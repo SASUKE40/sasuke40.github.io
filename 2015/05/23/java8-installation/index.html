@@ -3,27 +3,57 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Play Framework項目初始化 | SASUKE的個人博客</title>
+  <title>Ubuntu安裝java8 | SASUKE的個人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="安裝Activator先下載Activator解壓到D:\Program Files\activator-1.3.2將D:\Program Files\activator-1.3.2加到環境變量Path中在你的項目目錄中執行以下命令，驗證是否安裝成功
-1activator -help
-創建Play項目123activator new demo play-javacd demoactivator
-安">
+  <meta name="description" content="添加ppa
+1sudo add-apt-repository ppa:webupd8team/java
+
+更新系統
+1sudo apt-get update
+
+安裝java8
+1sudo apt-get install oracle-java8-installer
+
+檢測是否成功
+1java -version
+
+
+結果如下123java version &quot;1.8.0_45&quot;Java(TM) SE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Play Framework項目初始化">
-<meta property="og:url" content="http://sasuke40.github.io/2015/05/23/play-framework/index.html">
+<meta property="og:title" content="Ubuntu安裝java8">
+<meta property="og:url" content="http://sasuke40.github.io/2015/05/23/java8-installation/index.html">
 <meta property="og:site_name" content="SASUKE的個人博客">
-<meta property="og:description" content="安裝Activator先下載Activator解壓到D:\Program Files\activator-1.3.2將D:\Program Files\activator-1.3.2加到環境變量Path中在你的項目目錄中執行以下命令，驗證是否安裝成功
-1activator -help
-創建Play項目123activator new demo play-javacd demoactivator
-安">
-<meta property="og:updated_time" content="2015-05-23T03:20:08.804Z">
+<meta property="og:description" content="添加ppa
+1sudo add-apt-repository ppa:webupd8team/java
+
+更新系統
+1sudo apt-get update
+
+安裝java8
+1sudo apt-get install oracle-java8-installer
+
+檢測是否成功
+1java -version
+
+
+結果如下123java version &quot;1.8.0_45&quot;Java(TM) SE">
+<meta property="og:updated_time" content="2015-05-23T10:36:46.233Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Play Framework項目初始化">
-<meta name="twitter:description" content="安裝Activator先下載Activator解壓到D:\Program Files\activator-1.3.2將D:\Program Files\activator-1.3.2加到環境變量Path中在你的項目目錄中執行以下命令，驗證是否安裝成功
-1activator -help
-創建Play項目123activator new demo play-javacd demoactivator
-安">
+<meta name="twitter:title" content="Ubuntu安裝java8">
+<meta name="twitter:description" content="添加ppa
+1sudo add-apt-repository ppa:webupd8team/java
+
+更新系統
+1sudo apt-get update
+
+安裝java8
+1sudo apt-get install oracle-java8-installer
+
+檢測是否成功
+1java -version
+
+
+結果如下123java version &quot;1.8.0_45&quot;Java(TM) SE">
   
     <link rel="alternative" href="/atom.xml" title="SASUKE的個人博客" type="application/atom+xml">
   
@@ -178,11 +208,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-play-framework" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-java8-installation" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/05/23/play-framework/" class="article-date">
-  	<time datetime="2015-05-23T03:03:21.000Z" itemprop="datePublished">2015-05-23</time>
+      <a href="/2015/05/23/java8-installation/" class="article-date">
+  	<time datetime="2015-05-23T10:00:36.000Z" itemprop="datePublished">2015-05-23</time>
 </a>
     </div>
   
@@ -195,7 +225,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Play Framework項目初始化
+      Ubuntu安裝java8
     </h1>
   
 
@@ -204,7 +234,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Play-Framework/">Play Framework</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 	</div>
 
         
@@ -215,13 +245,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="安裝Activator">安裝Activator</h2><p>先下載<a href="http://www.typesafe.com/community/core-tools/activator-and-sbt" target="_blank" rel="external">Activator</a><br>解壓到<code>D:\Program Files\activator-1.3.2</code><br>將<code>D:\Program Files\activator-1.3.2</code>加到環境變量Path中<br>在你的項目目錄中執行以下命令，驗證是否安裝成功</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activator -help</span><br></pre></td></tr></table></figure>
-<h2 id="創建Play項目">創建Play項目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">activator new demo play-java</span><br><span class="line"><span class="built_in">cd</span> demo</span><br><span class="line">activator</span><br></pre></td></tr></table></figure>
-<h2 id="安裝Eclipse插件">安裝Eclipse插件</h2><p><a href="http://scala-ide.org/download/current.html" target="_blank" rel="external">Scala IDE</a><br>在Eclipse中Install New Software增加宰割Update Site，記得安裝Play Support</p>
-<h2 id="創建Eclipse項目">創建Eclipse項目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eclipse with-source=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h2 id="跑起來看看">跑起來看看</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run</span><br></pre></td></tr></table></figure>
-<p>在瀏覽器中打開<a href="http://localhost:9000" target="_blank" rel="external">http://localhost:9000</a>，項目就跑起來了╰(￣▽￣)╮</p>
+        <ol>
+<li><p>添加ppa</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:webupd8team/java</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新系統</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安裝java8</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install oracle-java8-installer</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>檢測是否成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>結果如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java version <span class="string">"1.8.0_45"</span></span><br><span class="line">Java(TM) SE Runtime Environment (build <span class="number">1.8</span>.<span class="number">0</span>_45-b14)</span><br><span class="line">Java HotSpot(TM) <span class="number">64</span>-Bit Server VM (build <span class="number">25.45</span>-b02, mixed mode)</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><p>設置環境變量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install oracle-java8-set-default</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>版本切換</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-java-alternatives <span class="operator">-s</span> java-<span class="number">8</span>-oracle</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>
@@ -231,18 +277,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/05/23/java8-installation/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Ubuntu安裝java8
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/05/23/work-experience/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">工作心得</div>
+    <a href="/2015/05/23/play-framework/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Play Framework項目初始化</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -271,7 +308,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="play-framework" data-title="Play Framework項目初始化" data-url="http://sasuke40.github.io/2015/05/23/play-framework/"></div>
+	<div class="ds-thread" data-thread-key="java8-installation" data-title="Ubuntu安裝java8" data-url="http://sasuke40.github.io/2015/05/23/java8-installation/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

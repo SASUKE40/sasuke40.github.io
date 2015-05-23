@@ -106,7 +106,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/工作/" style="font-size: 10px;">工作</a> <a href="/tags/心得/" style="font-size: 10px;">心得</a> <a href="/tags/荔枝FM/" style="font-size: 10px;">荔枝FM</a>
+						<a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/工作/" style="font-size: 10px;">工作</a> <a href="/tags/心得/" style="font-size: 10px;">心得</a> <a href="/tags/荔枝FM/" style="font-size: 10px;">荔枝FM</a>
 					</div>
 				</section>
 				
@@ -169,6 +169,81 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-java8-installation" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/23/java8-installation/" class="article-date">
+  	<time datetime="2015-05-23T10:00:36.000Z" itemprop="datePublished">2015-05-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/23/java8-installation/">Ubuntu安裝java8</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>添加ppa</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:webupd8team/java</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新系統</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安裝java8</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install oracle-java8-installer</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>檢測是否成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>結果如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java version <span class="string">"1.8.0_45"</span></span><br><span class="line">Java(TM) SE Runtime Environment (build <span class="number">1.8</span>.<span class="number">0</span>_45-b14)</span><br><span class="line">Java HotSpot(TM) <span class="number">64</span>-Bit Server VM (build <span class="number">25.45</span>-b02, mixed mode)</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><p>設置環境變量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install oracle-java8-set-default</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>版本切換</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-java-alternatives <span class="operator">-s</span> java-<span class="number">8</span>-oracle</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-play-framework" class="article article-type-post" itemscope itemprop="blogPost">
   
