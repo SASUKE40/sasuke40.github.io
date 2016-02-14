@@ -4,7 +4,7 @@
   <subtitle><![CDATA[前端開發工程師 - 音樂達人]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sasuke40.github.io/"/>
-  <updated>2015-05-23T10:36:46.233Z</updated>
+  <updated>2016-02-14T03:21:11.418Z</updated>
   <id>http://sasuke40.github.io/</id>
   
   <author>
@@ -13,6 +13,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Sublime Text 3 (Build 3103) 注册码]]></title>
+    <link href="http://sasuke40.github.io/2016/02/14/Sublime-Text-3-License-Key/"/>
+    <id>http://sasuke40.github.io/2016/02/14/Sublime-Text-3-License-Key/</id>
+    <published>2016-02-14T03:19:28.000Z</published>
+    <updated>2016-02-14T03:21:11.418Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#8212;&#8211; BEGIN LICENSE &#8212;&#8211;&#10;Michael Barnes&#10;Single User License&#10;EA7E-821385&#10;8A353C41 872A0D5C DF9B2950 AFF6F667&#10;C458EA6D 8EA3C286 98D1D650 131A97AB&#10;AA919AEC EF20E143 B361B1E7 4C8B7F04&#10;B085E65E 2F5F5360 8489D422 FB8FC1AA&#10;93F6323C FD7F7544 3F39C318 D95E6480&#10;FCCC7561 8A4A1741 68FA4223 ADCEDE07&#10;200C25BE DBBC4855 C4CFB774 C5EC138C&#10;0FEC1CEF D9DCECEC D3A5DAD1 01316C36&#10;&#8212;&#8212; END LICENSE &#8212;&#8212;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#8212;&#8211; BEGIN LICENSE &#8212;&#8211;&#10;Nicolas Hennion&#10;Single User License&#10;EA7E-866075&#10;8A01AA83 1D668D24 4484AEBC 3B04512C&#10;827B0DE5 69E9B07A A39ACCC0 F95F5410&#10;729D5639 4C37CECB B2522FB3 8D37FDC1&#10;72899363 BBA441AC A5F47F08 6CD3B3FE&#10;CEFB3783 B2E1BA96 71AAF7B4 AFB61B1D&#10;0CC513E7 52FF2333 9F726D2C CDE53B4A&#10;810C0D4F E1F419A3 CDA0832B 8440565A&#10;35BF00F6 4CA9F869 ED10E245 469C233E&#10;&#8212;&#8212; END LICENSE &#8212;&#8212;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#8212;&#8211; BEGIN LICENSE &#8212;&#8211;&#10;Anthony Sansone&#10;Single User License&#10;EA7E-878563&#10;28B9A648 42B99D8A F2E3E9E0 16DE076E&#10;E218B3DC F3606379 C33C1526 E8B58964&#10;B2CB3F63 BDF901BE D31424D2 082891B5&#10;F7058694 55FA46D8 EFC11878 0868F093&#10;B17CAFE7 63A78881 86B78E38 0F146238&#10;BAE22DBB D4EC71A1 0EC2E701 C7F9C648&#10;5CF29CA3 1CB14285 19A46991 E9A98676&#10;14FD4777 2D8A0AB6 A444EE0D CA009B54&#10;&#8212;&#8212; END LICENSE &#8212;&#8212;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#8212;&#8211; BEGIN LICENSE &#8212;&#8211;&#10;Alexey Plutalov&#10;Single User License&#10;EA7E-860776&#10;3DC19CC1 134CDF23 504DC871 2DE5CE55&#10;585DC8A6 253BB0D9 637C87A2 D8D0BA85&#10;AAE574AD BA7D6DA9 2B9773F2 324C5DEF&#10;17830A4E FBCF9D1D 182406E9 F883EA87&#10;E585BBA1 2538C270 E2E857C2 194283CA&#10;7234FF9E D0392F93 1D16E021 F1914917&#10;63909E12 203C0169 3F08FFC8 86D06EA8&#10;73DDAEF0 AC559F30 A6A67947 B60104C6&#10;&#8212;&#8212; END LICENSE &#8212;&#8212;</span><br></pre></td></tr></table></figure>]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span cla]]>
+    </summary>
+    
+      <category term="Lisense Key" scheme="http://sasuke40.github.io/tags/Lisense-Key/"/>
+    
+      <category term="Sublime Text" scheme="http://sasuke40.github.io/tags/Sublime-Text/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Ubuntu安装php]]></title>
+    <link href="http://sasuke40.github.io/2016/02/06/php-installation/"/>
+    <id>http://sasuke40.github.io/2016/02/06/php-installation/</id>
+    <published>2016-02-06T06:07:54.000Z</published>
+    <updated>2016-02-06T07:46:46.503Z</updated>
+    <content type="html"><![CDATA[<ol>
+<li><p>安装apt源管理工具、添加nginx和php的安装源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get install python-software-properties</span><br><span class="line">add-apt-repository ppa:nginx/stable</span><br><span class="line">add-apt-repository ppa:ondrej/php5</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新系统软件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装mysql</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install mysql-server mysql-client</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装php及对mysql的支持</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install php5-fpm php5-mysql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据实际需要，选择性的安装php的各类功能模块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apt-get install php-pear php5-dev php5-curl</span><br><span class="line">apt-get install php5-gd php5-intl php5-imagick</span><br><span class="line">apt-get install php5-imap php5-mcrypt php5-memcache</span><br><span class="line">apt-get install php5-ming php5-ps php5-pspell</span><br><span class="line">apt-get install php5-recode php5-snmp php5-sqlite</span><br><span class="line">apt-get install php5-tidy php5-xmlrpc php5-xsl</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改nginx默认站点配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/sites-available/default</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen <span class="number">80</span> default_server;</span><br><span class="line">    listen [::]:<span class="number">80</span> default_server ipv6only=on;</span><br><span class="line"></span><br><span class="line">    root /usr/share/nginx/html;</span><br><span class="line">    index index.php index.html index.htm;</span><br><span class="line"></span><br><span class="line">    server_name server_domain_name_or_IP;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ =<span class="number">404</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page <span class="number">404</span> /<span class="number">404</span>.html;</span><br><span class="line">    error_page <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /<span class="number">50</span>x.html;</span><br><span class="line">    location = /<span class="number">50</span>x.html &#123;</span><br><span class="line">        root /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        try_files <span class="variable">$uri</span> =<span class="number">404</span>;</span><br><span class="line">        fastcgi_split_path_info ^(.+\.php)(/.+)$;</span><br><span class="line">        fastcgi_pass unix:/var/run/php5-fpm.sock;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ol>
+<li><p>安装apt源管理工具、添加nginx和php的安装源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br>]]>
+    </summary>
+    
+      <category term="Ubuntu" scheme="http://sasuke40.github.io/tags/Ubuntu/"/>
+    
+      <category term="php" scheme="http://sasuke40.github.io/tags/php/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Ubuntu安裝java8]]></title>
