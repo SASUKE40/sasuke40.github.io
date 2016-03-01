@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>React官網示例講解 | SASUKE的個人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言可能大家會問：“官網示例那麼簡單，有必要講解嗎？”，我的看法是：“非常需要！”。一般而言，官方文檔是學習新知識最好的去處，你可以瞭解它的理念、思想、模式和API等等，可謂是無所不包。相對來說，官網的Sample就是能快速的瞭解和切入的直觀體現。因此，今天來看看官網的示例要告訴我們什麼，相信它對感興趣React但是不是很瞭解的人可以有個感性的瞭解。
+什麼是React（個人見解/官方簡介轉述）
+它">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React官網示例講解">
+<meta property="og:url" content="http://sasuke40.github.io/2016/03/01/react-official-sample-explanation/index.html">
+<meta property="og:site_name" content="SASUKE的個人博客">
+<meta property="og:description" content="前言可能大家會問：“官網示例那麼簡單，有必要講解嗎？”，我的看法是：“非常需要！”。一般而言，官方文檔是學習新知識最好的去處，你可以瞭解它的理念、思想、模式和API等等，可謂是無所不包。相對來說，官網的Sample就是能快速的瞭解和切入的直觀體現。因此，今天來看看官網的示例要告訴我們什麼，相信它對感興趣React但是不是很瞭解的人可以有個感性的瞭解。
+什麼是React（個人見解/官方簡介轉述）
+它">
+<meta property="og:updated_time" content="2016-03-01T02:03:45.368Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React官網示例講解">
+<meta name="twitter:description" content="前言可能大家會問：“官網示例那麼簡單，有必要講解嗎？”，我的看法是：“非常需要！”。一般而言，官方文檔是學習新知識最好的去處，你可以瞭解它的理念、思想、模式和API等等，可謂是無所不包。相對來說，官網的Sample就是能快速的瞭解和切入的直觀體現。因此，今天來看看官網的示例要告訴我們什麼，相信它對感興趣React但是不是很瞭解的人可以有個感性的瞭解。
+什麼是React（個人見解/官方簡介轉述）
+它">
+  
+    <link rel="alternative" href="/atom.xml" title="SASUKE的個人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/img/sasuke.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">SASUKE</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">前端開發工程師 - 音樂達人</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/SASUKE40" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/523559345" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/sasuke-uchiha-40" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Lisense-Key/" style="font-size: 10px;">Lisense Key</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/Play-Framework/" style="font-size: 10px;">Play Framework</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Sublime-Text/" style="font-size: 10px;">Sublime Text</a> <a href="/tags/Ubuntu/" style="font-size: 20px;">Ubuntu</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/工作/" style="font-size: 20px;">工作</a> <a href="/tags/广州/" style="font-size: 10px;">广州</a> <a href="/tags/心得/" style="font-size: 10px;">心得</a> <a href="/tags/荔枝FM/" style="font-size: 10px;">荔枝FM</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">充滿好奇心，享受獨立解決問題的過程，做個正直人</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">SASUKE</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img src="/img/sasuke.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">SASUKE</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">前端開發工程師 - 音樂達人</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/SASUKE40" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/523559345" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/sasuke-uchiha-40" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-react-official-sample-explanation" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/01/react-official-sample-explanation/" class="article-date">
+  	<time datetime="2016-03-01T00:49:06.000Z" itemprop="datePublished">2016-03-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React官網示例講解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVVM/">MVVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言">前言</h2><p>可能大家會問：“官網示例那麼簡單，有必要講解嗎？”，我的看法是：“非常需要！”。一般而言，官方文檔是學習新知識最好的去處，你可以瞭解它的理念、思想、模式和API等等，可謂是無所不包。相對來說，官網的Sample就是能快速的瞭解和切入的直觀體現。因此，今天來看看官網的示例要告訴我們什麼，相信它對感興趣React但是不是很瞭解的人可以有個感性的瞭解。</p>
+<h2 id="什麼是React（個人見解/官方簡介轉述）">什麼是React（個人見解/官方簡介轉述）</h2><ol>
+<li>它只做UI層面的事，你可以理解為是Web Component的特殊實現</li>
+<li>Virtual DOM，就一個字：“快”，同時支持服務端渲染</li>
+<li>數據流，單向的數據綁定足夠應付大部分的業務場景，同時使得數據和事件的流動變得清晰</li>
+</ol>
+<h2 id="怎麼開始用上React">怎麼開始用上React</h2><p>這裡我們先不用Webpack、gulp這些這麼“高級”的工具，方便小白入門。<br>我們直接引入對應的腳本更加方便，大概是這樣子的：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span>React Sample 1<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"container"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/babel-core/5.8.34/browser.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/react/0.14.7/react-with-addons.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/react/0.14.7/react-dom.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/babel"</span>&gt;</span><span class="actionscript"></span><br><span class="line">        <span class="keyword">var</span> mountNode = document.getElementById(<span class="string">'container'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> HelloMessage = React.createClass(&#123;</span><br><span class="line">            render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> &lt;div&gt;Hello &#123;<span class="keyword">this</span>.props.name&#125;&lt;/div&gt;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        ReactDOM.render(&lt;HelloMessage name=<span class="string">"SASUKE40"</span> /&gt;, mountNode);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>這是官網的第一個示例，當然官網略去了很多東西沒說。<br>先說一下上面代碼我加了的東西：</p>
+<ol>
+<li><code>browser.js</code>是<code>babel</code>的瀏覽器版本，<code>babel</code>是一個很酷的東西，自己Google下就知道有多酷。提示一下，千萬別急著用babel6，你會用哭的~</li>
+<li><code>react</code>就不必多說了，我們的主角</li>
+<li><code>react-dom</code>是最近從<code>react</code>拆出來的，以前是包在<code>react</code>中的</li>
+</ol>
+<p>細心的朋友可能看到<code>type=&quot;text/babel&quot;</code>這個奇怪的類型屬性，其實它是為了讓babel能去轉換<code>jsx</code>成瀏覽器讀得懂兼容較好的<code>JavaScript</code></p>
+<h2 id="示例初步講解">示例初步講解</h2><p>為什麼說初步呢？因為深挖底層具體的動作，可能很多人都會暈，所以只講表層我們看的到的東西。</p>
+<p>第一個官方示例主要分成兩個步驟：</p>
+<ol>
+<li>創建React類，使用<code>React.createClass</code>創建，傳入一個object，<br>這個object有個成員屬性render返回<code>jsx</code></li>
+<li>用ReactDOM如渲染並掛載到某個具體的DOM節點上<blockquote>
+<p>額外的Tip：在這裡的<code>&lt;div&gt;Hello {this.props.name}&lt;/div&gt;</code>這一部分並不是HTML，而是貨真價實的JavaScript，並且創建出來對象是React實例，並不是HTML的DOM節點。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="使用React在這個示例的好處">使用React在這個示例的好處</h3><p>可以自定義標籤屬性，在渲染的時候可以插入到內容中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span>React Sample 2<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"container"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/babel-core/5.8.34/browser.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/react/0.14.7/react-with-addons.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/react/0.14.7/react-dom.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/babel"</span>&gt;</span><span class="actionscript"></span><br><span class="line">        <span class="keyword">var</span> mountNode = document.getElementById(<span class="string">'container'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> Timer = React.createClass(&#123;</span><br><span class="line">            getInitialState: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;secondsElapsed: <span class="number">0</span>&#125;;</span><br><span class="line">            &#125;,</span><br><span class="line">            tick: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">this</span>.setState(&#123;secondsElapsed: <span class="keyword">this</span>.state.secondsElapsed + <span class="number">1</span>&#125;)</span><br><span class="line">            &#125;,</span><br><span class="line">            componentDidMount: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.interval = setInterval(<span class="keyword">this</span>.tick, <span class="number">1000</span>);</span><br><span class="line">            &#125;,</span><br><span class="line">            componentWillUnmount: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                clearInterval(<span class="keyword">this</span>.interval);</span><br><span class="line">            &#125;,</span><br><span class="line">            render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (</span><br><span class="line">                    &lt;div&gt;過去了：&#123;<span class="keyword">this</span>.state.secondsElapsed&#125;秒&lt;/div&gt;</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        ReactDOM.render(&lt;Timer/&gt;, mountNode);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>這個示例多了好多：</p>
+<ol>
+<li><code>getInitialState</code>是一個關鍵的成員屬性，它可以初始化state，在render中可以調用<code>this.state.xxx</code>就能拿到</li>
+<li><code>tick</code>是一個自定義的成員屬性，其中<code>this.setState</code>是React類的關鍵方法，可以修改state的值</li>
+<li><code>componentDidMount</code>顧名思義，在掛載後執行一些東西，這裡是弄了個定時器</li>
+<li><code>componentWillUnmount</code>也顧名思義，將要卸載的時候做點事情，良好的編碼習慣，這裡清除定時</li>
+</ol>
+<h3 id="示例3">示例3</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span>React Sample 3<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"container"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/babel-core/5.8.34/browser.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/react/0.14.7/react-with-addons.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/react/0.14.7/react-dom.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/babel"</span>&gt;</span><span class="actionscript"></span><br><span class="line">        <span class="keyword">var</span> mountNode = document.getElementById(<span class="string">'container'</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> TodoList = React.createClass(&#123;</span><br><span class="line">          render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> createItem = <span class="function"><span class="keyword">function</span><span class="params">(item)</span> </span>&#123;</span><br><span class="line">              <span class="keyword">return</span> &lt;li key=&#123;item.id&#125;&gt;&#123;item.text&#125;&lt;/li&gt;;</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="keyword">return</span> &lt;ul&gt;&#123;<span class="keyword">this</span>.props.items.map(createItem)&#125;&lt;/ul&gt;;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">var</span> TodoApp = React.createClass(&#123;</span><br><span class="line">          getInitialState: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;items: [], text: <span class="string">''</span>&#125;;</span><br><span class="line">          &#125;,</span><br><span class="line">          onChange: <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.setState(&#123;text: e.target.value&#125;);</span><br><span class="line">          &#125;,</span><br><span class="line">          handleSubmit: <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>&#123;</span><br><span class="line">            e.preventDefault();</span><br><span class="line">            <span class="keyword">var</span> nextItems = <span class="keyword">this</span>.state.items.concat([&#123;text: <span class="keyword">this</span>.state.text, id: Date.now()&#125;]);</span><br><span class="line">            <span class="keyword">var</span> nextText = <span class="string">''</span>;</span><br><span class="line">            <span class="keyword">this</span>.setState(&#123;items: nextItems, text: nextText&#125;);</span><br><span class="line">          &#125;,</span><br><span class="line">          render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (</span><br><span class="line">              &lt;div&gt;</span><br><span class="line">                &lt;h3&gt;TODO&lt;/h3&gt;</span><br><span class="line">                &lt;TodoList items=&#123;<span class="keyword">this</span>.state.items&#125; /&gt;</span><br><span class="line">                &lt;form onSubmit=&#123;<span class="keyword">this</span>.handleSubmit&#125;&gt;</span><br><span class="line">                  &lt;input onChange=&#123;<span class="keyword">this</span>.onChange&#125; value=&#123;<span class="keyword">this</span>.state.text&#125; /&gt;</span><br><span class="line">                  &lt;button&gt;&#123;<span class="string">'Add #'</span> + (<span class="keyword">this</span>.state.items.length + <span class="number">1</span>)&#125;&lt;/button&gt;</span><br><span class="line">                &lt;/form&gt;</span><br><span class="line">              &lt;/div&gt;</span><br><span class="line">            );</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        ReactDOM.render(&lt;TodoApp /&gt;, mountNode);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>關鍵點：</p>
+<ol>
+<li>標籤可以嵌套</li>
+<li>可以些一些事件，以自定義事件函數體現，不管這裡的是JavaScript的事件，並不是DOM節點上定義的</li>
+<li>列表組件定義的一種推薦寫法：<code>this.props.items.map</code>傳入單個組件</li>
+</ol>
+<h3 id="示例4">示例4</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span>React Sample 4<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"container"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/babel-core/5.8.34/browser.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/react/0.14.7/react-with-addons.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/react/0.14.7/react-dom.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://cdn.bootcss.com/marked/0.3.5/marked.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/babel"</span>&gt;</span><span class="actionscript"></span><br><span class="line">        <span class="keyword">var</span> mountNode = document.getElementById(<span class="string">'container'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> MarkdownEditor = React.createClass(&#123;</span><br><span class="line">          getInitialState: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;value: <span class="string">'Type some *markdown* here!'</span>&#125;;</span><br><span class="line">          &#125;,</span><br><span class="line">          handleChange: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.setState(&#123;value: <span class="keyword">this</span>.refs.textarea.value&#125;);</span><br><span class="line">          &#125;,</span><br><span class="line">          rawMarkup: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> &#123; __html: marked(<span class="keyword">this</span>.state.value, &#123;sanitize: <span class="literal">true</span>&#125;) &#125;;</span><br><span class="line">          &#125;,</span><br><span class="line">          render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (</span><br><span class="line">              &lt;div className=<span class="string">"MarkdownEditor"</span>&gt;</span><br><span class="line">                &lt;h3&gt;Input&lt;/h3&gt;</span><br><span class="line">                &lt;textarea</span><br><span class="line">                  onChange=&#123;<span class="keyword">this</span>.handleChange&#125;</span><br><span class="line">                  ref=<span class="string">"textarea"</span></span><br><span class="line">                  defaultValue=&#123;<span class="keyword">this</span>.state.value&#125; /&gt;</span><br><span class="line">                &lt;h3&gt;Output&lt;/h3&gt;</span><br><span class="line">                &lt;div</span><br><span class="line">                  className=<span class="string">"content"</span></span><br><span class="line">                  dangerouslySetInnerHTML=&#123;<span class="keyword">this</span>.rawMarkup()&#125;</span><br><span class="line">                /&gt;</span><br><span class="line">              &lt;/div&gt;</span><br><span class="line">            );</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        ReactDOM.render(&lt;MarkdownEditor /&gt;, mountNode);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>關鍵點：</p>
+<ol>
+<li>可以使用自定義函數用作過濾器，如這裡引入的<code>marked.js</code>裏的<code>marked()</code></li>
+<li>React中的設置HTML的API<code>dangerouslySetInnerHTML</code>，返回含有<code>__html</code>屬性的object即可</li>
+<li>使用<code>refs</code>拿到DOM？思考一下是不是吧~<blockquote>
+<p>額外的Tip：React還沒有1.0.0，很多都經常變化，<code>refs</code>在以前不是這麼拿到，哭死我們這些前端小白了~</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="結語">結語</h2><p>前端之路還很長，React大法好啊~</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/27/interview-in-guangzhou-2016/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2016年廣州前端面試之旅</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="react-official-sample-explanation" data-title="React官網示例講解" data-url="http://sasuke40.github.io/2016/03/01/react-official-sample-explanation/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"sasuke40"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 SASUKE
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: undefined,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: undefined
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
