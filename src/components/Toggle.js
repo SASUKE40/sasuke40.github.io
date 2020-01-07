@@ -11,7 +11,7 @@ import React, { PureComponent } from 'react'
 // Copyright 2015-present Drifty Co.
 // http://drifty.com/
 // from: https://github.com/driftyco/ionic/blob/master/src/util/dom.ts
-function pointerCoord (event) {
+function pointerCoord(event) {
   // get coordinates for either a mouse click
   // or a touch depending on the given event
   if (event) {
@@ -29,7 +29,7 @@ function pointerCoord (event) {
 }
 
 export default class Toggle extends PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
     this.handleTouchStart = this.handleTouchStart.bind(this)
@@ -41,20 +41,20 @@ export default class Toggle extends PureComponent {
     this.state = {
       checked: !!(props.checked || props.defaultChecked),
       hasFocus: false,
-      previouslyChecked: !!(props.checked || props.defaultChecked)
+      previouslyChecked: !!(props.checked || props.defaultChecked),
     }
   }
 
-  static getDerivedStateFromProps (nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     if ('checked' in nextProps) {
       return {
         checked: !!nextProps.checked,
-        previouslyChecked: !!nextProps.checked
+        previouslyChecked: !!nextProps.checked,
       }
     }
   }
 
-  handleClick (event) {
+  handleClick(event) {
     const checkbox = this.input
     if (event.target !== checkbox && !this.moved) {
       event.preventDefault()
@@ -65,18 +65,18 @@ export default class Toggle extends PureComponent {
 
     this.setState({
       checked: checkbox.checked,
-      previouslyChecked: checkbox.checked
+      previouslyChecked: checkbox.checked,
     })
   }
 
-  handleTouchStart (event) {
+  handleTouchStart(event) {
     this.startX = pointerCoord(event).x
     this.touchStarted = true
     this.hadFocusAtTouchStart = this.state.hasFocus
     this.setState({ hasFocus: true })
   }
 
-  handleTouchMove (event) {
+  handleTouchMove(event) {
     if (!this.touchStarted) return
     this.touchMoved = true
 
@@ -92,7 +92,7 @@ export default class Toggle extends PureComponent {
     }
   }
 
-  handleTouchEnd (event) {
+  handleTouchEnd(event) {
     if (!this.touchMoved) return
     const checkbox = this.input
     event.preventDefault()
@@ -112,7 +112,7 @@ export default class Toggle extends PureComponent {
     }
   }
 
-  handleTouchCancel (event) {
+  handleTouchCancel(event) {
     if (this.startX != null) {
       this.touchStarted = false
       this.startX = null
@@ -124,7 +124,7 @@ export default class Toggle extends PureComponent {
     }
   }
 
-  handleFocus (event) {
+  handleFocus(event) {
     const { onFocus } = this.props
 
     if (onFocus) {
@@ -135,7 +135,7 @@ export default class Toggle extends PureComponent {
     this.setState({ hasFocus: true })
   }
 
-  handleBlur (event) {
+  handleBlur(event) {
     const { onBlur } = this.props
 
     if (onBlur) {
@@ -146,7 +146,7 @@ export default class Toggle extends PureComponent {
     this.setState({ hasFocus: false })
   }
 
-  getIcon (type) {
+  getIcon(type) {
     const { icons } = this.props
     if (!icons) {
       return null
@@ -156,7 +156,7 @@ export default class Toggle extends PureComponent {
       : icons[type]
   }
 
-  render () {
+  render() {
     const { className, icons: _icons, ...inputProps } = this.props
     const classes =
       'react-toggle' +
@@ -173,15 +173,15 @@ export default class Toggle extends PureComponent {
         onTouchEnd={this.handleTouchEnd}
         onTouchCancel={this.handleTouchCancel}
       >
-        <div className='react-toggle-track'>
-          <div className='react-toggle-track-check'>
+        <div className="react-toggle-track">
+          <div className="react-toggle-track-check">
             {this.getIcon('checked')}
           </div>
-          <div className='react-toggle-track-x'>
+          <div className="react-toggle-track-x">
             {this.getIcon('unchecked')}
           </div>
         </div>
-        <div className='react-toggle-thumb' />
+        <div className="react-toggle-thumb" />
 
         <input
           {...inputProps}
@@ -190,9 +190,9 @@ export default class Toggle extends PureComponent {
           }}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
-          className='react-toggle-screenreader-only'
-          type='checkbox'
-          aria-label='Switch between Dark and Light mode'
+          className="react-toggle-screenreader-only"
+          type="checkbox"
+          aria-label="Switch between Dark and Light mode"
         />
       </div>
     )

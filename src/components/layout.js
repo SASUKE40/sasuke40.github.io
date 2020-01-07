@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
-import Toggle from "./Toggle"
-import sun from "../assets/sun.png"
-import moon from "../assets/moon.png"
-import Helmet from "react-helmet"
+import React, { useEffect, useState } from 'react'
+import { Link, graphql, useStaticQuery } from 'gatsby'
+import Toggle from './Toggle'
+import sun from '../assets/sun.png'
+import moon from '../assets/moon.png'
+import Helmet from 'react-helmet'
 
-import { rhythm } from "../utils/typography"
-import moment from "moment"
+import { rhythm } from '../utils/typography'
+import moment from 'moment'
 
 const Layout = props => {
   const [theme, setTheme] = useState(null)
@@ -27,17 +27,17 @@ const Layout = props => {
   const header = (
     <h3
       style={{
-        fontFamily: "Montserrat, sans-serif",
+        fontFamily: 'Montserrat, sans-serif',
         marginTop: 0,
       }}
     >
       <Link
         style={{
-          boxShadow: "none",
-          textDecoration: "none",
-          color: "inherit",
+          boxShadow: 'none',
+          textDecoration: 'none',
+          color: 'inherit',
         }}
-        to={"/"}
+        to={'/'}
       >
         {title}
       </Link>
@@ -46,12 +46,10 @@ const Layout = props => {
   return (
     <div
       style={{
-        color: "var(--textNormal)",
-        background: "var(--bg)",
-        // transition: 'color 0.2s ease-out, background 0.2s ease-out',
-        // minHeight: '100vh',
-        marginLeft: "auto",
-        marginRight: "auto",
+        color: 'var(--textNormal)',
+        background: 'var(--bg)',
+        marginLeft: 'auto',
+        marginRight: 'auto',
         maxWidth: rhythm(24),
         padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
       }}
@@ -59,17 +57,17 @@ const Layout = props => {
       <Helmet
         meta={[
           {
-            name: "theme-color",
-            content: theme === "light" ? "#ffa8c5" : "#282c35",
+            name: 'theme-color',
+            content: theme === 'light' ? '#ffa8c5' : '#282c35',
           },
         ]}
       />
       <header
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "2.625rem",
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '2.625rem',
         }}
       >
         {header}
@@ -78,36 +76,38 @@ const Layout = props => {
             icons={{
               checked: (
                 <img
+                  alt="dark"
                   src={moon}
                   width="16"
                   height="16"
                   role="presentation"
-                  style={{ pointerEvents: "none" }}
+                  style={{ pointerEvents: 'none' }}
                 />
               ),
               unchecked: (
                 <img
+                  alt="light"
                   src={sun}
                   width="16"
                   height="16"
                   role="presentation"
-                  style={{ pointerEvents: "none" }}
+                  style={{ pointerEvents: 'none' }}
                 />
               ),
             }}
-            checked={theme === "dark"}
+            checked={theme === 'dark'}
             onChange={e =>
-              window.__setPreferredTheme(e.target.checked ? "dark" : "light")
+              window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')
             }
           />
         ) : (
-          <div style={{ height: "24px" }} />
+          <div style={{ height: '24px' }} />
         )}
       </header>
       <main>{children}</main>
       <footer>
-        © {new Date().getFullYear()}, Built on{" "}
-        {moment(data.site.buildTime).format("YYYY D Mo, H:m")} with{" "}
+        © {new Date().getFullYear()}, Built on{' '}
+        {moment(data.site.buildTime).format('YYYY-MM-DD HH:mm')} with{' '}
         <a href="https://www.gatsbyjs.org">Gatsby</a>
       </footer>
     </div>

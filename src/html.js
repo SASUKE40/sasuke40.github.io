@@ -2,19 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default class HTML extends React.Component {
-  render () {
+  render() {
     return (
       <html {...this.props.htmlAttributes}>
         <head>
-          <meta charSet='utf-8' />
-          <meta httpEquiv='x-ua-compatible' content='ie=edge' />
+          <meta charSet="utf-8" />
+          <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta
-            name='viewport'
-            content='width=device-width, initial-scale=1, shrink-to-fit=no'
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           {this.props.headComponents}
         </head>
-        <body {...this.props.bodyAttributes} className='light'>
+        <body {...this.props.bodyAttributes} className="light">
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -46,13 +46,13 @@ export default class HTML extends React.Component {
 
                 setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
               })();
-            `
+            `,
             }}
           />
           {this.props.preBodyComponents}
           <div
             key={'body'}
-            id='___gatsby'
+            id="___gatsby"
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
@@ -68,5 +68,5 @@ HTML.propTypes = {
   bodyAttributes: PropTypes.object,
   preBodyComponents: PropTypes.array,
   body: PropTypes.string,
-  postBodyComponents: PropTypes.array
+  postBodyComponents: PropTypes.array,
 }
