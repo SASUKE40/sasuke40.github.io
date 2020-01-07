@@ -1,6 +1,6 @@
 ---
 title: Ubuntu安裝java8
-date: 2015-05-23 18:00:36
+date: 2015-05-23
 tags:
   - java
   - Ubuntu

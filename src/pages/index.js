@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
+import moment from 'moment'
 
 import Bio from '../components/bio'
 import Layout from '../components/layout'
@@ -30,7 +31,9 @@ class BlogIndex extends React.Component {
                     {title}
                   </Link>
                 </h3>
-                <small>{node.frontmatter.date}</small>
+                <small>
+                  {moment(node.frontmatter.date).format('YYYY-MM-DD')}
+                </small>
               </header>
               <section>
                 <p

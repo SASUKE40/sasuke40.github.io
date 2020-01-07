@@ -1,6 +1,6 @@
 ---
 title: React 官網示例講解
-date: 2016-03-01 18:00:36
+date: 2016-03-01
 tags:
   - MVVM
   - React

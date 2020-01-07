@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
+import moment from 'moment'
 // import "prismjs/themes/prism-solarizedlight.css"
 
 import Bio from '../components/bio'
@@ -36,7 +37,7 @@ class BlogPostTemplate extends React.Component {
                 marginBottom: rhythm(1),
               }}
             >
-              {post.frontmatter.date}
+              {moment(post.frontmatter.date).format('YYYY-MM-DD')}
             </p>
           </header>
           <section dangerouslySetInnerHTML={{ __html: post.html }} />

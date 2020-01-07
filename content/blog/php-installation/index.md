@@ -1,6 +1,6 @@
 ---
 title: Ubuntu 安裝 php
-date: 2016-02-06 18:00:36
+date: 2016-02-06
 tags:
   - php
   - Ubuntu

@@ -1,6 +1,6 @@
 ---
 title: Play Framework項目初始化
-date: 2015-05-23 11:03:21
+date: 2015-05-23
 tags:
   - Play Framework
 ---
