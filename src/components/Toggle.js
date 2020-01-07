@@ -165,6 +165,7 @@ export default class Toggle extends PureComponent {
       (this.props.disabled ? ' react-toggle--disabled' : '') +
       (className ? ' ' + className : '')
     return (
+      // eslint-disable-next-line
       <div
         className={classes}
         onClick={this.handleClick}
