@@ -1,3 +1,4 @@
+const friendship = require('./friendship')
 module.exports = {
   siteMetadata: {
     title: `Edward Elric`,
@@ -13,7 +14,12 @@ module.exports = {
         name: 'Home',
         link: '/',
       },
+      {
+        name: 'Friends',
+        link: '/friends',
+      },
     ],
+    friendship: [...friendship],
   },
   plugins: [
     {
@@ -96,6 +102,8 @@ module.exports = {
         icon: 'content/assets/profile-pic.jpg',
       },
     },
+    'gatsby-plugin-offline',
+    'gatsby-plugin-material-ui',
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-typography',
