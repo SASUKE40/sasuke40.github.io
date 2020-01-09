@@ -1,36 +1,65 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import Disqus from 'disqus-react'
+import Divider from '@material-ui/core/Divider'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Image from 'gatsby-image'
 
 import Layout from '../components/layout'
 import RouterTabs from '../components/RouterTabs'
 import SEO from '../components/seo'
+import Bio from '../components/bio'
 
 import '../style/friend.css'
 
-const FriendPage = (props) => {
-  const { data } = props
-  const siteTitle = data.site.siteMetadata.title
+const useStyles = makeStyles({
+  friends: {
+    margin: '1rem 0 0 0',
+  },
+  divider: {
+    marginBottom: '1rem',
+  },
+  introduction: {
+    '& img': {
+      margin: 'auto',
+    },
+  },
+  comment: {
+    marginTop: '1.5rem',
+  },
+})
 
-  const avatars = data.avatars.edges.filter(
-    avatar => /^friend/.test(avatar.node.relativePath))
+const FriendPage = props => {
+  const { data } = props
+  const theme = useTheme()
+  const classes = useStyles()
+  const siteTitle = data.site.siteMetadata.title
+  const discusConfig = {
+    url: props.url,
+    identifier: 'global-comment',
+    title: '评论区',
+  }
+
+  const avatars = data.avatars.edges
+    .filter(avatar => /^friend/.test(avatar.node.relativePath))
     .map(avatar => avatar.node)
 
   return (
     <Layout location={props.location} title={siteTitle}>
-      <SEO title='Friends'/>
+      <SEO title="Friends" />
       <RouterTabs
         routers={data.site.siteMetadata.menuLinks}
-        currentPage='/friends'
+        currentPage="/friends"
       />
-      <ul className='friends'>
+      <ul className={classes.friends}>
         {data.site.siteMetadata.friendship.map(friend => {
-          const image = avatars.find(
-            v => new RegExp(friend.image).test(v.relativePath))
+          const image = avatars.find(v =>
+            new RegExp(friend.image).test(v.relativePath)
+          )
           return (
             <li
               key={friend.name}
-              className='friend-card'
+              className="friend-card"
               onClick={() => window.open(friend.url)}
             >
               <Image
@@ -39,19 +68,42 @@ const FriendPage = (props) => {
                 style={{
                   flex: 1,
                   maxWidth: 50,
-                  borderRadius: '100%'
+                  borderRadius: '100%',
                 }}
                 imgStyle={{
-                  borderRadius: '50%'
+                  borderRadius: '50%',
                 }}
               />
-              <div className='friend-card-content'>
+              <div className="friend-card-content">
                 <span>{friend.name}</span>
               </div>
             </li>
           )
         })}
       </ul>
+      <Divider
+        className={classes.divider}
+        light={theme.palette.type === 'light'}
+      />
+      <Bio>
+        <div className={classes.introduction}>
+          <img
+            alt="GitHub followers"
+            src="https://img.shields.io/github/followers/sasuke40?label=Follow&style=social"
+          />
+          <br />
+          <img
+            alt="Twitter Follow"
+            src="https://img.shields.io/twitter/follow/sasuke688848?label=Follow&style=social"
+          />
+        </div>
+      </Bio>
+      <div className={classes.comment}>
+        <Disqus.DiscussionEmbed
+          shortname={process.env.GATSBY_DISQUS_NAME}
+          config={discusConfig}
+        />
+      </div>
     </Layout>
   )
 }

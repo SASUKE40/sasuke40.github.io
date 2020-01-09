@@ -1,4 +1,6 @@
 const friendship = require('./friendship')
+require('dotenv').config()
+
 module.exports = {
   siteMetadata: {
     title: `Edward Elric`,
@@ -22,6 +24,14 @@ module.exports = {
     friendship: [...friendship],
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-typescript',
+      options: {
+        isTSX: true,
+        jsxPragma: 'React',
+        allExtensions: true,
+      },
+    },
     {
       resolve: 'gatsby-remark-prismjs',
       options: {

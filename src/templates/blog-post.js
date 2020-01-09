@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import moment from 'moment'
-// import "prismjs/themes/prism-solarizedlight.css"
+// import 'prismjs/themes/prism-solarizedlight.css'
 
 import Bio from '../components/bio'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import { rhythm, scale } from '../utils/typography'
+import NeverUseZhihu from '../components/NeverUseZhihu'
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class BlogPostTemplate extends React.Component {
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
         />
+        <NeverUseZhihu />
         <article>
           <header>
             <h1
