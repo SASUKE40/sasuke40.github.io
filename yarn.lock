@@ -1119,30 +1119,30 @@
   dependencies:
     core-js "^2.5.7"
 
-"@material-ui/core@^4.9.0":
-  version "4.9.0"
-  resolved "https://registry.npm.taobao.org/@material-ui/core/download/@material-ui/core-4.9.0.tgz#96ca3281ee06216d44fd4d0e306dbe0429eb2ebe"
-  integrity sha1-lsoyge4GIW1E/U0OMG2+BCnrLr4=
+"@material-ui/core@^4.9.1":
+  version "4.9.1"
+  resolved "https://registry.npm.taobao.org/@material-ui/core/download/@material-ui/core-4.9.1.tgz#8e57382b12a01b35a3fa2a45424528915aef2115"
+  integrity sha1-jlc4KxKgGzWj+ipFQkUokVrvIRU=
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/styles" "^4.9.0"
-    "@material-ui/system" "^4.7.1"
+    "@material-ui/system" "^4.9.1"
     "@material-ui/types" "^5.0.0"
     "@material-ui/utils" "^4.7.1"
     "@types/react-transition-group" "^4.2.0"
     clsx "^1.0.2"
     convert-css-length "^2.0.1"
-    hoist-non-react-statics "^3.2.1"
+    hoist-non-react-statics "^3.3.2"
     normalize-scroll-left "^0.2.0"
     popper.js "^1.14.1"
     prop-types "^15.7.2"
     react-is "^16.8.0"
     react-transition-group "^4.3.0"
 
-"@material-ui/lab@^4.0.0-alpha.40":
-  version "4.0.0-alpha.40"
-  resolved "https://registry.npm.taobao.org/@material-ui/lab/download/@material-ui/lab-4.0.0-alpha.40.tgz#8d78dc80d32c27c05def7eda8a36e0d0a0748e7f"
-  integrity sha1-jXjcgNMsJ8Bd737aijbg0KB0jn8=
+"@material-ui/lab@^4.0.0-alpha.41":
+  version "4.0.0-alpha.41"
+  resolved "https://registry.npm.taobao.org/@material-ui/lab/download/@material-ui/lab-4.0.0-alpha.41.tgz#3848fd0ad224f02d86f737b60ce78c1524c122a3"
+  integrity sha1-OEj9CtIk8C2G9ze2DOeMFSTBIqM=
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/utils" "^4.7.1"
@@ -1172,10 +1172,10 @@
     jss-plugin-vendor-prefixer "^10.0.3"
     prop-types "^15.7.2"
 
-"@material-ui/system@^4.7.1":
-  version "4.7.1"
-  resolved "https://registry.npm.taobao.org/@material-ui/system/download/@material-ui/system-4.7.1.tgz#d928dacc0eeae6bea569ff3ee079f409efb3517d"
-  integrity sha1-2SjazA7q5r6laf8+4Hn0Ce+zUX0=
+"@material-ui/system@^4.9.1":
+  version "4.9.1"
+  resolved "https://registry.npm.taobao.org/@material-ui/system/download/@material-ui/system-4.9.1.tgz#beb6595e1b164317340bdc5a629a6798fc35f82d"
+  integrity sha1-vrZZXhsWQxc0C9xaYppnmPw1+C0=
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/utils" "^4.7.1"
@@ -1244,9 +1244,9 @@
     string-width "^2.0.0"
     strip-ansi "^3"
 
-"@reach/router@^1.2.1":
+"@reach/router@1.2.1":
   version "1.2.1"
-  resolved "https://registry.npm.taobao.org/@reach/router/download/@reach/router-1.2.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40reach%2Frouter%2Fdownload%2F%40reach%2Frouter-1.2.1.tgz#34ae3541a5ac44fa7796e5506a5d7274a162be4e"
+  resolved "https://registry.npm.taobao.org/@reach/router/download/@reach/router-1.2.1.tgz#34ae3541a5ac44fa7796e5506a5d7274a162be4e"
   integrity sha1-NK41QaWsRPp3luVQal1ydKFivk4=
   dependencies:
     create-react-context "^0.2.1"
@@ -5853,10 +5853,10 @@ gatsby-transformer-sharp@^2.3.14:
     semver "^5.7.1"
     sharp "^0.23.4"
 
-gatsby@^2.19.11:
-  version "2.19.11"
-  resolved "https://registry.npm.taobao.org/gatsby/download/gatsby-2.19.11.tgz#9e1be03ffb680f3ff988dcecf07d3cc89ef5e4b7"
-  integrity sha1-nhvgP/toDz/5iNzs8H08yJ715Lc=
+gatsby@^2.19.12:
+  version "2.19.12"
+  resolved "https://registry.npm.taobao.org/gatsby/download/gatsby-2.19.12.tgz#9819d47407386912ad89f8067d69cec4ef7aec23"
+  integrity sha1-mBnUdAc4aRKtifgGfWnOxO967CM=
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/core" "^7.7.5"
@@ -5867,7 +5867,7 @@ gatsby@^2.19.11:
     "@hapi/joi" "^15.1.1"
     "@mikaelkristiansson/domready" "^1.0.10"
     "@pieh/friendly-errors-webpack-plugin" "1.7.0-chalk-2"
-    "@reach/router" "^1.2.1"
+    "@reach/router" "1.2.1"
     "@typescript-eslint/eslint-plugin" "^2.11.0"
     "@typescript-eslint/parser" "^2.11.0"
     address "1.1.2"
@@ -6638,6 +6638,13 @@ hoist-non-react-statics@^3.2.1, hoist-non-react-statics@^3.3.0:
   version "3.3.1"
   resolved "https://registry.npm.taobao.org/hoist-non-react-statics/download/hoist-non-react-statics-3.3.1.tgz#101685d3aff3b23ea213163f6e8e12f4f111e19f"
   integrity sha1-EBaF06/zsj6iExY/bo4S9PER4Z8=
+  dependencies:
+    react-is "^16.7.0"
+
+hoist-non-react-statics@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.npm.taobao.org/hoist-non-react-statics/download/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
+  integrity sha1-7OCsr3HWLClpwuxZ/v9CpLGoW0U=
   dependencies:
     react-is "^16.7.0"
 
