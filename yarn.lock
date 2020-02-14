@@ -5515,10 +5515,10 @@ gatsby-graphiql-explorer@^0.2.34:
   dependencies:
     "@babel/runtime" "^7.7.6"
 
-gatsby-image@^2.2.40:
-  version "2.2.40"
-  resolved "https://registry.npm.taobao.org/gatsby-image/download/gatsby-image-2.2.40.tgz#2ccb965ba03ed7456a87f42fe0a04bcaa6367b6d"
-  integrity sha1-LMuWW6A+10Vqh/Qv4KBLyqY2e20=
+gatsby-image@^2.2.41:
+  version "2.2.41"
+  resolved "https://registry.npm.taobao.org/gatsby-image/download/gatsby-image-2.2.41.tgz#9ce085798587fc95ffdac1b400153b45d37d48e6"
+  integrity sha1-nOCFeYWH/JX/2sG0ABU7RdN9SOY=
   dependencies:
     "@babel/runtime" "^7.7.6"
     object-fit-images "^3.2.4"
@@ -5783,10 +5783,10 @@ gatsby-telemetry@^1.1.49:
     stack-utils "1.0.2"
     uuid "3.3.3"
 
-gatsby-transformer-remark@^2.6.50:
-  version "2.6.50"
-  resolved "https://registry.npm.taobao.org/gatsby-transformer-remark/download/gatsby-transformer-remark-2.6.50.tgz#5278c41279f58e2409ab61fa458e0d6d47cfc956"
-  integrity sha1-UnjEEnn1jiQJq2H6RY4NbUfPyVY=
+gatsby-transformer-remark@^2.6.51:
+  version "2.6.51"
+  resolved "https://registry.npm.taobao.org/gatsby-transformer-remark/download/gatsby-transformer-remark-2.6.51.tgz#e67439ae8c6fa3198059690d9b929520d098963f"
+  integrity sha1-5nQ5roxvoxmAWWkNm5KVINCYlj8=
   dependencies:
     "@babel/runtime" "^7.7.6"
     bluebird "^3.7.2"
@@ -5823,10 +5823,10 @@ gatsby-transformer-sharp@^2.3.14:
     semver "^5.7.1"
     sharp "^0.23.4"
 
-gatsby@^2.19.16:
-  version "2.19.16"
-  resolved "https://registry.npm.taobao.org/gatsby/download/gatsby-2.19.16.tgz#9b302f4159b983b603341f1aba8b6d48c4bbb453"
-  integrity sha1-mzAvQVm5g7YDNB8auottSMS7tFM=
+gatsby@^2.19.17:
+  version "2.19.17"
+  resolved "https://registry.npm.taobao.org/gatsby/download/gatsby-2.19.17.tgz#f512b251d9aeb688bed270f3c2e490887edd2ee8"
+  integrity sha1-9RKyUdmutoi+0nDzwuSQiH7dLug=
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/core" "^7.7.5"
