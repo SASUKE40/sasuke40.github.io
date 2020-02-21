@@ -1400,10 +1400,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/react@^16.9.20":
-  version "16.9.20"
-  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.20.tgz?cache=0&sync_timestamp=1581989149469&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.20.tgz#e83285766340fb1a7fafe7e5c4708c53832e3641"
-  integrity sha1-6DKFdmNA+xp/r+flxHCMU4MuNkE=
+"@types/react@^16.9.21":
+  version "16.9.21"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.21.tgz?cache=0&sync_timestamp=1582160147624&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.21.tgz#99e274e2ecfab6bb93920e918341daa3198b348d"
+  integrity sha1-meJ04uz6truTkg6Rg0HaoxmLNI0=
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -5782,10 +5782,10 @@ gatsby-telemetry@^1.1.49:
     stack-utils "1.0.2"
     uuid "3.3.3"
 
-gatsby-transformer-remark@^2.6.52:
-  version "2.6.52"
-  resolved "https://registry.npm.taobao.org/gatsby-transformer-remark/download/gatsby-transformer-remark-2.6.52.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fgatsby-transformer-remark%2Fdownload%2Fgatsby-transformer-remark-2.6.52.tgz#ab843006fa4e7242452d732d2756b2ccb5f264a4"
-  integrity sha1-q4QwBvpOckJFLXMtJ1ayzLXyZKQ=
+gatsby-transformer-remark@^2.6.53:
+  version "2.6.53"
+  resolved "https://registry.npm.taobao.org/gatsby-transformer-remark/download/gatsby-transformer-remark-2.6.53.tgz#f35c4c196eb4e6b96fed03c9a2ebde005619ae0b"
+  integrity sha1-81xMGW605rlv7QPJouveAFYZrgs=
   dependencies:
     "@babel/runtime" "^7.7.6"
     bluebird "^3.7.2"
@@ -5822,10 +5822,10 @@ gatsby-transformer-sharp@^2.3.14:
     semver "^5.7.1"
     sharp "^0.23.4"
 
-gatsby@^2.19.18:
-  version "2.19.18"
-  resolved "https://registry.npm.taobao.org/gatsby/download/gatsby-2.19.18.tgz#bc03a806eb577e056d66b7ab5f7ca50070fc14c7"
-  integrity sha1-vAOoButXfgVtZrerX3ylAHD8FMc=
+gatsby@^2.19.19:
+  version "2.19.19"
+  resolved "https://registry.npm.taobao.org/gatsby/download/gatsby-2.19.19.tgz#8d4aa54e8c8da9cb38c5c7a15cfa358aec496f65"
+  integrity sha1-jUqlToyNqcs4xcehXPo1iuxJb2U=
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/core" "^7.7.5"
@@ -12580,10 +12580,10 @@ typeface-montserrat@0.0.75:
   resolved "https://registry.npm.taobao.org/typeface-montserrat/download/typeface-montserrat-0.0.75.tgz#b796d9c767ab8ed1343271985beb1e44b382b7b3"
   integrity sha1-t5bZx2erjtE0MnGYW+seRLOCt7M=
 
-typescript@^3.7.5:
-  version "3.7.5"
-  resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.7.5.tgz#0692e21f65fd4108b9330238aac11dd2e177a1ae"
-  integrity sha1-BpLiH2X9QQi5MwI4qsEd0uF3oa4=
+typescript@^3.8.2:
+  version "3.8.2"
+  resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.8.2.tgz?cache=0&sync_timestamp=1582238814724&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-3.8.2.tgz#91d6868aaead7da74f493c553aeff76c0c0b1d5a"
+  integrity sha1-kdaGiq6tfadPSTxVOu/3bAwLHVo=
 
 typography-breakpoint-constants@^0.16.19:
   version "0.16.19"
