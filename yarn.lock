@@ -1119,10 +1119,10 @@
   dependencies:
     core-js "^2.5.7"
 
-"@material-ui/core@^4.9.3":
-  version "4.9.3"
-  resolved "https://registry.npm.taobao.org/@material-ui/core/download/@material-ui/core-4.9.3.tgz#29ad51f4d36cbc3af7a9db27d92f93fa4fa42d50"
-  integrity sha1-Ka1R9NNsvDr3qdsn2S+T+k+kLVA=
+"@material-ui/core@^4.9.4":
+  version "4.9.4"
+  resolved "https://registry.npm.taobao.org/@material-ui/core/download/@material-ui/core-4.9.4.tgz#796515b12845dc6ea7e21872888cfc4c0c1c1efe"
+  integrity sha1-eWUVsShF3G6n4hhyiIz8TAwcHv4=
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/styles" "^4.9.0"
@@ -1131,17 +1131,16 @@
     "@material-ui/utils" "^4.7.1"
     "@types/react-transition-group" "^4.2.0"
     clsx "^1.0.2"
-    convert-css-length "^2.0.1"
     hoist-non-react-statics "^3.3.2"
     popper.js "^1.14.1"
     prop-types "^15.7.2"
     react-is "^16.8.0"
     react-transition-group "^4.3.0"
 
-"@material-ui/lab@^4.0.0-alpha.43":
-  version "4.0.0-alpha.43"
-  resolved "https://registry.npm.taobao.org/@material-ui/lab/download/@material-ui/lab-4.0.0-alpha.43.tgz#4bc673924cf1922750d70adcbb71414d3c18ff23"
-  integrity sha1-S8ZzkkzxkidQ1wrcu3FBTTwY/yM=
+"@material-ui/lab@^4.0.0-alpha.44":
+  version "4.0.0-alpha.44"
+  resolved "https://registry.npm.taobao.org/@material-ui/lab/download/@material-ui/lab-4.0.0-alpha.44.tgz#041281a288f731594a46c1010477e82cad4925fd"
+  integrity sha1-BBKBooj3MVlKRsEBBHfoLK1JJf0=
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/utils" "^4.7.1"
@@ -3365,11 +3364,6 @@ convert-css-length@^1.0.1:
   dependencies:
     console-polyfill "^0.1.2"
     parse-unit "^1.0.1"
-
-convert-css-length@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npm.taobao.org/convert-css-length/download/convert-css-length-2.0.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fconvert-css-length%2Fdownload%2Fconvert-css-length-2.0.1.tgz#90a76bde5bfd24d72881a5b45d02249b2c1d257c"
-  integrity sha1-kKdr3lv9JNcogaW0XQIkmywdJXw=
 
 convert-hrtime@^3.0.0:
   version "3.0.0"
