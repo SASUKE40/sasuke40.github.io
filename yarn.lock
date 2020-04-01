@@ -1513,10 +1513,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/react@^16.9.29":
-  version "16.9.29"
-  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.29.tgz#41c0353b5ea916cdb7a7e89b80b09b268c87a2f8"
-  integrity sha1-QcA1O16pFs23p+ibgLCbJoyHovg=
+"@types/react@^16.9.31":
+  version "16.9.31"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.31.tgz#6a543529766c8934ec8a89667376c2e73e9e2636"
+  integrity sha1-alQ1KXZsiTTsiolmc3bC5z6eJjY=
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
