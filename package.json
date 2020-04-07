@@ -12,7 +12,7 @@
     "@material-ui/lab": "^4.0.0-alpha.48",
     "@material-ui/styles": "^4.9.6",
     "disqus-react": "^1.0.8",
-    "gatsby": "^2.20.12",
+    "gatsby": "^2.20.13",
     "gatsby-image": "^2.3.1",
     "gatsby-plugin-feed": "^2.4.1",
     "gatsby-plugin-google-analytics": "^2.2.2",
@@ -48,8 +48,8 @@
   "devDependencies": {
     "@types/react": "^16.9.32",
     "@types/react-helmet": "^5.0.15",
-    "@typescript-eslint/eslint-plugin": "^2.26.0",
-    "@typescript-eslint/parser": "^2.26.0",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
@@ -64,7 +64,7 @@
     "eslint-plugin-react-hooks": "^3.0.0",
     "eslint-plugin-standard": "^4.0.1",
     "gh-pages": "^2.2.0",
-    "prettier": "^2.0.2"
+    "prettier": "^2.0.4"
   },
   "homepage": "https://github.com/SASUKE40/sasuke.github.io#readme",
   "keywords": [
