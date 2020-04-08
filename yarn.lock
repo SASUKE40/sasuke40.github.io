@@ -5921,10 +5921,10 @@ gatsby-graphiql-explorer@^0.3.1:
   dependencies:
     "@babel/runtime" "^7.8.7"
 
-gatsby-image@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.npm.taobao.org/gatsby-image/download/gatsby-image-2.3.1.tgz#6898e03a489e9b43242562d70079bd8ed10c5d99"
-  integrity sha1-aJjgOkiem0MkJWLXAHm9jtEMXZk=
+gatsby-image@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.npm.taobao.org/gatsby-image/download/gatsby-image-2.3.2.tgz#12e6cac9d6cc1a8152a35693ddf7729d5e59759f"
+  integrity sha1-EubKydbMGoFSo1aT3fdynV5ZdZ8=
   dependencies:
     "@babel/runtime" "^7.8.7"
     object-fit-images "^3.2.4"
