@@ -1580,10 +1580,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/react@^16.9.32":
-  version "16.9.32"
-  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.32.tgz?cache=0&sync_timestamp=1585851758317&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.32.tgz#f6368625b224604148d1ddf5920e4fefbd98d383"
-  integrity sha1-9jaGJbIkYEFI0d31kg5P772Y04M=
+"@types/react@^16.9.33":
+  version "16.9.33"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.33.tgz#a5274520f0d28cbbb73c8652ddd48646fd4bcae5"
+  integrity sha1-pSdFIPDSjLu3PIZS3dSGRv1LyuU=
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -6230,10 +6230,10 @@ gatsby-transformer-sharp@^2.4.4:
     semver "^5.7.1"
     sharp "^0.25.1"
 
-gatsby@^2.20.13:
-  version "2.20.13"
-  resolved "https://registry.npm.taobao.org/gatsby/download/gatsby-2.20.13.tgz#e6b44e6e3ecf5f6a5c3e55f25f2097678a7db3a1"
-  integrity sha1-5rRObj7PX2pcPlXyXyCXZ4p9s6E=
+gatsby@^2.20.15:
+  version "2.20.15"
+  resolved "https://registry.npm.taobao.org/gatsby/download/gatsby-2.20.15.tgz#7f91baac059ad9eb1b0b384b2a38e2a7459742cd"
+  integrity sha1-f5G6rAWa2esbCzhLKjjip0WXQs0=
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/core" "^7.8.7"
