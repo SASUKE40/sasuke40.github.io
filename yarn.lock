@@ -5857,10 +5857,10 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.npm.taobao.org/functional-red-black-tree/download/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-gatsby-cli@^2.11.6:
-  version "2.11.6"
-  resolved "https://registry.npm.taobao.org/gatsby-cli/download/gatsby-cli-2.11.6.tgz#d6d12c86d879b531cf42007faf327d4ef793ff36"
-  integrity sha1-1tEshth5tTHPQgB/rzJ9TveT/zY=
+gatsby-cli@^2.11.7:
+  version "2.11.7"
+  resolved "https://registry.npm.taobao.org/gatsby-cli/download/gatsby-cli-2.11.7.tgz#2156fb46e96c987358e801b928d2cb693257cedd"
+  integrity sha1-IVb7RulsmHNY6AG5KNLLaTJXzt0=
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/runtime" "^7.8.7"
@@ -6017,10 +6017,10 @@ gatsby-plugin-page-creator@^2.2.1:
     lodash "^4.17.15"
     micromatch "^3.1.10"
 
-gatsby-plugin-react-helmet@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.npm.taobao.org/gatsby-plugin-react-helmet/download/gatsby-plugin-react-helmet-3.2.1.tgz#28a89e884e5447f7aefead2a80749e3745f5f5a9"
-  integrity sha1-KKieiE5UR/eu/q0qgHSeN0X19ak=
+gatsby-plugin-react-helmet@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.npm.taobao.org/gatsby-plugin-react-helmet/download/gatsby-plugin-react-helmet-3.2.2.tgz#8817da61cd57b8fd9cf1cc6fb55c1e9564aa6a3c"
+  integrity sha1-iBfaYc1XuP2c8cxvtVwelWSqajw=
   dependencies:
     "@babel/runtime" "^7.8.7"
 
@@ -6230,10 +6230,10 @@ gatsby-transformer-sharp@^2.4.4:
     semver "^5.7.1"
     sharp "^0.25.1"
 
-gatsby@^2.20.16:
-  version "2.20.16"
-  resolved "https://registry.npm.taobao.org/gatsby/download/gatsby-2.20.16.tgz#3935aef136073e244ce234beeaee56c99f6b0e25"
-  integrity sha1-OTWu8TYHPiRM4jS+6u5WyZ9rDiU=
+gatsby@^2.20.17:
+  version "2.20.17"
+  resolved "https://registry.npm.taobao.org/gatsby/download/gatsby-2.20.17.tgz#b381f55225a6437598c1e455d005d240578b7fc9"
+  integrity sha1-s4H1UiWmQ3WYweRV0AXSQFeLf8k=
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/core" "^7.8.7"
@@ -6296,7 +6296,7 @@ gatsby@^2.20.16:
     flat "^4.1.0"
     fs-exists-cached "1.0.0"
     fs-extra "^8.1.0"
-    gatsby-cli "^2.11.6"
+    gatsby-cli "^2.11.7"
     gatsby-core-utils "^1.1.1"
     gatsby-graphiql-explorer "^0.3.1"
     gatsby-link "^2.3.2"
