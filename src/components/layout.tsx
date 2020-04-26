@@ -23,7 +23,6 @@ const Layout: React.FC<{
       createMuiTheme({
         ...defaultTheme,
         palette: {
-          // todo
           ...defaultTheme.palette,
           type: theme || 'light'
         }
