@@ -13,9 +13,9 @@ const BlogIndex = ({ data, ...props }) => {
 
   return (
     <Layout location={props.location} title={siteTitle}>
-      <SEO title="Home" />
+      <SEO title='Home' />
       <Bio />
-      <RouterTabs routers={data.site.siteMetadata.menuLinks} currentPage="/" />
+      <RouterTabs routers={data.site.siteMetadata.menuLinks} currentPage='/' />
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
@@ -23,7 +23,7 @@ const BlogIndex = ({ data, ...props }) => {
             <header>
               <h3
                 style={{
-                  marginBottom: rhythm(1 / 4),
+                  marginBottom: rhythm(1 / 4)
                 }}
               >
                 <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
@@ -37,7 +37,7 @@ const BlogIndex = ({ data, ...props }) => {
             <section>
               <p
                 dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
+                  __html: node.frontmatter.description || node.excerpt
                 }}
               />
             </section>

@@ -14,19 +14,19 @@ import '../style/friend.css'
 
 const useStyles = makeStyles({
   friends: {
-    margin: '1rem 0 0 0',
+    margin: '1rem 0 0 0'
   },
   divider: {
-    marginBottom: '1rem',
+    marginBottom: '1rem'
   },
   introduction: {
     '& img': {
-      margin: 'auto',
-    },
+      margin: 'auto'
+    }
   },
   comment: {
-    marginTop: '1.5rem',
-  },
+    marginTop: '1.5rem'
+  }
 })
 
 const FriendPage = props => {
@@ -37,7 +37,7 @@ const FriendPage = props => {
   const discusConfig = {
     url: props.url,
     identifier: 'global-comment',
-    title: '评论区',
+    title: '评论区'
   }
 
   const avatars = data.avatars.edges
@@ -46,10 +46,10 @@ const FriendPage = props => {
 
   return (
     <Layout location={props.location} title={siteTitle}>
-      <SEO title="Friends" />
+      <SEO title='Friends' />
       <RouterTabs
         routers={data.site.siteMetadata.menuLinks}
-        currentPage="/friends"
+        currentPage='/friends'
       />
       <ul className={classes.friends}>
         {data.site.siteMetadata.friendship.map(friend => {
@@ -59,7 +59,7 @@ const FriendPage = props => {
           return (
             <li
               key={friend.name}
-              className="friend-card"
+              className='friend-card'
               onClick={() => window.open(friend.url)}
             >
               <Image
@@ -68,13 +68,13 @@ const FriendPage = props => {
                 style={{
                   flex: 1,
                   maxWidth: 50,
-                  borderRadius: '100%',
+                  borderRadius: '100%'
                 }}
                 imgStyle={{
-                  borderRadius: '50%',
+                  borderRadius: '50%'
                 }}
               />
-              <div className="friend-card-content">
+              <div className='friend-card-content'>
                 <span>{friend.name}</span>
               </div>
             </li>
@@ -88,13 +88,13 @@ const FriendPage = props => {
       <Bio>
         <div className={classes.introduction}>
           <img
-            alt="GitHub followers"
-            src="https://img.shields.io/github/followers/sasuke40?label=Follow&style=social"
+            alt='GitHub followers'
+            src='https://img.shields.io/github/followers/sasuke40?label=Follow&style=social'
           />
           <br />
           <img
-            alt="Twitter Follow"
-            src="https://img.shields.io/twitter/follow/sasuke688848?label=Follow&style=social"
+            alt='Twitter Follow'
+            src='https://img.shields.io/twitter/follow/sasuke688848?label=Follow&style=social'
           />
         </div>
       </Bio>

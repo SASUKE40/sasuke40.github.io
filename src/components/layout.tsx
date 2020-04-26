@@ -25,8 +25,8 @@ const Layout: React.FC<{
         palette: {
           // todo
           ...defaultTheme.palette,
-          type: theme || 'light',
-        },
+          type: theme || 'light'
+        }
       }),
     [theme]
   )
@@ -58,14 +58,14 @@ const Layout: React.FC<{
     <h3
       style={{
         fontFamily: 'Montserrat, sans-serif',
-        marginTop: 0,
+        marginTop: 0
       }}
     >
       <Link
         style={{
           boxShadow: 'none',
           textDecoration: 'none',
-          color: 'inherit',
+          color: 'inherit'
         }}
         to={'/'}
       >
@@ -82,15 +82,15 @@ const Layout: React.FC<{
           marginLeft: 'auto',
           marginRight: 'auto',
           maxWidth: rhythm(24),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`
         }}
       >
         <Helmet
           meta={[
             {
               name: 'theme-color',
-              content: theme === 'light' ? '#ffa8c5' : '#282c35',
-            },
+              content: theme === 'light' ? '#ffa8c5' : '#282c35'
+            }
           ]}
         />
         <header
@@ -98,7 +98,7 @@ const Layout: React.FC<{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: '2.625rem',
+            marginBottom: '2.625rem'
           }}
         >
           {header}
@@ -108,21 +108,23 @@ const Layout: React.FC<{
                 checked: (
                   <img
                     src={moon}
-                    width="16"
-                    height="16"
-                    role="presentation"
+                    width='16'
+                    height='16'
+                    role='presentation'
                     style={{ pointerEvents: 'none' }}
+                    alt='dark'
                   />
                 ),
                 unchecked: (
                   <img
                     src={sun}
-                    width="16"
-                    height="16"
-                    role="presentation"
+                    width='16'
+                    height='16'
+                    role='presentation'
                     style={{ pointerEvents: 'none' }}
+                    alt='light'
                   />
-                ),
+                )
               }}
               checked={theme === 'dark'}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -139,7 +141,7 @@ const Layout: React.FC<{
           {moment(data.site.buildTime)
             .local()
             .format('YYYY-MM-DD HH:mm')}{' '}
-          with <a href="https://www.gatsbyjs.org">Gatsby</a>
+          with <a href='https://www.gatsbyjs.org'>Gatsby</a>
         </footer>
       </div>
     </ThemeProvider>
