@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Edward Elric]]></title><description><![CDATA[Stay Hungry Stay Foolish]]></description><link>https://sasuke40.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 11 Jan 2020 12:17:56 GMT</lastBuildDate><item><title><![CDATA[使用 Gatsby 搭建个人网站指南]]></title><description><![CDATA[前言 相信大部分程序员都有自己个人网站，或者是托管在各大平台上的技术博客。 大概在大一的时候我也萌生搭建个人博客的想法，最早还是比较流行自己买一个 VPS、域名，然后搭建 WordPress…]]></description><link>https://sasuke40.github.io/a-guide-to-building-a-personal-website-with-gatsby/</link><guid isPermaLink="false">https://sasuke40.github.io/a-guide-to-building-a-personal-website-with-gatsby/</guid><pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Edward Elric]]></title><description><![CDATA[Stay Hungry Stay Foolish]]></description><link>https://sasuke40.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 26 Apr 2020 13:32:58 GMT</lastBuildDate><item><title><![CDATA[使用 Gatsby 搭建个人网站指南]]></title><description><![CDATA[前言 相信大部分程序员都有自己个人网站，或者是托管在各大平台上的技术博客。 大概在大一的时候我也萌生搭建个人博客的想法，最早还是比较流行自己买一个 VPS、域名，然后搭建 WordPress…]]></description><link>https://sasuke40.github.io/a-guide-to-building-a-personal-website-with-gatsby/</link><guid isPermaLink="false">https://sasuke40.github.io/a-guide-to-building-a-personal-website-with-gatsby/</guid><pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
 &lt;p&gt;相信大部分程序员都有自己个人网站，或者是托管在各大平台上的技术博客。&lt;/p&gt;
 &lt;p&gt;大概在大一的时候我也萌生搭建个人博客的想法，最早还是比较流行自己买一个 VPS、域名，然后搭建 &lt;strong&gt;WordPress&lt;/strong&gt;。不过由于没续费，东西也没妥善备份也不知道去哪里了。
 接着网络兴起&lt;strong&gt;轻博客&lt;/strong&gt;，我想着自己塔多不方便，就用了&lt;strong&gt;点点网&lt;/strong&gt;写自己的博客，在上面沉淀不少文章，然而点点网在 2016 年也关闭了。&lt;/p&gt;
@@ -58,19 +58,19 @@
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 85.91549295774648%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAAAsSAAALEgHS3X78AAABXklEQVQ4y6VU2WrDMBD0/39Sn/sBeehBIS00jvEVX7V1S55qZewkhdCoXRgskDTszKyc9KNA3XEwziCkgrEOSpuwlkpHIzFKYDYCnHHU1Qlt20JKCap5nqORWOfC5fyU4eXtGfv9O/I8h9Yazu/RoZhKGOdQQqKeehyKDNkxQ1GUEELAGBNPqP0lzA7VoJEWLcqiAOfif5KXLhY0TYuqqlGW5R8J7ULo3Ox9M15ugXEcw5o8XBFNSLDW+u4q9H2/JX1JeJeHPwkp4WmaAiFjbEv73k7PkoNsF7wjyURGX6XUdviy01sdX3VIF9I0DT7eqigPjbE4HI5BMnXG/YwSyIq75/CcsgtjY+SXJ5NhsEnyMAwh8aiUaWSodh8aDzuDkWlPyK5kLqHMv+LcodV4/WR4fBrRDQxD322BRD291R+SJlgPMTXoWo+uD/O4vucoyVTkWeN/XWTluvmX9/wNjko5tkPieZQAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 85.8108108108108%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAAAsSAAALEgHS3X78AAABXklEQVQ4y6VU2WrDMBD0/39Sn/sBeehBIS00jvEVX7V1S55qZewkhdCoXRgskDTszKyc9KNA3XEwziCkgrEOSpuwlkpHIzFKYDYCnHHU1Qlt20JKCap5nqORWOfC5fyU4eXtGfv9O/I8h9Yazu/RoZhKGOdQQqKeehyKDNkxQ1GUEELAGBNPqP0lzA7VoJEWLcqiAOfif5KXLhY0TYuqqlGW5R8J7ULo3Ox9M15ugXEcw5o8XBFNSLDW+u4q9H2/JX1JeJeHPwkp4WmaAiFjbEv73k7PkoNsF7wjyURGX6XUdviy01sdX3VIF9I0DT7eqigPjbE4HI5BMnXG/YwSyIq75/CcsgtjY+SXJ5NhsEnyMAwh8aiUaWSodh8aDzuDkWlPyK5kLqHMv+LcodV4/WR4fBrRDQxD322BRD291R+SJlgPMTXoWo+uD/O4vucoyVTkWeN/XWTluvmX9/wNjko5tkPieZQAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;image&quot;
         title=&quot;image&quot;
-        src=&quot;/static/520096670c0a9ed36b22c9c9a2d2951d/799d3/google_analytics.png&quot;
-        srcset=&quot;/static/520096670c0a9ed36b22c9c9a2d2951d/00d96/google_analytics.png 148w,
-/static/520096670c0a9ed36b22c9c9a2d2951d/0b23c/google_analytics.png 295w,
-/static/520096670c0a9ed36b22c9c9a2d2951d/799d3/google_analytics.png 590w,
-/static/520096670c0a9ed36b22c9c9a2d2951d/2a3d6/google_analytics.png 885w,
-/static/520096670c0a9ed36b22c9c9a2d2951d/ae92f/google_analytics.png 1180w,
-/static/520096670c0a9ed36b22c9c9a2d2951d/7b787/google_analytics.png 1704w&quot;
+        src=&quot;/static/520096670c0a9ed36b22c9c9a2d2951d/fcda8/google_analytics.png&quot;
+        srcset=&quot;/static/520096670c0a9ed36b22c9c9a2d2951d/12f09/google_analytics.png 148w,
+/static/520096670c0a9ed36b22c9c9a2d2951d/e4a3f/google_analytics.png 295w,
+/static/520096670c0a9ed36b22c9c9a2d2951d/fcda8/google_analytics.png 590w,
+/static/520096670c0a9ed36b22c9c9a2d2951d/efc66/google_analytics.png 885w,
+/static/520096670c0a9ed36b22c9c9a2d2951d/c83ae/google_analytics.png 1180w,
+/static/520096670c0a9ed36b22c9c9a2d2951d/09b15/google_analytics.png 1704w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -85,19 +85,19 @@
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 125.70579494799405%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZCAYAAAAxFw7TAAAACXBIWXMAAAsSAAALEgHS3X78AAAC/0lEQVQ4y61VS0/bQBD234QTF4S4BAmu/BCkit/QGxJU6iVSJRClLTQkcZz4Fdtx3vj9/jqzUUhAaQqoK43m4d3Zmflm1hI+uMqqQkV8ndgmRVGEi4sLyLKM29tbBEEA13UxmUzQ7XaFvV6v4+rqCo1GQ+wJw5BOlyjHLgrXRjG0UY4GqIockuM42NnZQe3oCLu7uzg+Psbe3h5qtRoODg5wdnaG09NT7O/v4+TkBIeHh/h0fi5iCm/q8Otf4F9+RkxyFUeQKgozTVLEFGlRFOCI4zhGmqYURIU8L5CTfaGXKPKcbPkiSYpQ0MgRVJFdAjssImRlIVLJshRh4BN58OYzuihEEpM9TYhHdGEoyuJ5Hny6eE6ynyRCFjVMsgRfry+h2iYaD7/R7up4kHXcNbq4e+yhoZho9iy0VAv3sgndtDEZjzEcDkWtHdsWNCKdMxApz7wnpFmGwPcRxBn8FHQr4CUV8QpPcYkgXfDyH+hLm83rzfD6E7XLFhIRbjwozm4+xPuZbXQYpQW+qx5+ah6ulRlulDm+yTMY42gZ0NaIXl5EKSfUMrbjYjSeYO7Hwpjm1C7lKsq3LhEh91er1YSu6+gqHSiKgk5HRrvdQq/XE9PS6XSeqd1uo9lsiglSVVXofIblhNpH4ia1LEuQbTtwBgMMiHiCmNvUEsy5Rfr9/vM31rl1WOazPnXIFpQ/tkTKIYHygwBRBhFadoDHvo973YM1jbci/RqMZ4dJmkHtUzrOGO6URi4p4EU5Yrrobw54ItblpS5S5oegI7ehaSpMXUOvq0An2bL60AgoBkvTNMGZDMMQOteWweCasn06nS4cphSh2beo4BYM04RCqK5AsgUQS27Sdz7MOnO2ZTSy66WR/hcYq8amDv5lBOgQKE0rQKPviTq+FZClo5VDSlk2XOj2BM40wMTP6EEtX2x6z7RICYHCYJiGhtl0vDGd9yyJIQ+CUDz9Ab3YPNspPftZUX0sQv6P8AgxmYwotYvhzqGPY/FPebfDtyD4nvUH9vl5l64IgsYAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 125.67567567567568%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZCAYAAAAxFw7TAAAACXBIWXMAAAsSAAALEgHS3X78AAAC/0lEQVQ4y61VS0/bQBD234QTF4S4BAmu/BCkit/QGxJU6iVSJRClLTQkcZz4Fdtx3vj9/jqzUUhAaQqoK43m4d3Zmflm1hI+uMqqQkV8ndgmRVGEi4sLyLKM29tbBEEA13UxmUzQ7XaFvV6v4+rqCo1GQ+wJw5BOlyjHLgrXRjG0UY4GqIockuM42NnZQe3oCLu7uzg+Psbe3h5qtRoODg5wdnaG09NT7O/v4+TkBIeHh/h0fi5iCm/q8Otf4F9+RkxyFUeQKgozTVLEFGlRFOCI4zhGmqYURIU8L5CTfaGXKPKcbPkiSYpQ0MgRVJFdAjssImRlIVLJshRh4BN58OYzuihEEpM9TYhHdGEoyuJ5Hny6eE6ynyRCFjVMsgRfry+h2iYaD7/R7up4kHXcNbq4e+yhoZho9iy0VAv3sgndtDEZjzEcDkWtHdsWNCKdMxApz7wnpFmGwPcRxBn8FHQr4CUV8QpPcYkgXfDyH+hLm83rzfD6E7XLFhIRbjwozm4+xPuZbXQYpQW+qx5+ah6ulRlulDm+yTMY42gZ0NaIXl5EKSfUMrbjYjSeYO7Hwpjm1C7lKsq3LhEh91er1YSu6+gqHSiKgk5HRrvdQq/XE9PS6XSeqd1uo9lsiglSVVXofIblhNpH4ia1LEuQbTtwBgMMiHiCmNvUEsy5Rfr9/vM31rl1WOazPnXIFpQ/tkTKIYHygwBRBhFadoDHvo973YM1jbci/RqMZ4dJmkHtUzrOGO6URi4p4EU5Yrrobw54ItblpS5S5oegI7ehaSpMXUOvq0An2bL60AgoBkvTNMGZDMMQOteWweCasn06nS4cphSh2beo4BYM04RCqK5AsgUQS27Sdz7MOnO2ZTSy66WR/hcYq8amDv5lBOgQKE0rQKPviTq+FZClo5VDSlk2XOj2BM40wMTP6EEtX2x6z7RICYHCYJiGhtl0vDGd9yyJIQ+CUDz9Ab3YPNspPftZUX0sQv6P8AgxmYwotYvhzqGPY/FPebfDtyD4nvUH9vl5l64IgsYAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;image&quot;
         title=&quot;image&quot;
-        src=&quot;/static/597186f3191b7d2b970b2c4434970b74/799d3/add_dark_mode.png&quot;
-        srcset=&quot;/static/597186f3191b7d2b970b2c4434970b74/00d96/add_dark_mode.png 148w,
-/static/597186f3191b7d2b970b2c4434970b74/0b23c/add_dark_mode.png 295w,
-/static/597186f3191b7d2b970b2c4434970b74/799d3/add_dark_mode.png 590w,
-/static/597186f3191b7d2b970b2c4434970b74/2a3d6/add_dark_mode.png 885w,
-/static/597186f3191b7d2b970b2c4434970b74/ae92f/add_dark_mode.png 1180w,
-/static/597186f3191b7d2b970b2c4434970b74/44860/add_dark_mode.png 1346w&quot;
+        src=&quot;/static/597186f3191b7d2b970b2c4434970b74/fcda8/add_dark_mode.png&quot;
+        srcset=&quot;/static/597186f3191b7d2b970b2c4434970b74/12f09/add_dark_mode.png 148w,
+/static/597186f3191b7d2b970b2c4434970b74/e4a3f/add_dark_mode.png 295w,
+/static/597186f3191b7d2b970b2c4434970b74/fcda8/add_dark_mode.png 590w,
+/static/597186f3191b7d2b970b2c4434970b74/efc66/add_dark_mode.png 885w,
+/static/597186f3191b7d2b970b2c4434970b74/c83ae/add_dark_mode.png 1180w,
+/static/597186f3191b7d2b970b2c4434970b74/c45c7/add_dark_mode.png 1346w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -223,19 +223,19 @@
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 111.14245416078985%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAACXBIWXMAABYlAAAWJQFJUiTwAAADX0lEQVQ4y4VV25baRhDkT7IOy0WIu5AQEpLQBQnBml0W73pzc5y8JHlOPirn+Av8deXqlkTIiWM/FD3TM+rp6a4aWv2hjcF4iZ65UGtOXIhP5mK/hGaP2Jv2EH3algR5+eFXvHn7Dq8fXvDT+9/gRwVu+3MYI/vrQQcLmFMbz7/8gd7QQas5YcjMJLhAfB3DQnfwdXSMOQYTC+X5xyqgBAuTAlM7uFx5OFthNPcJj6e7xOpih/V4NPMwsXyMuWc089HuTjSxlsEgHz7+jd//+hPLVYo4OSDfHlEWD4p4s8dmUyKJ90i4FsUlMlpvvcUqqOCuMz1AA/ZMG16SY+5GWCw3sO0Qvr1ReGKdGKtFpGOPY2sRYO0kMEcO2v2ZXlnQNKglnWn3qoWmLreDeQ3rylbjZv1zLNAMZWDy2gZP7HCzOM0Rm8O5+AY1DO4z6g+NL9CoNWSw5+0Zp+QBj+kDTsT7w/fI/AL3yT3e7b/Dz5yPxu7lag2aGzVzvbJkEZB3fpBjwfrNrQAza40JuyxUmkg3Z54WfcTumzW9zMkS49qvN6nFQWI7iNIDNtkd4u1rJPkRxf4RKa0X5kiLe6w3O/WpvziSZnvdr98RayYkDZVsVSkxF7c70uTurB9FpMWc2S69tNrsbnQscP0MjpeoTzg4ZdftVaz8rGnDJvAqQy4KJ4W8Xfpe9aa4IVm/6YzV3nTHitsrqlyr5Z8aUi6OFSrPXPJtOvVgs45LO0LgpopolakNac1amtc6b8aaoWw452c8755w2NwpaSM3q7ocH3FOT3jJ3+CJTHjaPmJISjXZNXpv5hWxGX0V5XDZgIUXU5/sMHU9W0ZaivFireUYUL9TJ9SajckAqbGCPqmh+HrN8+WHhTZmdzjj7v4t8vKkXRZ7OD4hoJZlXZoWUtPF4fHChIYB0ijtsqTpkYOyKBQo9id2dgeLGWakjAhf/DIWyOERaSOPgvDvP0qRH9Fmx6zq0TZmF3zbr6B6Zp0qfzXuXynmX0oRnR4iNmOZaCfLiM9XUGIX8mpEyuYUwR577inoL8ODrnX/73GQgGlUwvcyTPlQyhPlM7hA6CJWKOSSVnKgPGfOIvxsdhVtqEmX9Vjz4QwIZ01FsG4Cm4UW6wbVXNbkup2aIoP6lbr+w/oEo57RHblBgTcAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 110.8108108108108%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAACXBIWXMAABYlAAAWJQFJUiTwAAADX0lEQVQ4y4VV25baRhDkT7IOy0WIu5AQEpLQBQnBml0W73pzc5y8JHlOPirn+Av8deXqlkTIiWM/FD3TM+rp6a4aWv2hjcF4iZ65UGtOXIhP5mK/hGaP2Jv2EH3algR5+eFXvHn7Dq8fXvDT+9/gRwVu+3MYI/vrQQcLmFMbz7/8gd7QQas5YcjMJLhAfB3DQnfwdXSMOQYTC+X5xyqgBAuTAlM7uFx5OFthNPcJj6e7xOpih/V4NPMwsXyMuWc089HuTjSxlsEgHz7+jd//+hPLVYo4OSDfHlEWD4p4s8dmUyKJ90i4FsUlMlpvvcUqqOCuMz1AA/ZMG16SY+5GWCw3sO0Qvr1ReGKdGKtFpGOPY2sRYO0kMEcO2v2ZXlnQNKglnWn3qoWmLreDeQ3rylbjZv1zLNAMZWDy2gZP7HCzOM0Rm8O5+AY1DO4z6g+NL9CoNWSw5+0Zp+QBj+kDTsT7w/fI/AL3yT3e7b/Dz5yPxu7lag2aGzVzvbJkEZB3fpBjwfrNrQAza40JuyxUmkg3Z54WfcTumzW9zMkS49qvN6nFQWI7iNIDNtkd4u1rJPkRxf4RKa0X5kiLe6w3O/WpvziSZnvdr98RayYkDZVsVSkxF7c70uTurB9FpMWc2S69tNrsbnQscP0MjpeoTzg4ZdftVaz8rGnDJvAqQy4KJ4W8Xfpe9aa4IVm/6YzV3nTHitsrqlyr5Z8aUi6OFSrPXPJtOvVgs45LO0LgpopolakNac1amtc6b8aaoWw452c8755w2NwpaSM3q7ocH3FOT3jJ3+CJTHjaPmJISjXZNXpv5hWxGX0V5XDZgIUXU5/sMHU9W0ZaivFireUYUL9TJ9SajckAqbGCPqmh+HrN8+WHhTZmdzjj7v4t8vKkXRZ7OD4hoJZlXZoWUtPF4fHChIYB0ijtsqTpkYOyKBQo9id2dgeLGWakjAhf/DIWyOERaSOPgvDvP0qRH9Fmx6zq0TZmF3zbr6B6Zp0qfzXuXynmX0oRnR4iNmOZaCfLiM9XUGIX8mpEyuYUwR577inoL8ODrnX/73GQgGlUwvcyTPlQyhPlM7hA6CJWKOSSVnKgPGfOIvxsdhVtqEmX9Vjz4QwIZ01FsG4Cm4UW6wbVXNbkup2aIoP6lbr+w/oEo57RHblBgTcAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;image&quot;
         title=&quot;image&quot;
-        src=&quot;/static/e55c0f6abb9c755e3b9ccf32c7d689fe/799d3/result.png&quot;
-        srcset=&quot;/static/e55c0f6abb9c755e3b9ccf32c7d689fe/00d96/result.png 148w,
-/static/e55c0f6abb9c755e3b9ccf32c7d689fe/0b23c/result.png 295w,
-/static/e55c0f6abb9c755e3b9ccf32c7d689fe/799d3/result.png 590w,
-/static/e55c0f6abb9c755e3b9ccf32c7d689fe/2a3d6/result.png 885w,
-/static/e55c0f6abb9c755e3b9ccf32c7d689fe/ae92f/result.png 1180w,
-/static/e55c0f6abb9c755e3b9ccf32c7d689fe/16518/result.png 1418w&quot;
+        src=&quot;/static/e55c0f6abb9c755e3b9ccf32c7d689fe/fcda8/result.png&quot;
+        srcset=&quot;/static/e55c0f6abb9c755e3b9ccf32c7d689fe/12f09/result.png 148w,
+/static/e55c0f6abb9c755e3b9ccf32c7d689fe/e4a3f/result.png 295w,
+/static/e55c0f6abb9c755e3b9ccf32c7d689fe/fcda8/result.png 590w,
+/static/e55c0f6abb9c755e3b9ccf32c7d689fe/efc66/result.png 885w,
+/static/e55c0f6abb9c755e3b9ccf32c7d689fe/c83ae/result.png 1180w,
+/static/e55c0f6abb9c755e3b9ccf32c7d689fe/bb543/result.png 1418w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -265,19 +265,19 @@
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 33.3767926988266%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAABF0lEQVQoz53RfU+DMBAGcL7/JzMxajRGg4w5Rss2XkZZ6aCF9vG4xUXN/pLkl3uAuwuh0SpdQUiJOElwbFv85wohXEXqZNEbh67tYLTBbCdM1rGZuMFSnpil7EbHOPM7RxtxFcWqQULSeouk/KSaE0E5JwIfhwxZW2BzFEirDOsmR6YKeiaxppmlKq/RBo0xOEQvNsazeceDfiOveDQb3PeSCNx1Ak+DxAo0zAqu6R9JyBGHDC0tjkS1gx4NLG2/sBi95TrMI87TwPec2ZIvPd+WueXrJj8j2m4FpNxhvz+gLCtUZc11V+xRVw0U/dtOnUgH1WnU2qMz/vbheDoUcz5D9/0vvTE46R7OOW703vMJ+h/CDUvfF+bYGlH3wdUvAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 33.108108108108105%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAABF0lEQVQoz53RfU+DMBAGcL7/JzMxajRGg4w5Rss2XkZZ6aCF9vG4xUXN/pLkl3uAuwuh0SpdQUiJOElwbFv85wohXEXqZNEbh67tYLTBbCdM1rGZuMFSnpil7EbHOPM7RxtxFcWqQULSeouk/KSaE0E5JwIfhwxZW2BzFEirDOsmR6YKeiaxppmlKq/RBo0xOEQvNsazeceDfiOveDQb3PeSCNx1Ak+DxAo0zAqu6R9JyBGHDC0tjkS1gx4NLG2/sBi95TrMI87TwPec2ZIvPd+WueXrJj8j2m4FpNxhvz+gLCtUZc11V+xRVw0U/dtOnUgH1WnU2qMz/vbheDoUcz5D9/0vvTE46R7OOW703vMJ+h/CDUvfF+bYGlH3wdUvAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;image&quot;
         title=&quot;image&quot;
-        src=&quot;/static/e9b3da86e9e000edddf377dc6bf543c6/799d3/github_pages_setting.png&quot;
-        srcset=&quot;/static/e9b3da86e9e000edddf377dc6bf543c6/00d96/github_pages_setting.png 148w,
-/static/e9b3da86e9e000edddf377dc6bf543c6/0b23c/github_pages_setting.png 295w,
-/static/e9b3da86e9e000edddf377dc6bf543c6/799d3/github_pages_setting.png 590w,
-/static/e9b3da86e9e000edddf377dc6bf543c6/2a3d6/github_pages_setting.png 885w,
-/static/e9b3da86e9e000edddf377dc6bf543c6/ae92f/github_pages_setting.png 1180w,
-/static/e9b3da86e9e000edddf377dc6bf543c6/bd983/github_pages_setting.png 1534w&quot;
+        src=&quot;/static/e9b3da86e9e000edddf377dc6bf543c6/fcda8/github_pages_setting.png&quot;
+        srcset=&quot;/static/e9b3da86e9e000edddf377dc6bf543c6/12f09/github_pages_setting.png 148w,
+/static/e9b3da86e9e000edddf377dc6bf543c6/e4a3f/github_pages_setting.png 295w,
+/static/e9b3da86e9e000edddf377dc6bf543c6/fcda8/github_pages_setting.png 590w,
+/static/e9b3da86e9e000edddf377dc6bf543c6/efc66/github_pages_setting.png 885w,
+/static/e9b3da86e9e000edddf377dc6bf543c6/c83ae/github_pages_setting.png 1180w,
+/static/e9b3da86e9e000edddf377dc6bf543c6/ddc6c/github_pages_setting.png 1534w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -322,13 +322,13 @@
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;1&quot;
         title=&quot;1&quot;
-        src=&quot;/static/bba3dc42ba9d010f2b3ac2439665e242/88218/1.jpg&quot;
-        srcset=&quot;/static/bba3dc42ba9d010f2b3ac2439665e242/7237a/1.jpg 148w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/0cfdf/1.jpg 295w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/88218/1.jpg 590w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/77d57/1.jpg 885w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/5a917/1.jpg 1180w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/e5be1/1.jpg 1440w&quot;
+        src=&quot;/static/bba3dc42ba9d010f2b3ac2439665e242/1c72d/1.jpg&quot;
+        srcset=&quot;/static/bba3dc42ba9d010f2b3ac2439665e242/a80bd/1.jpg 148w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/1c91a/1.jpg 295w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/1c72d/1.jpg 590w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/a8a14/1.jpg 885w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/fbd2c/1.jpg 1180w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/644c5/1.jpg 1440w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -347,13 +347,13 @@
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;2&quot;
         title=&quot;2&quot;
-        src=&quot;/static/e41ed86540c8420313443a57ec847934/88218/2.jpg&quot;
-        srcset=&quot;/static/e41ed86540c8420313443a57ec847934/7237a/2.jpg 148w,
-/static/e41ed86540c8420313443a57ec847934/0cfdf/2.jpg 295w,
-/static/e41ed86540c8420313443a57ec847934/88218/2.jpg 590w,
-/static/e41ed86540c8420313443a57ec847934/77d57/2.jpg 885w,
-/static/e41ed86540c8420313443a57ec847934/5a917/2.jpg 1180w,
-/static/e41ed86540c8420313443a57ec847934/e5be1/2.jpg 1440w&quot;
+        src=&quot;/static/e41ed86540c8420313443a57ec847934/1c72d/2.jpg&quot;
+        srcset=&quot;/static/e41ed86540c8420313443a57ec847934/a80bd/2.jpg 148w,
+/static/e41ed86540c8420313443a57ec847934/1c91a/2.jpg 295w,
+/static/e41ed86540c8420313443a57ec847934/1c72d/2.jpg 590w,
+/static/e41ed86540c8420313443a57ec847934/a8a14/2.jpg 885w,
+/static/e41ed86540c8420313443a57ec847934/fbd2c/2.jpg 1180w,
+/static/e41ed86540c8420313443a57ec847934/644c5/2.jpg 1440w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -372,13 +372,13 @@
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;3&quot;
         title=&quot;3&quot;
-        src=&quot;/static/a4563d93640804e9f25a4d2445955e7d/88218/3.jpg&quot;
-        srcset=&quot;/static/a4563d93640804e9f25a4d2445955e7d/7237a/3.jpg 148w,
-/static/a4563d93640804e9f25a4d2445955e7d/0cfdf/3.jpg 295w,
-/static/a4563d93640804e9f25a4d2445955e7d/88218/3.jpg 590w,
-/static/a4563d93640804e9f25a4d2445955e7d/77d57/3.jpg 885w,
-/static/a4563d93640804e9f25a4d2445955e7d/5a917/3.jpg 1180w,
-/static/a4563d93640804e9f25a4d2445955e7d/e5be1/3.jpg 1440w&quot;
+        src=&quot;/static/a4563d93640804e9f25a4d2445955e7d/1c72d/3.jpg&quot;
+        srcset=&quot;/static/a4563d93640804e9f25a4d2445955e7d/a80bd/3.jpg 148w,
+/static/a4563d93640804e9f25a4d2445955e7d/1c91a/3.jpg 295w,
+/static/a4563d93640804e9f25a4d2445955e7d/1c72d/3.jpg 590w,
+/static/a4563d93640804e9f25a4d2445955e7d/a8a14/3.jpg 885w,
+/static/a4563d93640804e9f25a4d2445955e7d/fbd2c/3.jpg 1180w,
+/static/a4563d93640804e9f25a4d2445955e7d/644c5/3.jpg 1440w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -390,18 +390,18 @@
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 133.33333333333331%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAIDBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAABAAL/2gAMAwEAAhADEAAAAWmThRBuhPYuXOKN/8QAHhAAAgICAgMAAAAAAAAAAAAAAQIDEgARBBMhIzP/2gAIAQEAAQUCaTYd9DtwxPYpKcq+TzVdrJFwz6ajb+RD8//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EAB0QAAIDAAIDAAAAAAAAAAAAAAABAhEhEjEyQYH/2gAIAQEABj8CFdmIa9nidHGEU5NaSdVh9LrSn0I//8QAHBABAAICAwEAAAAAAAAAAAAAAQARIUExUWFx/9oACAEBAAE/ISxFfCLQqygdkNcPkaCtqXmKFWo7iXLbzjMuslDyMSsBfUfn2mtW3CcstTEj2f/aAAwDAQACAAMAAAAQb9//AP/EABURAQEAAAAAAAAAAAAAAAAAAAEg/9oACAEDAQE/EGP/xAAXEQADAQAAAAAAAAAAAAAAAAAAAREQ/9oACAECAQE/EKy5D//EAB0QAQADAQEBAAMAAAAAAAAAAAEAESExQZFRobH/2gAIAQEAAT8QrKtXaG/xFQMMQs7BCwDDgjesHuB9Lm6Alw0fdlCt9hT6RSYlxzwMW2VQ5arr3IvvlX6lLF9tdY6ChTbsBkAf6Z//2Q==&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 133.1081081081081%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAIDBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAABAAL/2gAMAwEAAhADEAAAAWmThRBuhPYuXOKN/8QAHhAAAgICAgMAAAAAAAAAAAAAAQIDEgARBBMhIzP/2gAIAQEAAQUCaTYd9DtwxPYpKcq+TzVdrJFwz6ajb+RD8//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EAB0QAAIDAAIDAAAAAAAAAAAAAAABAhEhEjEyQYH/2gAIAQEABj8CFdmIa9nidHGEU5NaSdVh9LrSn0I//8QAHBABAAICAwEAAAAAAAAAAAAAAQARIUExUWFx/9oACAEBAAE/ISxFfCLQqygdkNcPkaCtqXmKFWo7iXLbzjMuslDyMSsBfUfn2mtW3CcstTEj2f/aAAwDAQACAAMAAAAQb9//AP/EABURAQEAAAAAAAAAAAAAAAAAAAEg/9oACAEDAQE/EGP/xAAXEQADAQAAAAAAAAAAAAAAAAAAAREQ/9oACAECAQE/EKy5D//EAB0QAQADAQEBAAMAAAAAAAAAAAEAESExQZFRobH/2gAIAQEAAT8QrKtXaG/xFQMMQs7BCwDDgjesHuB9Lm6Alw0fdlCt9hT6RSYlxzwMW2VQ5arr3IvvlX6lLF9tdY6ChTbsBkAf6Z//2Q==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;4&quot;
         title=&quot;4&quot;
-        src=&quot;/static/5c060a92d31a51911b8452d327896e9e/88218/4.jpg&quot;
-        srcset=&quot;/static/5c060a92d31a51911b8452d327896e9e/7237a/4.jpg 148w,
-/static/5c060a92d31a51911b8452d327896e9e/0cfdf/4.jpg 295w,
-/static/5c060a92d31a51911b8452d327896e9e/88218/4.jpg 590w,
-/static/5c060a92d31a51911b8452d327896e9e/77d57/4.jpg 885w,
-/static/5c060a92d31a51911b8452d327896e9e/0a772/4.jpg 1080w&quot;
+        src=&quot;/static/5c060a92d31a51911b8452d327896e9e/1c72d/4.jpg&quot;
+        srcset=&quot;/static/5c060a92d31a51911b8452d327896e9e/a80bd/4.jpg 148w,
+/static/5c060a92d31a51911b8452d327896e9e/1c91a/4.jpg 295w,
+/static/5c060a92d31a51911b8452d327896e9e/1c72d/4.jpg 590w,
+/static/5c060a92d31a51911b8452d327896e9e/a8a14/4.jpg 885w,
+/static/5c060a92d31a51911b8452d327896e9e/47311/4.jpg 1080w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -421,13 +421,13 @@
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;5&quot;
         title=&quot;5&quot;
-        src=&quot;/static/c36d850d460a3a01f8f804b08f127400/88218/5.jpg&quot;
-        srcset=&quot;/static/c36d850d460a3a01f8f804b08f127400/7237a/5.jpg 148w,
-/static/c36d850d460a3a01f8f804b08f127400/0cfdf/5.jpg 295w,
-/static/c36d850d460a3a01f8f804b08f127400/88218/5.jpg 590w,
-/static/c36d850d460a3a01f8f804b08f127400/77d57/5.jpg 885w,
-/static/c36d850d460a3a01f8f804b08f127400/5a917/5.jpg 1180w,
-/static/c36d850d460a3a01f8f804b08f127400/e5be1/5.jpg 1440w&quot;
+        src=&quot;/static/c36d850d460a3a01f8f804b08f127400/1c72d/5.jpg&quot;
+        srcset=&quot;/static/c36d850d460a3a01f8f804b08f127400/a80bd/5.jpg 148w,
+/static/c36d850d460a3a01f8f804b08f127400/1c91a/5.jpg 295w,
+/static/c36d850d460a3a01f8f804b08f127400/1c72d/5.jpg 590w,
+/static/c36d850d460a3a01f8f804b08f127400/a8a14/5.jpg 885w,
+/static/c36d850d460a3a01f8f804b08f127400/fbd2c/5.jpg 1180w,
+/static/c36d850d460a3a01f8f804b08f127400/644c5/5.jpg 1440w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -487,18 +487,18 @@
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 133.33333333333331%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQBAgMF/8QAFgEBAQEAAAAAAAAAAAAAAAAAAgEA/9oADAMBAAIQAxAAAAFSnSjVQqBMN5Z0vCBF/8QAHRAAAgIBBQAAAAAAAAAAAAAAAQIAAxEEEiEiI//aAAgBAQABBQIerDCNtWyKqhTpwVFdkW3qDwGEyYSYJ//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAgBAwEBPwFiI//EABgRAAIDAAAAAAAAAAAAAAAAAAABECEi/9oACAECAQE/AaNDcf/EAB4QAAICAQUBAAAAAAAAAAAAAAABAhESICExQWFx/9oACAEBAAY/Aksa+DvoycuRyLRshx91f//EAB0QAQACAgIDAAAAAAAAAAAAAAEAESFBMWFRcYH/2gAIAQEAAT8hABhNuYMxRVA3yIYLwpxLMoRxnrudEVeMw6GdwRQ1UaudzzJt7n//2gAMAwEAAgADAAAAEGMH/P/EABkRAQACAwAAAAAAAAAAAAAAAAEAERAhof/aAAgBAwEBPxAWqiDQ8IYP/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAERIf/aAAgBAgEBPxBqto9YUKf/xAAaEAEAAwEBAQAAAAAAAAAAAAABABEhMUFh/9oACAEBAAE/ECnpdqt9I/BCC7X7fJmA60leVXkULQvTXTuzL0KU3YRIVamNYFql+y18jHhqiXun2UbjFHkBhmiCSnx9ifcf/9k=&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 133.1081081081081%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQBAgMF/8QAFgEBAQEAAAAAAAAAAAAAAAAAAgEA/9oADAMBAAIQAxAAAAFSnSjVQqBMN5Z0vCBF/8QAHRAAAgIBBQAAAAAAAAAAAAAAAQIAAxEEEiEiI//aAAgBAQABBQIerDCNtWyKqhTpwVFdkW3qDwGEyYSYJ//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAgBAwEBPwFiI//EABgRAAIDAAAAAAAAAAAAAAAAAAABECEi/9oACAECAQE/AaNDcf/EAB4QAAICAQUBAAAAAAAAAAAAAAABAhESICExQWFx/9oACAEBAAY/Aksa+DvoycuRyLRshx91f//EAB0QAQACAgIDAAAAAAAAAAAAAAEAESFBMWFRcYH/2gAIAQEAAT8hABhNuYMxRVA3yIYLwpxLMoRxnrudEVeMw6GdwRQ1UaudzzJt7n//2gAMAwEAAgADAAAAEGMH/P/EABkRAQACAwAAAAAAAAAAAAAAAAEAERAhof/aAAgBAwEBPxAWqiDQ8IYP/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAERIf/aAAgBAgEBPxBqto9YUKf/xAAaEAEAAwEBAQAAAAAAAAAAAAABABEhMUFh/9oACAEBAAE/ECnpdqt9I/BCC7X7fJmA60leVXkULQvTXTuzL0KU3YRIVamNYFql+y18jHhqiXun2UbjFHkBhmiCSnx9ifcf/9k=&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         alt=&quot;6&quot;
         title=&quot;6&quot;
-        src=&quot;/static/f26d0db23567dd6ad01deb52a15d2289/88218/6.jpg&quot;
-        srcset=&quot;/static/f26d0db23567dd6ad01deb52a15d2289/7237a/6.jpg 148w,
-/static/f26d0db23567dd6ad01deb52a15d2289/0cfdf/6.jpg 295w,
-/static/f26d0db23567dd6ad01deb52a15d2289/88218/6.jpg 590w,
-/static/f26d0db23567dd6ad01deb52a15d2289/77d57/6.jpg 885w,
-/static/f26d0db23567dd6ad01deb52a15d2289/0a772/6.jpg 1080w&quot;
+        src=&quot;/static/f26d0db23567dd6ad01deb52a15d2289/1c72d/6.jpg&quot;
+        srcset=&quot;/static/f26d0db23567dd6ad01deb52a15d2289/a80bd/6.jpg 148w,
+/static/f26d0db23567dd6ad01deb52a15d2289/1c91a/6.jpg 295w,
+/static/f26d0db23567dd6ad01deb52a15d2289/1c72d/6.jpg 590w,
+/static/f26d0db23567dd6ad01deb52a15d2289/a8a14/6.jpg 885w,
+/static/f26d0db23567dd6ad01deb52a15d2289/47311/6.jpg 1080w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -1379,28 +1379,7 @@ Java HotSpot&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;TM&lt;
 &lt;ol start=&quot;6&quot;&gt;
 &lt;li&gt;版本切換&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; update-java-alternatives -s java-8-oracle&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Play Framework項目初始化]]></title><description><![CDATA[安裝 Activator 先下載Activator
-解壓到
-將加到環境變量 Path 中
-在你的項目目錄中執行以下命令，驗證是否安裝成功 創建 Play 項目 安裝 Eclipse 插件 Scala IDE
-在 Eclipse 中 Install New Software…]]></description><link>https://sasuke40.github.io/play-framework/</link><guid isPermaLink="false">https://sasuke40.github.io/play-framework/</guid><pubDate>Sat, 23 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;安裝 Activator&lt;/h2&gt;
-&lt;p&gt;先下載&lt;a href=&quot;http://www.typesafe.com/community/core-tools/activator-and-sbt&quot;&gt;Activator&lt;/a&gt;
-解壓到&lt;code class=&quot;language-text&quot;&gt;D:\Program Files\activator-1.3.2&lt;/code&gt;
-將&lt;code class=&quot;language-text&quot;&gt;D:\Program Files\activator-1.3.2&lt;/code&gt;加到環境變量 Path 中
-在你的項目目錄中執行以下命令，驗證是否安裝成功&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;activator -help&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;創建 Play 項目&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;activator new demo play-java
-&lt;span class=&quot;token builtin class-name&quot;&gt;cd&lt;/span&gt; demo
-activator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;安裝 Eclipse 插件&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;http://scala-ide.org/download/current.html&quot;&gt;Scala IDE&lt;/a&gt;
-在 Eclipse 中 Install New Software 增加宰割 Update Site，記得安裝 Play Support&lt;/p&gt;
-&lt;h2&gt;創建 Eclipse 項目&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;eclipse with-source&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;true&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;跑起來看看&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;run&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;在瀏覽器中打開&lt;a href=&quot;http://localhost:9000&quot;&gt;http://localhost:9000&lt;/a&gt;，項目就跑起來了 ╰(￣ ▽ ￣)╮&lt;/p&gt;</content:encoded></item><item><title><![CDATA[工作心得]]></title><description><![CDATA[寫這篇文章的初衷 想想在荔枝 FM 工作接近 2 個月了，一直沒能好好總結是一個很大的問題，因此今天就來寫一些東西來回顧一下過去的工作。 工作列表 荔枝達人 HTML5 遊戲 運營後臺·標記播客庫 微信錄音 錄音指南 HTML5 程壁線下文藝店 HTML…]]></description><link>https://sasuke40.github.io/work-experience/</link><guid isPermaLink="false">https://sasuke40.github.io/work-experience/</guid><pubDate>Sat, 23 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;寫這篇文章的初衷&lt;/h1&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; update-java-alternatives -s java-8-oracle&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[工作心得]]></title><description><![CDATA[寫這篇文章的初衷 想想在荔枝 FM 工作接近 2 個月了，一直沒能好好總結是一個很大的問題，因此今天就來寫一些東西來回顧一下過去的工作。 工作列表 荔枝達人 HTML5 遊戲 運營後臺·標記播客庫 微信錄音 錄音指南 HTML5 程壁線下文藝店 HTML…]]></description><link>https://sasuke40.github.io/work-experience/</link><guid isPermaLink="false">https://sasuke40.github.io/work-experience/</guid><pubDate>Sat, 23 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;寫這篇文章的初衷&lt;/h1&gt;
 &lt;p&gt;想想在荔枝 FM 工作接近 2 個月了，一直沒能好好總結是一個很大的問題，因此今天就來寫一些東西來回顧一下過去的工作。&lt;/p&gt;
 &lt;h3&gt;工作列表&lt;/h3&gt;
 &lt;ul&gt;
@@ -1515,4 +1494,25 @@ bind-address &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;spa
 這個東西用了&lt;code class=&quot;language-text&quot;&gt;Swiper&lt;/code&gt;，很贊的觸摸滑動插件，對移動端支持很棒。&lt;/p&gt;
 &lt;p&gt;這個 HTML5 是可以配置修改的，只要在後臺設置好就能生成新的一期了，總體來說還 ok。&lt;/p&gt;
 &lt;h3&gt;推廣後臺&lt;/h3&gt;
-&lt;p&gt;這個也能講一大堆，暫時不講了，休息休息~~&lt;/p&gt;</content:encoded></item></channel></rss>
+&lt;p&gt;這個也能講一大堆，暫時不講了，休息休息~~&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Play Framework項目初始化]]></title><description><![CDATA[安裝 Activator 先下載Activator
+解壓到
+將加到環境變量 Path 中
+在你的項目目錄中執行以下命令，驗證是否安裝成功 創建 Play 項目 安裝 Eclipse 插件 Scala IDE
+在 Eclipse 中 Install New Software…]]></description><link>https://sasuke40.github.io/play-framework/</link><guid isPermaLink="false">https://sasuke40.github.io/play-framework/</guid><pubDate>Sat, 23 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;安裝 Activator&lt;/h2&gt;
+&lt;p&gt;先下載&lt;a href=&quot;http://www.typesafe.com/community/core-tools/activator-and-sbt&quot;&gt;Activator&lt;/a&gt;
+解壓到&lt;code class=&quot;language-text&quot;&gt;D:\Program Files\activator-1.3.2&lt;/code&gt;
+將&lt;code class=&quot;language-text&quot;&gt;D:\Program Files\activator-1.3.2&lt;/code&gt;加到環境變量 Path 中
+在你的項目目錄中執行以下命令，驗證是否安裝成功&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;activator -help&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;創建 Play 項目&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;activator new demo play-java
+&lt;span class=&quot;token builtin class-name&quot;&gt;cd&lt;/span&gt; demo
+activator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;安裝 Eclipse 插件&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://scala-ide.org/download/current.html&quot;&gt;Scala IDE&lt;/a&gt;
+在 Eclipse 中 Install New Software 增加宰割 Update Site，記得安裝 Play Support&lt;/p&gt;
+&lt;h2&gt;創建 Eclipse 項目&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;eclipse with-source&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;true&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;跑起來看看&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;run&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;在瀏覽器中打開&lt;a href=&quot;http://localhost:9000&quot;&gt;http://localhost:9000&lt;/a&gt;，項目就跑起來了 ╰(￣ ▽ ￣)╮&lt;/p&gt;</content:encoded></item></channel></rss>
