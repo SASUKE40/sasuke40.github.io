@@ -7,24 +7,18 @@ And all post are under `/content/blog` folder
 
 ### Looking for Something?
 
-- `/content/blog` all blogs
-
-- `/examples` all code examples
-
-- `/contept` something about my idea
+- `/content` all blogs
 
 - `/src` source code
-
-- `/node` something about `Node.js` and `JavaScript` concept
 
 ### Test and Build Blog
 
 ```bash
-yarn install    # install all depend
+yarn            # install all dependencies
 
 yarn develop    # dev mode
 
-yarn build      # build blog      
+yarn deploy     # deploy blog      
 ```
 
 ## LICENSE
