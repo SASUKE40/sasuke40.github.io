@@ -3,8 +3,8 @@ import { navigate } from 'gatsby'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 
-const RouterTabs = ({ routers = [], currentPage, ...props }) => {
-  const [index, setIndex] = useState(
+const RouterTabs = ({ routers = [], currentPage }) => {
+  const [index] = useState(
     routers.findIndex(v => v.link === currentPage)
   )
   return (
