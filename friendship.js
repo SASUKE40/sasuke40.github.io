@@ -7,6 +7,6 @@ push('ice1000', 'https://ice1000.org', 'ice1000.jpg')
 push('DIYgod', 'https://diygod.me/', 'DIYgod.jpg')
 push('太狼', 'https://lynvv.xyz', 'lynvv.jpg')
 push('木子', 'https://blog.502.li', 'muzi502.png')
-push('隔雨听竹', 'https://blog.bobguo.top', 'bob.jpg')
+push('隔雨听竹', 'https://pegionfish.github.io', 'bob.jpg')
 
 module.exports = friendship
