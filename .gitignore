@@ -51,9 +51,6 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
-# dotenv environment variable files
-.env*
-
 # gatsby files
 .cache/
 public
@@ -67,11 +64,4 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
-/.idea/.gitignore
-/.idea/codeStyles/codeStyleConfig.xml
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/codeStyles/Project.xml
-/.idea/inspectionProfiles/Project_Default.xml
-/.idea/sasuke40.github.io.iml
-/.idea/vcs.xml
+.idea/
