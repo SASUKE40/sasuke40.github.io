@@ -3,25 +3,25 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    title: `Edward Elric`,
-    author: `Edward Elric`,
-    description: `Stay Hungry Stay Foolish`,
-    siteUrl: `https://sasuke40.github.io/`,
+    title: 'Edward Elric\'s Blog',
+    author: 'Edward Elric',
+    description: 'Stay Hungry Stay Foolish',
+    siteUrl: 'https://edward40.com',
     social: {
-      twitter: `SASUKE688848`,
-      github: `sasuke40`,
+      twitter: 'SASUKE688848',
+      github: 'sasuke40'
     },
     menuLinks: [
       {
         name: 'Home',
-        link: '/',
+        link: '/'
       },
       {
         name: 'Friends',
-        link: '/friends',
-      },
+        link: '/friends'
+      }
     ],
-    friendship: [...friendship],
+    friendship: [...friendship]
   },
   plugins: [
     {
@@ -29,8 +29,8 @@ module.exports = {
       options: {
         isTSX: true,
         jsxPragma: 'React',
-        allExtensions: true,
-      },
+        allExtensions: true
+      }
     },
     {
       resolve: 'gatsby-remark-prismjs',
@@ -44,30 +44,30 @@ module.exports = {
             language: 'superscript',
             extend: 'javascript',
             definition: {
-              superscript_types: /(SuperType)/,
+              superscript_types: /(SuperType)/
             },
             insertBefore: {
               function: {
-                superscript_keywords: /(superif|superelse)/,
-              },
-            },
-          },
-        ],
-      },
+                superscript_keywords: /(superif|superelse)/
+              }
+            }
+          }
+        ]
+      }
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/content/blog`,
-        name: 'blog',
-      },
+        name: 'blog'
+      }
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/content/assets`,
-        name: 'assets',
-      },
+        name: 'assets'
+      }
     },
     {
       resolve: 'gatsby-transformer-remark',
@@ -77,34 +77,34 @@ module.exports = {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 590,
-              linkImagesToOriginal: false,
-            },
+              linkImagesToOriginal: false
+            }
           },
           {
             resolve: 'gatsby-remark-images-medium-zoom',
             options: {
-              background: '#000',
-            },
+              background: '#000'
+            }
           },
           {
             resolve: 'gatsby-remark-responsive-iframe',
             options: {
-              wrapperStyle: 'margin-bottom: 1.0725rem',
-            },
+              wrapperStyle: 'margin-bottom: 1.0725rem'
+            }
           },
           'gatsby-remark-prismjs',
           'gatsby-remark-copy-linked-files',
-          'gatsby-remark-smartypants',
-        ],
-      },
+          'gatsby-remark-smartypants'
+        ]
+      }
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
-        trackingId: 'UA-46826341-2',
-      },
+        trackingId: 'UA-46826341-2'
+      }
     },
     'gatsby-plugin-feed',
     {
@@ -116,8 +116,8 @@ module.exports = {
         background_color: '#ffffff',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'content/assets/profile-pic.jpg',
-      },
+        icon: 'content/assets/profile-pic.jpg'
+      }
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-material-ui',
@@ -125,11 +125,11 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-typography',
       options: {
-        pathToConfigModule: 'src/utils/typography',
-      },
-    },
+        pathToConfigModule: 'src/utils/typography'
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
-  ],
+  ]
 }
