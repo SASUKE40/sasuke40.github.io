@@ -26,6 +26,9 @@ const useStyles = makeStyles({
   },
   comment: {
     marginTop: '1.5rem'
+  },
+  socialLink: {
+    boxShadow: 'none'
   }
 })
 
@@ -34,6 +37,7 @@ const FriendPage = props => {
   const theme = useTheme()
   const classes = useStyles()
   const siteTitle = data.site.siteMetadata.title
+  const { twitter, github } = data.site.siteMetadata.social
   const discusConfig = {
     url: props.url,
     identifier: 'global-comment',
@@ -46,7 +50,7 @@ const FriendPage = props => {
 
   return (
     <Layout location={props.location} title={siteTitle}>
-      <SEO title='Friends' />
+      <SEO title='Friends'/>
       <RouterTabs
         routers={data.site.siteMetadata.menuLinks}
         currentPage='/friends'
@@ -87,15 +91,19 @@ const FriendPage = props => {
       />
       <Bio>
         <div className={classes.introduction}>
-          <img
-            alt='GitHub followers'
-            src='https://img.shields.io/github/followers/sasuke40?label=Follow&style=social'
-          />
-          <br />
-          <img
-            alt='Twitter Follow'
-            src='https://img.shields.io/twitter/follow/sasuke688848?label=Follow&style=social'
-          />
+          <a className={classes.socialLink} href={`https://github.com/${github}`} target='_blank' rel='noopener noreferrer'>
+            <img
+              alt='GitHub followers'
+              src={`https://img.shields.io/github/followers/${github}?label=Follow&style=social`}
+            />
+          </a>
+          <br/>
+          <a className={classes.socialLink} href={`https://github.com/${twitter}`} target='_blank' rel='noopener noreferrer'>
+            <img
+              alt='Twitter Follow'
+              src={`https://img.shields.io/twitter/follow/${twitter}?label=Follow&style=social`}
+            />
+          </a>
         </div>
       </Bio>
       <div className={classes.comment}>
@@ -111,33 +119,37 @@ const FriendPage = props => {
 export default FriendPage
 
 export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-        menuLinks {
-          name
-          link
-        }
-        friendship {
-          name
-          url
-          image
-        }
-      }
-    }
-    avatars: allFile {
-      edges {
-        node {
-          relativePath
-          name
-          childImageSharp {
-            fluid(maxWidth: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-    }
-  }
+query {
+  site {
+  siteMetadata {
+  title
+  menuLinks {
+  name
+  link
+}
+  social {
+  twitter
+  github
+}
+  friendship {
+  name
+  url
+  image
+}
+}
+}
+  avatars: allFile {
+  edges {
+  node {
+  relativePath
+  name
+  childImageSharp {
+  fluid(maxWidth: 100) {
+  ...GatsbyImageSharpFluid
+}
+}
+}
+}
+}
+}
 `
