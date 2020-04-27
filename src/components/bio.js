@@ -58,11 +58,11 @@ const Bio = ({ children }) => {
         <p>
           Written by <strong>{author}</strong> who lives and works in China
           building useful things.
-          {' '}
+          You can follow him on{' '}
           <a href={`https://twitter.com/${social.twitter}`}>
-            You should follow him on Twitter
+           Twitter
           </a>
-          <span> Or </span>
+          <span> or </span>
           <a
             target='_blank'
             rel='noopener noreferrer'
