@@ -98,7 +98,7 @@ const FriendPage = props => {
             />
           </a>
           <br/>
-          <a className={classes.socialLink} href={`https://github.com/${twitter}`} target='_blank' rel='noopener noreferrer'>
+          <a className={classes.socialLink} href={`https://twitter.com/${twitter}`} target='_blank' rel='noopener noreferrer'>
             <img
               alt='Twitter Follow'
               src={`https://img.shields.io/twitter/follow/${twitter}?label=Follow&style=social`}
