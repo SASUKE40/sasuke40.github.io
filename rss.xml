@@ -1,4 +1,316 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Edward Elric's Blog]]></title><description><![CDATA[Stay Hungry Stay Foolish]]></description><link>https://edward40.com</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 27 Apr 2020 14:46:41 GMT</lastBuildDate><item><title><![CDATA[使用 Gatsby 搭建个人网站指南]]></title><description><![CDATA[前言 相信大部分程序员都有自己个人网站，或者是托管在各大平台上的技术博客。 大概在大一的时候我也萌生搭建个人博客的想法，最早还是比较流行自己买一个 VPS、域名，然后搭建 WordPress…]]></description><link>https://edward40.com/a-guide-to-building-a-personal-website-with-gatsby/</link><guid isPermaLink="false">https://edward40.com/a-guide-to-building-a-personal-website-with-gatsby/</guid><pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Edward Elric's Blog]]></title><description><![CDATA[Stay Hungry Stay Foolish]]></description><link>https://edward40.com</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 10 May 2020 16:28:01 GMT</lastBuildDate><item><title><![CDATA[对比 Vue Composition API 和 React Hooks]]></title><description><![CDATA[引言 最近 Vue 3.0 发布了 Beta 版本，其中最引人注意的就是其 。而这个设计近期经常被拿来和
+ 进行比较，以下是两个代码片段： 我们可以看到两者的心智模型非常不同，React 编程范式更接近于纯函数，Vue 则采取了 Reactivity 的模式。 React…]]></description><link>https://edward40.com/compare-vue-composition-api-with-react-hooks/</link><guid isPermaLink="false">https://edward40.com/compare-vue-composition-api-with-react-hooks/</guid><pubDate>Sun, 10 May 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;引言&lt;/h1&gt;
+&lt;p&gt;最近 &lt;a href=&quot;https://github.com/vuejs/vue-next&quot;&gt;Vue 3.0&lt;/a&gt; 发布了 Beta 版本，其中最引人注意的就是其 &lt;code class=&quot;language-text&quot;&gt;Composition API&lt;/code&gt;。而这个设计近期经常被拿来和
+&lt;code class=&quot;language-text&quot;&gt;React Hooks&lt;/code&gt; 进行比较，以下是两个代码片段：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;jsx&quot;&gt;&lt;pre class=&quot;language-jsx&quot;&gt;&lt;code class=&quot;language-jsx&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// React&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;props&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;a&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setA&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;a&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;setA&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;a&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;jsx&quot;&gt;&lt;pre class=&quot;language-jsx&quot;&gt;&lt;code class=&quot;language-jsx&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Vue 3 composition API&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Component&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;props&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; a &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;setA&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; a&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;value&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;a&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;setA&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;a&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;我们可以看到两者的心智模型非常不同，React 编程范式更接近于纯函数，Vue 则采取了 Reactivity 的模式。&lt;/p&gt;
+&lt;h1&gt;React Hooks 的心智负担&lt;/h1&gt;
+&lt;p&gt;React Hooks 是在 2018 年 10 月 React Conf 的时候正式向广大开发者进行宣传，在当时看到 Dan Abramov 演讲以及现场使用 React Hooks 重构 Class Component 的时候简直惊为天人，那一刻我深深被 Function Programming 所着迷。
+然而，直到如今一年半开发者各种实践，发现 React Hooks 并没有想象中的那么美好。你现在可以在知乎、掘金等各类平台上搜寻到大量的《React Hooks 最佳实践》，这不禁让人深思：React Hooks 怎么没那么美好了？&lt;/p&gt;
+&lt;p&gt;React Hooks 开发经常提及的一些问题我列举几个：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;我该使用单个 state 变量还是多个 state 变量？&lt;/li&gt;
+&lt;li&gt;deps 依赖过多，导致 Hooks 难以维护？&lt;/li&gt;
+&lt;li&gt;该不该使用 useMemo？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;然后基于这些问题的最佳实践，人们又总结出：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将完全不相关的 state 拆分为多组 state。&lt;/li&gt;
+&lt;li&gt;如果某些 state 是相互关联的，或者需要一起发生改变，就可以把它们合并为一组 state。&lt;/li&gt;
+&lt;li&gt;依赖数组依赖的值最好不要超过 3 个，否则会导致代码会难以维护。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果发现依赖数组依赖的值过多，我们应该采取一些方法来减少它。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;去掉不必要的依赖。&lt;/li&gt;
+&lt;li&gt;将 Hook 拆分为更小的单元，每个 Hook 依赖于各自的依赖数组。&lt;/li&gt;
+&lt;li&gt;通过合并相关的 state，将多个依赖值聚合为一个。&lt;/li&gt;
+&lt;li&gt;通过 setState 回调函数获取最新的 state，以减少外部依赖。&lt;/li&gt;
+&lt;li&gt;通过 ref 来读取可变变量的值，不过需要注意控制修改它的途径。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;应该使用 useMemo 的场景：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;保持引用相等&lt;/li&gt;
+&lt;li&gt;成本很高的计算&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;无需使用 useMemo 的场景：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;如果返回的值是原始值： string, boolean, null, undefined, number, symbol（不包括动态声明的 Symbol），一般不需要使用 useMemo。&lt;/li&gt;
+&lt;li&gt;仅在组件内部用到的 object、array、函数等（没有作为 props 传递给子组件），且没有用到其他 Hook 的依赖数组中，一般不需要使用 useMemo。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Hooks、Render Props 和高阶组件都有各自的使用场景，具体使用哪一种要看实际情况。&lt;/li&gt;
+&lt;li&gt;若 Hook 类型相同，且依赖数组一致时，应该合并成一个 Hook。&lt;/li&gt;
+&lt;li&gt;自定义 Hooks 的返回值可以使用 Tuple 类型，更易于在外部重命名。如果返回的值过多，则不建议使用。&lt;/li&gt;
+&lt;li&gt;ref 不要直接暴露给外部使用，而是提供一个修改值的方法。&lt;/li&gt;
+&lt;li&gt;在使用 useMemo 或者 useCallback 时，可以借助 ref 或者 setState callback，确保返回的函数只创建一次。也就是说，函数不会根据依赖数组的变化而二次创建。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;React Hooks 给人一种美丽的错觉，Function Component 可以非常简单，但长期开发下才逐渐暴露出函数式编程在 JavaScript 中的困境。
+对这个问题大家在思考，而 Vue 3.0 也在思考如何从 React Hooks 上取其精华去其糟粕。我们可以在 Vue RFC 中看到最初的 &lt;a href=&quot;https://github.com/vuejs/rfcs/pull/17&quot;&gt;Class API&lt;/a&gt; 到 &lt;a href=&quot;https://github.com/vuejs/rfcs/pull/42&quot;&gt;Function-based Component API&lt;/a&gt; 取其 FP 的精华，再到被修订为 &lt;a href=&quot;https://github.com/vuejs/rfcs/pull/78&quot;&gt;Composition API&lt;/a&gt; 采用 Reactivity 的过程。&lt;/p&gt;
+&lt;p&gt;这种改变和 JavaScript 这门语言本身的编程范式离不开，主要还是围绕一等公民函数、动态类型这两点。&lt;/p&gt;
+&lt;h1&gt;Vue Composition API 是否美好&lt;/h1&gt;
+&lt;p&gt;Vue 一直被人所称道的就是其开发简便，这也是隐式依赖跟踪带来的便利。然而成也萧何败也萧何，Vue 诟病的一点就是闭包对象的不可预测性，例如 this。&lt;/p&gt;
+&lt;p&gt;在 Vue Composition API 中，我发现官方对 Ref 和 Reactive 给出了最佳实践。可能这里就有所谓的幻灭存在，就像当年很多人不听 React 官方最佳实践，在 componentWillMount 里获取数据一样。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://composition-api.vuejs.org/#ref-vs-reactive&quot;&gt;Ref vs. Reactive&lt;/a&gt; 章节中有如下的对比：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// style 1: separate variables&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;updatePosition&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  x &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; e&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;pageX
+  y &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; e&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;pageY
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// --- compared to ---&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// style 2: single object&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; pos &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  x&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  y&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;updatePosition&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  pos&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; e&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;pageX
+  pos&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;y &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; e&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;pageY
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;那么依赖跟踪的迷惑就此开始，因为当你对已经 reactive 的对象进行解构赋值或者赋给新值的时候，依赖跟踪就失效了。官方对这个的态度比较模糊：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在现阶段，我们认为在 ref vs reactive 上实施最佳做法为时尚早。我们建议您从上面的两个选项中选择与您的心智模型相符的方式。我们将收集实开发场景下的用户真反馈，并最终提供有关此主题的更明确的指导。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1&gt;对比两者&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Vue Composition API：闭包变量、响应式的依赖追踪&lt;/li&gt;
+&lt;li&gt;React Hooks: 纯函数、无副作用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其实没有好坏之分，在 JavaScript 这种编程范式模棱两可的语言中，你既可以写函数，但又不能不让改引用变量（像 cpp 的 const&amp;#x26; 一般），你又可以面向对象编程（像 Java 一样疯狂反射，咻咻咻）。&lt;/p&gt;
+&lt;p&gt;其实语言、框架没有优劣，主要看使用的人对其理解到什么程度。使用 React Hooks 就要尽量采用 immutable 变量，降低函数调用过频影响性能（部分 React 调度策略兜底）；使用 Vue 就尽量不要依赖跟踪丢失或者滥用依赖跟踪导致行为不可预测。&lt;/p&gt;
+&lt;h1&gt;最后&lt;/h1&gt;
+&lt;p&gt;React 和 Vue 没有不可调和之处，他们是 JavaScript 这门语言一体两面的提现。&lt;/p&gt;
+&lt;p&gt;未来哪个社区更加繁荣还是要看 TC39 把 JavaScript 带向何方，是更加 Functional Programming 呢？还是更加 Imperative Programming 呢？&lt;/p&gt;</content:encoded></item><item><title><![CDATA[2019 年回顾总结]]></title><description><![CDATA[自我推翻自我重建，我觉得是活着的人该做的事情。 一个人要是对这个世界失去好奇心，失去求知欲，这个人已经是死的了。 —— 摘自 Zeke 201…]]></description><link>https://edward40.com/review-2019/</link><guid isPermaLink="false">https://edward40.com/review-2019/</guid><pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;自我推翻自我重建，我觉得是活着的人该做的事情。&lt;/p&gt;
+&lt;p&gt;一个人要是对这个世界失去好奇心，失去求知欲，这个人已经是死的了。&lt;/p&gt;
+&lt;p&gt;—— 摘自 Zeke&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2019 年，我从杭州阿里来到深圳腾讯工作的一年，这一年充满了感恩、迷茫、思考、转变。&lt;/p&gt;
+&lt;h1&gt;生活&lt;/h1&gt;
+&lt;p&gt;在朋友的帮助下，我顺利的在深圳安顿下来，很感谢他。&lt;/p&gt;
+&lt;p&gt;年头的时候去广州参加同学的婚礼，感觉时间过得好快。&lt;/p&gt;
+&lt;p&gt;然后还和经常一起玩吃鸡、CSGO、彩六的网友见了一面，一起吃饭、玩耍。不过后面大家还是天南地北，很多回去学校了，真希望有缘能再聚一次。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAUCAwT/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABliZKBqVEf//EABoQAAIDAQEAAAAAAAAAAAAAAAEDAAITBBH/2gAIAQEAAQUCSv2iiGWyTGZJBKruHKJ//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oACAECAQE/AW1//8QAHhAAAgEDBQAAAAAAAAAAAAAAAAESAiExIiNRgZH/2gAIAQEABj8Cnhm6YNTfRKTV+C1b8P/EABsQAQACAwEBAAAAAAAAAAAAAAEAESExQVFx/9oACAEBAAE/ISVZbqnkVDMa5PAV9mtl6BEgE2zCy1DH/9oADAMBAAIAAwAAABAjz//EABYRAQEBAAAAAAAAAAAAAAAAAAAhUf/aAAgBAwEBPxBMf//EABYRAQEBAAAAAAAAAAAAAAAAAAEQIf/aAAgBAgEBPxAcl//EAB4QAQACAgEFAAAAAAAAAAAAAAEAESExUUFhgbHB/9oACAEBAAE/EKO7msHCznEaBAOiXxOL9Bl9lAVjY0dsTCA0s9TYRQon/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;1&quot;
+        title=&quot;1&quot;
+        src=&quot;/static/bba3dc42ba9d010f2b3ac2439665e242/1c72d/1.jpg&quot;
+        srcset=&quot;/static/bba3dc42ba9d010f2b3ac2439665e242/a80bd/1.jpg 148w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/1c91a/1.jpg 295w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/1c72d/1.jpg 590w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/a8a14/1.jpg 885w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/fbd2c/1.jpg 1180w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/644c5/1.jpg 1440w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;国庆的时候和家人一起去澳门玩，看了大三巴牌坊。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAABA//EABYBAQEBAAAAAAAAAAAAAAAAAAIAAf/aAAwDAQACEAMQAAABWfnti4sj/8QAGhAAAgMBAQAAAAAAAAAAAAAAAQIDERIhAP/aAAgBAQABBQKSTLK/h0M1ydyC1f/EABYRAQEBAAAAAAAAAAAAAAAAAAAREv/aAAgBAwEBPwGMP//EABYRAQEBAAAAAAAAAAAAAAAAAAASE//aAAgBAgEBPwGmj//EABkQAQADAQEAAAAAAAAAAAAAAAACESExYf/aAAgBAQAGPwKqaxP11kqf/8QAGxABAQEAAgMAAAAAAAAAAAAAAREAQVEhMZH/2gAIAQEAAT8hNLWW7t0uBT01sPL5pAfC9ZYXDxN//9oADAMBAAIAAwAAABC//wD/xAAXEQADAQAAAAAAAAAAAAAAAAAAARFB/9oACAEDAQE/EJG2H//EABcRAAMBAAAAAAAAAAAAAAAAAAABEUH/2gAIAQIBAT8QbWojT//EABsQAQEAAwADAAAAAAAAAAAAAAERACExUXGh/9oACAEBAAE/EK3DCKecVbUQqc9awk1XHKYQrhqoHzBAiEkF7N4L4ro7d5//2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;2&quot;
+        title=&quot;2&quot;
+        src=&quot;/static/e41ed86540c8420313443a57ec847934/1c72d/2.jpg&quot;
+        srcset=&quot;/static/e41ed86540c8420313443a57ec847934/a80bd/2.jpg 148w,
+/static/e41ed86540c8420313443a57ec847934/1c91a/2.jpg 295w,
+/static/e41ed86540c8420313443a57ec847934/1c72d/2.jpg 590w,
+/static/e41ed86540c8420313443a57ec847934/a8a14/2.jpg 885w,
+/static/e41ed86540c8420313443a57ec847934/fbd2c/2.jpg 1180w,
+/static/e41ed86540c8420313443a57ec847934/644c5/2.jpg 1440w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;在珠海长隆海洋王国看动物，大家都很喜欢海豹呢。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAgX/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/2gAMAwEAAhADEAAAAcumXm2HND//xAAbEAEAAgIDAAAAAAAAAAAAAAABAAIDBBEUI//aAAgBAQABBQLhYF09CO1ZjnyFezaf/8QAFREBAQAAAAAAAAAAAAAAAAAAEBH/2gAIAQMBAT8Bp//EABYRAAMAAAAAAAAAAAAAAAAAAAEQEf/aAAgBAgEBPwGFf//EABwQAAEDBQAAAAAAAAAAAAAAAAABESEQMjNBkf/aAAgBAQAGPwKHLVMakI1N9P/EABsQAAICAwEAAAAAAAAAAAAAAAERADEhQXGB/9oACAEBAAE/IcxBI1bgw6tx4gfhhZKQOFBKJsl6n//aAAwDAQACAAMAAAAQD/8A/8QAFhEBAQEAAAAAAAAAAAAAAAAAABEB/9oACAEDAQE/EIXH/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oACAECAQE/EBlf/8QAHxAAAgEEAgMAAAAAAAAAAAAAAREAMVGRoUFhgbHB/9oACAEBAAE/EKNxxQvkVy8SOZQquBe5roHlwYiCkwLPRcJSKXAHuf/Z&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;3&quot;
+        title=&quot;3&quot;
+        src=&quot;/static/a4563d93640804e9f25a4d2445955e7d/1c72d/3.jpg&quot;
+        srcset=&quot;/static/a4563d93640804e9f25a4d2445955e7d/a80bd/3.jpg 148w,
+/static/a4563d93640804e9f25a4d2445955e7d/1c91a/3.jpg 295w,
+/static/a4563d93640804e9f25a4d2445955e7d/1c72d/3.jpg 590w,
+/static/a4563d93640804e9f25a4d2445955e7d/a8a14/3.jpg 885w,
+/static/a4563d93640804e9f25a4d2445955e7d/fbd2c/3.jpg 1180w,
+/static/a4563d93640804e9f25a4d2445955e7d/644c5/3.jpg 1440w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 133.1081081081081%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAIDBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAABAAL/2gAMAwEAAhADEAAAAWmThRBuhPYuXOKN/8QAHhAAAgICAgMAAAAAAAAAAAAAAQIDEgARBBMhIzP/2gAIAQEAAQUCaTYd9DtwxPYpKcq+TzVdrJFwz6ajb+RD8//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EAB0QAAIDAAIDAAAAAAAAAAAAAAABAhEhEjEyQYH/2gAIAQEABj8CFdmIa9nidHGEU5NaSdVh9LrSn0I//8QAHBABAAICAwEAAAAAAAAAAAAAAQARIUExUWFx/9oACAEBAAE/ISxFfCLQqygdkNcPkaCtqXmKFWo7iXLbzjMuslDyMSsBfUfn2mtW3CcstTEj2f/aAAwDAQACAAMAAAAQb9//AP/EABURAQEAAAAAAAAAAAAAAAAAAAEg/9oACAEDAQE/EGP/xAAXEQADAQAAAAAAAAAAAAAAAAAAAREQ/9oACAECAQE/EKy5D//EAB0QAQADAQEBAAMAAAAAAAAAAAEAESExQZFRobH/2gAIAQEAAT8QrKtXaG/xFQMMQs7BCwDDgjesHuB9Lm6Alw0fdlCt9hT6RSYlxzwMW2VQ5arr3IvvlX6lLF9tdY6ChTbsBkAf6Z//2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;4&quot;
+        title=&quot;4&quot;
+        src=&quot;/static/5c060a92d31a51911b8452d327896e9e/1c72d/4.jpg&quot;
+        srcset=&quot;/static/5c060a92d31a51911b8452d327896e9e/a80bd/4.jpg 148w,
+/static/5c060a92d31a51911b8452d327896e9e/1c91a/4.jpg 295w,
+/static/5c060a92d31a51911b8452d327896e9e/1c72d/4.jpg 590w,
+/static/5c060a92d31a51911b8452d327896e9e/a8a14/4.jpg 885w,
+/static/5c060a92d31a51911b8452d327896e9e/47311/4.jpg 1080w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其实我不是个喜欢和家人打电话的人，但内心家人对我来说非常的重要。同时我也感恩有一个智慧的妈妈，她爱阅读、爱思考，教会我如何待人接物、为人处事。&lt;/p&gt;
+&lt;p&gt;我也努力沉下心来也读了一些书，如： 《旧制度与大革命》《1984》《学会提问：批判性思维指南》等等，渐渐也能收获阅读的乐趣。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABAAC/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAP/2gAMAwEAAhADEAAAAQbXmdSTY//EABkQAQADAQEAAAAAAAAAAAAAAAIAAQMSIf/aAAgBAQABBQKi5w4ioFnHfpzTr//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAgBAwEBPwHVf//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABsQAAIBBQAAAAAAAAAAAAAAAAARAQIQEjFB/9oACAEBAAY/AjjspbHToeUH/8QAGxAAAwADAQEAAAAAAAAAAAAAAAERITFRQYH/2gAIAQEAAT8hY1BNigYFa0RNfY43xUjAp8P/2gAMAwEAAgADAAAAEHff/8QAGBEAAwEBAAAAAAAAAAAAAAAAAAExESH/2gAIAQMBAT8Q1nDmn//EABgRAAIDAAAAAAAAAAAAAAAAAAABESFR/9oACAECAQE/EK0hn//EABwQAQEAAgIDAAAAAAAAAAAAAAERACExQXGBof/aAAgBAQABPxAaQEi0Y4CCPjfJMGm0BIa+5eIEVDeCnrLsk8ZAaGIxs9Z//9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;5&quot;
+        title=&quot;5&quot;
+        src=&quot;/static/c36d850d460a3a01f8f804b08f127400/1c72d/5.jpg&quot;
+        srcset=&quot;/static/c36d850d460a3a01f8f804b08f127400/a80bd/5.jpg 148w,
+/static/c36d850d460a3a01f8f804b08f127400/1c91a/5.jpg 295w,
+/static/c36d850d460a3a01f8f804b08f127400/1c72d/5.jpg 590w,
+/static/c36d850d460a3a01f8f804b08f127400/a8a14/5.jpg 885w,
+/static/c36d850d460a3a01f8f804b08f127400/fbd2c/5.jpg 1180w,
+/static/c36d850d460a3a01f8f804b08f127400/644c5/5.jpg 1440w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h1&gt;看过的频道&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;妈咪说 Mommy Talk&lt;/p&gt;
+&lt;p&gt;在 B 站上看，主要是科普天文、数学、物理之类的，最近讲混沌非常有意思。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;3Blue1Brown&lt;/p&gt;
+&lt;p&gt;Youtube 上看的，Grant Sanderson 从独特的视觉角度解说高等数学，也非常擅长开发，用可视化来让人快速理解数学之美。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;NiceChord&lt;/p&gt;
+&lt;p&gt;讲乐理之类的，不过 Wiwi 官大为好像是个技术宅，也经常会放一些音乐编程的视频。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;看过的电视剧&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;《致命女人》：好看&lt;/li&gt;
+&lt;li&gt;《权力的游戏》：烂尾&lt;/li&gt;
+&lt;li&gt;《Years and Years》：噱头比较大&lt;/li&gt;
+&lt;li&gt;《切尔诺贝利》&lt;/li&gt;
+&lt;li&gt;《性爱自修室》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;看过的番剧&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;《进击的巨人 第三季》：强烈推荐&lt;/li&gt;
+&lt;li&gt;《约定的梦幻岛》&lt;/li&gt;
+&lt;li&gt;《流汗吧！健身少女》&lt;/li&gt;
+&lt;li&gt;《Dr. STONE 石纪元》&lt;/li&gt;
+&lt;li&gt;《刀剑神域 Alicization 篇》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;技能&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;健身 💪&lt;/p&gt;
+&lt;p&gt;坚持了几个月，和同事一起去的，但后来健身房改造就没去（其实也是懒惰的理由）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;钢琴 🎹&lt;/p&gt;
+&lt;p&gt;其实有点荒废这个天赋，希望 2020 能坚持下来&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;煮饭 🍳&lt;/p&gt;
+&lt;p&gt;买了一套厨具，不过没怎么用，果然还是不喜欢烧菜&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;参与分享&lt;/h1&gt;
+&lt;p&gt;6 月的时候，参加 GIAC 作为讲师分享
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 133.1081081081081%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQBAgMF/8QAFgEBAQEAAAAAAAAAAAAAAAAAAgEA/9oADAMBAAIQAxAAAAFSnSjVQqBMN5Z0vCBF/8QAHRAAAgIBBQAAAAAAAAAAAAAAAQIAAxEEEiEiI//aAAgBAQABBQIerDCNtWyKqhTpwVFdkW3qDwGEyYSYJ//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAgBAwEBPwFiI//EABgRAAIDAAAAAAAAAAAAAAAAAAABECEi/9oACAECAQE/AaNDcf/EAB4QAAICAQUBAAAAAAAAAAAAAAABAhESICExQWFx/9oACAEBAAY/Aksa+DvoycuRyLRshx91f//EAB0QAQACAgIDAAAAAAAAAAAAAAEAESFBMWFRcYH/2gAIAQEAAT8hABhNuYMxRVA3yIYLwpxLMoRxnrudEVeMw6GdwRQ1UaudzzJt7n//2gAMAwEAAgADAAAAEGMH/P/EABkRAQACAwAAAAAAAAAAAAAAAAEAERAhof/aAAgBAwEBPxAWqiDQ8IYP/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAERIf/aAAgBAgEBPxBqto9YUKf/xAAaEAEAAwEBAQAAAAAAAAAAAAABABEhMUFh/9oACAEBAAE/ECnpdqt9I/BCC7X7fJmA60leVXkULQvTXTuzL0KU3YRIVamNYFql+y18jHhqiXun2UbjFHkBhmiCSnx9ifcf/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;6&quot;
+        title=&quot;6&quot;
+        src=&quot;/static/f26d0db23567dd6ad01deb52a15d2289/1c72d/6.jpg&quot;
+        srcset=&quot;/static/f26d0db23567dd6ad01deb52a15d2289/a80bd/6.jpg 148w,
+/static/f26d0db23567dd6ad01deb52a15d2289/1c91a/6.jpg 295w,
+/static/f26d0db23567dd6ad01deb52a15d2289/1c72d/6.jpg 590w,
+/static/f26d0db23567dd6ad01deb52a15d2289/a8a14/6.jpg 885w,
+/static/f26d0db23567dd6ad01deb52a15d2289/47311/6.jpg 1080w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h1&gt;思考&lt;/h1&gt;
+&lt;p&gt;其实过去的一年我生活在恐慌之中，我发现个人的成长几乎停滞不前。&lt;/p&gt;
+&lt;p&gt;我开始反思自己为什么会这样？&lt;/p&gt;
+&lt;p&gt;然后我发现了其实我是用工作麻痹自己，不肯直面 2018 的过去，失去了对自己对未来的信心。其实这并不能完全归咎于自己，不过沉迷不悟始终不是办法。&lt;/p&gt;
+&lt;p&gt;这里要感谢 Zeke，在和他聊天过程中我找到了方向：我需要的是自我推翻自我重建，保持求知欲、好奇心。&lt;/p&gt;
+&lt;h1&gt;展望&lt;/h1&gt;
+&lt;p&gt;2020 年我开始摈弃麻痹，不管多困难都要离开舒适圈。&lt;/p&gt;
+&lt;p&gt;也给自己定下了一个目标：「让自己成为有影响力的人」&lt;/p&gt;</content:encoded></item><item><title><![CDATA[使用 Gatsby 搭建个人网站指南]]></title><description><![CDATA[前言 相信大部分程序员都有自己个人网站，或者是托管在各大平台上的技术博客。 大概在大一的时候我也萌生搭建个人博客的想法，最早还是比较流行自己买一个 VPS、域名，然后搭建 WordPress…]]></description><link>https://edward40.com/a-guide-to-building-a-personal-website-with-gatsby/</link><guid isPermaLink="false">https://edward40.com/a-guide-to-building-a-personal-website-with-gatsby/</guid><pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
 &lt;p&gt;相信大部分程序员都有自己个人网站，或者是托管在各大平台上的技术博客。&lt;/p&gt;
 &lt;p&gt;大概在大一的时候我也萌生搭建个人博客的想法，最早还是比较流行自己买一个 VPS、域名，然后搭建 &lt;strong&gt;WordPress&lt;/strong&gt;。不过由于没续费，东西也没妥善备份也不知道去哪里了。
 接着网络兴起&lt;strong&gt;轻博客&lt;/strong&gt;，我想着自己塔多不方便，就用了&lt;strong&gt;点点网&lt;/strong&gt;写自己的博客，在上面沉淀不少文章，然而点点网在 2016 年也关闭了。&lt;/p&gt;
@@ -54,7 +366,7 @@
 &lt;p&gt;还有得去 &lt;a href=&quot;https://analytics.google.com/&quot;&gt;google analytics&lt;/a&gt; 配置一下记录站点的访问信息。
 &lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
@@ -81,7 +393,7 @@
 &lt;p&gt;其实上面配置完成基本上站点就能用了，不过 Gatsby 最好玩的是他的灵活。自带的没有夜间模式，下面我快速介绍一下怎么开发。&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
@@ -219,7 +531,7 @@
 &lt;p&gt;最终效果就是这样
 &lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
@@ -261,7 +573,7 @@
 &lt;p&gt;因此，源码就需要放到非 &lt;code class=&quot;language-text&quot;&gt;master&lt;/code&gt; 分支上。我把博客的源码推到 &lt;code class=&quot;language-text&quot;&gt;dev&lt;/code&gt; 分支，并将其设置为默认。
 &lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
     &gt;
       &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
@@ -300,218 +612,7 @@
 &lt;li&gt;因其灵活，对个人博客的友好度就没那么高，md 文件及文件夹需要自己建立。不像 hexo 可以 &lt;code class=&quot;language-text&quot;&gt;hexo new [layout] &amp;lt;title&amp;gt;&lt;/code&gt; 这么方便&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;总体来说，我对 Gatsby 还挺满意的。要是大家挖掘到好玩的插件、好看的主题也欢迎留言。
-最后，也欢迎大家互换友链 ➡️&lt;a href=&quot;https://sasuke40.github.io/&quot;&gt;Edward Elric&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[2019 年回顾总结]]></title><description><![CDATA[自我推翻自我重建，我觉得是活着的人该做的事情。 一个人要是对这个世界失去好奇心，失去求知欲，这个人已经是死的了。 —— 摘自 Zeke 201…]]></description><link>https://edward40.com/review-2019/</link><guid isPermaLink="false">https://edward40.com/review-2019/</guid><pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
-&lt;p&gt;自我推翻自我重建，我觉得是活着的人该做的事情。&lt;/p&gt;
-&lt;p&gt;一个人要是对这个世界失去好奇心，失去求知欲，这个人已经是死的了。&lt;/p&gt;
-&lt;p&gt;—— 摘自 Zeke&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;2019 年，我从杭州阿里来到深圳腾讯工作的一年，这一年充满了感恩、迷茫、思考、转变。&lt;/p&gt;
-&lt;h1&gt;生活&lt;/h1&gt;
-&lt;p&gt;在朋友的帮助下，我顺利的在深圳安顿下来，很感谢他。&lt;/p&gt;
-&lt;p&gt;年头的时候去广州参加同学的婚礼，感觉时间过得好快。&lt;/p&gt;
-&lt;p&gt;然后还和经常一起玩吃鸡、CSGO、彩六的网友见了一面，一起吃饭、玩耍。不过后面大家还是天南地北，很多回去学校了，真希望有缘能再聚一次。&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAUCAwT/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABliZKBqVEf//EABoQAAIDAQEAAAAAAAAAAAAAAAEDAAITBBH/2gAIAQEAAQUCSv2iiGWyTGZJBKruHKJ//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oACAECAQE/AW1//8QAHhAAAgEDBQAAAAAAAAAAAAAAAAESAiExIiNRgZH/2gAIAQEABj8Cnhm6YNTfRKTV+C1b8P/EABsQAQACAwEBAAAAAAAAAAAAAAEAESExQVFx/9oACAEBAAE/ISVZbqnkVDMa5PAV9mtl6BEgE2zCy1DH/9oADAMBAAIAAwAAABAjz//EABYRAQEBAAAAAAAAAAAAAAAAAAAhUf/aAAgBAwEBPxBMf//EABYRAQEBAAAAAAAAAAAAAAAAAAEQIf/aAAgBAgEBPxAcl//EAB4QAQACAgEFAAAAAAAAAAAAAAEAESExUUFhgbHB/9oACAEBAAE/EKO7msHCznEaBAOiXxOL9Bl9lAVjY0dsTCA0s9TYRQon/9k=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;1&quot;
-        title=&quot;1&quot;
-        src=&quot;/static/bba3dc42ba9d010f2b3ac2439665e242/1c72d/1.jpg&quot;
-        srcset=&quot;/static/bba3dc42ba9d010f2b3ac2439665e242/a80bd/1.jpg 148w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/1c91a/1.jpg 295w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/1c72d/1.jpg 590w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/a8a14/1.jpg 885w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/fbd2c/1.jpg 1180w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/644c5/1.jpg 1440w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;国庆的时候和家人一起去澳门玩，看了大三巴牌坊。&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAABA//EABYBAQEBAAAAAAAAAAAAAAAAAAIAAf/aAAwDAQACEAMQAAABWfnti4sj/8QAGhAAAgMBAQAAAAAAAAAAAAAAAQIDERIhAP/aAAgBAQABBQKSTLK/h0M1ydyC1f/EABYRAQEBAAAAAAAAAAAAAAAAAAAREv/aAAgBAwEBPwGMP//EABYRAQEBAAAAAAAAAAAAAAAAAAASE//aAAgBAgEBPwGmj//EABkQAQADAQEAAAAAAAAAAAAAAAACESExYf/aAAgBAQAGPwKqaxP11kqf/8QAGxABAQEAAgMAAAAAAAAAAAAAAREAQVEhMZH/2gAIAQEAAT8hNLWW7t0uBT01sPL5pAfC9ZYXDxN//9oADAMBAAIAAwAAABC//wD/xAAXEQADAQAAAAAAAAAAAAAAAAAAARFB/9oACAEDAQE/EJG2H//EABcRAAMBAAAAAAAAAAAAAAAAAAABEUH/2gAIAQIBAT8QbWojT//EABsQAQEAAwADAAAAAAAAAAAAAAERACExUXGh/9oACAEBAAE/EK3DCKecVbUQqc9awk1XHKYQrhqoHzBAiEkF7N4L4ro7d5//2Q==&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;2&quot;
-        title=&quot;2&quot;
-        src=&quot;/static/e41ed86540c8420313443a57ec847934/1c72d/2.jpg&quot;
-        srcset=&quot;/static/e41ed86540c8420313443a57ec847934/a80bd/2.jpg 148w,
-/static/e41ed86540c8420313443a57ec847934/1c91a/2.jpg 295w,
-/static/e41ed86540c8420313443a57ec847934/1c72d/2.jpg 590w,
-/static/e41ed86540c8420313443a57ec847934/a8a14/2.jpg 885w,
-/static/e41ed86540c8420313443a57ec847934/fbd2c/2.jpg 1180w,
-/static/e41ed86540c8420313443a57ec847934/644c5/2.jpg 1440w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;在珠海长隆海洋王国看动物，大家都很喜欢海豹呢。&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAgX/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/2gAMAwEAAhADEAAAAcumXm2HND//xAAbEAEAAgIDAAAAAAAAAAAAAAABAAIDBBEUI//aAAgBAQABBQLhYF09CO1ZjnyFezaf/8QAFREBAQAAAAAAAAAAAAAAAAAAEBH/2gAIAQMBAT8Bp//EABYRAAMAAAAAAAAAAAAAAAAAAAEQEf/aAAgBAgEBPwGFf//EABwQAAEDBQAAAAAAAAAAAAAAAAABESEQMjNBkf/aAAgBAQAGPwKHLVMakI1N9P/EABsQAAICAwEAAAAAAAAAAAAAAAERADEhQXGB/9oACAEBAAE/IcxBI1bgw6tx4gfhhZKQOFBKJsl6n//aAAwDAQACAAMAAAAQD/8A/8QAFhEBAQEAAAAAAAAAAAAAAAAAABEB/9oACAEDAQE/EIXH/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oACAECAQE/EBlf/8QAHxAAAgEEAgMAAAAAAAAAAAAAAREAMVGRoUFhgbHB/9oACAEBAAE/EKNxxQvkVy8SOZQquBe5roHlwYiCkwLPRcJSKXAHuf/Z&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;3&quot;
-        title=&quot;3&quot;
-        src=&quot;/static/a4563d93640804e9f25a4d2445955e7d/1c72d/3.jpg&quot;
-        srcset=&quot;/static/a4563d93640804e9f25a4d2445955e7d/a80bd/3.jpg 148w,
-/static/a4563d93640804e9f25a4d2445955e7d/1c91a/3.jpg 295w,
-/static/a4563d93640804e9f25a4d2445955e7d/1c72d/3.jpg 590w,
-/static/a4563d93640804e9f25a4d2445955e7d/a8a14/3.jpg 885w,
-/static/a4563d93640804e9f25a4d2445955e7d/fbd2c/3.jpg 1180w,
-/static/a4563d93640804e9f25a4d2445955e7d/644c5/3.jpg 1440w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 133.1081081081081%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAIDBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAABAAL/2gAMAwEAAhADEAAAAWmThRBuhPYuXOKN/8QAHhAAAgICAgMAAAAAAAAAAAAAAQIDEgARBBMhIzP/2gAIAQEAAQUCaTYd9DtwxPYpKcq+TzVdrJFwz6ajb+RD8//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EAB0QAAIDAAIDAAAAAAAAAAAAAAABAhEhEjEyQYH/2gAIAQEABj8CFdmIa9nidHGEU5NaSdVh9LrSn0I//8QAHBABAAICAwEAAAAAAAAAAAAAAQARIUExUWFx/9oACAEBAAE/ISxFfCLQqygdkNcPkaCtqXmKFWo7iXLbzjMuslDyMSsBfUfn2mtW3CcstTEj2f/aAAwDAQACAAMAAAAQb9//AP/EABURAQEAAAAAAAAAAAAAAAAAAAEg/9oACAEDAQE/EGP/xAAXEQADAQAAAAAAAAAAAAAAAAAAAREQ/9oACAECAQE/EKy5D//EAB0QAQADAQEBAAMAAAAAAAAAAAEAESExQZFRobH/2gAIAQEAAT8QrKtXaG/xFQMMQs7BCwDDgjesHuB9Lm6Alw0fdlCt9hT6RSYlxzwMW2VQ5arr3IvvlX6lLF9tdY6ChTbsBkAf6Z//2Q==&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;4&quot;
-        title=&quot;4&quot;
-        src=&quot;/static/5c060a92d31a51911b8452d327896e9e/1c72d/4.jpg&quot;
-        srcset=&quot;/static/5c060a92d31a51911b8452d327896e9e/a80bd/4.jpg 148w,
-/static/5c060a92d31a51911b8452d327896e9e/1c91a/4.jpg 295w,
-/static/5c060a92d31a51911b8452d327896e9e/1c72d/4.jpg 590w,
-/static/5c060a92d31a51911b8452d327896e9e/a8a14/4.jpg 885w,
-/static/5c060a92d31a51911b8452d327896e9e/47311/4.jpg 1080w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其实我不是个喜欢和家人打电话的人，但内心家人对我来说非常的重要。同时我也感恩有一个智慧的妈妈，她爱阅读、爱思考，教会我如何待人接物、为人处事。&lt;/p&gt;
-&lt;p&gt;我也努力沉下心来也读了一些书，如： 《旧制度与大革命》《1984》《学会提问：批判性思维指南》等等，渐渐也能收获阅读的乐趣。&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABAAC/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAP/2gAMAwEAAhADEAAAAQbXmdSTY//EABkQAQADAQEAAAAAAAAAAAAAAAIAAQMSIf/aAAgBAQABBQKi5w4ioFnHfpzTr//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAgBAwEBPwHVf//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABsQAAIBBQAAAAAAAAAAAAAAAAARAQIQEjFB/9oACAEBAAY/AjjspbHToeUH/8QAGxAAAwADAQEAAAAAAAAAAAAAAAERITFRQYH/2gAIAQEAAT8hY1BNigYFa0RNfY43xUjAp8P/2gAMAwEAAgADAAAAEHff/8QAGBEAAwEBAAAAAAAAAAAAAAAAAAExESH/2gAIAQMBAT8Q1nDmn//EABgRAAIDAAAAAAAAAAAAAAAAAAABESFR/9oACAECAQE/EK0hn//EABwQAQEAAgIDAAAAAAAAAAAAAAERACExQXGBof/aAAgBAQABPxAaQEi0Y4CCPjfJMGm0BIa+5eIEVDeCnrLsk8ZAaGIxs9Z//9k=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;5&quot;
-        title=&quot;5&quot;
-        src=&quot;/static/c36d850d460a3a01f8f804b08f127400/1c72d/5.jpg&quot;
-        srcset=&quot;/static/c36d850d460a3a01f8f804b08f127400/a80bd/5.jpg 148w,
-/static/c36d850d460a3a01f8f804b08f127400/1c91a/5.jpg 295w,
-/static/c36d850d460a3a01f8f804b08f127400/1c72d/5.jpg 590w,
-/static/c36d850d460a3a01f8f804b08f127400/a8a14/5.jpg 885w,
-/static/c36d850d460a3a01f8f804b08f127400/fbd2c/5.jpg 1180w,
-/static/c36d850d460a3a01f8f804b08f127400/644c5/5.jpg 1440w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;h1&gt;看过的频道&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;妈咪说 Mommy Talk&lt;/p&gt;
-&lt;p&gt;在 B 站上看，主要是科普天文、数学、物理之类的，最近讲混沌非常有意思。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;3Blue1Brown&lt;/p&gt;
-&lt;p&gt;Youtube 上看的，Grant Sanderson 从独特的视觉角度解说高等数学，也非常擅长开发，用可视化来让人快速理解数学之美。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;NiceChord&lt;/p&gt;
-&lt;p&gt;讲乐理之类的，不过 Wiwi 官大为好像是个技术宅，也经常会放一些音乐编程的视频。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1&gt;看过的电视剧&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;《致命女人》：好看&lt;/li&gt;
-&lt;li&gt;《权力的游戏》：烂尾&lt;/li&gt;
-&lt;li&gt;《Years and Years》：噱头比较大&lt;/li&gt;
-&lt;li&gt;《切尔诺贝利》&lt;/li&gt;
-&lt;li&gt;《性爱自修室》&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;看过的番剧&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;《进击的巨人 第三季》：强烈推荐&lt;/li&gt;
-&lt;li&gt;《约定的梦幻岛》&lt;/li&gt;
-&lt;li&gt;《流汗吧！健身少女》&lt;/li&gt;
-&lt;li&gt;《Dr. STONE 石纪元》&lt;/li&gt;
-&lt;li&gt;《刀剑神域 Alicization 篇》&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;技能&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;健身 💪&lt;/p&gt;
-&lt;p&gt;坚持了几个月，和同事一起去的，但后来健身房改造就没去（其实也是懒惰的理由）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;钢琴 🎹&lt;/p&gt;
-&lt;p&gt;其实有点荒废这个天赋，希望 2020 能坚持下来&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;煮饭 🍳&lt;/p&gt;
-&lt;p&gt;买了一套厨具，不过没怎么用，果然还是不喜欢烧菜&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;参与分享&lt;/h1&gt;
-&lt;p&gt;6 月的时候，参加 GIAC 作为讲师分享
-&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 133.1081081081081%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQBAgMF/8QAFgEBAQEAAAAAAAAAAAAAAAAAAgEA/9oADAMBAAIQAxAAAAFSnSjVQqBMN5Z0vCBF/8QAHRAAAgIBBQAAAAAAAAAAAAAAAQIAAxEEEiEiI//aAAgBAQABBQIerDCNtWyKqhTpwVFdkW3qDwGEyYSYJ//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAgBAwEBPwFiI//EABgRAAIDAAAAAAAAAAAAAAAAAAABECEi/9oACAECAQE/AaNDcf/EAB4QAAICAQUBAAAAAAAAAAAAAAABAhESICExQWFx/9oACAEBAAY/Aksa+DvoycuRyLRshx91f//EAB0QAQACAgIDAAAAAAAAAAAAAAEAESFBMWFRcYH/2gAIAQEAAT8hABhNuYMxRVA3yIYLwpxLMoRxnrudEVeMw6GdwRQ1UaudzzJt7n//2gAMAwEAAgADAAAAEGMH/P/EABkRAQACAwAAAAAAAAAAAAAAAAEAERAhof/aAAgBAwEBPxAWqiDQ8IYP/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAERIf/aAAgBAgEBPxBqto9YUKf/xAAaEAEAAwEBAQAAAAAAAAAAAAABABEhMUFh/9oACAEBAAE/ECnpdqt9I/BCC7X7fJmA60leVXkULQvTXTuzL0KU3YRIVamNYFql+y18jHhqiXun2UbjFHkBhmiCSnx9ifcf/9k=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;6&quot;
-        title=&quot;6&quot;
-        src=&quot;/static/f26d0db23567dd6ad01deb52a15d2289/1c72d/6.jpg&quot;
-        srcset=&quot;/static/f26d0db23567dd6ad01deb52a15d2289/a80bd/6.jpg 148w,
-/static/f26d0db23567dd6ad01deb52a15d2289/1c91a/6.jpg 295w,
-/static/f26d0db23567dd6ad01deb52a15d2289/1c72d/6.jpg 590w,
-/static/f26d0db23567dd6ad01deb52a15d2289/a8a14/6.jpg 885w,
-/static/f26d0db23567dd6ad01deb52a15d2289/47311/6.jpg 1080w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;h1&gt;思考&lt;/h1&gt;
-&lt;p&gt;其实过去的一年我生活在恐慌之中，我发现个人的成长几乎停滞不前。&lt;/p&gt;
-&lt;p&gt;我开始反思自己为什么会这样？&lt;/p&gt;
-&lt;p&gt;然后我发现了其实我是用工作麻痹自己，不肯直面 2018 的过去，失去了对自己对未来的信心。其实这并不能完全归咎于自己，不过沉迷不悟始终不是办法。&lt;/p&gt;
-&lt;p&gt;这里要感谢 Zeke，在和他聊天过程中我找到了方向：我需要的是自我推翻自我重建，保持求知欲、好奇心。&lt;/p&gt;
-&lt;h1&gt;展望&lt;/h1&gt;
-&lt;p&gt;2020 年我开始摈弃麻痹，不管多困难都要离开舒适圈。&lt;/p&gt;
-&lt;p&gt;也给自己定下了一个目标：「让自己成为有影响力的人」&lt;/p&gt;</content:encoded></item><item><title><![CDATA[尝试用 Rust + Yew 写高性能前端页面]]></title><description><![CDATA[前言 看到这篇文章，可能很多人会有个疑问：“已经有 React + TypeScript 这么好的组合，为什么还想着使用 Rust 来写前端页面，不折腾吗？”
+最后，也欢迎大家互换友链 ➡️&lt;a href=&quot;https://sasuke40.github.io/&quot;&gt;Edward Elric&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[尝试用 Rust + Yew 写高性能前端页面]]></title><description><![CDATA[前言 看到这篇文章，可能很多人会有个疑问：“已经有 React + TypeScript 这么好的组合，为什么还想着使用 Rust 来写前端页面，不折腾吗？”
 首先值得讨论的一点，接下来几年的前端方向有哪些？
 个人的愚见，在全栈领域必然是 serverless…]]></description><link>https://edward40.com/try-writing-fe-with-rust-yew/</link><guid isPermaLink="false">https://edward40.com/try-writing-fe-with-rust-yew/</guid><pubDate>Sun, 05 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
 &lt;p&gt;看到这篇文章，可能很多人会有个疑问：“已经有 React + TypeScript 这么好的组合，为什么还想着使用 Rust 来写前端页面，不折腾吗？”
