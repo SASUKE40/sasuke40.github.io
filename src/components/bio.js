@@ -27,6 +27,7 @@ const Bio = ({ children }) => {
           social {
             twitter
             github
+            zhihu
           }
         }
       }
@@ -58,7 +59,15 @@ const Bio = ({ children }) => {
         <p>
           Written by <strong>{author}</strong> who lives and works in China
           building useful things.
-          You can follow him on{' '}
+          You can follow me on{' '}
+          <a
+            target='_blank'
+            rel='noopener noreferrer'
+            href={`https://www.zhihu.com/people/${social.zhihu}`}
+          >
+            Zhihu
+          </a>
+          {', '}
           <a href={`https://twitter.com/${social.twitter}`}>
            Twitter
           </a>

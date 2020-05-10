@@ -9,7 +9,8 @@ module.exports = {
     siteUrl: 'https://edward40.com',
     social: {
       twitter: 'SASUKE688848',
-      github: 'sasuke40'
+      github: 'sasuke40',
+      zhihu: 'edward688848'
     },
     menuLinks: [
       {
