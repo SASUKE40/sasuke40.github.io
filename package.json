@@ -10,7 +10,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.13",
     "@material-ui/lab": "^4.0.0-alpha.52",
-    "@material-ui/styles": "^4.9.13",
+    "@material-ui/styles": "^4.9.14",
     "disqus-react": "^1.0.8",
     "gatsby": "^2.21.21",
     "gatsby-image": "^2.4.3",
