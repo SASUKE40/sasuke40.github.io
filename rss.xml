@@ -1,4 +1,291 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Edward Elric's Blog]]></title><description><![CDATA[Stay Hungry Stay Foolish]]></description><link>https://edward40.com</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 10 May 2020 16:28:01 GMT</lastBuildDate><item><title><![CDATA[对比 Vue Composition API 和 React Hooks]]></title><description><![CDATA[引言 最近 Vue 3.0 发布了 Beta 版本，其中最引人注意的就是其 。而这个设计近期经常被拿来和
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Edward Elric's Blog]]></title><description><![CDATA[Stay Hungry Stay Foolish]]></description><link>https://edward40.com</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 16 May 2020 06:58:19 GMT</lastBuildDate><item><title><![CDATA[Recoil 一个基于 actor 模型的 React 状态管理库]]></title><description><![CDATA[前言 最近在 React Europe 2020 Conference 上， facebook 内部释出一个状态管理库 Recoil  通过官方的宣传以及初步的使用，Recoil 在处理 shared state 上比较方便，也能做到最小度的更新来提升复杂 App…]]></description><link>https://edward40.com/recoil-a-state-management-system-for-react/</link><guid isPermaLink="false">https://edward40.com/recoil-a-state-management-system-for-react/</guid><pubDate>Sat, 16 May 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
+&lt;p&gt;最近在 React Europe 2020 Conference 上， facebook 内部释出一个状态管理库 &lt;a href=&quot;https://recoiljs.org/&quot;&gt;Recoil&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;通过官方的宣传以及初步的使用，Recoil 在处理 shared state 上比较方便，也能做到最小度的更新来提升复杂 App 的性能。不过有趣的是，对 Recoil 的 &lt;code class=&quot;language-text&quot;&gt;atom&lt;/code&gt; &lt;code class=&quot;language-text&quot;&gt;selector&lt;/code&gt; 这些 API 设计而言，其实就是早在 47 年提出的 &lt;strong&gt;Actor Model&lt;/strong&gt;，可谓是前端状态管理的文艺复兴。&lt;/p&gt;
+&lt;h1&gt;Actor Model 部分&lt;/h1&gt;
+&lt;h2&gt;什么是 Actor Model&lt;/h2&gt;
+&lt;p&gt;Actor 模型(Actor model)首先是由 Carl Hewitt 在1973定义， 由 Erlang OTP(Open Telecom Platform) 推广，其消息传递更加符合面向对象的原始意图。Actors 属于并发组件模型，通过组件方式定义并发编程范式的高级阶段，避免使用者直接接触多线程并发或线程池等基础概念。&lt;/p&gt;
+&lt;p&gt;流行语言并发是基于多线程之间的共享内存，使用同步方法防止写争夺，Actors 使用消息模型，每个 Actors 在同一时间处理最多一个消息，可以发送消息给其他 Actors，保证了单独写原则。从而巧妙避免了多线程写争夺。&lt;/p&gt;
+&lt;p&gt;Actor Model 主要有几个特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;轻量：Actor 是系统内的一个基础单位，每个 Actor 只负责自己的工作&lt;/li&gt;
+&lt;li&gt;没有 Shared State：每个 Actor 各自管理自己的 state，跑在各自的 thread 上，不共享内存和 state&lt;/li&gt;
+&lt;li&gt;通过消息传递：每个 Actor 有一个消息队列，类似 MailBox / Queue，接受到的消息会在此队列等待依次执行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;谁使用 Actor Model&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Erlang&lt;/li&gt;
+&lt;li&gt;Akka&lt;/li&gt;
+&lt;li&gt;Vert.x&lt;/li&gt;
+&lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Recoil 部分&lt;/h1&gt;
+&lt;h2&gt;Recoil 产生背景&lt;/h2&gt;
+&lt;p&gt;前端的应用越来越复杂，诸如常见的 Web 监控面板，包含各类的性能数据、节点信息、分类聚合用来进行应用分析。可以想象得到面板中包含各类的交互行为，编辑、删除、添加、将一个数据源绑定多个面板等等。除此之外，还需要对数据持久化，这样就能把 url 分享给其他人，并要确保被分享的人看到的是一致的。&lt;/p&gt;
+&lt;p&gt;因此开发过程中要尽量做到页面最小化更新达到高性能的目的，需要对数据流的操作更加精细。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.08108108108109%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAEF/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAAB3igH/8QAFRABAQAAAAAAAAAAAAAAAAAAIEH/2gAIAQEAAQUCh//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8BP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABQQAQAAAAAAAAAAAAAAAAAAACD/2gAIAQEABj8CX//EABgQAAIDAAAAAAAAAAAAAAAAAAAQAREx/9oACAEBAAE/IbGqX//aAAwDAQACAAMAAAAQQA//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAaEAEBAQADAQAAAAAAAAAAAAABABEhMVGh/9oACAEBAAE/EDAU1lRwfYPbsW2t/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Recoil at React Europe 2020 00 00 12 &quot;
+        title=&quot;Recoil at React Europe 2020 00 00 12 &quot;
+        src=&quot;/static/987bc56102caab8fa8d4e1d49c7556c6/1c72d/Recoil%20at%20React%20Europe%202020%2000-00-12%20.jpg&quot;
+        srcset=&quot;/static/987bc56102caab8fa8d4e1d49c7556c6/a80bd/Recoil%20at%20React%20Europe%202020%2000-00-12%20.jpg 148w,
+/static/987bc56102caab8fa8d4e1d49c7556c6/1c91a/Recoil%20at%20React%20Europe%202020%2000-00-12%20.jpg 295w,
+/static/987bc56102caab8fa8d4e1d49c7556c6/1c72d/Recoil%20at%20React%20Europe%202020%2000-00-12%20.jpg 590w,
+/static/987bc56102caab8fa8d4e1d49c7556c6/a8a14/Recoil%20at%20React%20Europe%202020%2000-00-12%20.jpg 885w,
+/static/987bc56102caab8fa8d4e1d49c7556c6/fbd2c/Recoil%20at%20React%20Europe%202020%2000-00-12%20.jpg 1180w,
+/static/987bc56102caab8fa8d4e1d49c7556c6/0f98f/Recoil%20at%20React%20Europe%202020%2000-00-12%20.jpg 1920w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;面对这样的挑战，一般会想到用一些状态管理的函数或者库，如 React 内置的 state 管理，或者 Redux。&lt;/p&gt;
+&lt;p&gt;Recoil 想通过一个不一样的方式来解决这些问题，主要分为 3 个方面：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Flexible shared state: 在 react tree 任意的地方都能灵活共享 state，并保持高性能&lt;/li&gt;
+&lt;li&gt;Derived data and queries: 高效可靠地根据变化的 state 进行计算&lt;/li&gt;
+&lt;li&gt;App-wide state observation: time travel debugging, 支持 undo, 日志持久化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Recoil 主要设计&lt;/h2&gt;
+&lt;h3&gt;Shared state&lt;/h3&gt;
+&lt;p&gt;有一个应用基于这样一个场景，将 List 中更新一个节点，然后对应 Canvas 中的节点也更新&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.08108108108109%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA2UlEQVQoz6VRiwrCMAz0//9O3ERwgt2c3dut3Zru0em5IuJzoEcpIddLesni/BnGjMCXB4svnBCyadQvYsi01kLKuq7nxfihGUw/oSwrKaVNNiijaBgGY64s7vedlVKet4vjRAjxlE/TbM9YEBwQP4u7vufhce247nrj+8Ge+UVxwsBAEWkecsbYcuVAznkEI3aOVjwqomDrsZUDk1UlsixPkhSewcFAtPVw8rJE/yiKwbZte+9s/dCEruvgE4G1h5sUaSIkUQ7+1Y16GNinrY4vmN/zLP4SXwAdJoTKJiU22QAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Recoil at React Europe 2020 00 04 55 &quot;
+        title=&quot;Recoil at React Europe 2020 00 04 55 &quot;
+        src=&quot;/static/323cd8e613c052bfe07864140ad76304/fcda8/Recoil%20at%20React%20Europe%202020%2000-04-55%20.png&quot;
+        srcset=&quot;/static/323cd8e613c052bfe07864140ad76304/12f09/Recoil%20at%20React%20Europe%202020%2000-04-55%20.png 148w,
+/static/323cd8e613c052bfe07864140ad76304/e4a3f/Recoil%20at%20React%20Europe%202020%2000-04-55%20.png 295w,
+/static/323cd8e613c052bfe07864140ad76304/fcda8/Recoil%20at%20React%20Europe%202020%2000-04-55%20.png 590w,
+/static/323cd8e613c052bfe07864140ad76304/efc66/Recoil%20at%20React%20Europe%202020%2000-04-55%20.png 885w,
+/static/323cd8e613c052bfe07864140ad76304/c83ae/Recoil%20at%20React%20Europe%202020%2000-04-55%20.png 1180w,
+/static/323cd8e613c052bfe07864140ad76304/29114/Recoil%20at%20React%20Europe%202020%2000-04-55%20.png 1920w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h4&gt;第 1 种方式&lt;/h4&gt;
+&lt;p&gt;把 state 传到公共的父节点转发给 canvas 子节点，这样显然会全量 re-render&lt;/p&gt;
+&lt;h4&gt;第 2 种方式&lt;/h4&gt;
+&lt;p&gt;给父节点加 Provider 在子节点加 Consumer，不过每多加一个 item 就要多一层 Provider&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.08108108108109%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA60lEQVQoz42S227DIBBE/f/f2Cq1qyStKAYWcFhuzuBGKVItxfOwQisOsxeG9Z9qbVFp/ph+vLda65zzuqdhN5tzFZKV0kQEOMZ4CIZtSnVWIXCxlkyTTikdgq2L76Ml26wsaGr8UXhWLGTYul7JWpDzPB+FDfFye4wH3YYQ6qbXsL8lZRiHlDIzO+eWZYFtKa/gXKpUKefimnyMCYalFJh77xF/n+irGJ6L/Rb+7fR1vV7O5wsMu/lXjG0cp3H6RCN9/3/OzFEIgfEYQ9jw82PgNhGWhqSSUnLg/Z7jJmCIfXngkcEUUHz/2+4TDoa//ePaMQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Recoil at React Europe 2020 00 06 43 &quot;
+        title=&quot;Recoil at React Europe 2020 00 06 43 &quot;
+        src=&quot;/static/be68d83be5d0089eba9ca3ae541b4042/fcda8/Recoil%20at%20React%20Europe%202020%2000-06-43%20.png&quot;
+        srcset=&quot;/static/be68d83be5d0089eba9ca3ae541b4042/12f09/Recoil%20at%20React%20Europe%202020%2000-06-43%20.png 148w,
+/static/be68d83be5d0089eba9ca3ae541b4042/e4a3f/Recoil%20at%20React%20Europe%202020%2000-06-43%20.png 295w,
+/static/be68d83be5d0089eba9ca3ae541b4042/fcda8/Recoil%20at%20React%20Europe%202020%2000-06-43%20.png 590w,
+/static/be68d83be5d0089eba9ca3ae541b4042/efc66/Recoil%20at%20React%20Europe%202020%2000-06-43%20.png 885w,
+/static/be68d83be5d0089eba9ca3ae541b4042/c83ae/Recoil%20at%20React%20Europe%202020%2000-06-43%20.png 1180w,
+/static/be68d83be5d0089eba9ca3ae541b4042/29114/Recoil%20at%20React%20Europe%202020%2000-06-43%20.png 1920w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h4&gt;第 3 种方式&lt;/h4&gt;
+&lt;p&gt;在 react tree 上创建另一个正交的 tree，把每片 item 的 state 抽出来。每个 component 都有对应单独的一片 state，当数据更新的时候对应的组件也会更新。Recoil 把 这每一片的数据称为 Atom，Atom 是可订阅可变的 state 单元。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.08108108108109%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAABwklEQVQoz11SWW/TQBD2/xdvPFWqKkF54oWXIihqQUJVSEOKnfhM5NiOHV/r27s+1t512MSCJvm02jl2Ps3szHD7c/hCHCjpWiwkIecVqJjlzMwlN5l6YBn4k2CT1pCFDcdg7pV3dGRuGeqJv61MHUlaaYXl3ArWQcw7vhLuZq5Oh+E/gxuGgVJKjuj7HiYojypbjgwTWmaxMAMTxKobaoG/iUMnjw5Z/vG5pm3zomjbtm4aBFG0S5IEbhSgif5yvXuWHNnyectYWFYKoVskZ2SmQ4hYcmb0HWnytsw6z2skwf4tG4IKFCfSEwAKZANgJ+CCvGcFI4QOSkcyr1QlsNLjlQ+Wss2r9lS0vDTP6sbJsi3wCaGvfx4Fxh3uOtpTY+5+uJHff+XfTWaPonz/ffbw2f/47c+PpXgvydssxE3bdd3+otu4xzBG4qN9fbO5+rK+fXm+M3hDcD69XV3dbt7cza+nT4vQYt2uqron5Iw87AfWsNSDqlrqHtTC0Kuytmy1SfT0K3sQvZ+WbmbhOJqyhGw03OmGMBtViHUe4xYfL1YhGTpCMGVvzGK+A3BVV03TcBcbRk9AxjMKSoeT9RjxF0LWZUUKBRK5AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Recoil at React Europe 2020 00 07 24 &quot;
+        title=&quot;Recoil at React Europe 2020 00 07 24 &quot;
+        src=&quot;/static/511f2376092c2d1eff023b9d688ade66/fcda8/Recoil%20at%20React%20Europe%202020%2000-07-24%20.png&quot;
+        srcset=&quot;/static/511f2376092c2d1eff023b9d688ade66/12f09/Recoil%20at%20React%20Europe%202020%2000-07-24%20.png 148w,
+/static/511f2376092c2d1eff023b9d688ade66/e4a3f/Recoil%20at%20React%20Europe%202020%2000-07-24%20.png 295w,
+/static/511f2376092c2d1eff023b9d688ade66/fcda8/Recoil%20at%20React%20Europe%202020%2000-07-24%20.png 590w,
+/static/511f2376092c2d1eff023b9d688ade66/efc66/Recoil%20at%20React%20Europe%202020%2000-07-24%20.png 885w,
+/static/511f2376092c2d1eff023b9d688ade66/c83ae/Recoil%20at%20React%20Europe%202020%2000-07-24%20.png 1180w,
+/static/511f2376092c2d1eff023b9d688ade66/29114/Recoil%20at%20React%20Europe%202020%2000-07-24%20.png 1920w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;配合 &lt;code class=&quot;language-text&quot;&gt;useRecoilState&lt;/code&gt; 可以使用这些 Atom，实践上对多个 item 的 Atom 可以用 memorize 进行优化，具体可以在官方文档查看，这里不赘述。&lt;/p&gt;
+&lt;h3&gt;Derived Data&lt;/h3&gt;
+&lt;p&gt;有这么一个场景需要根据多个 Item Box 计算 Bounding Box&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 581px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 51.35135135135135%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsSAAALEgHS3X78AAABBUlEQVQoz6VRa2+DMAzk//+/fqj6FBQSYOOVkDY0yc1J6FaqdtrD0uHgs072OcGLcM79CrdIrleHLB2Q5wOyrMXp1KNrNZSyGEcTIR8wmgUn53oQvFwsViuG3a6gfMB6nUEMKpDW/nRCYBhMeCdaW5quQ9P0BIG67qH19Lk2fe+wMGVRl2IWnCaHM633Hw99iHtB78WjyHfHehaLCZVaCoYGqcDYOzhvQq7rLnh666uqFox/8W919P3phD7aVmCzybHfM2y3BdK0gjHRGkv5eOSh7nnfxwoRBY1x6Hs6vbDkQ4SUlgQnlHxEWSrKiiY6R27u8f+BI3A20pXjIZMXTuEv4bf7ALtoDeb5/0aLAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;derived data&quot;
+        title=&quot;derived data&quot;
+        src=&quot;/static/219ab74910774bb38966915f8dc02546/92d15/derived_data.png&quot;
+        srcset=&quot;/static/219ab74910774bb38966915f8dc02546/12f09/derived_data.png 148w,
+/static/219ab74910774bb38966915f8dc02546/e4a3f/derived_data.png 295w,
+/static/219ab74910774bb38966915f8dc02546/92d15/derived_data.png 581w&quot;
+        sizes=&quot;(max-width: 581px) 100vw, 581px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;如果你是 Vue 的爱好者，你可能想到了计算属性。Derived Data 确实有 computed props 的味道，具体思路是选取多个 Atom 进行计算，然后返回一个新的 state。因此在 Recoil 中设计了 &lt;code class=&quot;language-text&quot;&gt;select&lt;/code&gt; 这样的 API 来选取多个 Atom 进行计算。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.08108108108109%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA5klEQVQoz42R227DIAyG8/7vttvdrF00CTJlObQBAsY2UKfRqh62phYStuXP/g1VuTI8KDKtODklghQDxaFm0/gIBsDGUG6tuoszziXz4hDQ+MWul07lH3uAGdkNdNTw/S78mnsRXupw0qF5yxiek39MLjmT7XCof8eWV2EiijEiUnSGiM+HEJGZt2EhpVqE4rEhsAGW8JLfgHPOMkcc26tO7+WVmdgYsypKKW3sLApDCErrj91uHEfn3P6zVkoBgLS446tHMTJkmiZj7Dx7udv2p+t6N88Ce+9F3TP48kP5dqPVrotO7BGIr4HVhgwAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Recoil at React Europe 2020 00 14 53 &quot;
+        title=&quot;Recoil at React Europe 2020 00 14 53 &quot;
+        src=&quot;/static/b5adda457e6be56398ba382b526116b8/fcda8/Recoil%20at%20React%20Europe%202020%2000-14-53%20.png&quot;
+        srcset=&quot;/static/b5adda457e6be56398ba382b526116b8/12f09/Recoil%20at%20React%20Europe%202020%2000-14-53%20.png 148w,
+/static/b5adda457e6be56398ba382b526116b8/e4a3f/Recoil%20at%20React%20Europe%202020%2000-14-53%20.png 295w,
+/static/b5adda457e6be56398ba382b526116b8/fcda8/Recoil%20at%20React%20Europe%202020%2000-14-53%20.png 590w,
+/static/b5adda457e6be56398ba382b526116b8/efc66/Recoil%20at%20React%20Europe%202020%2000-14-53%20.png 885w,
+/static/b5adda457e6be56398ba382b526116b8/c83ae/Recoil%20at%20React%20Europe%202020%2000-14-53%20.png 1180w,
+/static/b5adda457e6be56398ba382b526116b8/29114/Recoil%20at%20React%20Europe%202020%2000-14-53%20.png 1920w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;select&lt;/code&gt; 的设计和 Proxy 挺像的，属性上有 &lt;code class=&quot;language-text&quot;&gt;get&lt;/code&gt; 进行读取，有 &lt;code class=&quot;language-text&quot;&gt;set&lt;/code&gt; 进行设置，函数内部又有 &lt;code class=&quot;language-text&quot;&gt;get&lt;/code&gt;， &lt;code class=&quot;language-text&quot;&gt;set&lt;/code&gt; 操作 state&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;atom&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; selector&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; useRecoilState&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;recoil&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; tempFahrenheit &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;atom&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  key&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;tempFahrenheit&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; tempCelcius &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  key&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;tempCelcius&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token function-variable function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;tempFahrenheit&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token function-variable function&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; newValue&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;tempFahrenheit&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;newValue &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;App-wide observation&lt;/h3&gt;
+&lt;p&gt;这个场景下需要把 url 分享给其他人，别人打开相同的链接也能看到一样的页面。&lt;/p&gt;
+&lt;p&gt;那么就需要 observe Atom 的变更，Recoil 使用 &lt;code class=&quot;language-text&quot;&gt;useTransactionObservation&lt;/code&gt; 进行订阅&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token function&quot;&gt;useTransactionObservation&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;atomValues&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;modifiedAtoms&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;另一方面，打开链接的时候也需要对输入的数据进行校验&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; counter &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;atom&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  key&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;myCounter&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  validator&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;untrustedInput&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  metadata&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Recoil 后续&lt;/h2&gt;
+&lt;p&gt;目前 Recoil 还属于实验阶段，不过能确定的是 Recoil 会兼容 React Concurrent Mode&lt;/p&gt;
+&lt;h1&gt;Actor Model &amp;#x26; Recoil 联系&lt;/h1&gt;
+&lt;p&gt;通过前面提及 Recoil 的设计，可以发现两者的理念是相似的。&lt;/p&gt;
+&lt;p&gt;在实现的细节中 Recoil 维护了新的队列，并通过订阅、派发的机制完成消息的传递及组件的更新。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Fire or enqueue callbacks to rerender components that are subscribed to&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// nodes affected by the updatedNodes&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;fireNodeSubscriptions&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+  store&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Store&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  updatedNodes&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; $ReadOnlySet&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;NodeKey&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  when&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;enqueue&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;now&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;/*
+  This is called in two conditions: When an atom is set (with &apos;enqueue&apos;) and
+  when an async selector resolves (with &apos;now&apos;). When an atom is set, we want
+  to use the latest dependencies that may have become dependencies due to
+  earlier changes in a batch. But if an async selector happens to resolve during
+  a batch, it should use the currently rendered output, and then the end of the
+  batch will trigger any further subscriptions due to new deps in the new state.
+  */&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; state &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+    when &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;enqueue&apos;&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; store&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nextTree &lt;span class=&quot;token operator&quot;&gt;??&lt;/span&gt; store&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;currentTree
+      &lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; store&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;currentTree&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; dependentNodes &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;getDownstreamNodes&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;state&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; updatedNodes&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; key &lt;span class=&quot;token keyword&quot;&gt;of&lt;/span&gt; dependentNodes&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;state&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;nodeToComponentSubscriptions&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;key&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;debugName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; cb&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        when &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;enqueue&apos;&lt;/span&gt;
+          &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; store&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;queuedComponentCallbacks&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;cb&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+          &lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;cb&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;state&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// Wake all suspended components so the right one(s) can try to re-render.&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// We need to wake up components not just when some asynchronous selector&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// resolved (when === &apos;now&apos;), but also when changing synchronous values because&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// they may cause a selector to change from asynchronous to synchronous, in&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// which case there would be no follow-up asynchronous resolution to wake us up.&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// TODO OPTIMIZATION Only wake up related downstream components&lt;/span&gt;
+  Tracing&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&apos;value became available, waking components&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    Array&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;updatedNodes&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;, &apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; resolvers &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; store&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;suspendedComponentResolvers&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      resolvers&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      resolvers&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;其实 Recoil 不是 Actor Model 在前端的首次实践，2年前 PolymerLabs 就有 &lt;a href=&quot;https://github.com/PolymerLabs/actor-helpers&quot;&gt;actor-helpers&lt;/a&gt; 以及 &lt;a href=&quot;https://github.com/PolymerLabs/actor-boilerplate&quot;&gt;actor-boilerplate&lt;/a&gt; 相关的实践。不过在 React 强大的生态以及 React Hooks 的加持之下，用 Sync 的方式做到异步 state 管理和共享，同时保持交互流程、高性能的 Recoil 算是补充了一个不错的方案。&lt;/p&gt;
+&lt;h1&gt;补充&lt;/h1&gt;
+&lt;p&gt;Recoil 刚刚释出实验版本，我想正好可以在不断更改的过程中了解前端 Actor Model 的实现方式步骤。&lt;/p&gt;
+&lt;p&gt;另外，其实不少人批评前端的发展就是到处借鉴，没有新的事物，像是 WPF 就有很多前端可以借鉴的地方（确实也如此）。&lt;/p&gt;
+&lt;p&gt;不过在我看来，放到一个比较长的时期里，前端慢慢吸收各类后端、客户端的设计思想才产生“新”事物是很正常的发展进程。包括经常被提到的 Vue 和 React 孰优孰劣之争，Node.js 不堪大用等等话题，其实都是历史发展及其技术定位所致。可能对其他领域的看来是不新鲜，但对前端而言是语言发展（残疾而缝合的 JavaScript）、生态繁荣才有可能繁衍出这些对前端而言的新事物。&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&quot;fn-https://en.wikipedia.org/wiki/actor_model&quot;&gt;
+&lt;p&gt;Wikipedia Actor model&lt;/p&gt;
+&lt;a href=&quot;#fnref-https://en.wikipedia.org/wiki/actor_model&quot; class=&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn-http://jiangew.me/actor-model/#what-actor-model&quot;&gt;
+&lt;p&gt;Actor 编程模型浅谈&lt;/p&gt;
+&lt;a href=&quot;#fnref-http://jiangew.me/actor-model/#what-actor-model&quot; class=&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn-https://recoiljs.org/docs/api-reference/core/atom&quot;&gt;
+&lt;p&gt;Recoil Atom&lt;/p&gt;
+&lt;a href=&quot;#fnref-https://recoiljs.org/docs/api-reference/core/atom&quot; class=&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn-https://blog.techbridge.cc/2019/06/21/actor-model-in-web/&quot;&gt;
+&lt;p&gt;46 年老技術與 Web 的新火花 - Actor Model in Web&lt;/p&gt;
+&lt;a href=&quot;#fnref-https://blog.techbridge.cc/2019/06/21/actor-model-in-web/&quot; class=&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[对比 Vue Composition API 和 React Hooks]]></title><description><![CDATA[引言 最近 Vue 3.0 发布了 Beta 版本，其中最引人注意的就是其 。而这个设计近期经常被拿来和
  进行比较，以下是两个代码片段： 我们可以看到两者的心智模型非常不同，React 编程范式更接近于纯函数，Vue 则采取了 Reactivity 的模式。 React…]]></description><link>https://edward40.com/compare-vue-composition-api-with-react-hooks/</link><guid isPermaLink="false">https://edward40.com/compare-vue-composition-api-with-react-hooks/</guid><pubDate>Sun, 10 May 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;引言&lt;/h1&gt;
 &lt;p&gt;最近 &lt;a href=&quot;https://github.com/vuejs/vue-next&quot;&gt;Vue 3.0&lt;/a&gt; 发布了 Beta 版本，其中最引人注意的就是其 &lt;code class=&quot;language-text&quot;&gt;Composition API&lt;/code&gt;。而这个设计近期经常被拿来和
 &lt;code class=&quot;language-text&quot;&gt;React Hooks&lt;/code&gt; 进行比较，以下是两个代码片段：&lt;/p&gt;
@@ -99,218 +386,7 @@
 &lt;p&gt;其实语言、框架没有优劣，主要看使用的人对其理解到什么程度。使用 React Hooks 就要尽量采用 immutable 变量，降低函数调用过频影响性能（部分 React 调度策略兜底）；使用 Vue 就尽量不要依赖跟踪丢失或者滥用依赖跟踪导致行为不可预测。&lt;/p&gt;
 &lt;h1&gt;最后&lt;/h1&gt;
 &lt;p&gt;React 和 Vue 没有不可调和之处，他们是 JavaScript 这门语言一体两面的提现。&lt;/p&gt;
-&lt;p&gt;未来哪个社区更加繁荣还是要看 TC39 把 JavaScript 带向何方，是更加 Functional Programming 呢？还是更加 Imperative Programming 呢？&lt;/p&gt;</content:encoded></item><item><title><![CDATA[2019 年回顾总结]]></title><description><![CDATA[自我推翻自我重建，我觉得是活着的人该做的事情。 一个人要是对这个世界失去好奇心，失去求知欲，这个人已经是死的了。 —— 摘自 Zeke 201…]]></description><link>https://edward40.com/review-2019/</link><guid isPermaLink="false">https://edward40.com/review-2019/</guid><pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
-&lt;p&gt;自我推翻自我重建，我觉得是活着的人该做的事情。&lt;/p&gt;
-&lt;p&gt;一个人要是对这个世界失去好奇心，失去求知欲，这个人已经是死的了。&lt;/p&gt;
-&lt;p&gt;—— 摘自 Zeke&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;2019 年，我从杭州阿里来到深圳腾讯工作的一年，这一年充满了感恩、迷茫、思考、转变。&lt;/p&gt;
-&lt;h1&gt;生活&lt;/h1&gt;
-&lt;p&gt;在朋友的帮助下，我顺利的在深圳安顿下来，很感谢他。&lt;/p&gt;
-&lt;p&gt;年头的时候去广州参加同学的婚礼，感觉时间过得好快。&lt;/p&gt;
-&lt;p&gt;然后还和经常一起玩吃鸡、CSGO、彩六的网友见了一面，一起吃饭、玩耍。不过后面大家还是天南地北，很多回去学校了，真希望有缘能再聚一次。&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAUCAwT/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABliZKBqVEf//EABoQAAIDAQEAAAAAAAAAAAAAAAEDAAITBBH/2gAIAQEAAQUCSv2iiGWyTGZJBKruHKJ//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oACAECAQE/AW1//8QAHhAAAgEDBQAAAAAAAAAAAAAAAAESAiExIiNRgZH/2gAIAQEABj8Cnhm6YNTfRKTV+C1b8P/EABsQAQACAwEBAAAAAAAAAAAAAAEAESExQVFx/9oACAEBAAE/ISVZbqnkVDMa5PAV9mtl6BEgE2zCy1DH/9oADAMBAAIAAwAAABAjz//EABYRAQEBAAAAAAAAAAAAAAAAAAAhUf/aAAgBAwEBPxBMf//EABYRAQEBAAAAAAAAAAAAAAAAAAEQIf/aAAgBAgEBPxAcl//EAB4QAQACAgEFAAAAAAAAAAAAAAEAESExUUFhgbHB/9oACAEBAAE/EKO7msHCznEaBAOiXxOL9Bl9lAVjY0dsTCA0s9TYRQon/9k=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;1&quot;
-        title=&quot;1&quot;
-        src=&quot;/static/bba3dc42ba9d010f2b3ac2439665e242/1c72d/1.jpg&quot;
-        srcset=&quot;/static/bba3dc42ba9d010f2b3ac2439665e242/a80bd/1.jpg 148w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/1c91a/1.jpg 295w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/1c72d/1.jpg 590w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/a8a14/1.jpg 885w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/fbd2c/1.jpg 1180w,
-/static/bba3dc42ba9d010f2b3ac2439665e242/644c5/1.jpg 1440w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;国庆的时候和家人一起去澳门玩，看了大三巴牌坊。&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAABA//EABYBAQEBAAAAAAAAAAAAAAAAAAIAAf/aAAwDAQACEAMQAAABWfnti4sj/8QAGhAAAgMBAQAAAAAAAAAAAAAAAQIDERIhAP/aAAgBAQABBQKSTLK/h0M1ydyC1f/EABYRAQEBAAAAAAAAAAAAAAAAAAAREv/aAAgBAwEBPwGMP//EABYRAQEBAAAAAAAAAAAAAAAAAAASE//aAAgBAgEBPwGmj//EABkQAQADAQEAAAAAAAAAAAAAAAACESExYf/aAAgBAQAGPwKqaxP11kqf/8QAGxABAQEAAgMAAAAAAAAAAAAAAREAQVEhMZH/2gAIAQEAAT8hNLWW7t0uBT01sPL5pAfC9ZYXDxN//9oADAMBAAIAAwAAABC//wD/xAAXEQADAQAAAAAAAAAAAAAAAAAAARFB/9oACAEDAQE/EJG2H//EABcRAAMBAAAAAAAAAAAAAAAAAAABEUH/2gAIAQIBAT8QbWojT//EABsQAQEAAwADAAAAAAAAAAAAAAERACExUXGh/9oACAEBAAE/EK3DCKecVbUQqc9awk1XHKYQrhqoHzBAiEkF7N4L4ro7d5//2Q==&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;2&quot;
-        title=&quot;2&quot;
-        src=&quot;/static/e41ed86540c8420313443a57ec847934/1c72d/2.jpg&quot;
-        srcset=&quot;/static/e41ed86540c8420313443a57ec847934/a80bd/2.jpg 148w,
-/static/e41ed86540c8420313443a57ec847934/1c91a/2.jpg 295w,
-/static/e41ed86540c8420313443a57ec847934/1c72d/2.jpg 590w,
-/static/e41ed86540c8420313443a57ec847934/a8a14/2.jpg 885w,
-/static/e41ed86540c8420313443a57ec847934/fbd2c/2.jpg 1180w,
-/static/e41ed86540c8420313443a57ec847934/644c5/2.jpg 1440w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;在珠海长隆海洋王国看动物，大家都很喜欢海豹呢。&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAgX/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/2gAMAwEAAhADEAAAAcumXm2HND//xAAbEAEAAgIDAAAAAAAAAAAAAAABAAIDBBEUI//aAAgBAQABBQLhYF09CO1ZjnyFezaf/8QAFREBAQAAAAAAAAAAAAAAAAAAEBH/2gAIAQMBAT8Bp//EABYRAAMAAAAAAAAAAAAAAAAAAAEQEf/aAAgBAgEBPwGFf//EABwQAAEDBQAAAAAAAAAAAAAAAAABESEQMjNBkf/aAAgBAQAGPwKHLVMakI1N9P/EABsQAAICAwEAAAAAAAAAAAAAAAERADEhQXGB/9oACAEBAAE/IcxBI1bgw6tx4gfhhZKQOFBKJsl6n//aAAwDAQACAAMAAAAQD/8A/8QAFhEBAQEAAAAAAAAAAAAAAAAAABEB/9oACAEDAQE/EIXH/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oACAECAQE/EBlf/8QAHxAAAgEEAgMAAAAAAAAAAAAAAREAMVGRoUFhgbHB/9oACAEBAAE/EKNxxQvkVy8SOZQquBe5roHlwYiCkwLPRcJSKXAHuf/Z&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;3&quot;
-        title=&quot;3&quot;
-        src=&quot;/static/a4563d93640804e9f25a4d2445955e7d/1c72d/3.jpg&quot;
-        srcset=&quot;/static/a4563d93640804e9f25a4d2445955e7d/a80bd/3.jpg 148w,
-/static/a4563d93640804e9f25a4d2445955e7d/1c91a/3.jpg 295w,
-/static/a4563d93640804e9f25a4d2445955e7d/1c72d/3.jpg 590w,
-/static/a4563d93640804e9f25a4d2445955e7d/a8a14/3.jpg 885w,
-/static/a4563d93640804e9f25a4d2445955e7d/fbd2c/3.jpg 1180w,
-/static/a4563d93640804e9f25a4d2445955e7d/644c5/3.jpg 1440w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 133.1081081081081%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAIDBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAABAAL/2gAMAwEAAhADEAAAAWmThRBuhPYuXOKN/8QAHhAAAgICAgMAAAAAAAAAAAAAAQIDEgARBBMhIzP/2gAIAQEAAQUCaTYd9DtwxPYpKcq+TzVdrJFwz6ajb+RD8//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EAB0QAAIDAAIDAAAAAAAAAAAAAAABAhEhEjEyQYH/2gAIAQEABj8CFdmIa9nidHGEU5NaSdVh9LrSn0I//8QAHBABAAICAwEAAAAAAAAAAAAAAQARIUExUWFx/9oACAEBAAE/ISxFfCLQqygdkNcPkaCtqXmKFWo7iXLbzjMuslDyMSsBfUfn2mtW3CcstTEj2f/aAAwDAQACAAMAAAAQb9//AP/EABURAQEAAAAAAAAAAAAAAAAAAAEg/9oACAEDAQE/EGP/xAAXEQADAQAAAAAAAAAAAAAAAAAAAREQ/9oACAECAQE/EKy5D//EAB0QAQADAQEBAAMAAAAAAAAAAAEAESExQZFRobH/2gAIAQEAAT8QrKtXaG/xFQMMQs7BCwDDgjesHuB9Lm6Alw0fdlCt9hT6RSYlxzwMW2VQ5arr3IvvlX6lLF9tdY6ChTbsBkAf6Z//2Q==&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;4&quot;
-        title=&quot;4&quot;
-        src=&quot;/static/5c060a92d31a51911b8452d327896e9e/1c72d/4.jpg&quot;
-        srcset=&quot;/static/5c060a92d31a51911b8452d327896e9e/a80bd/4.jpg 148w,
-/static/5c060a92d31a51911b8452d327896e9e/1c91a/4.jpg 295w,
-/static/5c060a92d31a51911b8452d327896e9e/1c72d/4.jpg 590w,
-/static/5c060a92d31a51911b8452d327896e9e/a8a14/4.jpg 885w,
-/static/5c060a92d31a51911b8452d327896e9e/47311/4.jpg 1080w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其实我不是个喜欢和家人打电话的人，但内心家人对我来说非常的重要。同时我也感恩有一个智慧的妈妈，她爱阅读、爱思考，教会我如何待人接物、为人处事。&lt;/p&gt;
-&lt;p&gt;我也努力沉下心来也读了一些书，如： 《旧制度与大革命》《1984》《学会提问：批判性思维指南》等等，渐渐也能收获阅读的乐趣。&lt;/p&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABAAC/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAP/2gAMAwEAAhADEAAAAQbXmdSTY//EABkQAQADAQEAAAAAAAAAAAAAAAIAAQMSIf/aAAgBAQABBQKi5w4ioFnHfpzTr//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAgBAwEBPwHVf//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABsQAAIBBQAAAAAAAAAAAAAAAAARAQIQEjFB/9oACAEBAAY/AjjspbHToeUH/8QAGxAAAwADAQEAAAAAAAAAAAAAAAERITFRQYH/2gAIAQEAAT8hY1BNigYFa0RNfY43xUjAp8P/2gAMAwEAAgADAAAAEHff/8QAGBEAAwEBAAAAAAAAAAAAAAAAAAExESH/2gAIAQMBAT8Q1nDmn//EABgRAAIDAAAAAAAAAAAAAAAAAAABESFR/9oACAECAQE/EK0hn//EABwQAQEAAgIDAAAAAAAAAAAAAAERACExQXGBof/aAAgBAQABPxAaQEi0Y4CCPjfJMGm0BIa+5eIEVDeCnrLsk8ZAaGIxs9Z//9k=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;5&quot;
-        title=&quot;5&quot;
-        src=&quot;/static/c36d850d460a3a01f8f804b08f127400/1c72d/5.jpg&quot;
-        srcset=&quot;/static/c36d850d460a3a01f8f804b08f127400/a80bd/5.jpg 148w,
-/static/c36d850d460a3a01f8f804b08f127400/1c91a/5.jpg 295w,
-/static/c36d850d460a3a01f8f804b08f127400/1c72d/5.jpg 590w,
-/static/c36d850d460a3a01f8f804b08f127400/a8a14/5.jpg 885w,
-/static/c36d850d460a3a01f8f804b08f127400/fbd2c/5.jpg 1180w,
-/static/c36d850d460a3a01f8f804b08f127400/644c5/5.jpg 1440w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;h1&gt;看过的频道&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;妈咪说 Mommy Talk&lt;/p&gt;
-&lt;p&gt;在 B 站上看，主要是科普天文、数学、物理之类的，最近讲混沌非常有意思。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;3Blue1Brown&lt;/p&gt;
-&lt;p&gt;Youtube 上看的，Grant Sanderson 从独特的视觉角度解说高等数学，也非常擅长开发，用可视化来让人快速理解数学之美。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;NiceChord&lt;/p&gt;
-&lt;p&gt;讲乐理之类的，不过 Wiwi 官大为好像是个技术宅，也经常会放一些音乐编程的视频。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1&gt;看过的电视剧&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;《致命女人》：好看&lt;/li&gt;
-&lt;li&gt;《权力的游戏》：烂尾&lt;/li&gt;
-&lt;li&gt;《Years and Years》：噱头比较大&lt;/li&gt;
-&lt;li&gt;《切尔诺贝利》&lt;/li&gt;
-&lt;li&gt;《性爱自修室》&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;看过的番剧&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;《进击的巨人 第三季》：强烈推荐&lt;/li&gt;
-&lt;li&gt;《约定的梦幻岛》&lt;/li&gt;
-&lt;li&gt;《流汗吧！健身少女》&lt;/li&gt;
-&lt;li&gt;《Dr. STONE 石纪元》&lt;/li&gt;
-&lt;li&gt;《刀剑神域 Alicization 篇》&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;技能&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;健身 💪&lt;/p&gt;
-&lt;p&gt;坚持了几个月，和同事一起去的，但后来健身房改造就没去（其实也是懒惰的理由）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;钢琴 🎹&lt;/p&gt;
-&lt;p&gt;其实有点荒废这个天赋，希望 2020 能坚持下来&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;煮饭 🍳&lt;/p&gt;
-&lt;p&gt;买了一套厨具，不过没怎么用，果然还是不喜欢烧菜&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;参与分享&lt;/h1&gt;
-&lt;p&gt;6 月的时候，参加 GIAC 作为讲师分享
-&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 133.1081081081081%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQBAgMF/8QAFgEBAQEAAAAAAAAAAAAAAAAAAgEA/9oADAMBAAIQAxAAAAFSnSjVQqBMN5Z0vCBF/8QAHRAAAgIBBQAAAAAAAAAAAAAAAQIAAxEEEiEiI//aAAgBAQABBQIerDCNtWyKqhTpwVFdkW3qDwGEyYSYJ//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAgBAwEBPwFiI//EABgRAAIDAAAAAAAAAAAAAAAAAAABECEi/9oACAECAQE/AaNDcf/EAB4QAAICAQUBAAAAAAAAAAAAAAABAhESICExQWFx/9oACAEBAAY/Aksa+DvoycuRyLRshx91f//EAB0QAQACAgIDAAAAAAAAAAAAAAEAESFBMWFRcYH/2gAIAQEAAT8hABhNuYMxRVA3yIYLwpxLMoRxnrudEVeMw6GdwRQ1UaudzzJt7n//2gAMAwEAAgADAAAAEGMH/P/EABkRAQACAwAAAAAAAAAAAAAAAAEAERAhof/aAAgBAwEBPxAWqiDQ8IYP/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAERIf/aAAgBAgEBPxBqto9YUKf/xAAaEAEAAwEBAQAAAAAAAAAAAAABABEhMUFh/9oACAEBAAE/ECnpdqt9I/BCC7X7fJmA60leVXkULQvTXTuzL0KU3YRIVamNYFql+y18jHhqiXun2UbjFHkBhmiCSnx9ifcf/9k=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;6&quot;
-        title=&quot;6&quot;
-        src=&quot;/static/f26d0db23567dd6ad01deb52a15d2289/1c72d/6.jpg&quot;
-        srcset=&quot;/static/f26d0db23567dd6ad01deb52a15d2289/a80bd/6.jpg 148w,
-/static/f26d0db23567dd6ad01deb52a15d2289/1c91a/6.jpg 295w,
-/static/f26d0db23567dd6ad01deb52a15d2289/1c72d/6.jpg 590w,
-/static/f26d0db23567dd6ad01deb52a15d2289/a8a14/6.jpg 885w,
-/static/f26d0db23567dd6ad01deb52a15d2289/47311/6.jpg 1080w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
-        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;h1&gt;思考&lt;/h1&gt;
-&lt;p&gt;其实过去的一年我生活在恐慌之中，我发现个人的成长几乎停滞不前。&lt;/p&gt;
-&lt;p&gt;我开始反思自己为什么会这样？&lt;/p&gt;
-&lt;p&gt;然后我发现了其实我是用工作麻痹自己，不肯直面 2018 的过去，失去了对自己对未来的信心。其实这并不能完全归咎于自己，不过沉迷不悟始终不是办法。&lt;/p&gt;
-&lt;p&gt;这里要感谢 Zeke，在和他聊天过程中我找到了方向：我需要的是自我推翻自我重建，保持求知欲、好奇心。&lt;/p&gt;
-&lt;h1&gt;展望&lt;/h1&gt;
-&lt;p&gt;2020 年我开始摈弃麻痹，不管多困难都要离开舒适圈。&lt;/p&gt;
-&lt;p&gt;也给自己定下了一个目标：「让自己成为有影响力的人」&lt;/p&gt;</content:encoded></item><item><title><![CDATA[使用 Gatsby 搭建个人网站指南]]></title><description><![CDATA[前言 相信大部分程序员都有自己个人网站，或者是托管在各大平台上的技术博客。 大概在大一的时候我也萌生搭建个人博客的想法，最早还是比较流行自己买一个 VPS、域名，然后搭建 WordPress…]]></description><link>https://edward40.com/a-guide-to-building-a-personal-website-with-gatsby/</link><guid isPermaLink="false">https://edward40.com/a-guide-to-building-a-personal-website-with-gatsby/</guid><pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
+&lt;p&gt;未来哪个社区更加繁荣还是要看 TC39 把 JavaScript 带向何方，是更加 Functional Programming 呢？还是更加 Imperative Programming 呢？&lt;/p&gt;</content:encoded></item><item><title><![CDATA[使用 Gatsby 搭建个人网站指南]]></title><description><![CDATA[前言 相信大部分程序员都有自己个人网站，或者是托管在各大平台上的技术博客。 大概在大一的时候我也萌生搭建个人博客的想法，最早还是比较流行自己买一个 VPS、域名，然后搭建 WordPress…]]></description><link>https://edward40.com/a-guide-to-building-a-personal-website-with-gatsby/</link><guid isPermaLink="false">https://edward40.com/a-guide-to-building-a-personal-website-with-gatsby/</guid><pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
 &lt;p&gt;相信大部分程序员都有自己个人网站，或者是托管在各大平台上的技术博客。&lt;/p&gt;
 &lt;p&gt;大概在大一的时候我也萌生搭建个人博客的想法，最早还是比较流行自己买一个 VPS、域名，然后搭建 &lt;strong&gt;WordPress&lt;/strong&gt;。不过由于没续费，东西也没妥善备份也不知道去哪里了。
 接着网络兴起&lt;strong&gt;轻博客&lt;/strong&gt;，我想着自己塔多不方便，就用了&lt;strong&gt;点点网&lt;/strong&gt;写自己的博客，在上面沉淀不少文章，然而点点网在 2016 年也关闭了。&lt;/p&gt;
@@ -612,7 +688,218 @@
 &lt;li&gt;因其灵活，对个人博客的友好度就没那么高，md 文件及文件夹需要自己建立。不像 hexo 可以 &lt;code class=&quot;language-text&quot;&gt;hexo new [layout] &amp;lt;title&amp;gt;&lt;/code&gt; 这么方便&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;总体来说，我对 Gatsby 还挺满意的。要是大家挖掘到好玩的插件、好看的主题也欢迎留言。
-最后，也欢迎大家互换友链 ➡️&lt;a href=&quot;https://sasuke40.github.io/&quot;&gt;Edward Elric&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[尝试用 Rust + Yew 写高性能前端页面]]></title><description><![CDATA[前言 看到这篇文章，可能很多人会有个疑问：“已经有 React + TypeScript 这么好的组合，为什么还想着使用 Rust 来写前端页面，不折腾吗？”
+最后，也欢迎大家互换友链 ➡️&lt;a href=&quot;https://sasuke40.github.io/&quot;&gt;Edward Elric&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[2019 年回顾总结]]></title><description><![CDATA[自我推翻自我重建，我觉得是活着的人该做的事情。 一个人要是对这个世界失去好奇心，失去求知欲，这个人已经是死的了。 —— 摘自 Zeke 201…]]></description><link>https://edward40.com/review-2019/</link><guid isPermaLink="false">https://edward40.com/review-2019/</guid><pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;自我推翻自我重建，我觉得是活着的人该做的事情。&lt;/p&gt;
+&lt;p&gt;一个人要是对这个世界失去好奇心，失去求知欲，这个人已经是死的了。&lt;/p&gt;
+&lt;p&gt;—— 摘自 Zeke&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2019 年，我从杭州阿里来到深圳腾讯工作的一年，这一年充满了感恩、迷茫、思考、转变。&lt;/p&gt;
+&lt;h1&gt;生活&lt;/h1&gt;
+&lt;p&gt;在朋友的帮助下，我顺利的在深圳安顿下来，很感谢他。&lt;/p&gt;
+&lt;p&gt;年头的时候去广州参加同学的婚礼，感觉时间过得好快。&lt;/p&gt;
+&lt;p&gt;然后还和经常一起玩吃鸡、CSGO、彩六的网友见了一面，一起吃饭、玩耍。不过后面大家还是天南地北，很多回去学校了，真希望有缘能再聚一次。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAUCAwT/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABliZKBqVEf//EABoQAAIDAQEAAAAAAAAAAAAAAAEDAAITBBH/2gAIAQEAAQUCSv2iiGWyTGZJBKruHKJ//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oACAECAQE/AW1//8QAHhAAAgEDBQAAAAAAAAAAAAAAAAESAiExIiNRgZH/2gAIAQEABj8Cnhm6YNTfRKTV+C1b8P/EABsQAQACAwEBAAAAAAAAAAAAAAEAESExQVFx/9oACAEBAAE/ISVZbqnkVDMa5PAV9mtl6BEgE2zCy1DH/9oADAMBAAIAAwAAABAjz//EABYRAQEBAAAAAAAAAAAAAAAAAAAhUf/aAAgBAwEBPxBMf//EABYRAQEBAAAAAAAAAAAAAAAAAAEQIf/aAAgBAgEBPxAcl//EAB4QAQACAgEFAAAAAAAAAAAAAAEAESExUUFhgbHB/9oACAEBAAE/EKO7msHCznEaBAOiXxOL9Bl9lAVjY0dsTCA0s9TYRQon/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;1&quot;
+        title=&quot;1&quot;
+        src=&quot;/static/bba3dc42ba9d010f2b3ac2439665e242/1c72d/1.jpg&quot;
+        srcset=&quot;/static/bba3dc42ba9d010f2b3ac2439665e242/a80bd/1.jpg 148w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/1c91a/1.jpg 295w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/1c72d/1.jpg 590w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/a8a14/1.jpg 885w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/fbd2c/1.jpg 1180w,
+/static/bba3dc42ba9d010f2b3ac2439665e242/644c5/1.jpg 1440w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;国庆的时候和家人一起去澳门玩，看了大三巴牌坊。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAABA//EABYBAQEBAAAAAAAAAAAAAAAAAAIAAf/aAAwDAQACEAMQAAABWfnti4sj/8QAGhAAAgMBAQAAAAAAAAAAAAAAAQIDERIhAP/aAAgBAQABBQKSTLK/h0M1ydyC1f/EABYRAQEBAAAAAAAAAAAAAAAAAAAREv/aAAgBAwEBPwGMP//EABYRAQEBAAAAAAAAAAAAAAAAAAASE//aAAgBAgEBPwGmj//EABkQAQADAQEAAAAAAAAAAAAAAAACESExYf/aAAgBAQAGPwKqaxP11kqf/8QAGxABAQEAAgMAAAAAAAAAAAAAAREAQVEhMZH/2gAIAQEAAT8hNLWW7t0uBT01sPL5pAfC9ZYXDxN//9oADAMBAAIAAwAAABC//wD/xAAXEQADAQAAAAAAAAAAAAAAAAAAARFB/9oACAEDAQE/EJG2H//EABcRAAMBAAAAAAAAAAAAAAAAAAABEUH/2gAIAQIBAT8QbWojT//EABsQAQEAAwADAAAAAAAAAAAAAAERACExUXGh/9oACAEBAAE/EK3DCKecVbUQqc9awk1XHKYQrhqoHzBAiEkF7N4L4ro7d5//2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;2&quot;
+        title=&quot;2&quot;
+        src=&quot;/static/e41ed86540c8420313443a57ec847934/1c72d/2.jpg&quot;
+        srcset=&quot;/static/e41ed86540c8420313443a57ec847934/a80bd/2.jpg 148w,
+/static/e41ed86540c8420313443a57ec847934/1c91a/2.jpg 295w,
+/static/e41ed86540c8420313443a57ec847934/1c72d/2.jpg 590w,
+/static/e41ed86540c8420313443a57ec847934/a8a14/2.jpg 885w,
+/static/e41ed86540c8420313443a57ec847934/fbd2c/2.jpg 1180w,
+/static/e41ed86540c8420313443a57ec847934/644c5/2.jpg 1440w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;在珠海长隆海洋王国看动物，大家都很喜欢海豹呢。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAgX/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/2gAMAwEAAhADEAAAAcumXm2HND//xAAbEAEAAgIDAAAAAAAAAAAAAAABAAIDBBEUI//aAAgBAQABBQLhYF09CO1ZjnyFezaf/8QAFREBAQAAAAAAAAAAAAAAAAAAEBH/2gAIAQMBAT8Bp//EABYRAAMAAAAAAAAAAAAAAAAAAAEQEf/aAAgBAgEBPwGFf//EABwQAAEDBQAAAAAAAAAAAAAAAAABESEQMjNBkf/aAAgBAQAGPwKHLVMakI1N9P/EABsQAAICAwEAAAAAAAAAAAAAAAERADEhQXGB/9oACAEBAAE/IcxBI1bgw6tx4gfhhZKQOFBKJsl6n//aAAwDAQACAAMAAAAQD/8A/8QAFhEBAQEAAAAAAAAAAAAAAAAAABEB/9oACAEDAQE/EIXH/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oACAECAQE/EBlf/8QAHxAAAgEEAgMAAAAAAAAAAAAAAREAMVGRoUFhgbHB/9oACAEBAAE/EKNxxQvkVy8SOZQquBe5roHlwYiCkwLPRcJSKXAHuf/Z&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;3&quot;
+        title=&quot;3&quot;
+        src=&quot;/static/a4563d93640804e9f25a4d2445955e7d/1c72d/3.jpg&quot;
+        srcset=&quot;/static/a4563d93640804e9f25a4d2445955e7d/a80bd/3.jpg 148w,
+/static/a4563d93640804e9f25a4d2445955e7d/1c91a/3.jpg 295w,
+/static/a4563d93640804e9f25a4d2445955e7d/1c72d/3.jpg 590w,
+/static/a4563d93640804e9f25a4d2445955e7d/a8a14/3.jpg 885w,
+/static/a4563d93640804e9f25a4d2445955e7d/fbd2c/3.jpg 1180w,
+/static/a4563d93640804e9f25a4d2445955e7d/644c5/3.jpg 1440w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 133.1081081081081%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAIDBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAABAAL/2gAMAwEAAhADEAAAAWmThRBuhPYuXOKN/8QAHhAAAgICAgMAAAAAAAAAAAAAAQIDEgARBBMhIzP/2gAIAQEAAQUCaTYd9DtwxPYpKcq+TzVdrJFwz6ajb+RD8//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EAB0QAAIDAAIDAAAAAAAAAAAAAAABAhEhEjEyQYH/2gAIAQEABj8CFdmIa9nidHGEU5NaSdVh9LrSn0I//8QAHBABAAICAwEAAAAAAAAAAAAAAQARIUExUWFx/9oACAEBAAE/ISxFfCLQqygdkNcPkaCtqXmKFWo7iXLbzjMuslDyMSsBfUfn2mtW3CcstTEj2f/aAAwDAQACAAMAAAAQb9//AP/EABURAQEAAAAAAAAAAAAAAAAAAAEg/9oACAEDAQE/EGP/xAAXEQADAQAAAAAAAAAAAAAAAAAAAREQ/9oACAECAQE/EKy5D//EAB0QAQADAQEBAAMAAAAAAAAAAAEAESExQZFRobH/2gAIAQEAAT8QrKtXaG/xFQMMQs7BCwDDgjesHuB9Lm6Alw0fdlCt9hT6RSYlxzwMW2VQ5arr3IvvlX6lLF9tdY6ChTbsBkAf6Z//2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;4&quot;
+        title=&quot;4&quot;
+        src=&quot;/static/5c060a92d31a51911b8452d327896e9e/1c72d/4.jpg&quot;
+        srcset=&quot;/static/5c060a92d31a51911b8452d327896e9e/a80bd/4.jpg 148w,
+/static/5c060a92d31a51911b8452d327896e9e/1c91a/4.jpg 295w,
+/static/5c060a92d31a51911b8452d327896e9e/1c72d/4.jpg 590w,
+/static/5c060a92d31a51911b8452d327896e9e/a8a14/4.jpg 885w,
+/static/5c060a92d31a51911b8452d327896e9e/47311/4.jpg 1080w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其实我不是个喜欢和家人打电话的人，但内心家人对我来说非常的重要。同时我也感恩有一个智慧的妈妈，她爱阅读、爱思考，教会我如何待人接物、为人处事。&lt;/p&gt;
+&lt;p&gt;我也努力沉下心来也读了一些书，如： 《旧制度与大革命》《1984》《学会提问：批判性思维指南》等等，渐渐也能收获阅读的乐趣。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABAAC/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAP/2gAMAwEAAhADEAAAAQbXmdSTY//EABkQAQADAQEAAAAAAAAAAAAAAAIAAQMSIf/aAAgBAQABBQKi5w4ioFnHfpzTr//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAgBAwEBPwHVf//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABsQAAIBBQAAAAAAAAAAAAAAAAARAQIQEjFB/9oACAEBAAY/AjjspbHToeUH/8QAGxAAAwADAQEAAAAAAAAAAAAAAAERITFRQYH/2gAIAQEAAT8hY1BNigYFa0RNfY43xUjAp8P/2gAMAwEAAgADAAAAEHff/8QAGBEAAwEBAAAAAAAAAAAAAAAAAAExESH/2gAIAQMBAT8Q1nDmn//EABgRAAIDAAAAAAAAAAAAAAAAAAABESFR/9oACAECAQE/EK0hn//EABwQAQEAAgIDAAAAAAAAAAAAAAERACExQXGBof/aAAgBAQABPxAaQEi0Y4CCPjfJMGm0BIa+5eIEVDeCnrLsk8ZAaGIxs9Z//9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;5&quot;
+        title=&quot;5&quot;
+        src=&quot;/static/c36d850d460a3a01f8f804b08f127400/1c72d/5.jpg&quot;
+        srcset=&quot;/static/c36d850d460a3a01f8f804b08f127400/a80bd/5.jpg 148w,
+/static/c36d850d460a3a01f8f804b08f127400/1c91a/5.jpg 295w,
+/static/c36d850d460a3a01f8f804b08f127400/1c72d/5.jpg 590w,
+/static/c36d850d460a3a01f8f804b08f127400/a8a14/5.jpg 885w,
+/static/c36d850d460a3a01f8f804b08f127400/fbd2c/5.jpg 1180w,
+/static/c36d850d460a3a01f8f804b08f127400/644c5/5.jpg 1440w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h1&gt;看过的频道&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;妈咪说 Mommy Talk&lt;/p&gt;
+&lt;p&gt;在 B 站上看，主要是科普天文、数学、物理之类的，最近讲混沌非常有意思。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;3Blue1Brown&lt;/p&gt;
+&lt;p&gt;Youtube 上看的，Grant Sanderson 从独特的视觉角度解说高等数学，也非常擅长开发，用可视化来让人快速理解数学之美。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;NiceChord&lt;/p&gt;
+&lt;p&gt;讲乐理之类的，不过 Wiwi 官大为好像是个技术宅，也经常会放一些音乐编程的视频。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;看过的电视剧&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;《致命女人》：好看&lt;/li&gt;
+&lt;li&gt;《权力的游戏》：烂尾&lt;/li&gt;
+&lt;li&gt;《Years and Years》：噱头比较大&lt;/li&gt;
+&lt;li&gt;《切尔诺贝利》&lt;/li&gt;
+&lt;li&gt;《性爱自修室》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;看过的番剧&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;《进击的巨人 第三季》：强烈推荐&lt;/li&gt;
+&lt;li&gt;《约定的梦幻岛》&lt;/li&gt;
+&lt;li&gt;《流汗吧！健身少女》&lt;/li&gt;
+&lt;li&gt;《Dr. STONE 石纪元》&lt;/li&gt;
+&lt;li&gt;《刀剑神域 Alicization 篇》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;技能&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;健身 💪&lt;/p&gt;
+&lt;p&gt;坚持了几个月，和同事一起去的，但后来健身房改造就没去（其实也是懒惰的理由）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;钢琴 🎹&lt;/p&gt;
+&lt;p&gt;其实有点荒废这个天赋，希望 2020 能坚持下来&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;煮饭 🍳&lt;/p&gt;
+&lt;p&gt;买了一套厨具，不过没怎么用，果然还是不喜欢烧菜&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;参与分享&lt;/h1&gt;
+&lt;p&gt;6 月的时候，参加 GIAC 作为讲师分享
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 133.1081081081081%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAbABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQBAgMF/8QAFgEBAQEAAAAAAAAAAAAAAAAAAgEA/9oADAMBAAIQAxAAAAFSnSjVQqBMN5Z0vCBF/8QAHRAAAgIBBQAAAAAAAAAAAAAAAQIAAxEEEiEiI//aAAgBAQABBQIerDCNtWyKqhTpwVFdkW3qDwGEyYSYJ//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAgBAwEBPwFiI//EABgRAAIDAAAAAAAAAAAAAAAAAAABECEi/9oACAECAQE/AaNDcf/EAB4QAAICAQUBAAAAAAAAAAAAAAABAhESICExQWFx/9oACAEBAAY/Aksa+DvoycuRyLRshx91f//EAB0QAQACAgIDAAAAAAAAAAAAAAEAESFBMWFRcYH/2gAIAQEAAT8hABhNuYMxRVA3yIYLwpxLMoRxnrudEVeMw6GdwRQ1UaudzzJt7n//2gAMAwEAAgADAAAAEGMH/P/EABkRAQACAwAAAAAAAAAAAAAAAAEAERAhof/aAAgBAwEBPxAWqiDQ8IYP/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAERIf/aAAgBAgEBPxBqto9YUKf/xAAaEAEAAwEBAQAAAAAAAAAAAAABABEhMUFh/9oACAEBAAE/ECnpdqt9I/BCC7X7fJmA60leVXkULQvTXTuzL0KU3YRIVamNYFql+y18jHhqiXun2UbjFHkBhmiCSnx9ifcf/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;6&quot;
+        title=&quot;6&quot;
+        src=&quot;/static/f26d0db23567dd6ad01deb52a15d2289/1c72d/6.jpg&quot;
+        srcset=&quot;/static/f26d0db23567dd6ad01deb52a15d2289/a80bd/6.jpg 148w,
+/static/f26d0db23567dd6ad01deb52a15d2289/1c91a/6.jpg 295w,
+/static/f26d0db23567dd6ad01deb52a15d2289/1c72d/6.jpg 590w,
+/static/f26d0db23567dd6ad01deb52a15d2289/a8a14/6.jpg 885w,
+/static/f26d0db23567dd6ad01deb52a15d2289/47311/6.jpg 1080w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h1&gt;思考&lt;/h1&gt;
+&lt;p&gt;其实过去的一年我生活在恐慌之中，我发现个人的成长几乎停滞不前。&lt;/p&gt;
+&lt;p&gt;我开始反思自己为什么会这样？&lt;/p&gt;
+&lt;p&gt;然后我发现了其实我是用工作麻痹自己，不肯直面 2018 的过去，失去了对自己对未来的信心。其实这并不能完全归咎于自己，不过沉迷不悟始终不是办法。&lt;/p&gt;
+&lt;p&gt;这里要感谢 Zeke，在和他聊天过程中我找到了方向：我需要的是自我推翻自我重建，保持求知欲、好奇心。&lt;/p&gt;
+&lt;h1&gt;展望&lt;/h1&gt;
+&lt;p&gt;2020 年我开始摈弃麻痹，不管多困难都要离开舒适圈。&lt;/p&gt;
+&lt;p&gt;也给自己定下了一个目标：「让自己成为有影响力的人」&lt;/p&gt;</content:encoded></item><item><title><![CDATA[尝试用 Rust + Yew 写高性能前端页面]]></title><description><![CDATA[前言 看到这篇文章，可能很多人会有个疑问：“已经有 React + TypeScript 这么好的组合，为什么还想着使用 Rust 来写前端页面，不折腾吗？”
 首先值得讨论的一点，接下来几年的前端方向有哪些？
 个人的愚见，在全栈领域必然是 serverless…]]></description><link>https://edward40.com/try-writing-fe-with-rust-yew/</link><guid isPermaLink="false">https://edward40.com/try-writing-fe-with-rust-yew/</guid><pubDate>Sun, 05 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
 &lt;p&gt;看到这篇文章，可能很多人会有个疑问：“已经有 React + TypeScript 这么好的组合，为什么还想着使用 Rust 来写前端页面，不折腾吗？”
