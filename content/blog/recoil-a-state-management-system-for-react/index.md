@@ -13,7 +13,7 @@ tags:
 
 # 前言
 
-最近在 React Europe 2020 Conference 上， facebook 内部释出一个状态管理库 [Recoil](https://recoiljs.org/) 
+最近在 React Europe 2020 Conference 上， facebook 内部释出一个状态管理库 [Recoil](https://recoiljs.org/)
 
 通过官方的宣传以及初步的使用，Recoil 在处理 shared state 上比较方便，也能做到最小度的更新来提升复杂 App 的性能。不过有趣的是，对 Recoil 的 `atom` `selector` 这些 API 设计而言，其实就是早在 47 年提出的 **Actor Model**，可谓是前端状态管理的文艺复兴。
 
@@ -21,7 +21,7 @@ tags:
 
 ## 什么是 Actor Model
 
-Actor 模型(Actor model)首先是由 Carl Hewitt 在1973定义， 由 Erlang OTP(Open Telecom Platform) 推广，其消息传递更加符合面向对象的原始意图。Actors 属于并发组件模型，通过组件方式定义并发编程范式的高级阶段，避免使用者直接接触多线程并发或线程池等基础概念。
+Actor 模型(Actor model)首先是由 Carl Hewitt 在 1973 定义， 由 Erlang OTP(Open Telecom Platform) 推广，其消息传递更加符合面向对象的原始意图。Actors 属于并发组件模型，通过组件方式定义并发编程范式的高级阶段，避免使用者直接接触多线程并发或线程池等基础概念。
 
 流行语言并发是基于多线程之间的共享内存，使用同步方法防止写争夺，Actors 使用消息模型，每个 Actors 在同一时间处理最多一个消息，可以发送消息给其他 Actors，保证了单独写原则。从而巧妙避免了多线程写争夺。
 
@@ -31,7 +31,7 @@ Actor Model 主要有几个特点：
 - 没有 Shared State：每个 Actor 各自管理自己的 state，跑在各自的 thread 上，不共享内存和 state
 - 通过消息传递：每个 Actor 有一个消息队列，类似 MailBox / Queue，接受到的消息会在此队列等待依次执行
 
-[^https://en.wikipedia.org/wiki/Actor_model]: Wikipedia Actor model
+[^https://en.wikipedia.org/wiki/actor_model]: Wikipedia Actor model
 [^http://jiangew.me/actor-model/#what-actor-model]: Actor 编程模型浅谈
 
 ## 谁使用 Actor Model
@@ -39,6 +39,7 @@ Actor Model 主要有几个特点：
 - Erlang
 - Akka
 - Vert.x
+- Actix
 - ...
 
 # Recoil 部分
@@ -64,8 +65,6 @@ Recoil 想通过一个不一样的方式来解决这些问题，主要分为 3 �
 ### Shared state
 
 有一个应用基于这样一个场景，将 List 中更新一个节点，然后对应 Canvas 中的节点也更新
-
-
 
 ![](./Recoil at React Europe 2020 00-04-55 .png)
 
@@ -97,25 +96,23 @@ Recoil 想通过一个不一样的方式来解决这些问题，主要分为 3 �
 
 如果你是 Vue 的爱好者，你可能想到了计算属性。Derived Data 确实有 computed props 的味道，具体思路是选取多个 Atom 进行计算，然后返回一个新的 state。因此在 Recoil 中设计了 `select` 这样的 API 来选取多个 Atom 进行计算。
 
-
-
 ![](./Recoil at React Europe 2020 00-14-53 .png)
 
 `select` 的设计和 Proxy 挺像的，属性上有 `get` 进行读取，有 `set` 进行设置，函数内部又有 `get`， `set` 操作 state
 
 ```js
-import {atom, selector, useRecoilState} from 'recoil';
+import { atom, selector, useRecoilState } from 'recoil'
 
 const tempFahrenheit = atom({
   key: 'tempFahrenheit',
   default: 32,
-});
+})
 
 const tempCelcius = selector({
   key: 'tempCelcius',
-  get: ({get}) => ((get(tempFahrenheit) - 32) * 5) / 9,
-  set: ({set}, newValue) => set(tempFahrenheit, (newValue * 9) / 5 + 32),
-});
+  get: ({ get }) => ((get(tempFahrenheit) - 32) * 5) / 9,
+  set: ({ set }, newValue) => set(tempFahrenheit, (newValue * 9) / 5 + 32),
+})
 ```
 
 ### App-wide observation
@@ -155,7 +152,7 @@ const counter = atom({
 function fireNodeSubscriptions(
   store: Store,
   updatedNodes: $ReadOnlySet<NodeKey>,
-  when: 'enqueue' | 'now',
+  when: 'enqueue' | 'now'
 ) {
   /*
   This is called in two conditions: When an atom is set (with 'enqueue') and
@@ -168,18 +165,18 @@ function fireNodeSubscriptions(
   const state =
     when === 'enqueue'
       ? store.getState().nextTree ?? store.getState().currentTree
-      : store.getState().currentTree;
+      : store.getState().currentTree
 
-  const dependentNodes = getDownstreamNodes(state, updatedNodes);
+  const dependentNodes = getDownstreamNodes(state, updatedNodes)
 
   for (const key of dependentNodes) {
-    (state.nodeToComponentSubscriptions.get(key) ?? []).forEach(
+    ;(state.nodeToComponentSubscriptions.get(key) ?? []).forEach(
       ([debugName, cb]) => {
         when === 'enqueue'
           ? store.getState().queuedComponentCallbacks.push(cb)
-          : cb(state);
-      },
-    );
+          : cb(state)
+      }
+    )
   }
 
   // Wake all suspended components so the right one(s) can try to re-render.
@@ -192,15 +189,15 @@ function fireNodeSubscriptions(
     'value became available, waking components',
     Array.from(updatedNodes).join(', '),
     () => {
-      const resolvers = store.getState().suspendedComponentResolvers;
-      resolvers.forEach(r => r());
-      resolvers.clear();
-    },
-  );
+      const resolvers = store.getState().suspendedComponentResolvers
+      resolvers.forEach((r) => r())
+      resolvers.clear()
+    }
+  )
 }
 ```
 
-其实 Recoil 不是 Actor Model 在前端的首次实践，2年前 PolymerLabs 就有 [actor-helpers](https://github.com/PolymerLabs/actor-helpers) 以及 [actor-boilerplate](https://github.com/PolymerLabs/actor-boilerplate) 相关的实践。不过在 React 强大的生态以及 React Hooks 的加持之下，用 Sync 的方式做到异步 state 管理和共享，同时保持交互流程、高性能的 Recoil 算是补充了一个不错的方案。
+其实 Recoil 不是 Actor Model 在前端的首次实践，2 年前 PolymerLabs 就有 [actor-helpers](https://github.com/PolymerLabs/actor-helpers) 以及 [actor-boilerplate](https://github.com/PolymerLabs/actor-boilerplate) 相关的实践。不过在 React 强大的生态以及 React Hooks 的加持之下，用 Sync 的方式做到异步 state 管理和共享，同时保持交互流程、高性能的 Recoil 算是补充了一个不错的方案。
 
 [^https://blog.techbridge.cc/2019/06/21/actor-model-in-web/]: 46 年老技術與 Web 的新火花 - Actor Model in Web
 
@@ -211,6 +208,3 @@ Recoil 刚刚释出实验版本，我想正好可以在不断更改的过程中�
 另外，其实不少人批评前端的发展就是到处借鉴，没有新的事物，像是 WPF 就有很多前端可以借鉴的地方（确实也如此）。
 
 不过在我看来，放到一个比较长的时期里，前端慢慢吸收各类后端、客户端的设计思想才产生“新”事物是很正常的发展进程。包括经常被提到的 Vue 和 React 孰优孰劣之争，Node.js 不堪大用等等话题，其实都是历史发展及其技术定位所致。可能对其他领域的看来是不新鲜，但对前端而言是语言发展（残疾而缝合的 JavaScript）、生态繁荣才有可能繁衍出这些对前端而言的新事物。
-
-
-
