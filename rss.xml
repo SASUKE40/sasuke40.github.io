@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Edward Elric's Blog]]></title><description><![CDATA[Stay Hungry Stay Foolish]]></description><link>https://edward40.com</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 18 May 2020 11:11:45 GMT</lastBuildDate><item><title><![CDATA[Recoil 一个基于 actor 模型的 React 状态管理库]]></title><description><![CDATA[前言 最近在 React Europe 2020 Conference 上， facebook 内部释出一个状态管理库 Recoil 通过官方的宣传以及初步的使用，Recoil 在处理 shared state 上比较方便，也能做到最小度的更新来提升复杂 App…]]></description><link>https://edward40.com/recoil-a-state-management-system-for-react/</link><guid isPermaLink="false">https://edward40.com/recoil-a-state-management-system-for-react/</guid><pubDate>Sat, 16 May 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Edward Elric's Blog]]></title><description><![CDATA[Stay Hungry Stay Foolish]]></description><link>https://edward40.com</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 19 May 2020 18:30:45 GMT</lastBuildDate><item><title><![CDATA[Recoil 一个基于 actor 模型的 React 状态管理库]]></title><description><![CDATA[前言 最近在 React Europe 2020 Conference 上， facebook 内部释出一个状态管理库 Recoil 通过官方的宣传以及初步的使用，Recoil 在处理 shared state 上比较方便，也能做到最小度的更新来提升复杂 App…]]></description><link>https://edward40.com/recoil-a-state-management-system-for-react/</link><guid isPermaLink="false">https://edward40.com/recoil-a-state-management-system-for-react/</guid><pubDate>Sat, 16 May 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;前言&lt;/h1&gt;
 &lt;p&gt;最近在 React Europe 2020 Conference 上， facebook 内部释出一个状态管理库 &lt;a href=&quot;https://recoiljs.org/&quot;&gt;Recoil&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;通过官方的宣传以及初步的使用，Recoil 在处理 shared state 上比较方便，也能做到最小度的更新来提升复杂 App 的性能。不过有趣的是，对 Recoil 的 &lt;code class=&quot;language-text&quot;&gt;atom&lt;/code&gt; &lt;code class=&quot;language-text&quot;&gt;selector&lt;/code&gt; 这些 API 设计而言，其实就是早在 47 年提出的 &lt;strong&gt;Actor Model&lt;/strong&gt;，可谓是前端状态管理的文艺复兴。&lt;/p&gt;
 &lt;h1&gt;Actor Model 部分&lt;/h1&gt;
@@ -1741,7 +1741,28 @@ server &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
         fastcgi_param SCRIPT_FILENAME &lt;span class=&quot;token variable&quot;&gt;$document_root&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;$fastcgi_script_name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
         include fastcgi_params&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Ubuntu安裝java8]]></title><description><![CDATA[添加 ppa 更新系統 安裝 java8 檢測是否成功 結果如下 設置環境變量 版本切換]]></description><link>https://edward40.com/java8-installation/</link><guid isPermaLink="false">https://edward40.com/java8-installation/</guid><pubDate>Sat, 23 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;ol&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Play Framework項目初始化]]></title><description><![CDATA[安裝 Activator 先下載Activator
+解壓到
+將加到環境變量 Path 中
+在你的項目目錄中執行以下命令，驗證是否安裝成功 創建 Play 項目 安裝 Eclipse 插件 Scala IDE
+在 Eclipse 中 Install New Software…]]></description><link>https://edward40.com/play-framework/</link><guid isPermaLink="false">https://edward40.com/play-framework/</guid><pubDate>Sat, 23 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;安裝 Activator&lt;/h2&gt;
+&lt;p&gt;先下載&lt;a href=&quot;http://www.typesafe.com/community/core-tools/activator-and-sbt&quot;&gt;Activator&lt;/a&gt;
+解壓到&lt;code class=&quot;language-text&quot;&gt;D:\Program Files\activator-1.3.2&lt;/code&gt;
+將&lt;code class=&quot;language-text&quot;&gt;D:\Program Files\activator-1.3.2&lt;/code&gt;加到環境變量 Path 中
+在你的項目目錄中執行以下命令，驗證是否安裝成功&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;activator -help&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;創建 Play 項目&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;activator new demo play-java
+&lt;span class=&quot;token builtin class-name&quot;&gt;cd&lt;/span&gt; demo
+activator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;安裝 Eclipse 插件&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://scala-ide.org/download/current.html&quot;&gt;Scala IDE&lt;/a&gt;
+在 Eclipse 中 Install New Software 增加宰割 Update Site，記得安裝 Play Support&lt;/p&gt;
+&lt;h2&gt;創建 Eclipse 項目&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;eclipse with-source&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;true&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;跑起來看看&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;run&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;在瀏覽器中打開&lt;a href=&quot;http://localhost:9000&quot;&gt;http://localhost:9000&lt;/a&gt;，項目就跑起來了 ╰(￣ ▽ ￣)╮&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Ubuntu安裝java8]]></title><description><![CDATA[添加 ppa 更新系統 安裝 java8 檢測是否成功 結果如下 設置環境變量 版本切換]]></description><link>https://edward40.com/java8-installation/</link><guid isPermaLink="false">https://edward40.com/java8-installation/</guid><pubDate>Sat, 23 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;ol&gt;
 &lt;li&gt;添加 ppa&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; add-apt-repository ppa:webupd8team/java&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1768,28 +1789,7 @@ Java HotSpot&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;TM&lt;
 &lt;ol start=&quot;6&quot;&gt;
 &lt;li&gt;版本切換&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; update-java-alternatives -s java-8-oracle&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Play Framework項目初始化]]></title><description><![CDATA[安裝 Activator 先下載Activator
-解壓到
-將加到環境變量 Path 中
-在你的項目目錄中執行以下命令，驗證是否安裝成功 創建 Play 項目 安裝 Eclipse 插件 Scala IDE
-在 Eclipse 中 Install New Software…]]></description><link>https://edward40.com/play-framework/</link><guid isPermaLink="false">https://edward40.com/play-framework/</guid><pubDate>Sat, 23 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;安裝 Activator&lt;/h2&gt;
-&lt;p&gt;先下載&lt;a href=&quot;http://www.typesafe.com/community/core-tools/activator-and-sbt&quot;&gt;Activator&lt;/a&gt;
-解壓到&lt;code class=&quot;language-text&quot;&gt;D:\Program Files\activator-1.3.2&lt;/code&gt;
-將&lt;code class=&quot;language-text&quot;&gt;D:\Program Files\activator-1.3.2&lt;/code&gt;加到環境變量 Path 中
-在你的項目目錄中執行以下命令，驗證是否安裝成功&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;activator -help&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;創建 Play 項目&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;activator new demo play-java
-&lt;span class=&quot;token builtin class-name&quot;&gt;cd&lt;/span&gt; demo
-activator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;安裝 Eclipse 插件&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;http://scala-ide.org/download/current.html&quot;&gt;Scala IDE&lt;/a&gt;
-在 Eclipse 中 Install New Software 增加宰割 Update Site，記得安裝 Play Support&lt;/p&gt;
-&lt;h2&gt;創建 Eclipse 項目&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;eclipse with-source&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;true&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;跑起來看看&lt;/h2&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;run&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;在瀏覽器中打開&lt;a href=&quot;http://localhost:9000&quot;&gt;http://localhost:9000&lt;/a&gt;，項目就跑起來了 ╰(￣ ▽ ￣)╮&lt;/p&gt;</content:encoded></item><item><title><![CDATA[工作心得]]></title><description><![CDATA[寫這篇文章的初衷 想想在荔枝 FM 工作接近 2 個月了，一直沒能好好總結是一個很大的問題，因此今天就來寫一些東西來回顧一下過去的工作。 工作列表 荔枝達人 HTML5 遊戲 運營後臺·標記播客庫 微信錄音 錄音指南 HTML5 程壁線下文藝店 HTML…]]></description><link>https://edward40.com/work-experience/</link><guid isPermaLink="false">https://edward40.com/work-experience/</guid><pubDate>Sat, 23 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;寫這篇文章的初衷&lt;/h1&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; update-java-alternatives -s java-8-oracle&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[工作心得]]></title><description><![CDATA[寫這篇文章的初衷 想想在荔枝 FM 工作接近 2 個月了，一直沒能好好總結是一個很大的問題，因此今天就來寫一些東西來回顧一下過去的工作。 工作列表 荔枝達人 HTML5 遊戲 運營後臺·標記播客庫 微信錄音 錄音指南 HTML5 程壁線下文藝店 HTML…]]></description><link>https://edward40.com/work-experience/</link><guid isPermaLink="false">https://edward40.com/work-experience/</guid><pubDate>Sat, 23 May 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;寫這篇文章的初衷&lt;/h1&gt;
 &lt;p&gt;想想在荔枝 FM 工作接近 2 個月了，一直沒能好好總結是一個很大的問題，因此今天就來寫一些東西來回顧一下過去的工作。&lt;/p&gt;
 &lt;h3&gt;工作列表&lt;/h3&gt;
 &lt;ul&gt;
