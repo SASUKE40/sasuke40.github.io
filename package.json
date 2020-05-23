@@ -12,7 +12,7 @@
     "@material-ui/lab": "^4.0.0-alpha.53",
     "@material-ui/styles": "^4.9.14",
     "disqus-react": "^1.0.8",
-    "gatsby": "^2.22.4",
+    "gatsby": "^2.22.9",
     "gatsby-image": "^2.4.5",
     "gatsby-plugin-feed": "^2.5.2",
     "gatsby-plugin-google-analytics": "^2.3.2",
