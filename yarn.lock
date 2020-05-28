@@ -6351,10 +6351,10 @@ gatsby-plugin-manifest@^2.4.9:
     semver "^5.7.1"
     sharp "^0.25.1"
 
-gatsby-plugin-material-ui@^2.1.8:
-  version "2.1.8"
-  resolved "https://registry.npm.taobao.org/gatsby-plugin-material-ui/download/gatsby-plugin-material-ui-2.1.8.tgz#6ff63fd2f4b187cad72863d7d47077a2f52555be"
-  integrity sha1-b/Y/0vSxh8rXKGPX1HB3ovUlVb4=
+gatsby-plugin-material-ui@^2.1.9:
+  version "2.1.9"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-material-ui/-/gatsby-plugin-material-ui-2.1.9.tgz#f0e4366f99475ba4ca4c7a6c6026c7546e25170e"
+  integrity sha512-bvfAEOugCyDgVY9ZNadnC+RP20qA/G2mMDnoj25hRf98fcTtP128s1DshoeYZF61w46Mqp6ACB+uZtrG6iWDfQ==
   dependencies:
     autoprefixer "^9.6.1"
     clean-css "^4.2.1"
