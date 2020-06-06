@@ -1,8 +1,9 @@
 ---
 title: 使用 Gatsby 搭建个人网站指南
+slug: a-guide-to-building-a-personal-website-with-gatsby
 date: 2020-01-07
 author: Edward Elric
-hero: ./result.png
+hero: ./gatsby.jpg
 tags:
   - blog
   - gatsby
