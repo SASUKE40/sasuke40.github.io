@@ -33,7 +33,7 @@ module.exports = {
         authorsPage: true,
         sources: {
           local: true,
-          // contentful: true,
+          contentful: false,
         },
       },
     },
@@ -48,10 +48,6 @@ module.exports = {
         display: `standalone`,
         icon: `src/assets/favicon.jpg`,
       },
-    },
-    {
-      resolve: `gatsby-plugin-netlify-cms`,
-      options: {},
     },
   ],
 };
