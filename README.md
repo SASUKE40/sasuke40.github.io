@@ -1,7 +1,7 @@
 # Edward Elric's Blog
 
 This is my own blog, using `Gatsby` to pre render.
-And all post are under `/content/blog` folder
+And all post are under `/content/posts` folder
 
 ## Usage
 
@@ -14,16 +14,16 @@ And all post are under `/content/blog` folder
 ### Test and Build Blog
 
 ```bash
-yarn            # install all dependencies
+npm i           # install all dependencies
 
-yarn develop    # dev mode
+npm run dev     # dev mode
 
-yarn deploy     # deploy blog      
+npm run build   # build blog      
 ```
 
 ## LICENSE
 
 ALL code using [MIT](LICENSE) LICENSE,
-with all articles(including `/node`, `/content/blog` folders) using
-[CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/)
+with all articles(including `/content/posts` folders) using
+[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 LICENSE.
