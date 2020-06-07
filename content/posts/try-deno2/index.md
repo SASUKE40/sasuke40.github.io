@@ -1,6 +1,6 @@
 ---
 title: 试玩 deno2
-plug: try-deno2
+slug: try-deno2
 author: Edward Elric
 hero: ./deno.png
 tags:

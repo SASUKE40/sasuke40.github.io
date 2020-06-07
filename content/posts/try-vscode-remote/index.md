@@ -1,6 +1,6 @@
 ---
 title: 尝试一下 VSCode Remote 开发 Node 应用
-plug: try-vscode-remote
+slug: try-vscode-remote
 author: Edward Elric
 hero: ./vscode.jpg
 tags:
