@@ -46,12 +46,14 @@ module.exports = {
         name: `Edward Elric\'s Blog`,
         short_name: `Edward`,
         start_url: `/`,
-        background_color: `#fff`,
-        theme_color: `#fff`,
-        display: `standalone`,
+        background_color: '#ffffff',
+        theme_color: '#663399',
+        display: 'minimal-ui',
         icon: `src/assets/favicon.jpg`
       }
     },
+    'gatsby-plugin-offline',
+    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
