@@ -5,6 +5,7 @@ author: Edward Elric
 hero: ./vscode.jpg
 tags:
   - VSCode
+excerpt: VSCode 的 Remote SSH 插件完美击中运维痛点，以后可以抛弃 Vim 直接在 VSCode 里面改东西，非常方便。
 date: 2019-05-17
 ---
 
