@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   siteMetadata: {
     title: "Edward Elric's Blog",
@@ -34,7 +36,7 @@ module.exports = {
         mailchimp: true,
         sources: {
           local: true,
-          contentful: false,
+          // contentful: true,
         },
       },
     },
@@ -63,5 +65,12 @@ module.exports = {
           "https://edward.us10.list-manage.com/subscribe/post?u=faa3997806ecfab79672c4208&amp;id=f12d75e448",
       },
     },
+    // {
+    //   resolve: 'gatsby-source-contentful',
+    //   options: {
+    //     spaceId: process.env.CONTENTFUL_SPACE_ID,
+    //     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+    //   },
+    // },
   ],
 };
