@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
@@ -8,22 +8,22 @@ module.exports = {
     description: `Stay Hungry Stay Foolish`,
     hero: {
       heading: `Stay Hungry Stay Foolish`,
-      maxWidth: 652,
+      maxWidth: 652
     },
     social: [
       {
         name: `twitter`,
-        url: `https://twitter.com/sasuke688848`,
+        url: `https://twitter.com/sasuke688848`
       },
       {
         name: `github`,
-        url: `https://github.com/sasuke40`,
+        url: `https://github.com/sasuke40`
       },
       {
         name: `linkedin`,
-        url: `https://www.linkedin.com/in/sasuke/`,
-      },
-    ],
+        url: `https://www.linkedin.com/in/sasuke/`
+      }
+    ]
   },
   plugins: [
     {
@@ -35,10 +35,10 @@ module.exports = {
         authorsPage: true,
         mailchimp: true,
         sources: {
-          local: true,
+          local: true
           // contentful: true,
-        },
-      },
+        }
+      }
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -49,8 +49,8 @@ module.exports = {
         background_color: `#fff`,
         theme_color: `#fff`,
         display: `standalone`,
-        icon: `src/assets/favicon.jpg`,
-      },
+        icon: `src/assets/favicon.jpg`
+      }
     },
     {
       resolve: 'gatsby-plugin-google-analytics',
@@ -59,12 +59,12 @@ module.exports = {
       }
     },
     {
-      resolve: "gatsby-plugin-mailchimp",
+      resolve: 'gatsby-plugin-mailchimp',
       options: {
         endpoint:
-          "https://edward.us10.list-manage.com/subscribe/post?u=faa3997806ecfab79672c4208&amp;id=f12d75e448",
-      },
-    },
+          'https://edward.us10.list-manage.com/subscribe/post?u=faa3997806ecfab79672c4208&amp;id=f12d75e448'
+      }
+    }
     // {
     //   resolve: 'gatsby-source-contentful',
     //   options: {
@@ -72,5 +72,5 @@ module.exports = {
     //     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
     //   },
     // },
-  ],
-};
+  ]
+}

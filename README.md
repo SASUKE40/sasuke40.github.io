@@ -18,7 +18,7 @@ npm i           # install all dependencies
 
 npm run dev     # dev mode
 
-npm run build   # build blog      
+npm run build   # build blog
 ```
 
 ## LICENSE

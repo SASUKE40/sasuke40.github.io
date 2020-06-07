@@ -10,7 +10,8 @@
   "scripts": {
     "build": "gatsby build",
     "dev": "gatsby develop",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "lint": "prettier --write **/*.md **/*.json **/*.js"
   },
   "dependencies": {
     "@narative/gatsby-theme-novela": "^0.*",

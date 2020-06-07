@@ -42,7 +42,7 @@ tags:
       var HelloMessage = React.createClass({
         render: function() {
           return <div>Hello {this.props.name}</div>
-        },
+        }
       })
 
       ReactDOM.render(<HelloMessage name="SASUKE40" />, mountNode)
@@ -106,7 +106,7 @@ tags:
         },
         render: function() {
           return <div>過去了：{this.state.secondsElapsed}秒</div>
-        },
+        }
       })
 
       ReactDOM.render(<Timer />, mountNode)
@@ -145,7 +145,7 @@ tags:
             return <li key={item.id}>{item.text}</li>
           }
           return <ul>{this.props.items.map(createItem)}</ul>
-        },
+        }
       })
       var TodoApp = React.createClass({
         getInitialState: function() {
@@ -157,7 +157,7 @@ tags:
         handleSubmit: function(e) {
           e.preventDefault()
           var nextItems = this.state.items.concat([
-            { text: this.state.text, id: Date.now() },
+            { text: this.state.text, id: Date.now() }
           ])
           var nextText = ''
           this.setState({ items: nextItems, text: nextText })
@@ -173,7 +173,7 @@ tags:
               </form>
             </div>
           )
-        },
+        }
       })
 
       ReactDOM.render(<TodoApp />, mountNode)
@@ -232,7 +232,7 @@ tags:
               />
             </div>
           )
-        },
+        }
       })
 
       ReactDOM.render(<MarkdownEditor />, mountNode)

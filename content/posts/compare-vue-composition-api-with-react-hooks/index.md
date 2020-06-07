@@ -10,9 +10,12 @@ tags:
   - React
   - React Hooks
 ---
+
 # 引言
+
 最近 [Vue 3.0](https://github.com/vuejs/vue-next) 发布了 Beta 版本，其中最引人注意的就是其 `Composition API`。而这个设计近期经常被拿来和
 `React Hooks` 进行比较，以下是两个代码片段：
+
 ```jsx
 // React
 function Component(props) {
@@ -20,6 +23,7 @@ function Component(props) {
   return <a onClick={() => setA(x => x + 1)}>{a}</a>
 }
 ```
+
 ```jsx
 // Vue 3 composition API
 function Component(props) {
@@ -28,33 +32,37 @@ function Component(props) {
   return <a onClick={setA}>{a}</a>
 }
 ```
+
 我们可以看到两者的心智模型非常不同，React 编程范式更接近于纯函数，Vue 则采取了 Reactivity 的模式。
 
 # React Hooks 的心智负担
+
 React Hooks 是在 2018 年 10 月 React Conf 的时候正式向广大开发者进行宣传，在当时看到 Dan Abramov 演讲以及现场使用 React Hooks 重构 Class Component 的时候简直惊为天人，那一刻我深深被 Function Programming 所着迷。
 然而，直到如今一年半开发者各种实践，发现 React Hooks 并没有想象中的那么美好。你现在可以在知乎、掘金等各类平台上搜寻到大量的《React Hooks 最佳实践》，这不禁让人深思：React Hooks 怎么没那么美好了？
 
 React Hooks 开发经常提及的一些问题我列举几个：
+
 1. 我该使用单个 state 变量还是多个 state 变量？
 2. deps 依赖过多，导致 Hooks 难以维护？
 3. 该不该使用 useMemo？
 
 然后基于这些问题的最佳实践，人们又总结出：
+
 1. 将完全不相关的 state 拆分为多组 state。
 2. 如果某些 state 是相互关联的，或者需要一起发生改变，就可以把它们合并为一组 state。
 3. 依赖数组依赖的值最好不要超过 3 个，否则会导致代码会难以维护。
 4. 如果发现依赖数组依赖的值过多，我们应该采取一些方法来减少它。
-    1. 去掉不必要的依赖。
-    2. 将 Hook 拆分为更小的单元，每个 Hook 依赖于各自的依赖数组。
-    3. 通过合并相关的 state，将多个依赖值聚合为一个。
-    4. 通过 setState 回调函数获取最新的 state，以减少外部依赖。
-    5. 通过 ref 来读取可变变量的值，不过需要注意控制修改它的途径。
+   1. 去掉不必要的依赖。
+   2. 将 Hook 拆分为更小的单元，每个 Hook 依赖于各自的依赖数组。
+   3. 通过合并相关的 state，将多个依赖值聚合为一个。
+   4. 通过 setState 回调函数获取最新的 state，以减少外部依赖。
+   5. 通过 ref 来读取可变变量的值，不过需要注意控制修改它的途径。
 5. 应该使用 useMemo 的场景：
-    1. 保持引用相等
-    2. 成本很高的计算
+   1. 保持引用相等
+   2. 成本很高的计算
 6. 无需使用 useMemo 的场景：
-    1. 如果返回的值是原始值： string, boolean, null, undefined, number, symbol（不包括动态声明的 Symbol），一般不需要使用 useMemo。
-    2. 仅在组件内部用到的 object、array、函数等（没有作为 props 传递给子组件），且没有用到其他 Hook 的依赖数组中，一般不需要使用 useMemo。
+   1. 如果返回的值是原始值： string, boolean, null, undefined, number, symbol（不包括动态声明的 Symbol），一般不需要使用 useMemo。
+   2. 仅在组件内部用到的 object、array、函数等（没有作为 props 传递给子组件），且没有用到其他 Hook 的依赖数组中，一般不需要使用 useMemo。
 7. Hooks、Render Props 和高阶组件都有各自的使用场景，具体使用哪一种要看实际情况。
 8. 若 Hook 类型相同，且依赖数组一致时，应该合并成一个 Hook。
 9. 自定义 Hooks 的返回值可以使用 Tuple 类型，更易于在外部重命名。如果返回的值过多，则不建议使用。
@@ -73,6 +81,7 @@ Vue 一直被人所称道的就是其开发简便，这也是隐式依赖跟踪�
 在 Vue Composition API 中，我发现官方对 Ref 和 Reactive 给出了最佳实践。可能这里就有所谓的幻灭存在，就像当年很多人不听 React 官方最佳实践，在 componentWillMount 里获取数据一样。
 
 [Ref vs. Reactive](https://composition-api.vuejs.org/#ref-vs-reactive) 章节中有如下的对比：
+
 ```js
 // style 1: separate variables
 let x = 0
@@ -96,10 +105,13 @@ function updatePosition(e) {
   pos.y = e.pageY
 }
 ```
+
 那么依赖跟踪的迷惑就此开始，因为当你对已经 reactive 的对象进行解构赋值或者赋给新值的时候，依赖跟踪就失效了。官方对这个的态度比较模糊：
+
 > 在现阶段，我们认为在 ref vs reactive 上实施最佳做法为时尚早。我们建议您从上面的两个选项中选择与您的心智模型相符的方式。我们将收集实开发场景下的用户真反馈，并最终提供有关此主题的更明确的指导。
-  
+
 # 对比两者
+
 - Vue Composition API：闭包变量、响应式的依赖追踪
 - React Hooks: 纯函数、无副作用
 

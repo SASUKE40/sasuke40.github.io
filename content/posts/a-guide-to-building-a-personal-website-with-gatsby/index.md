@@ -129,7 +129,7 @@ gatsby develop
 
       setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
     })();
-  `,
+  `
   }}
 />
 ```
@@ -151,7 +151,7 @@ gatsby develop
             width="16"
             height="16"
             role="presentation"
-            style={{pointerEvents: 'none'}}
+            style={{ pointerEvents: 'none' }}
           />
         ),
         unchecked: (
@@ -160,18 +160,18 @@ gatsby develop
             width="16"
             height="16"
             role="presentation"
-            style={{pointerEvents: 'none'}}
+            style={{ pointerEvents: 'none' }}
           />
-        ),
+        )
       }}
       checked={theme === 'dark'}
-      onChange={(e) =>
+      onChange={e =>
         window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')
       }
     />
   ) : (
-    <div style={{height: '24px'}} />
-  );
+    <div style={{ height: '24px' }} />
+  )
 }
 ```
 

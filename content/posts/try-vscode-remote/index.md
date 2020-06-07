@@ -38,7 +38,6 @@ User ubuntu
 
 ![远端文件管理](https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743887-f9d7a7df-f9f5-4599-952a-7a658117c13d.png#align=left&display=inline&height=558&originHeight=558&originWidth=720&size=0&status=done&style=none&width=720)
 
-
 ## 第四步 编写 Node 应用
 
 ![一个简单的 node 应用](https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743913-8e957743-919c-4cde-8d25-1c936268274a.png#align=left&display=inline&height=558&originHeight=558&originWidth=720&size=0&status=done&style=none&width=720)
@@ -63,6 +62,7 @@ docker images
 ![构建查看 Docker 镜像](https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743906-f9d99e10-71b5-4d15-86a1-f57560ed8092.png#align=left&display=inline&height=486&originHeight=486&originWidth=720&size=0&status=done&style=none&width=720)
 
 本地试跑镜像
+
 ```shell script
 docker run -p 3000:8080 -d edward40/node-web-app
 ```
@@ -84,7 +84,6 @@ docker push edward40/docker_web_app:tagname
 只要推送代码就会 build 出镜像
 
 ![自动化构建流程](https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743912-cfe78e3f-c1be-4f98-83b0-e235daa56acf.png#align=left&display=inline&height=456&originHeight=456&originWidth=720&size=0&status=done&style=none&width=720)
-
 
 ## 第六步 服务器上跑镜像
 
@@ -119,14 +118,16 @@ https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-dockerm
 ![12](https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743920-7b386948-9bb9-4b72-962f-df34bd871658.png#align=left&display=inline&height=558&originHeight=558&originWidth=720&size=0&status=done&style=none&width=720)
 
 需要切换别的 Linux 系统，并增加 .devcontainer.json 文件
+
 ```json
 {
-    "name": "Node.js Sample",
-    "dockerFile": "Dockerfile",
-    "appPort": 3000,
-    "extensions": []
+  "name": "Node.js Sample",
+  "dockerFile": "Dockerfile",
+  "appPort": 3000,
+  "extensions": []
 }
 ```
+
 Dockerfile 的 alpine 换成 lts 版本
 
 ```dockerfile

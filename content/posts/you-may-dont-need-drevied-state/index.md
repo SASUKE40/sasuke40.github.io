@@ -88,14 +88,14 @@ class EmailInput extends Component {
 ```javascript
 class EmailInput extends Component {
   state = {
-    email: this.props.email,
+    email: this.props.email
   }
 
   componentWillReceiveProps(nextProps) {
     // Any time props.email changes, update state.
     if (nextProps.email !== this.props.email) {
       this.setState({
-        email: nextProps.email,
+        email: nextProps.email
       })
     }
   }
@@ -166,7 +166,7 @@ Note
 class EmailInput extends Component {
   state = {
     email: this.props.defaultEmail,
-    prevPropsUserID: this.props.userID,
+    prevPropsUserID: this.props.userID
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -176,7 +176,7 @@ class EmailInput extends Component {
     if (props.userID !== state.prevPropsUserID) {
       return {
         prevPropsUserID: props.userID,
-        email: props.defaultEmail,
+        email: props.defaultEmail
       }
     }
     return null
@@ -197,7 +197,7 @@ Note
 ```javascript
 class EmailInput extends Component {
   state = {
-    email: this.props.defaultEmail,
+    email: this.props.defaultEmail
   }
 
   resetEmailForNewUser(newEmail) {
@@ -241,7 +241,7 @@ Refs 在这个确定的例子中是有用的，但通常上我们建议你保守
 ```javascript
 class Example extends Component {
   state = {
-    filterText: '',
+    filterText: ''
   }
 
   // *******************************************************
@@ -261,7 +261,7 @@ class Example extends Component {
         prevFilterText: state.filterText,
         filteredList: props.list.filter(item =>
           item.text.includes(state.filterText)
-        ),
+        )
       }
     }
     return null
@@ -294,7 +294,7 @@ class Example extends Component {
 class Example extends PureComponent {
   // State only needs to hold the current filter text value:
   state = {
-    filterText: '',
+    filterText: ''
   }
 
   handleChange = event => {

@@ -108,13 +108,13 @@ import { atom, selector, useRecoilState } from 'recoil'
 
 const tempFahrenheit = atom({
   key: 'tempFahrenheit',
-  default: 32,
+  default: 32
 })
 
 const tempCelcius = selector({
   key: 'tempCelcius',
   get: ({ get }) => ((get(tempFahrenheit) - 32) * 5) / 9,
-  set: ({ set }, newValue) => set(tempFahrenheit, (newValue * 9) / 5 + 32),
+  set: ({ set }, newValue) => set(tempFahrenheit, (newValue * 9) / 5 + 32)
 })
 ```
 
@@ -193,7 +193,7 @@ function fireNodeSubscriptions(
     Array.from(updatedNodes).join(', '),
     () => {
       const resolvers = store.getState().suspendedComponentResolvers
-      resolvers.forEach((r) => r())
+      resolvers.forEach(r => r())
       resolvers.clear()
     }
   )
