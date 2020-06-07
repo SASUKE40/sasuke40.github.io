@@ -31,6 +31,7 @@ module.exports = {
         contentAuthors: 'content/authors',
         basePath: '/',
         authorsPage: true,
+        mailchimp: true,
         sources: {
           local: true,
           contentful: false,
@@ -47,6 +48,19 @@ module.exports = {
         theme_color: `#fff`,
         display: `standalone`,
         icon: `src/assets/favicon.jpg`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: 'UA-46826341-2'
+      }
+    },
+    {
+      resolve: "gatsby-plugin-mailchimp",
+      options: {
+        endpoint:
+          "https://edward.us10.list-manage.com/subscribe/post?u=faa3997806ecfab79672c4208&amp;id=f12d75e448",
       },
     },
   ],
