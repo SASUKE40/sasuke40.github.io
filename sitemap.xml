@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url> <loc>https://edward40.com/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/page/3</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/recoil-a-state-management-system-for-react</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/compare-vue-composition-api-with-react-hooks</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/review-2019</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/a-guide-to-building-a-personal-website-with-gatsby</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/try-writing-fe-with-rust-yew</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/try-vscode-remote</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/try-deno2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/you-may-dont-need-drevied-state</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/react-official-sample-explanation</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/interview-in-guangzhou-2016</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/php-installation</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/play-framework</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/java8-installation</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/work-experience</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/authors/edward-elric</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/authors/edward-elric/page/2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://edward40.com/authors/edward-elric/page/3</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+</urlset>
