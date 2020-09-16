@@ -22,7 +22,7 @@
     "gatsby-plugin-manifest": "^2.4.28",
     "gatsby-plugin-offline": "^3.2.27",
     "gatsby-plugin-sitemap": "^2.4.12",
-    "gatsby-source-contentful": "^2.3.45",
+    "gatsby-source-contentful": "^2.3.46",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
