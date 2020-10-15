@@ -23,8 +23,8 @@
     "gatsby-plugin-offline": "^3.2.31",
     "gatsby-plugin-sitemap": "^2.4.16",
     "gatsby-source-contentful": "^2.3.52",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
   "homepage": "https://github.com/SASUKE40/sasuke.github.io#readme",
   "keywords": [
