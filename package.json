@@ -14,7 +14,7 @@
     "lint": "prettier --write **/*.md **/*.json **/*.js"
   },
   "dependencies": {
-    "@narative/gatsby-theme-novela": "^0.18.0",
+    "@narative/gatsby-theme-novela": "^0.18.2",
     "dotenv": "^8.2.0",
     "gatsby": "^2.24.80",
     "gatsby-plugin-google-analytics": "^2.3.18",
