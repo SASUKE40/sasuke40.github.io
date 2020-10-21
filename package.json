@@ -20,7 +20,7 @@
     "gatsby-plugin-google-analytics": "^2.3.18",
     "gatsby-plugin-mailchimp": "^5.2.2",
     "gatsby-plugin-manifest": "^2.4.35",
-    "gatsby-plugin-offline": "^3.2.33",
+    "gatsby-plugin-offline": "^3.2.35",
     "gatsby-plugin-sitemap": "^2.4.17",
     "gatsby-source-contentful": "^2.3.55",
     "react": "^16.14.0",
