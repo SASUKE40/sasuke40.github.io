@@ -25,6 +25,8 @@
 
 /*! https://mths.be/regenerate v1.4.1 by @mathias | MIT license */
 
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
+
 /**
 * @link https://github.com/gajus/sister for the canonical source repository
 * @license https://github.com/gajus/sister/blob/master/LICENSE BSD 3-Clause
