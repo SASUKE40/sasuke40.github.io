@@ -23,7 +23,7 @@
  * Available under the MIT license <https://github.com/bnjmnt4n/regjsgen/blob/master/LICENSE-MIT.txt>
  */
 
-/*! https://mths.be/regenerate v1.4.1 by @mathias | MIT license */
+/*! https://mths.be/regenerate v1.4.2 by @mathias | MIT license */
 
 /**
 * @link https://github.com/gajus/sister for the canonical source repository
