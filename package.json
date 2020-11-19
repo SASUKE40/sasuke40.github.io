@@ -14,17 +14,17 @@
     "lint": "prettier --write **/*.md **/*.json **/*.js"
   },
   "dependencies": {
-    "@narative/gatsby-theme-novela": "^0.18.2",
+    "@narative/gatsby-theme-novela": "^0.18.4",
     "dotenv": "^8.2.0",
-    "gatsby": "^2.24.87",
-    "gatsby-plugin-google-analytics": "^2.3.19",
+    "gatsby": "^2.26.1",
+    "gatsby-plugin-google-analytics": "^2.5.0",
     "gatsby-plugin-mailchimp": "^5.2.2",
-    "gatsby-plugin-manifest": "^2.4.35",
-    "gatsby-plugin-offline": "^3.2.37",
-    "gatsby-plugin-sitemap": "^2.4.17",
-    "gatsby-source-contentful": "^3.0.5",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "gatsby-plugin-manifest": "^2.6.1",
+    "gatsby-plugin-offline": "^3.4.0",
+    "gatsby-plugin-sitemap": "^2.6.0",
+    "gatsby-source-contentful": "^4.0.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
   "homepage": "https://github.com/SASUKE40/sasuke.github.io#readme",
   "keywords": [
