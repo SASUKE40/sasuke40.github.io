@@ -21,7 +21,7 @@
     "gatsby-plugin-mailchimp": "^5.2.2",
     "gatsby-plugin-manifest": "^2.6.1",
     "gatsby-plugin-offline": "^3.4.0",
-    "gatsby-plugin-sitemap": "^2.6.0",
+    "gatsby-plugin-sitemap": "^2.7.0",
     "gatsby-source-contentful": "^4.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
