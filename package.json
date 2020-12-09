@@ -14,15 +14,15 @@
     "lint": "prettier --write **/*.md **/*.json **/*.js"
   },
   "dependencies": {
-    "@narative/gatsby-theme-novela": "^0.18.4",
+    "@narative/gatsby-theme-novela": "^0.2.3",
     "dotenv": "^8.2.0",
-    "gatsby": "^2.27.5",
-    "gatsby-plugin-google-analytics": "^2.6.0",
+    "gatsby": "^2.28.1",
+    "gatsby-plugin-google-analytics": "^2.7.0",
     "gatsby-plugin-mailchimp": "^5.2.2",
-    "gatsby-plugin-manifest": "^2.7.0",
-    "gatsby-plugin-offline": "^3.5.0",
-    "gatsby-plugin-sitemap": "^2.7.0",
-    "gatsby-source-contentful": "^4.1.1",
+    "gatsby-plugin-manifest": "^2.8.0",
+    "gatsby-plugin-offline": "^3.6.0",
+    "gatsby-plugin-sitemap": "^2.8.0",
+    "gatsby-source-contentful": "^4.2.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
