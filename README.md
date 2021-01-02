@@ -16,7 +16,7 @@ And all post are under `/content/posts` folder
 ```bash
 npm i           # install all dependencies
 
-npm run dev     # dev mode
+npm start    # dev mode
 
 npm run build   # build blog
 ```
