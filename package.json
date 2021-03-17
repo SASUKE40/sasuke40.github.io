@@ -16,15 +16,15 @@
   "dependencies": {
     "@narative/gatsby-theme-novela": "^0.18.6",
     "dotenv": "^8.2.0",
-    "gatsby": "^2.32.3",
-    "gatsby-plugin-google-analytics": "^2.11.0",
+    "gatsby": "^3.1.0",
+    "gatsby-plugin-google-analytics": "^3.1.0",
     "gatsby-plugin-mailchimp": "^5.2.2",
-    "gatsby-plugin-manifest": "^2.12.0",
-    "gatsby-plugin-offline": "^3.10.0",
-    "gatsby-plugin-sitemap": "^2.12.0",
-    "gatsby-source-contentful": "^4.6.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "gatsby-plugin-manifest": "^3.1.0",
+    "gatsby-plugin-offline": "^4.1.0",
+    "gatsby-plugin-sitemap": "^3.1.0",
+    "gatsby-source-contentful": "^5.1.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "homepage": "https://github.com/SASUKE40/sasuke.github.io#readme",
   "keywords": [
