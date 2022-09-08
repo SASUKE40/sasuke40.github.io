@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>state management on 仕麟的博客</title><link>https://edward40.com/tags/state-management/</link><description>Recent content in state management on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 16 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/state-management/index.xml" rel="self" type="application/rss+xml"/><item><title>Recoil 一个基于 actor 模型的 React 状态管理库</title><link>https://edward40.com/posts/recoil-a-state-management-system-for-react/</link><pubDate>Sat, 16 May 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/posts/recoil-a-state-management-system-for-react/</guid><description>&lt;img src="https://edward40.com/posts/recoil-a-state-management-system-for-react/Recoil%20at%20React%20Europe%202020%2000-07-24%20.png" alt="Featured image of post Recoil 一个基于 actor 模型的 React 状态管理库" />&lt;h1 id="前言">前言&lt;/h1>
+&lt;p>最近在 React Europe 2020 Conference 上， facebook 内部释出一个状态管理库 &lt;a class="link" href="https://recoiljs.org/" target="_blank" rel="noopener"
+>Recoil&lt;/a>&lt;/p>
+&lt;p>通过官方的宣传以及初步的使用，Recoil 在处理 shared state 上比较方便，也能做到最小度的更新来提升复杂 App 的性能。不过有趣的是，对 Recoil 的 &lt;code>atom&lt;/code> &lt;code>selector&lt;/code> 这些 API 设计而言，其实就是早在 47 年提出的 &lt;strong>Actor Model&lt;/strong>，可谓是前端状态管理的文艺复兴。&lt;/p>
+&lt;h1 id="actor-model-部分">Actor Model 部分&lt;/h1>
+&lt;h2 id="什么是-actor-model">什么是 Actor Model&lt;/h2>
+&lt;p>Actor 模型(Actor model)首先是由 Carl Hewitt 在 1973 定义， 由 Erlang OTP(Open Telecom Platform) 推广，其消息传递更加符合面向对象的原始意图。Actors 属于并发组件模型，通过组件方式定义并发编程范式的高级阶段，避免使用者直接接触多线程并发或线程池等基础概念。&lt;/p>
+&lt;p>流行语言并发是基于多线程之间的共享内存，使用同步方法防止写争夺，Actors 使用消息模型，每个 Actors 在同一时间处理最多一个消息，可以发送消息给其他 Actors，保证了单独写原则。从而巧妙避免了多线程写争夺。&lt;/p>
+&lt;p>Actor Model 主要有几个特点：&lt;/p>
+&lt;ul>
+&lt;li>轻量：Actor 是系统内的一个基础单位，每个 Actor 只负责自己的工作&lt;/li>
+&lt;li>没有 Shared State：每个 Actor 各自管理自己的 state，跑在各自的 thread 上，不共享内存和 state&lt;/li>
+&lt;li>通过消息传递：每个 Actor 有一个消息队列，类似 MailBox / Queue，接受到的消息会在此队列等待依次执行&lt;/li>
+&lt;/ul>
+&lt;h2 id="谁使用-actor-model">谁使用 Actor Model&lt;/h2>
+&lt;ul>
+&lt;li>Erlang&lt;/li>
+&lt;li>Akka&lt;/li>
+&lt;li>Vert.x&lt;/li>
+&lt;li>Actix&lt;/li>
+&lt;li>&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;h1 id="recoil-部分">Recoil 部分&lt;/h1>
+&lt;h2 id="recoil-产生背景">Recoil 产生背景&lt;/h2>
+&lt;p>前端的应用越来越复杂，诸如常见的 Web 监控面板，包含各类的性能数据、节点信息、分类聚合用来进行应用分析。可以想象得到面板中包含各类的交互行为，编辑、删除、添加、将一个数据源绑定多个面板等等。除此之外，还需要对数据持久化，这样就能把 url 分享给其他人，并要确保被分享的人看到的是一致的。&lt;/p>
+&lt;p>因此开发过程中要尽量做到页面最小化更新达到高性能的目的，需要对数据流的操作更加精细。&lt;/p>
+&lt;p>![](Recoil at React Europe 2020 00-00-12 .jpg)&lt;/p>
+&lt;p>面对这样的挑战，一般会想到用一些状态管理的函数或者库，如 React 内置的 state 管理，或者 Redux。&lt;/p>
+&lt;p>Recoil 想通过一个不一样的方式来解决这些问题，主要分为 3 个方面：&lt;/p>
+&lt;ul>
+&lt;li>Flexible shared state: 在 react tree 任意的地方都能灵活共享 state，并保持高性能&lt;/li>
+&lt;li>Derived data and queries: 高效可靠地根据变化的 state 进行计算&lt;/li>
+&lt;li>App-wide state observation: time travel debugging, 支持 undo, 日志持久化&lt;/li>
+&lt;/ul>
+&lt;p>##Recoil 主要设计&lt;/p>
+&lt;h3 id="shared-state">Shared state&lt;/h3>
+&lt;p>有一个应用基于这样一个场景，将 List 中更新一个节点，然后对应 Canvas 中的节点也更新&lt;/p>
+&lt;p>![](Recoil at React Europe 2020 00-04-55 .png)&lt;/p>
+&lt;h4 id="第-1-种方式">第 1 种方式&lt;/h4>
+&lt;p>把 state 传到公共的父节点转发给 canvas 子节点，这样显然会全量 re-render&lt;/p>
+&lt;h4 id="第-2-种方式">第 2 种方式&lt;/h4>
+&lt;p>给父节点加 Provider 在子节点加 Consumer，不过每多加一个 item 就要多一层 Provider&lt;/p>
+&lt;p>![](Recoil at React Europe 2020 00-06-43 .png)&lt;/p>
+&lt;h4 id="第-3-种方式">第 3 种方式&lt;/h4>
+&lt;p>在 react tree 上创建另一个正交的 tree，把每片 item 的 state 抽出来。每个 component 都有对应单独的一片 state，当数据更新的时候对应的组件也会更新。Recoil 把 这每一片的数据称为 Atom，Atom 是可订阅可变的 state 单元。&lt;/p>
+&lt;p>![](Recoil at React Europe 2020 00-07-24 .png)&lt;/p>
+&lt;p>配合 &lt;code>useRecoilState&lt;/code> 可以使用这些 Atom，实践上对多个 item 的 Atom 可以用 memorize 进行优化，具体可以在官方文档查看，这里不赘述。&lt;/p>
+&lt;h3 id="derived-data">Derived Data&lt;/h3>
+&lt;p>有这么一个场景需要根据多个 Item Box 计算 Bounding Box&lt;/p>
+&lt;p>&lt;img src="https://edward40.com/posts/recoil-a-state-management-system-for-react/derived_data.png"
+width="581"
+height="297"
+srcset="https://edward40.com/posts/recoil-a-state-management-system-for-react/derived_data_hu49373ba536efe9ad5ffd92d070160abe_26902_480x0_resize_box_3.png 480w, https://edward40.com/posts/recoil-a-state-management-system-for-react/derived_data_hu49373ba536efe9ad5ffd92d070160abe_26902_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="195"
+data-flex-basis="469px"
+>&lt;/p>
+&lt;p>如果你是 Vue 的爱好者，你可能想到了计算属性。Derived Data 确实有 computed props 的味道，具体思路是选取多个 Atom 进行计算，然后返回一个新的 state。因此在 Recoil 中设计了 &lt;code>select&lt;/code> 这样的 API 来选取多个 Atom 进行计算。&lt;/p>
+&lt;p>![](Recoil at React Europe 2020 00-14-53 .png)&lt;/p>
+&lt;p>&lt;code>select&lt;/code> 的设计和 Proxy 挺像的，属性上有 &lt;code>get&lt;/code> 进行读取，有 &lt;code>set&lt;/code> 进行设置，函数内部又有 &lt;code>get&lt;/code>， &lt;code>set&lt;/code> 操作 state&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">atom&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">selector&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">useRecoilState&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s1">&amp;#39;recoil&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">tempFahrenheit&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">atom&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">key&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;tempFahrenheit&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">default&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">32&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">tempCelcius&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">selector&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">key&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;tempCelcius&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">get&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">({&lt;/span> &lt;span class="nx">get&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">((&lt;/span>&lt;span class="nx">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">tempFahrenheit&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">32&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">set&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">({&lt;/span> &lt;span class="nx">set&lt;/span> &lt;span class="p">},&lt;/span> &lt;span class="nx">newValue&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">tempFahrenheit&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">newValue&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">9&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">5&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">32&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="app-wide-observation">App-wide observation&lt;/h3>
+&lt;p>这个场景下需要把 url 分享给其他人，别人打开相同的链接也能看到一样的页面。&lt;/p>
+&lt;p>那么就需要 observe Atom 的变更，Recoil 使用 &lt;code>useTransactionObservation&lt;/code> 进行订阅&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">useTransactionObservation&lt;/span>&lt;span class="p">(({&lt;/span>&lt;span class="nx">atomValues&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="nx">modifiedAtoms&lt;/span>&lt;span class="p">,...}&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{}))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>另一方面，打开链接的时候也需要对输入的数据进行校验&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">counter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">atom&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">key&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;myCounter&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">default&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">validator&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">untrustedInput&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">metadata&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>##Recoil 后续&lt;/p>
+&lt;p>目前 Recoil 还属于实验阶段，不过能确定的是 Recoil 会兼容 React Concurrent Mode&lt;/p>
+&lt;h1 id="actor-model--recoil-联系">Actor Model &amp;amp; Recoil 联系&lt;/h1>
+&lt;p>通过前面提及 Recoil 的设计，可以发现两者的理念是相似的。&lt;/p>
+&lt;p>在实现的细节中 Recoil 维护了新的队列，并通过订阅、派发的机制完成消息的传递及组件的更新。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Fire or enqueue callbacks to rerender components that are subscribed to
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// nodes affected by the updatedNodes
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="nx">fireNodeSubscriptions&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">store&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">Store&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">updatedNodes&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">$ReadOnlySet&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="nx">NodeKey&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">when&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;enqueue&amp;#39;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s1">&amp;#39;now&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/*
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> This is called in two conditions: When an atom is set (with &amp;#39;enqueue&amp;#39;) and
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> when an async selector resolves (with &amp;#39;now&amp;#39;). When an atom is set, we want
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> to use the latest dependencies that may have become dependencies due to
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> earlier changes in a batch. But if an async selector happens to resolve during
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> a batch, it should use the currently rendered output, and then the end of the
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> batch will trigger any further subscriptions due to new deps in the new state.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">state&lt;/span> &lt;span class="o">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">when&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;enqueue&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="nx">store&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getState&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">nextTree&lt;/span> &lt;span class="o">??&lt;/span> &lt;span class="nx">store&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getState&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">currentTree&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">:&lt;/span> &lt;span class="nx">store&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getState&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">currentTree&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">dependentNodes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">getDownstreamNodes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">state&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">updatedNodes&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">key&lt;/span> &lt;span class="k">of&lt;/span> &lt;span class="nx">dependentNodes&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">;(&lt;/span>&lt;span class="nx">state&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">nodeToComponentSubscriptions&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">key&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">??&lt;/span> &lt;span class="p">[]).&lt;/span>&lt;span class="nx">forEach&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">([&lt;/span>&lt;span class="nx">debugName&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">cb&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">when&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;enqueue&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">?&lt;/span> &lt;span class="nx">store&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getState&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">queuedComponentCallbacks&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">push&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">cb&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">:&lt;/span> &lt;span class="nx">cb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">state&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Wake all suspended components so the right one(s) can try to re-render.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// We need to wake up components not just when some asynchronous selector
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// resolved (when === &amp;#39;now&amp;#39;), but also when changing synchronous values because
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// they may cause a selector to change from asynchronous to synchronous, in
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// which case there would be no follow-up asynchronous resolution to wake us up.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// TODO OPTIMIZATION Only wake up related downstream components
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">Tracing&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">trace&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;value became available, waking components&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">Array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">from&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">updatedNodes&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;, &amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">const&lt;/span> &lt;span class="nx">resolvers&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">store&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getState&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">suspendedComponentResolvers&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">resolvers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">forEach&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">r&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">r&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">resolvers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">clear&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>其实 Recoil 不是 Actor Model 在前端的首次实践，2 年前 PolymerLabs 就有 &lt;a class="link" href="https://github.com/PolymerLabs/actor-helpers" target="_blank" rel="noopener"
+>actor-helpers&lt;/a> 以及 &lt;a class="link" href="https://github.com/PolymerLabs/actor-boilerplate" target="_blank" rel="noopener"
+>actor-boilerplate&lt;/a> 相关的实践。不过在 React 强大的生态以及 React Hooks 的加持之下，用 Sync 的方式做到异步 state 管理和共享，同时保持交互流程、高性能的 Recoil 算是补充了一个不错的方案。&lt;/p>
+&lt;h1 id="补充">补充&lt;/h1>
+&lt;p>Recoil 刚刚释出实验版本，我想正好可以在不断更改的过程中了解前端 Actor Model 的实现方式步骤。&lt;/p>
+&lt;p>另外，其实不少人批评前端的发展就是到处借鉴，没有新的事物，像是 WPF 就有很多前端可以借鉴的地方（确实也如此）。&lt;/p>
+&lt;p>不过在我看来，放到一个比较长的时期里，前端慢慢吸收各类后端、客户端的设计思想才产生“新”事物是很正常的发展进程。包括经常被提到的 Vue 和 React 孰优孰劣之争，Node.js 不堪大用等等话题，其实都是历史发展及其技术定位所致。可能对其他领域的看来是不新鲜，但对前端而言是语言发展（残疾而缝合的 JavaScript）、生态繁荣才有可能繁衍出这些对前端而言的新事物。&lt;/p></description></item></channel></rss>
