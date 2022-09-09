@@ -32,6 +32,11 @@ links:
     website: https://dark-flames.com
     image: https://avatars.githubusercontent.com/u/15088572?v=4
 
+  - title: Jack Works
+    description: Frontend dev at Sujitech.
+    website: https://blog.jackworks.dev
+    image: https://avatars.githubusercontent.com/u/5390719?v=4
+
   - title: 叶子
     description: 这是一个非常神秘的人，因为他的 About 还没有写好（
     website: https://mskclover.com
