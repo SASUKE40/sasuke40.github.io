@@ -2,6 +2,7 @@
 title: 关于
 description: 关于
 date: 2022-09-08
+slug: about
 aliases:
   - about
   - about-me

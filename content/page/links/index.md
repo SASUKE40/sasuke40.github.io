@@ -1,5 +1,6 @@
 ---
 title: 朋友
+slug: friends
 links:
   - title: Phosphorus
     description: CATs and cats 🐱 lover, amateur photographer 📷🌌 Interested in Indo-European Languages 🌍 and related histories & cultures 📚 Currently working on browser security 🌐 and JIT issues
