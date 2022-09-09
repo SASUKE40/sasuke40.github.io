@@ -7,6 +7,8 @@ image: react.png
 tags:
   - MVVM
   - React
+categories:
+  - Frontend
 ---
 
 # 前言

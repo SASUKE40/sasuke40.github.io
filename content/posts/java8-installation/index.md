@@ -7,6 +7,8 @@ author: Edward Elric
 tags:
   - java
   - Ubuntu
+categories:
+  - Backend
 ---
 
 1. 添加 ppa

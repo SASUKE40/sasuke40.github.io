@@ -6,6 +6,8 @@ author: Edward Elric
 image: play.jpg
 tags:
   - Play Framework
+categories:
+  - Backend
 ---
 
 ## 安裝 Activator

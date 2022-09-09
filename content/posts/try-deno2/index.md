@@ -6,6 +6,8 @@ image: deno.png
 tags:
   - deno
 date: 2018-06-28
+categories:
+  - Frontend
 ---
 
 # 前言

@@ -6,6 +6,8 @@ image: react-derived-state.jpg
 tags:
   - React
 date: 2018-06-15
+categories:
+  - Frontend
 ---
 
 React 16.4 包含了一个  [getDerivedStateFromProps 的 bugfix](https://link.zhihu.com/?target=https%3A//reactjs.org/blog/2018/05/23/react-v-16-4.html%23bugfix-for-getderivedstatefromprops)，这个 bug 导致一些 React 组件潜在的 bug 稳定复现。这个版本暴露了个案例，当你的应用正在使用反模式构建，则将会在此次修复后可能无法工作，我们对这个改动感到抱歉。在本文中，我们将阐述一些通常的使用 Derived State 的反模式以及相应的解决替代方案。

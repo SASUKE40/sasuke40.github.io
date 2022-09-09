@@ -7,6 +7,8 @@ image: php.png
 tags:
   - php
   - Ubuntu
+categories:
+  - Backend
 ---
 
 1. 安装 apt 源管理工具、添加 nginx 和 php 的安装源

@@ -8,6 +8,8 @@ tags:
   - blog
   - gatsby
   - personal website
+categories:
+  - Frontend
 ---
 
 # 前言

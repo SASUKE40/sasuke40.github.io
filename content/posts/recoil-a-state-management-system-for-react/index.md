@@ -12,6 +12,8 @@ tags:
   - actor
   - state management
   - facebook
+categories:
+  - Frontend
 ---
 
 # 前言

@@ -8,6 +8,8 @@ tags:
   - 工作
   - 心得
   - 荔枝FM
+categories:
+  - Job
 ---
 
 # 寫這篇文章的初衷

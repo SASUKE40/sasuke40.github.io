@@ -8,6 +8,8 @@ image: 1.jpeg
 tags:
   - 总结
   - 回顾
+categories:
+  - Life
 ---
 
 > 自我推翻自我重建，我觉得是活着的人该做的事情。

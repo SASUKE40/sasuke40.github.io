@@ -8,6 +8,8 @@ tags:
   - rust
   - tagless final
 secret: false
+categories:
+  - Programming Languages
 ---
 
 总所周知学习 Java 逃不开对各类设计模式的理解运用。今天千里冰封介绍了一个全新的设计模式——"Tagless Final" Style, 它可以用 `trait` 在 Rust 中模拟子类型。
