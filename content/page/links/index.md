@@ -37,8 +37,13 @@ links:
     website: https://blog.jackworks.dev
     image: https://avatars.githubusercontent.com/u/5390719?v=4
 
+  - title: QuantumAlgorithm
+    description: QuantumAlgorithm，穆罕默德的子孙，日月的兄弟，上帝的亲孙和代言人，马其顿、巴比伦、耶路撒冷、上下埃及等王国的统治者，帝中之帝，万王之王，从未失败的超凡骑士，耶稣基督神墓的坚定守护者，真主亲选的笃信者，穆斯林们的希望和慰藉，基督徒的伟大守护者 QuantumAlgorithm
+    website: https://qamoe.cyou
+    image: qa.png
+
   - title: 叶子
-    description: 这是一个非常神秘的人，因为他的 About 还没有写好（
+    description: 靡不有初，鲜克有终
     website: https://mskclover.com
     image: https://avatars.githubusercontent.com/u/58132833?v=4
 
