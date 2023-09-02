@@ -58,7 +58,7 @@ links:
     image: https://avatars.githubusercontent.com/u/69753389?v=4
 
   - title: Desvl
-    description:
+    description: A blog mainly on graduate mathematics.
     website: https://desvl.xyz
     image: https://avatars.githubusercontent.com/u/40477748?v=4
 
