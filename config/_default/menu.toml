@@ -1,0 +1,40 @@
+# Configure main menu and social menu
+#[[main]]
+#identifier = "home"
+#name = "Home"
+#url = "/"
+#[main.params]
+#icon = "home"
+#newtab = true
+
+[[social]]
+identifier = "github"
+name = "GitHub"
+url = "https://github.com/sasuke40"
+
+[social.params]
+icon = "brand-github"
+
+[[social]]
+identifier = "twitter"
+name = "Twitter"
+url = "https://twitter.com/edward40e"
+
+[social.params]
+icon = "brand-twitter"
+
+[[social]]
+identifier = "telegram"
+name = "Telegram"
+url = "https://t.me/edward40"
+
+[social.params]
+icon = "brand-telegram"
+
+[[social]]
+identifier = "gmail"
+name = "Gmail"
+url = "mailto:sasuke688848@gmail.com"
+
+[social.params]
+icon = "brand-gmail"
