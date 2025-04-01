@@ -1,277 +1,132 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yew on 仕麟的博客</title><link>https://edward40.com/tags/yew/</link><description>Recent content in Yew on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 05 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/yew/index.xml" rel="self" type="application/rss+xml"/><item><title>尝试用 Rust + Yew 写高性能前端页面</title><link>https://edward40.com/posts/try-writing-fe-with-rust-yew/</link><pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/posts/try-writing-fe-with-rust-yew/</guid><description>&lt;img src="https://edward40.com/posts/try-writing-fe-with-rust-yew/yew.jpg" alt="Featured image of post 尝试用 Rust + Yew 写高性能前端页面" />&lt;h1 id="前言">前言&lt;/h1>
-&lt;p>看到这篇文章，可能很多人会有个疑问：“已经有 React + TypeScript 这么好的组合，为什么还想着使用 Rust 来写前端页面，不折腾吗？”
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yew on 仕麟的博客</title><link>https://edward40.com/tags/yew/</link><description>Recent content in Yew on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 05 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/yew/index.xml" rel="self" type="application/rss+xml"/><item><title>尝试用 Rust + Yew 写高性能前端页面</title><link>https://edward40.com/p/try-writing-fe-with-rust-yew/</link><pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/p/try-writing-fe-with-rust-yew/</guid><description>&lt;img src="https://edward40.com/p/try-writing-fe-with-rust-yew/yew.jpg" alt="Featured image of post 尝试用 Rust + Yew 写高性能前端页面" />&lt;h1 id="前言">前言
+&lt;/h1>&lt;p>看到这篇文章，可能很多人会有个疑问：“已经有 React + TypeScript 这么好的组合，为什么还想着使用 Rust 来写前端页面，不折腾吗？”
 首先值得讨论的一点，接下来几年的前端方向有哪些？
 个人的愚见，在全栈领域必然是 serverless，我在业务开发中已经尝到甜头，高效、简便、心智负担很低了；而在 Web 领域，由于 2019 年 12 月 5 日— 万维网联盟（W3C）宣布 WebAssembly 核心规范成为正式标准，WASM 势必它的影响力会逐步提升。
 WASM 的框架 / 库的选择已经比较丰富了，如：C# + Blazor、Go + Vugu、Rust + Yew 等等。
 可能有人会问，为什么不能使用 TypeScript / JavaScript 来编译到 WASM，归根结底是因为 WASM 要求语言必须是静态强类型。当然可以魔改 TypeScript / JavaScript 做到这一点，例如 AssemblyScript / TurboScript 就是如此在 TypeScript / JavaScript 上做静态规范的。与其如此魔改，我个人觉得倒不如大大方方的使用静态强类型语言来编译到 WASM，反正魔改后也无法共享原有的生态。
 那么为什么选择 Rust 而不是其他的诸如 Go、C#、C / C++ 呢？这个确实没有很有说服力的理由，只是出于个人的技术偏好，或者说是受到 RY 使用 Rust 实现 Deno 的鼓舞吧。&lt;/p>
-&lt;h1 id="准备">准备&lt;/h1>
-&lt;h2 id="环境陈述">环境陈述&lt;/h2>
-&lt;p>我使用的是 macOS，很多人自然会想到使用 homebrew 来完成 Rust 环境 setup。一开始我也是这么做的，不过会遇到下面问题：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">error&lt;span class="o">[&lt;/span>E0463&lt;span class="o">]&lt;/span>: can&lt;span class="err">&amp;#39;&lt;/span>t find crate &lt;span class="k">for&lt;/span> &lt;span class="sb">`&lt;/span>std&lt;span class="sb">`&lt;/span> &lt;span class="p">|&lt;/span> &lt;span class="o">=&lt;/span> note: the &lt;span class="sb">`&lt;/span>wasm32-unknown-unknown&lt;span class="sb">`&lt;/span> target may not be installed
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>最后还是走官方推荐的方式解决的。&lt;/p>
-&lt;h2 id="rust-installation">Rust Installation&lt;/h2>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">curl --proto &lt;span class="s1">&amp;#39;=https&amp;#39;&lt;/span> --tlsv1.2 -sSf https://sh.rustup.rs &lt;span class="p">|&lt;/span> sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="yew-installation">Yew Installation&lt;/h2>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">cargo install wasm-pack
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cargo install cargo-web
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;img src="https://user-images.githubusercontent.com/3114495/71768267-99f34400-2f4f-11ea-927f-9f919876c04f.png"
+&lt;h1 id="准备">准备
+&lt;/h1>&lt;h2 id="环境陈述">环境陈述
+&lt;/h2>&lt;p>我使用的是 macOS，很多人自然会想到使用 homebrew 来完成 Rust 环境 setup。一开始我也是这么做的，不过会遇到下面问题：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>error&lt;span style="color:#f92672">[&lt;/span>E0463&lt;span style="color:#f92672">]&lt;/span>: can&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>t find crate &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#e6db74">`&lt;/span>std&lt;span style="color:#e6db74">`&lt;/span> | &lt;span style="color:#f92672">=&lt;/span> note: the &lt;span style="color:#e6db74">`&lt;/span>wasm32-unknown-unknown&lt;span style="color:#e6db74">`&lt;/span> target may not be installed
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后还是走官方推荐的方式解决的。&lt;/p>
+&lt;h2 id="rust-installation">Rust Installation
+&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>curl --proto &lt;span style="color:#e6db74">&amp;#39;=https&amp;#39;&lt;/span> --tlsv1.2 -sSf https://sh.rustup.rs | sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="yew-installation">Yew Installation
+&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>cargo install wasm-pack
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cargo install cargo-web
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://user-images.githubusercontent.com/3114495/71768267-99f34400-2f4f-11ea-927f-9f919876c04f.png"
 loading="lazy"
 >&lt;/p>
 &lt;p>&lt;img src="https://user-images.githubusercontent.com/3114495/71768269-9a8bda80-2f4f-11ea-8e2f-4fba76bfd7fd.png"
 loading="lazy"
 >&lt;/p>
-&lt;h1 id="上手">上手&lt;/h1>
-&lt;h2 id="一些说明">一些说明&lt;/h2>
-&lt;p>Rust 本身就能实现编译到 WASM，使用 Yew 框架的原因就如其官网宣传：只是为了方便前端组件整合，以及对 JavaScript 互通性的考量。&lt;/p>
-&lt;h2 id="项目初始化">项目初始化&lt;/h2>
-&lt;p>这里不采用官网提供的参考，因为示例过于简单，有些脱离真正应用场景。下面的步骤是我个人认为比较接近真实开发的状态，相关源码我也放到 GitHub 供大家玩耍 ➡️https://github.com/SASUKE40/yew-starter&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git clone --depth&lt;span class="o">=&lt;/span>&lt;span class="m">1&lt;/span> https://github.com/SASUKE40/yew-starter.git &amp;lt;project_name&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="目录结构">目录结构&lt;/h2>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── Cargo.lock
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── Cargo.toml
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── LICENSE
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── README.md
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── index.html
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── index.js
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── package-lock.json
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── package.json
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── src
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── app.rs
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └── lib.rs
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>这里面最重要的就是 &lt;code>Cargo.toml&lt;/code> 了，其中最关键的依赖如下：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">lib&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">crate-type&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;cdylib&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">dependencies&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">wasm-bindgen&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;0.2&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">yew&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;0.10.0&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;code>cdylib&lt;/code>  是用于配置构建 C interoperability(C FFI)，&lt;code>wasm-bindgen&lt;/code> 依赖是用于 WASM 模块和 JavaScript 之间的交互粘合。&lt;/p>
-&lt;h2 id="加载-wasm-以及-bind-的过程">加载 WASM 以及 bind 的过程&lt;/h2>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;span class="lnt">9
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-rust" data-lang="rust">&lt;span class="line">&lt;span class="cl">&lt;span class="k">mod&lt;/span> &lt;span class="nn">app&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">use&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">wasm_bindgen&lt;/span>::&lt;span class="n">prelude&lt;/span>::&lt;span class="o">*&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="cp">#[wasm_bindgen]&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">pub&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">fn&lt;/span> &lt;span class="nf">run_app&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="w"> &lt;/span>-&amp;gt; &lt;span class="nb">Result&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="p">(),&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">JsValue&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">yew&lt;/span>::&lt;span class="n">start_app&lt;/span>::&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">app&lt;/span>::&lt;span class="n">App&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">();&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nb">Ok&lt;/span>&lt;span class="p">(())&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>在需要导出 Rust 函数到 JavaScript 中，只需要在函数方法上注释 &lt;code>#[wasm_bindgen]&lt;/code> 即可，接着在 js 文件中导入使用&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">run_app&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s1">&amp;#39;./lib&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">run_app&lt;/span>&lt;span class="p">()&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="构建套件">构建套件&lt;/h2>
-&lt;p>使用 Parcel 是最方便的，开箱即用。既可以直接 import rs，也可以 import wasm。
+&lt;h1 id="上手">上手
+&lt;/h1>&lt;h2 id="一些说明">一些说明
+&lt;/h2>&lt;p>Rust 本身就能实现编译到 WASM，使用 Yew 框架的原因就如其官网宣传：只是为了方便前端组件整合，以及对 JavaScript 互通性的考量。&lt;/p>
+&lt;h2 id="项目初始化">项目初始化
+&lt;/h2>&lt;p>这里不采用官网提供的参考，因为示例过于简单，有些脱离真正应用场景。下面的步骤是我个人认为比较接近真实开发的状态，相关源码我也放到 GitHub 供大家玩耍 ➡️https://github.com/SASUKE40/yew-starter&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git clone --depth&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> https://github.com/SASUKE40/yew-starter.git &amp;lt;project_name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="目录结构">目录结构
+&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── Cargo.lock
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── Cargo.toml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── LICENSE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── README.md
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── index.html
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── index.js
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── package-lock.json
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── package.json
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── src
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── app.rs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── lib.rs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里面最重要的就是 &lt;code>Cargo.toml&lt;/code> 了，其中最关键的依赖如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#a6e22e">lib&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">crate-type&lt;/span> = [&lt;span style="color:#e6db74">&amp;#34;cdylib&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#a6e22e">dependencies&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">wasm-bindgen&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;0.2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">yew&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;0.10.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>cdylib&lt;/code>  是用于配置构建 C interoperability(C FFI)，&lt;code>wasm-bindgen&lt;/code> 依赖是用于 WASM 模块和 JavaScript 之间的交互粘合。&lt;/p>
+&lt;h2 id="加载-wasm-以及-bind-的过程">加载 WASM 以及 bind 的过程
+&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">mod&lt;/span> app;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">use&lt;/span> wasm_bindgen::prelude::&lt;span style="color:#f92672">*&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#[wasm_bindgen]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">pub&lt;/span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">run_app&lt;/span>() -&amp;gt; Result&lt;span style="color:#f92672">&amp;lt;&lt;/span>(), JsValue&lt;span style="color:#f92672">&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> yew::start_app::&lt;span style="color:#f92672">&amp;lt;&lt;/span>app::App&lt;span style="color:#f92672">&amp;gt;&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Ok(())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在需要导出 Rust 函数到 JavaScript 中，只需要在函数方法上注释 &lt;code>#[wasm_bindgen]&lt;/code> 即可，接着在 js 文件中导入使用&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">import&lt;/span> { &lt;span style="color:#a6e22e">run_app&lt;/span> } &lt;span style="color:#a6e22e">from&lt;/span> &lt;span style="color:#e6db74">&amp;#39;./lib&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">run_app&lt;/span>()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="构建套件">构建套件
+&lt;/h2>&lt;p>使用 Parcel 是最方便的，开箱即用。既可以直接 import rs，也可以 import wasm。
 &lt;img src="https://user-images.githubusercontent.com/3114495/71775834-453ce100-2fc2-11ea-8c66-27f19c0b8c98.png"
 loading="lazy"
 alt="image"
 >
 我这里用了 &lt;code>parcel-plugin-wasm.rs&lt;/code> 插件完成 Cargo loader 的工作，和上述 import rs 的方式不同：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">run_app&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s1">&amp;#39;./Cargo.toml&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">run_app&lt;/span>&lt;span class="p">()&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="yew-组件编写体验">Yew 组件编写体验&lt;/h2>
-&lt;p>Yew 框架使用 &lt;code>html!&lt;/code> macro 来生成 HTML&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-rust" data-lang="rust">&lt;span class="line">&lt;span class="cl">&lt;span class="k">impl&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Component&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">for&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">App&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">type&lt;/span> &lt;span class="nc">Message&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Msg&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">type&lt;/span> &lt;span class="nc">Properties&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">();&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">fn&lt;/span> &lt;span class="nf">create&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">_&lt;/span>: &lt;span class="nc">Self&lt;/span>::&lt;span class="n">Properties&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">_&lt;/span>: &lt;span class="nc">ComponentLink&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="bp">Self&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>-&amp;gt; &lt;span class="nc">Self&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">App&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">fn&lt;/span> &lt;span class="nf">update&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="k">mut&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">_msg&lt;/span>: &lt;span class="nc">Self&lt;/span>::&lt;span class="n">Message&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>-&amp;gt; &lt;span class="nc">ShouldRender&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">fn&lt;/span> &lt;span class="nf">view&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>-&amp;gt; &lt;span class="nc">Html&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="bp">Self&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="fm">html!&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;Hello world!&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>模板中可以使用 &lt;code>html! { &amp;quot;Hello, World&amp;quot; }&lt;/code> 这样的方式包裹文本或变量，这和 jsx 比较类似。
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">import&lt;/span> { &lt;span style="color:#a6e22e">run_app&lt;/span> } &lt;span style="color:#a6e22e">from&lt;/span> &lt;span style="color:#e6db74">&amp;#39;./Cargo.toml&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">run_app&lt;/span>()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="yew-组件编写体验">Yew 组件编写体验
+&lt;/h2>&lt;p>Yew 框架使用 &lt;code>html!&lt;/code> macro 来生成 HTML&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">impl&lt;/span> Component &lt;span style="color:#66d9ef">for&lt;/span> App {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Message&lt;/span> &lt;span style="color:#f92672">=&lt;/span> Msg;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Properties&lt;/span> &lt;span style="color:#f92672">=&lt;/span> ();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">create&lt;/span>(_: &lt;span style="color:#a6e22e">Self&lt;/span>::Properties, _: &lt;span style="color:#a6e22e">ComponentLink&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>Self&lt;span style="color:#f92672">&amp;gt;&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> App {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">update&lt;/span>(&lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#66d9ef">mut&lt;/span> self, _msg: &lt;span style="color:#a6e22e">Self&lt;/span>::Message) -&amp;gt; &lt;span style="color:#a6e22e">ShouldRender&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">view&lt;/span>(&lt;span style="color:#f92672">&amp;amp;&lt;/span>self) -&amp;gt; &lt;span style="color:#a6e22e">Html&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>Self&lt;span style="color:#f92672">&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> html! {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>p&lt;span style="color:#f92672">&amp;gt;&lt;/span>{ &lt;span style="color:#e6db74">&amp;#34;Hello world!&amp;#34;&lt;/span> }&lt;span style="color:#f92672">&amp;lt;/&lt;/span>p&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>模板中可以使用 &lt;code>html! { &amp;quot;Hello, World&amp;quot; }&lt;/code> 这样的方式包裹文本或变量，这和 jsx 比较类似。
 事件绑定、条件、循环也都是类似的，大同小异：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;span class="lnt">23
-&lt;/span>&lt;span class="lnt">24
-&lt;/span>&lt;span class="lnt">25
-&lt;/span>&lt;span class="lnt">26
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-rust" data-lang="rust">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 点击事件
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="fm">html!&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">onclick&lt;/span>&lt;span class="o">=|&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">Msg&lt;/span>::&lt;span class="n">Click&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;Click Me!&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c1">// 条件渲染
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="fm">html!&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">if&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">show_link&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="fm">html!&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://example.com&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s">&amp;#34;Link&amp;#34;&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">else&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="fm">html!&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="c1">// 迭代渲染
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="fm">html!&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;item-list&amp;#34;&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">for&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">props&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">items&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">iter&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">renderItem&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h1 id="效果">效果&lt;/h1>
-&lt;p>Navigate to &lt;a class="link" href="https://yew-starter.netlify.com/" target="_blank" rel="noopener"
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 点击事件
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>html!{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>button onclick&lt;span style="color:#f92672">=|&lt;/span>_&lt;span style="color:#f92672">|&lt;/span> Msg::Click&lt;span style="color:#f92672">&amp;gt;&lt;/span>{ &lt;span style="color:#e6db74">&amp;#34;Click Me!&amp;#34;&lt;/span> }&lt;span style="color:#f92672">&amp;lt;/&lt;/span>button&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 条件渲染
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>html! {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>div&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> show_link {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> html! {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>a href&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;https://example.com&amp;#34;&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>{&lt;span style="color:#e6db74">&amp;#34;Link&amp;#34;&lt;/span>}&lt;span style="color:#f92672">&amp;lt;/&lt;/span>a&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> html! {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;/&lt;/span>div&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 迭代渲染
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>html! {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>ul class&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;item-list&amp;#34;&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#66d9ef">for&lt;/span> self.props.items.iter().map(renderItem) }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;/&lt;/span>ul&lt;span style="color:#f92672">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="效果">效果
+&lt;/h1>&lt;p>Navigate to &lt;a class="link" href="https://yew-starter.netlify.com/" target="_blank" rel="noopener"
 >https://yew-starter.netlify.com/&lt;/a>
 &lt;img src="https://user-images.githubusercontent.com/3114495/71775897-ffcce380-2fc2-11ea-85f8-c3fbae3099e2.png"
 loading="lazy"
 alt="image"
 >
 实际上 WASM 没有大家相信的那么“便携小巧”，WASM 吃掉的体积有 50kb。&lt;/p>
-&lt;h1 id="总结">总结&lt;/h1>
-&lt;p>其优势：&lt;/p>
+&lt;h1 id="总结">总结
+&lt;/h1>&lt;p>其优势：&lt;/p>
 &lt;ul>
 &lt;li>WebAssembly 在桌面客户端移植到 Web 不可或缺&lt;/li>
 &lt;li>作为胶水包存在，如某面包姐姐最近就在尝试 Rust 2 WASM(CPP) 2 Node.js

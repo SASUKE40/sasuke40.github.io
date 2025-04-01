@@ -1,123 +1,63 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>gatsby on 仕麟的博客</title><link>https://edward40.com/tags/gatsby/</link><description>Recent content in gatsby on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 07 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/gatsby/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Gatsby 搭建个人网站指南</title><link>https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/</link><pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/</guid><description>&lt;img src="https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/gatsby.jpg" alt="Featured image of post 使用 Gatsby 搭建个人网站指南" />&lt;h1 id="前言">前言&lt;/h1>
-&lt;p>相信大部分程序员都有自己个人网站，或者是托管在各大平台上的技术博客。&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gatsby on 仕麟的博客</title><link>https://edward40.com/tags/gatsby/</link><description>Recent content in Gatsby on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 07 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/gatsby/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Gatsby 搭建个人网站指南</title><link>https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/</link><pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/</guid><description>&lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/gatsby.jpg" alt="Featured image of post 使用 Gatsby 搭建个人网站指南" />&lt;h1 id="前言">前言
+&lt;/h1>&lt;p>相信大部分程序员都有自己个人网站，或者是托管在各大平台上的技术博客。&lt;/p>
 &lt;p>大概在大一的时候我也萌生搭建个人博客的想法，最早还是比较流行自己买一个 VPS、域名，然后搭建 &lt;strong>WordPress&lt;/strong>。不过由于没续费，东西也没妥善备份也不知道去哪里了。
 接着网络兴起&lt;strong>轻博客&lt;/strong>，我想着自己塔多不方便，就用了&lt;strong>点点网&lt;/strong>写自己的博客，在上面沉淀不少文章，然而点点网在 2016 年也关闭了。&lt;/p>
 &lt;p>自建和博客平台都不靠谱，我便转向了 &lt;strong>GitHub Pages&lt;/strong>，正好那一阵流行用 &lt;code>hexo&lt;/code> 生成静态博客站点，于是就搭建了一个放了些文章。其实放到现在来看主题还是挺好看的，不过由于我没有备份的良好习惯，有几篇文章的 md 文件被我弄丢了。&lt;/p>
 &lt;p>因此，这次我把整个站点备份了一下（学乖了），并在上面盖新的个人网站。因为比较熟悉 React 的缘故，这次用的是 &lt;code>Gatsby&lt;/code> 进行搭建。&lt;/p>
-&lt;h1 id="准备工作">准备工作&lt;/h1>
-&lt;ol>
+&lt;h1 id="准备工作">准备工作
+&lt;/h1>&lt;ol>
 &lt;li>安装 Gatsby CLI&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">npm install -g gatsby-cli
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="2">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>npm install -g gatsby-cli
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>创建项目&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">gatsby new
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>目录结构如下：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── LICENSE
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── README.md
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── content
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── gatsby-browser.js
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── gatsby-config.js
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── gatsby-node.js
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── node_modules
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── package-lock.json
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── package.json
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── src
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── static
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="3">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>gatsby new
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>目录结构如下：&lt;/p>
+&lt;pre tabindex="0">&lt;code>.
+├── LICENSE
+├── README.md
+├── content
+├── gatsby-browser.js
+├── gatsby-config.js
+├── gatsby-node.js
+├── node_modules
+├── package-lock.json
+├── package.json
+├── src
+└── static
+&lt;/code>&lt;/pre>&lt;ol start="3">
 &lt;li>本地开发&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">gatsby develop
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="4">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>gatsby develop
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>常用的插件&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-plugin-feed&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^2.3.25&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-plugin-google-analytics&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^2.1.31&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-plugin-manifest&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^2.2.34&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-plugin-offline&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^3.0.30&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-plugin-react-helmet&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^3.1.18&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-plugin-sharp&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^2.3.10&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-plugin-typography&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^2.3.20&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-remark-copy-linked-files&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^2.1.33&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-remark-images&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^3.1.39&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-remark-prismjs&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^3.3.28&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-remark-responsive-iframe&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^2.2.30&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-remark-smartypants&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^2.1.19&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-source-filesystem&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^2.1.43&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-transformer-remark&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^2.6.45&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;gatsby-transformer-sharp&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="s2">&amp;#34;^2.3.9&amp;#34;&lt;/span>&lt;span class="err">,&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h1 id="配置及开发">配置及开发&lt;/h1>
-&lt;h2 id="配置">配置&lt;/h2>
-&lt;p>首先最重要的就是 &lt;code>gatsby-config.js&lt;/code> 文件了，我们需要在里面启用上述安装的插件，配置可以到 &lt;a class="link" href="https://github.com/SASUKE40/sasuke40.github.io" target="_blank" rel="noopener"
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-plugin-feed&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^2.3.25&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-plugin-google-analytics&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^2.1.31&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-plugin-manifest&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^2.2.34&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-plugin-offline&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^3.0.30&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-plugin-react-helmet&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^3.1.18&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-plugin-sharp&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^2.3.10&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-plugin-typography&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^2.3.20&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-remark-copy-linked-files&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^2.1.33&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-remark-images&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^3.1.39&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-remark-prismjs&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^3.3.28&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-remark-responsive-iframe&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^2.2.30&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-remark-smartypants&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^2.1.19&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-source-filesystem&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^2.1.43&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-transformer-remark&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^2.6.45&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;gatsby-transformer-sharp&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;^2.3.9&amp;#34;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">,&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="配置及开发">配置及开发
+&lt;/h1>&lt;h2 id="配置">配置
+&lt;/h2>&lt;p>首先最重要的就是 &lt;code>gatsby-config.js&lt;/code> 文件了，我们需要在里面启用上述安装的插件，配置可以到 &lt;a class="link" href="https://github.com/SASUKE40/sasuke40.github.io" target="_blank" rel="noopener"
 >sasuke40.githu.io&lt;/a> 查看。&lt;/p>
 &lt;p>还有得去 &lt;a class="link" href="https://analytics.google.com/" target="_blank" rel="noopener"
 >google analytics&lt;/a> 配置一下记录站点的访问信息。
-&lt;img src="https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/google_analytics.png"
+&lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics.png"
 width="1704"
 height="1464"
-srcset="https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hueb0042c0812d696e5a18f956985208d0_151763_480x0_resize_box_3.png 480w, https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hueb0042c0812d696e5a18f956985208d0_151763_1024x0_resize_box_3.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_42506dbab9fa3456.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_de2234577a7871f8.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -125,12 +65,12 @@ data-flex-grow="116"
 data-flex-basis="279px"
 >
 配置结束会给你个跟踪 ID，在配置文件 &lt;code>gatsby-plugin-google-analytics&lt;/code> 下修改就行。&lt;/p>
-&lt;h2 id="开发-dark-mode">开发 Dark Mode&lt;/h2>
-&lt;p>其实上面配置完成基本上站点就能用了，不过 Gatsby 最好玩的是他的灵活。自带的没有夜间模式，下面我快速介绍一下怎么开发。&lt;/p>
-&lt;p>&lt;img src="https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode.png"
+&lt;h2 id="开发-dark-mode">开发 Dark Mode
+&lt;/h2>&lt;p>其实上面配置完成基本上站点就能用了，不过 Gatsby 最好玩的是他的灵活。自带的没有夜间模式，下面我快速介绍一下怎么开发。&lt;/p>
+&lt;p>&lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode.png"
 width="1346"
 height="1692"
-srcset="https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hucf0fed8d21671adbec7e020a6800f35a_221341_480x0_resize_box_3.png 480w, https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hucf0fed8d21671adbec7e020a6800f35a_221341_1024x0_resize_box_3.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_588fd42caec8b945.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_942143c91bc59aef.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -141,81 +81,41 @@ data-flex-basis="190px"
 &lt;li>注入全局函数
 在 src 目录下新建 &lt;code>html.js&lt;/code>，开发一个用于控制主题的全局函数&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;span class="lnt">23
-&lt;/span>&lt;span class="lnt">24
-&lt;/span>&lt;span class="lnt">25
-&lt;/span>&lt;span class="lnt">26
-&lt;/span>&lt;span class="lnt">27
-&lt;/span>&lt;span class="lnt">28
-&lt;/span>&lt;span class="lnt">29
-&lt;/span>&lt;span class="lnt">30
-&lt;/span>&lt;span class="lnt">31
-&lt;/span>&lt;span class="lnt">32
-&lt;/span>&lt;span class="lnt">33
-&lt;/span>&lt;span class="lnt">34
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">dangerouslySetInnerHTML&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">__html&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="sb">`
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> (function() {
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> window.__onThemeChange = function() {};
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> function setTheme(newTheme) {
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> window.__theme = newTheme;
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> preferredTheme = newTheme;
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> document.body.className = newTheme;
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> window.__onThemeChange(newTheme);
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> }
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> var preferredTheme;
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> try {
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> preferredTheme = localStorage.getItem(&amp;#39;theme&amp;#39;);
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> } catch (err) { }
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> window.__setPreferredTheme = function(newTheme) {
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> setTheme(newTheme);
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> try {
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> localStorage.setItem(&amp;#39;theme&amp;#39;, newTheme);
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> } catch (err) {}
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> }
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> var darkQuery = window.matchMedia(&amp;#39;(prefers-color-scheme: dark)&amp;#39;);
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> darkQuery.addListener(function(e) {
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> window.__setPreferredTheme(e.matches ? &amp;#39;dark&amp;#39; : &amp;#39;light&amp;#39;)
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> });
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> setTheme(preferredTheme || (darkQuery.matches ? &amp;#39;dark&amp;#39; : &amp;#39;light&amp;#39;));
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> })();
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb"> `&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="2">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-jsx" data-lang="jsx">&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">script&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">dangerouslySetInnerHTML&lt;/span>&lt;span style="color:#f92672">=&lt;/span>{{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">__html&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#e6db74">`
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> (function() {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> window.__onThemeChange = function() {};
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> function setTheme(newTheme) {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> window.__theme = newTheme;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> preferredTheme = newTheme;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> document.body.className = newTheme;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> window.__onThemeChange(newTheme);
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> var preferredTheme;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> try {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> preferredTheme = localStorage.getItem(&amp;#39;theme&amp;#39;);
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> } catch (err) { }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> window.__setPreferredTheme = function(newTheme) {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> setTheme(newTheme);
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> try {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> localStorage.setItem(&amp;#39;theme&amp;#39;, newTheme);
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> } catch (err) {}
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> var darkQuery = window.matchMedia(&amp;#39;(prefers-color-scheme: dark)&amp;#39;);
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> darkQuery.addListener(function(e) {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> window.__setPreferredTheme(e.matches ? &amp;#39;dark&amp;#39; : &amp;#39;light&amp;#39;)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> });
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> setTheme(preferredTheme || (darkQuery.matches ? &amp;#39;dark&amp;#39; : &amp;#39;light&amp;#39;));
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> })();
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> `&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>开发 Toggle 组件&lt;/li>
 &lt;/ol>
 &lt;p>准备好两张 Icon 图片，然后把 &lt;a class="link" href="https://github.com/aaronshaf/react-toggle/" target="_blank" rel="noopener"
@@ -223,201 +123,107 @@ data-flex-basis="190px"
 &lt;ol start="3">
 &lt;li>修改 layout&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;span class="lnt">23
-&lt;/span>&lt;span class="lnt">24
-&lt;/span>&lt;span class="lnt">25
-&lt;/span>&lt;span class="lnt">26
-&lt;/span>&lt;span class="lnt">27
-&lt;/span>&lt;span class="lnt">28
-&lt;/span>&lt;span class="lnt">29
-&lt;/span>&lt;span class="lnt">30
-&lt;/span>&lt;span class="lnt">31
-&lt;/span>&lt;span class="lnt">32
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">theme&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">null&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Toggle&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">icons&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">checked&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">img&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nx">moon&lt;/span>&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;16&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">height&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;16&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">role&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;presentation&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="nx">pointerEvents&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;none&amp;#39;&lt;/span> &lt;span class="p">}}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">),&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">unchecked&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">img&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nb">sun&lt;/span>&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">width&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;16&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">height&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;16&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">role&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;presentation&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="nx">pointerEvents&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;none&amp;#39;&lt;/span> &lt;span class="p">}}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">checked&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nx">theme&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;dark&amp;#39;&lt;/span>&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">onChange&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nx">e&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">__setPreferredTheme&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">target&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">checked&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="s1">&amp;#39;dark&amp;#39;&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;light&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{{&lt;/span> &lt;span class="nx">height&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;24px&amp;#39;&lt;/span> &lt;span class="p">}}&lt;/span> &lt;span class="p">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="4">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-jsx" data-lang="jsx">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">theme&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span> &lt;span style="color:#f92672">?&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">Toggle&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">icons&lt;/span>&lt;span style="color:#f92672">=&lt;/span>{{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">checked&lt;/span>&lt;span style="color:#f92672">:&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">img&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">src&lt;/span>&lt;span style="color:#f92672">=&lt;/span>{&lt;span style="color:#a6e22e">moon&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">width&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;16&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">height&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;16&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">role&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;presentation&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">style&lt;/span>&lt;span style="color:#f92672">=&lt;/span>{{ &lt;span style="color:#a6e22e">pointerEvents&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#e6db74">&amp;#39;none&amp;#39;&lt;/span> }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">unchecked&lt;/span>&lt;span style="color:#f92672">:&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">img&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">src&lt;/span>&lt;span style="color:#f92672">=&lt;/span>{sun}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">width&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;16&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">height&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;16&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">role&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;presentation&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">style&lt;/span>&lt;span style="color:#f92672">=&lt;/span>{{ &lt;span style="color:#a6e22e">pointerEvents&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#e6db74">&amp;#39;none&amp;#39;&lt;/span> }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">checked&lt;/span>&lt;span style="color:#f92672">=&lt;/span>{&lt;span style="color:#a6e22e">theme&lt;/span> &lt;span style="color:#f92672">===&lt;/span> &lt;span style="color:#e6db74">&amp;#39;dark&amp;#39;&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">onChange&lt;/span>&lt;span style="color:#f92672">=&lt;/span>{&lt;span style="color:#a6e22e">e&lt;/span> =&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> window.&lt;span style="color:#a6e22e">__setPreferredTheme&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span>.&lt;span style="color:#a6e22e">target&lt;/span>.&lt;span style="color:#a6e22e">checked&lt;/span> &lt;span style="color:#f92672">?&lt;/span> &lt;span style="color:#e6db74">&amp;#39;dark&amp;#39;&lt;/span> &lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#e6db74">&amp;#39;light&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ) &lt;span style="color:#f92672">:&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">div&lt;/span> &lt;span style="color:#a6e22e">style&lt;/span>&lt;span style="color:#f92672">=&lt;/span>{{ &lt;span style="color:#a6e22e">height&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#e6db74">&amp;#39;24px&amp;#39;&lt;/span> }} /&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>编写全局样式
 编写 &lt;code>global.css&lt;/code> 并在 &lt;code>typography.js&lt;/code> 导入它，主要工作是给 body 配置 css 变量&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;span class="lnt">23
-&lt;/span>&lt;span class="lnt">24
-&lt;/span>&lt;span class="lnt">25
-&lt;/span>&lt;span class="lnt">26
-&lt;/span>&lt;span class="lnt">27
-&lt;/span>&lt;span class="lnt">28
-&lt;/span>&lt;span class="lnt">29
-&lt;/span>&lt;span class="lnt">30
-&lt;/span>&lt;span class="lnt">31
-&lt;/span>&lt;span class="lnt">32
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">body&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--pink&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">rgb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">255&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">167&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">196&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nf">var&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="n">bg&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nc">light&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--bg&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#ffffff&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--bg-secondary&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">rgb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">249&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">250&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">251&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--header&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nf">var&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="kc">pink&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--textNormal&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#222&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--textTitle&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#222&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--textLink&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#d23669&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--hr&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">hsla&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="kt">%&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="kt">%&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.2&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--inlineCode-bg&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">rgba&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">255&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">229&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.2&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--inlineCode-text&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#1a1a1a&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--form-shadow&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="mi">15&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="nb">rgba&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">210&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">214&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">220&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.5&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nc">dark&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kp">-webkit-&lt;/span>&lt;span class="n">font-smoothing&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">antialiased&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--bg&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#282c35&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--bg-secondary&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">rgb&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">54&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">60&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">72&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--header&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#ffffff&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--textNormal&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">rgba&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">255&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">255&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">255&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.88&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--textTitle&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#ffffff&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--textLink&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nf">var&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="kc">pink&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--hr&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">hsla&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="kt">%&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="kt">%&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.2&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--inlineCode-bg&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">rgba&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">115&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">124&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">153&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.2&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--inlineCode-text&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#ffee93&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">--form-shadow&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="mi">15&lt;/span>&lt;span class="kt">px&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="nb">rgba&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">26&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">26&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">27&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.637&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>最终效果就是这样
-&lt;img src="https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/result.png"
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-css" data-lang="css">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">body&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --pink: rgb(&lt;span style="color:#ae81ff">255&lt;/span>, &lt;span style="color:#ae81ff">167&lt;/span>, &lt;span style="color:#ae81ff">196&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">background-color&lt;/span>: &lt;span style="color:#a6e22e">var&lt;/span>(&lt;span style="color:#f92672">--&lt;/span>bg);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">body&lt;/span>.&lt;span style="color:#a6e22e">light&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --bg: &lt;span style="color:#ae81ff">#ffffff&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --bg-secondary: rgb(&lt;span style="color:#ae81ff">249&lt;/span>, &lt;span style="color:#ae81ff">250&lt;/span>, &lt;span style="color:#ae81ff">251&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --header: &lt;span style="color:#a6e22e">var&lt;/span>(&lt;span style="color:#f92672">--&lt;/span>&lt;span style="color:#66d9ef">pink&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --textNormal: &lt;span style="color:#ae81ff">#222&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --textTitle: &lt;span style="color:#ae81ff">#222&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --textLink: &lt;span style="color:#ae81ff">#d23669&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --hr: hsla(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#66d9ef">%&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#66d9ef">%&lt;/span>, &lt;span style="color:#ae81ff">0.2&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --inlineCode-bg: rgba(&lt;span style="color:#ae81ff">255&lt;/span>, &lt;span style="color:#ae81ff">229&lt;/span>, &lt;span style="color:#ae81ff">100&lt;/span>, &lt;span style="color:#ae81ff">0.2&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --inlineCode-text: &lt;span style="color:#ae81ff">#1a1a1a&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --form-shadow: &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">15&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> rgba(&lt;span style="color:#ae81ff">210&lt;/span>, &lt;span style="color:#ae81ff">214&lt;/span>, &lt;span style="color:#ae81ff">220&lt;/span>, &lt;span style="color:#ae81ff">0.5&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">body&lt;/span>.&lt;span style="color:#a6e22e">dark&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">-webkit-&lt;/span>font-smoothing: antialiased;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --bg: &lt;span style="color:#ae81ff">#282c35&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --bg-secondary: rgb(&lt;span style="color:#ae81ff">54&lt;/span>, &lt;span style="color:#ae81ff">60&lt;/span>, &lt;span style="color:#ae81ff">72&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --header: &lt;span style="color:#ae81ff">#ffffff&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --textNormal: rgba(&lt;span style="color:#ae81ff">255&lt;/span>, &lt;span style="color:#ae81ff">255&lt;/span>, &lt;span style="color:#ae81ff">255&lt;/span>, &lt;span style="color:#ae81ff">0.88&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --textTitle: &lt;span style="color:#ae81ff">#ffffff&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --textLink: &lt;span style="color:#a6e22e">var&lt;/span>(&lt;span style="color:#f92672">--&lt;/span>&lt;span style="color:#66d9ef">pink&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --hr: hsla(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#66d9ef">%&lt;/span>, &lt;span style="color:#ae81ff">100&lt;/span>&lt;span style="color:#66d9ef">%&lt;/span>, &lt;span style="color:#ae81ff">0.2&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --inlineCode-bg: rgba(&lt;span style="color:#ae81ff">115&lt;/span>, &lt;span style="color:#ae81ff">124&lt;/span>, &lt;span style="color:#ae81ff">153&lt;/span>, &lt;span style="color:#ae81ff">0.2&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --inlineCode-text: &lt;span style="color:#ae81ff">#ffee93&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --form-shadow: &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">15&lt;/span>&lt;span style="color:#66d9ef">px&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> rgba(&lt;span style="color:#ae81ff">26&lt;/span>, &lt;span style="color:#ae81ff">26&lt;/span>, &lt;span style="color:#ae81ff">27&lt;/span>, &lt;span style="color:#ae81ff">0.637&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最终效果就是这样
+&lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result.png"
 width="1418"
 height="1576"
-srcset="https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/result_hu5900c0cd33e3487d5a13ab7efb9b3d64_361646_480x0_resize_box_3.png 480w, https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/result_hu5900c0cd33e3487d5a13ab7efb9b3d64_361646_1024x0_resize_box_3.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_addfaaa7fb03e672.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_465b00a87fa1cc4e.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
 data-flex-grow="89"
 data-flex-basis="215px"
 >&lt;/p>
-&lt;h1 id="部署">部署&lt;/h1>
-&lt;ol>
+&lt;h1 id="部署">部署
+&lt;/h1>&lt;ol>
 &lt;li>安装 gh-pages&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">npm install gh-pages --save-dev
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="2">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>npm install gh-pages --save-dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>配置部署脚本&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;scripts&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;deploy&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;gatsby build &amp;amp;&amp;amp; gh-pages -d public -b master&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="3">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;scripts&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;deploy&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;gatsby build &amp;amp;&amp;amp; gh-pages -d public -b master&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>推送源码到 dev 分支&lt;/li>
 &lt;/ol>
 &lt;p>Github Pages 有个特殊的规则，就是 &amp;lt;username&amp;gt;.github.io 会默认使用 &lt;code>master&lt;/code> 分支中的生产代码。这也就是为什么 &lt;code>gh-pages -d public -b master&lt;/code> 中是指定 &lt;code>master&lt;/code>，而不是 &lt;code>gh-pages&lt;/code>。&lt;/p>
 &lt;p>因此，源码就需要放到非 &lt;code>master&lt;/code> 分支上。我把博客的源码推到 &lt;code>dev&lt;/code> 分支，并将其设置为默认。
-&lt;img src="https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting.png"
+&lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting.png"
 width="1534"
 height="512"
-srcset="https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu5fd032f7221f7bff58f85960fe7781cc_97286_480x0_resize_box_3.png 480w, https://edward40.com/posts/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu5fd032f7221f7bff58f85960fe7781cc_97286_1024x0_resize_box_3.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_9d8877c167ac5edb.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_132e3db4c678ce18.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -427,17 +233,10 @@ data-flex-basis="719px"
 &lt;ol start="4">
 &lt;li>推送构建后的生产代码&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">npm run deploy
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>推送后应该稍微等一下，就可以访问个人网站了。&lt;/p>
-&lt;h1 id="总结">总结&lt;/h1>
-&lt;p>Gastby 优势&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>npm run deploy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>推送后应该稍微等一下，就可以访问个人网站了。&lt;/p>
+&lt;h1 id="总结">总结
+&lt;/h1>&lt;p>Gastby 优势&lt;/p>
 &lt;ul>
 &lt;li>相当的灵活，给个人网站巨大的修改空间&lt;/li>
 &lt;li>支持 graphql，数据调用方便&lt;/li>

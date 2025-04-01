@@ -1,229 +1,93 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ubuntu on 仕麟的博客</title><link>https://edward40.com/tags/ubuntu/</link><description>Recent content in Ubuntu on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 06 Feb 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/ubuntu/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu 安裝 php</title><link>https://edward40.com/posts/php-installation/</link><pubDate>Sat, 06 Feb 2016 00:00:00 +0000</pubDate><guid>https://edward40.com/posts/php-installation/</guid><description>&lt;img src="https://edward40.com/posts/php-installation/php.png" alt="Featured image of post Ubuntu 安裝 php" />&lt;ol>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ubuntu on 仕麟的博客</title><link>https://edward40.com/tags/ubuntu/</link><description>Recent content in Ubuntu on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 06 Feb 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/ubuntu/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu 安裝 php</title><link>https://edward40.com/p/php-installation/</link><pubDate>Sat, 06 Feb 2016 00:00:00 +0000</pubDate><guid>https://edward40.com/p/php-installation/</guid><description>&lt;img src="https://edward40.com/p/php-installation/php.png" alt="Featured image of post Ubuntu 安裝 php" />&lt;ol>
 &lt;li>安装 apt 源管理工具、添加 nginx 和 php 的安装源&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">apt-get install python-software-properties
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">add-apt-repository ppa:nginx/stable
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">add-apt-repository ppa:ondrej/php5
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="2">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get install python-software-properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>add-apt-repository ppa:nginx/stable
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>add-apt-repository ppa:ondrej/php5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>更新系统软件&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">apt-get update
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="3">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>安装 mysql&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">apt-get install mysql-server mysql-client
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="4">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get install mysql-server mysql-client
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>安装 php 及对 mysql 的支持&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">apt-get install php5-fpm php5-mysql
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="5">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get install php5-fpm php5-mysql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>根据实际需要，选择性的安装 php 的各类功能模块&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">apt-get install php-pear php5-dev php5-curl
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">apt-get install php5-gd php5-intl php5-imagick
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">apt-get install php5-imap php5-mcrypt php5-memcache
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">apt-get install php5-ming php5-ps php5-pspell
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">apt-get install php5-recode php5-snmp php5-sqlite
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">apt-get install php5-tidy php5-xmlrpc php5-xsl
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="6">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get install php-pear php5-dev php5-curl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt-get install php5-gd php5-intl php5-imagick
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt-get install php5-imap php5-mcrypt php5-memcache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt-get install php5-ming php5-ps php5-pspell
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt-get install php5-recode php5-snmp php5-sqlite
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt-get install php5-tidy php5-xmlrpc php5-xsl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>安装 nginx&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">apt-get install nginx
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="7">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get install nginx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
 &lt;li>修改 nginx 默认站点配置文件&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;span class="lnt">23
-&lt;/span>&lt;span class="lnt">24
-&lt;/span>&lt;span class="lnt">25
-&lt;/span>&lt;span class="lnt">26
-&lt;/span>&lt;span class="lnt">27
-&lt;/span>&lt;span class="lnt">28
-&lt;/span>&lt;span class="lnt">29
-&lt;/span>&lt;span class="lnt">30
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">vim /etc/nginx/sites-available/default
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">server &lt;span class="o">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> listen &lt;span class="m">80&lt;/span> default_server&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> listen &lt;span class="o">[&lt;/span>::&lt;span class="o">]&lt;/span>:80 default_server &lt;span class="nv">ipv6only&lt;/span>&lt;span class="o">=&lt;/span>on&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> root /usr/share/nginx/html&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> index index.php index.html index.htm&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> server_name server_domain_name_or_IP&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> location / &lt;span class="o">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try_files &lt;span class="nv">$uri&lt;/span> &lt;span class="nv">$uri&lt;/span>/ &lt;span class="o">=&lt;/span>404&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> error_page &lt;span class="m">404&lt;/span> /404.html&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> error_page &lt;span class="m">500&lt;/span> &lt;span class="m">502&lt;/span> &lt;span class="m">503&lt;/span> &lt;span class="m">504&lt;/span> /50x.html&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">location&lt;/span> &lt;span class="o">=&lt;/span> /50x.html &lt;span class="o">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> root /usr/share/nginx/html&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> location ~ &lt;span class="se">\.&lt;/span>php$ &lt;span class="o">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try_files &lt;span class="nv">$uri&lt;/span> &lt;span class="o">=&lt;/span>404&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fastcgi_split_path_info ^&lt;span class="o">(&lt;/span>.+&lt;span class="se">\.&lt;/span>php&lt;span class="o">)(&lt;/span>/.+&lt;span class="o">)&lt;/span>$&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fastcgi_pass unix:/var/run/php5-fpm.sock&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fastcgi_index index.php&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fastcgi_param SCRIPT_FILENAME &lt;span class="nv">$document_root$fastcgi_script_name&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> include fastcgi_params&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div></description></item><item><title>Ubuntu安裝java8</title><link>https://edward40.com/posts/java8-installation/</link><pubDate>Sat, 23 May 2015 00:00:00 +0000</pubDate><guid>https://edward40.com/posts/java8-installation/</guid><description>&lt;img src="https://edward40.com/posts/java8-installation/java8.jpg" alt="Featured image of post Ubuntu安裝java8" />&lt;ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vim /etc/nginx/sites-available/default
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> listen &lt;span style="color:#ae81ff">80&lt;/span> default_server;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> listen &lt;span style="color:#f92672">[&lt;/span>::&lt;span style="color:#f92672">]&lt;/span>:80 default_server ipv6only&lt;span style="color:#f92672">=&lt;/span>on;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> root /usr/share/nginx/html;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> index index.php index.html index.htm;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> server_name server_domain_name_or_IP;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> location / &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> try_files $uri $uri/ &lt;span style="color:#f92672">=&lt;/span>404;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> error_page &lt;span style="color:#ae81ff">404&lt;/span> /404.html;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> error_page &lt;span style="color:#ae81ff">500&lt;/span> &lt;span style="color:#ae81ff">502&lt;/span> &lt;span style="color:#ae81ff">503&lt;/span> &lt;span style="color:#ae81ff">504&lt;/span> /50x.html;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> location &lt;span style="color:#f92672">=&lt;/span> /50x.html &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> root /usr/share/nginx/html;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> location ~ &lt;span style="color:#ae81ff">\.&lt;/span>php$ &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> try_files $uri &lt;span style="color:#f92672">=&lt;/span>404;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fastcgi_split_path_info ^&lt;span style="color:#f92672">(&lt;/span>.+&lt;span style="color:#ae81ff">\.&lt;/span>php&lt;span style="color:#f92672">)(&lt;/span>/.+&lt;span style="color:#f92672">)&lt;/span>$;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fastcgi_pass unix:/var/run/php5-fpm.sock;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fastcgi_index index.php;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> include fastcgi_params;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Ubuntu安裝java8</title><link>https://edward40.com/p/java8-installation/</link><pubDate>Sat, 23 May 2015 00:00:00 +0000</pubDate><guid>https://edward40.com/p/java8-installation/</guid><description>&lt;img src="https://edward40.com/p/java8-installation/java8.jpg" alt="Featured image of post Ubuntu安裝java8" />&lt;ol>
 &lt;li>添加 ppa&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo add-apt-repository ppa:webupd8team/java
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="2">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo add-apt-repository ppa:webupd8team/java
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>更新系統&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt-get update
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="3">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>安裝 java8&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt-get install oracle-java8-installer
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="4">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get install oracle-java8-installer
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>檢測是否成功&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">java -version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>結果如下&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">java version &lt;span class="s2">&amp;#34;1.8.0_45&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Java&lt;span class="o">(&lt;/span>TM&lt;span class="o">)&lt;/span> SE Runtime Environment &lt;span class="o">(&lt;/span>build 1.8.0_45-b14&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Java HotSpot&lt;span class="o">(&lt;/span>TM&lt;span class="o">)&lt;/span> 64-Bit Server VM &lt;span class="o">(&lt;/span>build 25.45-b02, mixed mode&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="5">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java -version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>結果如下&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java version &lt;span style="color:#e6db74">&amp;#34;1.8.0_45&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Java&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> SE Runtime Environment &lt;span style="color:#f92672">(&lt;/span>build 1.8.0_45-b14&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Java HotSpot&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> 64-Bit Server VM &lt;span style="color:#f92672">(&lt;/span>build 25.45-b02, mixed mode&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
 &lt;li>設置環境變量&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt-get install oracle-java8-set-default
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ol start="6">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get install oracle-java8-set-default
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
 &lt;li>版本切換&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo update-java-alternatives -s java-8-oracle
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div></description></item></channel></rss>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo update-java-alternatives -s java-8-oracle
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
