@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 仕麟的博客</title><link>https://edward40.com/post/</link><description>Recent content in Posts on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 18 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Tagless Final in Rust</title><link>https://edward40.com/p/tagless-final-in-rust/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/p/tagless-final-in-rust/</guid><description>&lt;img src="https://edward40.com/p/tagless-final-in-rust/rust_programming_crab_sea.png" alt="Featured image of post Tagless Final in Rust" />&lt;p>总所周知学习 Java 逃不开对各类设计模式的理解运用。今天千里冰封介绍了一个全新的设计模式——&amp;ldquo;Tagless Final&amp;rdquo; Style, 它可以用 &lt;code>trait&lt;/code> 在 Rust 中模拟子类型。&lt;/p>
-&lt;h2 id="第一步实现目标">第一步实现目标
-&lt;/h2>&lt;p>实现一个 expr 范型方法，可以根据类型执行。如下方代码，可以已 &lt;code>u32&lt;/code> 或者 &lt;code>String&lt;/code> 的类型返回&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Shilin's Blog</title><link>https://edward40.com/post/</link><description>Recent content in Posts on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 18 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Tagless Final in Rust</title><link>https://edward40.com/p/tagless-final-in-rust/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/p/tagless-final-in-rust/</guid><description>&lt;img src="https://edward40.com/p/tagless-final-in-rust/rust_programming_crab_sea.png" alt="Featured image of post Tagless Final in Rust" />&lt;p>As everyone knows, learning Java inevitably involves understanding and applying various design patterns. Today, Tesla Zhang introduced a brand new design pattern—the &amp;ldquo;Tagless Final&amp;rdquo; Style, which can simulate subtyping in Rust using &lt;code>trait&lt;/code>s.&lt;/p>
+&lt;h2 id="step-one-implementation-goal">Step One: Implementation Goal
+&lt;/h2>&lt;p>Implement a generic &lt;code>expr&lt;/code> function that can execute based on the type. As shown in the code below, it can return results of type &lt;code>u32&lt;/code> or &lt;code>String&lt;/code>.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">expr&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>T: &lt;span style="color:#a6e22e">Expr&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>() -&amp;gt; &lt;span style="color:#a6e22e">T&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Expr::add(
@@ -18,8 +18,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Running &lt;span style="color:#e6db74">`&lt;/span>target/debug/tagless&lt;span style="color:#e6db74">`&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">210&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">((&lt;/span>&lt;span style="color:#ae81ff">100&lt;/span> / 10&lt;span style="color:#f92672">)&lt;/span> + &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#ae81ff">223&lt;/span> - 23&lt;span style="color:#f92672">))&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="基础的-expr-trait-定义">基础的 Expr trait 定义
-&lt;/h2>&lt;p>这个最基础的 &lt;code>trait&lt;/code> 是外部引入，不能更改的。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="basic-expr-trait-definition">Basic Expr trait definition
+&lt;/h2>&lt;p>This most basic &lt;code>trait&lt;/code> is imported from an external source and cannot be modified.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">pub&lt;/span>(&lt;span style="color:#66d9ef">crate&lt;/span>) &lt;span style="color:#66d9ef">trait&lt;/span> Expr {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">lit&lt;/span>(i: &lt;span style="color:#66d9ef">u32&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">add&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
@@ -27,7 +27,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">mul&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">div&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="实现-string-和-u32-的-impl">实现 String 和 u32 的 impl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="implementations-for-string-and-u32">Implementations for String and u32
 &lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">impl&lt;/span> Expr &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#66d9ef">u32&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">lit&lt;/span>(i: &lt;span style="color:#66d9ef">u32&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
@@ -64,15 +64,15 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format!(&lt;span style="color:#e6db74">&amp;#34;(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> / &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>, lhs, rhs)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上的内容都单独抽出放入到 &lt;code>expr.rs&lt;/code> 中。&lt;/p>
-&lt;h2 id="给-expr-增加-exp-方法">给 expr 增加 exp 方法
-&lt;/h2>&lt;p>因为 Expr trait 不可被更改，所以新增一个 &lt;code>trait&lt;/code> 的 TypeParamBounds[^https://doc.rust-lang.org/reference/items/traits.html]: Rust traits&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>All the above content is extracted into &lt;code>expr.rs&lt;/code>.&lt;/p>
+&lt;h2 id="adding-an-exp-method-to-expr">Adding an &lt;code>exp&lt;/code> method to expr
+&lt;/h2>&lt;p>Since the &lt;code>Expr&lt;/code> trait cannot be changed, we add a new trait using TypeParamBounds[^https://doc.rust-lang.org/reference/items/traits.html]: Rust traits&lt;/p>
 &lt;pre tabindex="0">&lt;code>Syntax
 Trait :
 unsafe? trait IDENTIFIER Generics? ( : TypeParamBounds? )? WhereClause? {
 TraitItem*
 }
-&lt;/code>&lt;/pre>&lt;p>定义一个新的 &lt;code>ExprWithExp&lt;/code> trait，并实现 &lt;code>u32&lt;/code> 和 &lt;code>String&lt;/code> 类型的 &lt;code>exp&lt;/code> 方法：&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Define a new &lt;code>ExprWithExp&lt;/code> trait and implement the &lt;code>exp&lt;/code> method for &lt;code>u32&lt;/code> and &lt;code>String&lt;/code> types:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">trait&lt;/span> ExprWithExp: &lt;span style="color:#a6e22e">Expr&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">exp&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
@@ -88,16 +88,25 @@ TraitItem*
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format!(&lt;span style="color:#e6db74">&amp;#34;(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> ^ &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>, lhs, rhs)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这样就可以给 &lt;code>u32&lt;/code> 和 &lt;code>String&lt;/code> 拓展出 &lt;code>exp&lt;/code> 方法&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This allows extending &lt;code>u32&lt;/code> and &lt;code>String&lt;/code> with the &lt;code>exp&lt;/code> method.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// snippet
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">expr2&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>T: &lt;span style="color:#a6e22e">ExprWithExp&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>() -&amp;gt; &lt;span style="color:#a6e22e">T&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ExprWithExp::exp(expr(), Expr::lit(&lt;span style="color:#ae81ff">2&lt;/span>))
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">expr&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>T: &lt;span style="color:#a6e22e">Expr&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>() -&amp;gt; &lt;span style="color:#a6e22e">T&lt;/span> { &lt;span style="color:#75715e">// Define the original expr function again for context
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> Expr::add(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Expr::div(Expr::lit(&lt;span style="color:#ae81ff">100&lt;/span>), Expr::lit(&lt;span style="color:#ae81ff">10&lt;/span>)),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Expr::sub(Expr::lit(&lt;span style="color:#ae81ff">223&lt;/span>), Expr::lit(&lt;span style="color:#ae81ff">23&lt;/span>)),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr2::&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">u32&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>());
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr2::&lt;span style="color:#f92672">&amp;lt;&lt;/span>String&lt;span style="color:#f92672">&amp;gt;&lt;/span>());
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">expr2&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>T: &lt;span style="color:#a6e22e">ExprWithExp&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>() -&amp;gt; &lt;span style="color:#a6e22e">T&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ExprWithExp::exp(expr(), Expr::lit(&lt;span style="color:#ae81ff">2&lt;/span>)) &lt;span style="color:#75715e">// Call the original expr here
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr::&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">u32&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>()); &lt;span style="color:#75715e">// Original output
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr::&lt;span style="color:#f92672">&amp;lt;&lt;/span>String&lt;span style="color:#f92672">&amp;gt;&lt;/span>()); &lt;span style="color:#75715e">// Original output
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr2::&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">u32&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>()); &lt;span style="color:#75715e">// New output
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr2::&lt;span style="color:#f92672">&amp;lt;&lt;/span>String&lt;span style="color:#f92672">&amp;gt;&lt;/span>()); &lt;span style="color:#75715e">// New output
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>output:&lt;/p>
 &lt;pre tabindex="0">&lt;code>/Users/edward/.cargo/bin/cargo run --color=always --package tagless --bin tagless
 Compiling tagless v0.1.0 (/Users/edward/github/SASUKE40/tagless)
@@ -1717,35 +1726,7 @@ Note
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="跑起來看看">跑起來看看
 &lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>run
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在瀏覽器中打開&lt;a class="link" href="http://localhost:9000" target="_blank" rel="noopener"
->http://localhost:9000&lt;/a>，項目就跑起來了 ╰(￣ ▽ ￣)╮&lt;/p></description></item><item><title>Ubuntu安裝java8</title><link>https://edward40.com/p/java8-installation/</link><pubDate>Sat, 23 May 2015 00:00:00 +0000</pubDate><guid>https://edward40.com/p/java8-installation/</guid><description>&lt;img src="https://edward40.com/p/java8-installation/java8.jpg" alt="Featured image of post Ubuntu安裝java8" />&lt;ol>
-&lt;li>添加 ppa&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo add-apt-repository ppa:webupd8team/java
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>更新系統&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get update
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
-&lt;li>安裝 java8&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get install oracle-java8-installer
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
-&lt;li>檢測是否成功&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java -version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>結果如下&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java version &lt;span style="color:#e6db74">&amp;#34;1.8.0_45&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Java&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> SE Runtime Environment &lt;span style="color:#f92672">(&lt;/span>build 1.8.0_45-b14&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Java HotSpot&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> 64-Bit Server VM &lt;span style="color:#f92672">(&lt;/span>build 25.45-b02, mixed mode&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
-&lt;li>設置環境變量&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get install oracle-java8-set-default
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
-&lt;li>版本切換&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo update-java-alternatives -s java-8-oracle
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>工作心得</title><link>https://edward40.com/p/work-experience/</link><pubDate>Sat, 23 May 2015 00:00:00 +0000</pubDate><guid>https://edward40.com/p/work-experience/</guid><description>&lt;img src="https://edward40.com/p/work-experience/work.jpg" alt="Featured image of post 工作心得" />&lt;h1 id="寫這篇文章的初衷">寫這篇文章的初衷
+>http://localhost:9000&lt;/a>，項目就跑起來了 ╰(￣ ▽ ￣)╮&lt;/p></description></item><item><title>工作心得</title><link>https://edward40.com/p/work-experience/</link><pubDate>Sat, 23 May 2015 00:00:00 +0000</pubDate><guid>https://edward40.com/p/work-experience/</guid><description>&lt;img src="https://edward40.com/p/work-experience/work.jpg" alt="Featured image of post 工作心得" />&lt;h1 id="寫這篇文章的初衷">寫這篇文章的初衷
 &lt;/h1>&lt;p>想想在荔枝 FM 工作接近 2 個月了，一直沒能好好總結是一個很大的問題，因此今天就來寫一些東西來回顧一下過去的工作。&lt;/p>
 &lt;h3 id="工作列表">工作列表
 &lt;/h3>&lt;ul>
