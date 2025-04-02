@@ -1,6 +1,6 @@
 ---
-title: About
-description: About
+title: 关于
+description: 关于
 date: 2022-09-08
 slug: about
 aliases:
@@ -9,10 +9,10 @@ aliases:
 license: CC BY-NC-ND
 lastmod: 2022-09-08
 menu:
-  main:
-    weight: -90
-    params:
-      icon: user
+    main: 
+        weight: -90
+        params:
+            icon: user
 ---
 
 Shark 🦈 lover, amateur pianist 🎹

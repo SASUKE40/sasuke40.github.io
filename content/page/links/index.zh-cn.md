@@ -1,5 +1,5 @@
 ---
-title: Friends
+title: 朋友
 slug: friends
 links:
   - title: Phosphorus
