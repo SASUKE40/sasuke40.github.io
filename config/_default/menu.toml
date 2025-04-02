@@ -7,13 +7,13 @@
 #icon = "home"
 #newtab = true
 
-[[main]]
-identifier = "cv"
-name = "CV"
-url = "/files/resume.pdf"
-[main.params]
-icon = "file-cv"
-newtab = true
+# [[main]]
+# identifier = "cv"
+# name = "CV"
+# url = "/files/resume.pdf"
+# [main.params]
+# icon = "file-cv"
+# newtab = true
 
 [[social]]
 identifier = "github"
