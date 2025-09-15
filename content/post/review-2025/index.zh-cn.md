@@ -1,6 +1,7 @@
 ---
 title: "2025年回顾之离职后两年生活中的“小不可思议”"
 description: "跨越生活中的每一个“小不可思议”，怯懦之人建立信心之路"
+slug: a-review-of-2025
 date: 2025-09-14T20:31:40-07:00
 author: Edward Elric
 image: cover.png

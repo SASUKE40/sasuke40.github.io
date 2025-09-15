@@ -1,6 +1,7 @@
 ---
 title: "A Review of 2025: The 'Little Miracles' in Two Years After Resignation"
 description: "Overcoming every 'little miracle' in life, the journey of building confidence for the timid."
+slug: a-review-of-2025
 date: 2025-09-14T20:31:40-07:00
 author: Edward Elric
 image: cover.png
