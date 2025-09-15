@@ -1,57 +1,57 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deno on 仕麟的博客</title><link>https://edward40.com/zh-cn/tags/deno/</link><description>Recent content in Deno on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 28 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/zh-cn/tags/deno/index.xml" rel="self" type="application/rss+xml"/><item><title>试玩 deno2</title><link>https://edward40.com/zh-cn/p/try-deno2/</link><pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate><guid>https://edward40.com/zh-cn/p/try-deno2/</guid><description>&lt;img src="https://edward40.com/p/try-deno2/deno.png" alt="Featured image of post 试玩 deno2" />&lt;h1 id="前言">前言
-&lt;/h1>&lt;p>ry 近期把 deno 的第二版原型从 deno2 文件夹中转移到 src 上了，并初步完成之前定下针对 unprivileged 部分的改造目标：&lt;/p>
-&lt;ul>
-&lt;li>Use the gn build system for fast builds, sane configuration, and easy linking into Chrome.&lt;/li>
-&lt;li>Use V8 snapshots to improve startup time.&lt;/li>
-&lt;li>Remove Golang. Although it has been working nicely, I am concerned the double GC will become a problem sometime down the road.&lt;/li>
-&lt;li>Distribute a C++ library called libdeno, containing the snapshotted typescript runtime.&lt;/li>
-&lt;li>Test the message passing and other functionality at that layer before involving higher level languages.
-翻译：&lt;/li>
-&lt;li>使用 &lt;a class="link" href="https://link.zhihu.com/?target=https%3A//chromium.googlesource.com/chromium/src/%2B/master/tools/gn/docs/quick_start.md" target="_blank" rel="noopener"
->GN&lt;/a> 这个构建工具，这是 chromium 团队使用的构建工具&lt;/li>
-&lt;li>使用 V8 Snapshots 提升启动速度（已完成）&lt;/li>
-&lt;li>**移除 Golang，**因为不想同时存在两个 GC（Go 和 TS）&lt;/li>
-&lt;li>弄了一个 C++ 库叫 libdeno，负责 TS 的运行时环境&lt;/li>
-&lt;/ul>
-&lt;h1 id="试玩">试玩
-&lt;/h1>&lt;h2 id="克隆-depot-tools">克隆 &lt;a class="link" href="http://commondatastorage.googleapis.com/chrome-infra-docs/flat/depot_tools/docs/html/depot_tools_tutorial.html#_setting_up" target="_blank" rel="noopener"
->Depot Tools&lt;/a>
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置环境变量">配置环境变量
-&lt;/h2>&lt;p>这里我是把配置到 &lt;code>.zshrc&lt;/code> 文件中&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>export PATH&lt;span style="color:#f92672">=&lt;/span>$PATH:/path/to/depot_tools
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="克隆仓库">克隆仓库
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone git@github.com:ry/deno.git
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="进入到-src-文件夹">进入到 src 文件夹
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd deno/src
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="获取包和-v8">获取包和 v8
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gclient sync --no-history
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后你就会在 &lt;code>src&lt;/code> 下看到一堆三方包和 &lt;code>v8&lt;/code> 被下载下来&lt;/p>
-&lt;p>&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529995554027-c933cf86-d4df-4399-a4e2-eb1a7a5a9e31.png"
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deno on 仕麟的博客</title><link>https://edward40.com/zh-cn/tags/deno/</link><description>Recent content in Deno on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 28 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/zh-cn/tags/deno/index.xml" rel="self" type="application/rss+xml"/><item><title>试玩 deno2</title><link>https://edward40.com/zh-cn/p/try-deno2/</link><pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate><guid>https://edward40.com/zh-cn/p/try-deno2/</guid><description>&lt;img src="https://edward40.com/p/try-deno2/deno.png" alt="Featured image of post 试玩 deno2" /&gt;&lt;h1 id="前言"&gt;前言
+&lt;/h1&gt;&lt;p&gt;ry 近期把 deno 的第二版原型从 deno2 文件夹中转移到 src 上了，并初步完成之前定下针对 unprivileged 部分的改造目标：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use the gn build system for fast builds, sane configuration, and easy linking into Chrome.&lt;/li&gt;
+&lt;li&gt;Use V8 snapshots to improve startup time.&lt;/li&gt;
+&lt;li&gt;Remove Golang. Although it has been working nicely, I am concerned the double GC will become a problem sometime down the road.&lt;/li&gt;
+&lt;li&gt;Distribute a C++ library called libdeno, containing the snapshotted typescript runtime.&lt;/li&gt;
+&lt;li&gt;Test the message passing and other functionality at that layer before involving higher level languages.
+翻译：&lt;/li&gt;
+&lt;li&gt;使用 &lt;a class="link" href="https://link.zhihu.com/?target=https%3A//chromium.googlesource.com/chromium/src/%2B/master/tools/gn/docs/quick_start.md" target="_blank" rel="noopener"
+&gt;GN&lt;/a&gt; 这个构建工具，这是 chromium 团队使用的构建工具&lt;/li&gt;
+&lt;li&gt;使用 V8 Snapshots 提升启动速度（已完成）&lt;/li&gt;
+&lt;li&gt;**移除 Golang，**因为不想同时存在两个 GC（Go 和 TS）&lt;/li&gt;
+&lt;li&gt;弄了一个 C++ 库叫 libdeno，负责 TS 的运行时环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="试玩"&gt;试玩
+&lt;/h1&gt;&lt;h2 id="克隆-depot-tools"&gt;克隆 &lt;a class="link" href="http://commondatastorage.googleapis.com/chrome-infra-docs/flat/depot_tools/docs/html/depot_tools_tutorial.html#_setting_up" target="_blank" rel="noopener"
+&gt;Depot Tools&lt;/a&gt;
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="配置环境变量"&gt;配置环境变量
+&lt;/h2&gt;&lt;p&gt;这里我是把配置到 &lt;code&gt;.zshrc&lt;/code&gt; 文件中&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export PATH&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$PATH:/path/to/depot_tools
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="克隆仓库"&gt;克隆仓库
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone git@github.com:ry/deno.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="进入到-src-文件夹"&gt;进入到 src 文件夹
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd deno/src
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="获取包和-v8"&gt;获取包和 v8
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gclient sync --no-history
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后你就会在 &lt;code&gt;src&lt;/code&gt; 下看到一堆三方包和 &lt;code&gt;v8&lt;/code&gt; 被下载下来&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529995554027-c933cf86-d4df-4399-a4e2-eb1a7a5a9e31.png"
 loading="lazy"
->&lt;/p>
-&lt;h2 id="安装-js-依赖">安装 js 依赖
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd js
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yarn install
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gn gen out/Debug --args&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;cc_wrapper=&amp;#34;ccache&amp;#34; is_debug=true &amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使用-ninja-编译">使用 ninja 编译
-&lt;/h2>&lt;p>mac 上得先安装 &lt;code>ccache&lt;/code> 不然会报 &lt;code>subcommand failed&lt;/code> 错误&lt;/p>
-&lt;p>&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529995488649-004e99f7-50ff-4456-b394-15c20a1ec5ff.png"
+&gt;&lt;/p&gt;
+&lt;h2 id="安装-js-依赖"&gt;安装 js 依赖
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd js
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yarn install
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gn gen out/Debug --args&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;cc_wrapper=&amp;#34;ccache&amp;#34; is_debug=true &amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="使用-ninja-编译"&gt;使用 ninja 编译
+&lt;/h2&gt;&lt;p&gt;mac 上得先安装 &lt;code&gt;ccache&lt;/code&gt; 不然会报 &lt;code&gt;subcommand failed&lt;/code&gt; 错误&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529995488649-004e99f7-50ff-4456-b394-15c20a1ec5ff.png"
 loading="lazy"
->&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>brew install ccache
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 &lt;code>src&lt;/code> 下进行编译&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ninja -C out/Debug/ deno
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529995461197-704e52ca-67a1-4682-a8fd-7060b393d590.png"
+&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install ccache
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在 &lt;code&gt;src&lt;/code&gt; 下进行编译&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ninja -C out/Debug/ deno
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529995461197-704e52ca-67a1-4682-a8fd-7060b393d590.png"
 loading="lazy"
->&lt;/p>
-&lt;h2 id="试着执行">试着执行
-&lt;/h2>&lt;p>这样 deno 的执行文件就产生了&lt;/p>
-&lt;p>&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529996003157-e93454bd-02ab-4daf-9cdb-f617221510c1.png"
+&gt;&lt;/p&gt;
+&lt;h2 id="试着执行"&gt;试着执行
+&lt;/h2&gt;&lt;p&gt;这样 deno 的执行文件就产生了&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529996003157-e93454bd-02ab-4daf-9cdb-f617221510c1.png"
 loading="lazy"
->&lt;/p>
-&lt;p>接着运行看看&lt;/p>
-&lt;p>&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529996089799-7ddd86b3-9b2b-421d-abf1-e8044df6c462.png"
+&gt;&lt;/p&gt;
+&lt;p&gt;接着运行看看&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529996089799-7ddd86b3-9b2b-421d-abf1-e8044df6c462.png"
 loading="lazy"
->&lt;/p>
-&lt;p>打印出了 v8 的版本 V8 6.8.275.14&lt;/p></description></item></channel></rss>
+&gt;&lt;/p&gt;
+&lt;p&gt;打印出了 v8 的版本 V8 6.8.275.14&lt;/p&gt;</description></item></channel></rss>

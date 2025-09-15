@@ -1,21 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Play Framework on 仕麟的博客</title><link>https://edward40.com/zh-cn/tags/play-framework/</link><description>Recent content in Play Framework on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 23 May 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/zh-cn/tags/play-framework/index.xml" rel="self" type="application/rss+xml"/><item><title>Play Framework項目初始化</title><link>https://edward40.com/zh-cn/p/play-framework/</link><pubDate>Sat, 23 May 2015 00:00:00 +0000</pubDate><guid>https://edward40.com/zh-cn/p/play-framework/</guid><description>&lt;img src="https://edward40.com/p/play-framework/play.jpg" alt="Featured image of post Play Framework項目初始化" />&lt;h2 id="安裝-activator">安裝 Activator
-&lt;/h2>&lt;p>先下載&lt;a class="link" href="http://www.typesafe.com/community/core-tools/activator-and-sbt" target="_blank" rel="noopener"
->Activator&lt;/a>
-解壓到&lt;code>D:\Program Files\activator-1.3.2&lt;/code>
-將&lt;code>D:\Program Files\activator-1.3.2&lt;/code>加到環境變量 Path 中
-在你的項目目錄中執行以下命令，驗證是否安裝成功&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>activator -help
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="創建-play-項目">創建 Play 項目
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>activator new demo play-java
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd demo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>activator
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="安裝-eclipse-插件">安裝 Eclipse 插件
-&lt;/h2>&lt;p>&lt;a class="link" href="http://scala-ide.org/download/current.html" target="_blank" rel="noopener"
->Scala IDE&lt;/a>
-在 Eclipse 中 Install New Software 增加宰割 Update Site，記得安裝 Play Support&lt;/p>
-&lt;h2 id="創建-eclipse-項目">創建 Eclipse 項目
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>eclipse with-source&lt;span style="color:#f92672">=&lt;/span>true
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="跑起來看看">跑起來看看
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>run
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在瀏覽器中打開&lt;a class="link" href="http://localhost:9000" target="_blank" rel="noopener"
->http://localhost:9000&lt;/a>，項目就跑起來了 ╰(￣ ▽ ￣)╮&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Play Framework on 仕麟的博客</title><link>https://edward40.com/zh-cn/tags/play-framework/</link><description>Recent content in Play Framework on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 23 May 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/zh-cn/tags/play-framework/index.xml" rel="self" type="application/rss+xml"/><item><title>Play Framework項目初始化</title><link>https://edward40.com/zh-cn/p/play-framework/</link><pubDate>Sat, 23 May 2015 00:00:00 +0000</pubDate><guid>https://edward40.com/zh-cn/p/play-framework/</guid><description>&lt;img src="https://edward40.com/p/play-framework/play.jpg" alt="Featured image of post Play Framework項目初始化" /&gt;&lt;h2 id="安裝-activator"&gt;安裝 Activator
+&lt;/h2&gt;&lt;p&gt;先下載&lt;a class="link" href="http://www.typesafe.com/community/core-tools/activator-and-sbt" target="_blank" rel="noopener"
+&gt;Activator&lt;/a&gt;
+解壓到&lt;code&gt;D:\Program Files\activator-1.3.2&lt;/code&gt;
+將&lt;code&gt;D:\Program Files\activator-1.3.2&lt;/code&gt;加到環境變量 Path 中
+在你的項目目錄中執行以下命令，驗證是否安裝成功&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;activator -help
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="創建-play-項目"&gt;創建 Play 項目
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;activator new demo play-java
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd demo
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;activator
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="安裝-eclipse-插件"&gt;安裝 Eclipse 插件
+&lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="http://scala-ide.org/download/current.html" target="_blank" rel="noopener"
+&gt;Scala IDE&lt;/a&gt;
+在 Eclipse 中 Install New Software 增加宰割 Update Site，記得安裝 Play Support&lt;/p&gt;
+&lt;h2 id="創建-eclipse-項目"&gt;創建 Eclipse 項目
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;eclipse with-source&lt;span style="color:#f92672"&gt;=&lt;/span&gt;true
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="跑起來看看"&gt;跑起來看看
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在瀏覽器中打開&lt;a class="link" href="http://localhost:9000" target="_blank" rel="noopener"
+&gt;http://localhost:9000&lt;/a&gt;，項目就跑起來了 ╰(￣ ▽ ￣)╮&lt;/p&gt;</description></item></channel></rss>

@@ -1,105 +1,105 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Programming Languages on 仕麟的博客</title><link>https://edward40.com/zh-cn/categories/programming-languages/</link><description>Recent content in Programming Languages on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 18 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/zh-cn/categories/programming-languages/index.xml" rel="self" type="application/rss+xml"/><item><title>Tagless Final in Rust</title><link>https://edward40.com/zh-cn/p/tagless-final-in-rust/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/zh-cn/p/tagless-final-in-rust/</guid><description>&lt;img src="https://edward40.com/p/tagless-final-in-rust/rust_programming_crab_sea.png" alt="Featured image of post Tagless Final in Rust" />&lt;p>总所周知学习 Java 逃不开对各类设计模式的理解运用。今天千里冰封介绍了一个全新的设计模式——&amp;ldquo;Tagless Final&amp;rdquo; Style, 它可以用 &lt;code>trait&lt;/code> 在 Rust 中模拟子类型。&lt;/p>
-&lt;h2 id="第一步实现目标">第一步实现目标
-&lt;/h2>&lt;p>实现一个 expr 范型方法，可以根据类型执行。如下方代码，可以已 &lt;code>u32&lt;/code> 或者 &lt;code>String&lt;/code> 的类型返回&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">expr&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>T: &lt;span style="color:#a6e22e">Expr&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>() -&amp;gt; &lt;span style="color:#a6e22e">T&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Expr::add(
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Expr::div(Expr::lit(&lt;span style="color:#ae81ff">100&lt;/span>), Expr::lit(&lt;span style="color:#ae81ff">10&lt;/span>)),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Expr::sub(Expr::lit(&lt;span style="color:#ae81ff">223&lt;/span>), Expr::lit(&lt;span style="color:#ae81ff">23&lt;/span>)),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr::&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">u32&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>());
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr::&lt;span style="color:#f92672">&amp;lt;&lt;/span>String&lt;span style="color:#f92672">&amp;gt;&lt;/span>());
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>output:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>/Users/edward/.cargo/bin/cargo run --color&lt;span style="color:#f92672">=&lt;/span>always --package tagless --bin tagless
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Compiling tagless v0.1.0 &lt;span style="color:#f92672">(&lt;/span>/Users/edward/github/SASUKE40/tagless&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Finished dev &lt;span style="color:#f92672">[&lt;/span>unoptimized + debuginfo&lt;span style="color:#f92672">]&lt;/span> target&lt;span style="color:#f92672">(&lt;/span>s&lt;span style="color:#f92672">)&lt;/span> in 0.39s
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Running &lt;span style="color:#e6db74">`&lt;/span>target/debug/tagless&lt;span style="color:#e6db74">`&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">210&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">((&lt;/span>&lt;span style="color:#ae81ff">100&lt;/span> / 10&lt;span style="color:#f92672">)&lt;/span> + &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#ae81ff">223&lt;/span> - 23&lt;span style="color:#f92672">))&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="基础的-expr-trait-定义">基础的 Expr trait 定义
-&lt;/h2>&lt;p>这个最基础的 &lt;code>trait&lt;/code> 是外部引入，不能更改的。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">pub&lt;/span>(&lt;span style="color:#66d9ef">crate&lt;/span>) &lt;span style="color:#66d9ef">trait&lt;/span> Expr {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">lit&lt;/span>(i: &lt;span style="color:#66d9ef">u32&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">add&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">sub&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">mul&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">div&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="实现-string-和-u32-的-impl">实现 String 和 u32 的 impl
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">impl&lt;/span> Expr &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#66d9ef">u32&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">lit&lt;/span>(i: &lt;span style="color:#66d9ef">u32&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> i
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">add&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lhs &lt;span style="color:#f92672">+&lt;/span> rhs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">sub&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lhs &lt;span style="color:#f92672">-&lt;/span> rhs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">mul&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lhs &lt;span style="color:#f92672">*&lt;/span> rhs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">div&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lhs &lt;span style="color:#f92672">/&lt;/span> rhs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">impl&lt;/span> Expr &lt;span style="color:#66d9ef">for&lt;/span> String {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">lit&lt;/span>(i: &lt;span style="color:#66d9ef">u32&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> i.to_string()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">add&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format!(&lt;span style="color:#e6db74">&amp;#34;(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> + &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>, lhs, rhs)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">sub&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format!(&lt;span style="color:#e6db74">&amp;#34;(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> - &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>, lhs, rhs)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">mul&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format!(&lt;span style="color:#e6db74">&amp;#34;(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> * &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>, lhs, rhs)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">div&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format!(&lt;span style="color:#e6db74">&amp;#34;(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> / &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>, lhs, rhs)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上的内容都单独抽出放入到 &lt;code>expr.rs&lt;/code> 中。&lt;/p>
-&lt;h2 id="给-expr-增加-exp-方法">给 expr 增加 exp 方法
-&lt;/h2>&lt;p>因为 Expr trait 不可被更改，所以新增一个 &lt;code>trait&lt;/code> 的 TypeParamBounds[^https://doc.rust-lang.org/reference/items/traits.html]: Rust traits&lt;/p>
-&lt;pre tabindex="0">&lt;code>Syntax
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Programming Languages on 仕麟的博客</title><link>https://edward40.com/zh-cn/categories/programming-languages/</link><description>Recent content in Programming Languages on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 18 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/zh-cn/categories/programming-languages/index.xml" rel="self" type="application/rss+xml"/><item><title>Tagless Final in Rust</title><link>https://edward40.com/zh-cn/p/tagless-final-in-rust/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/zh-cn/p/tagless-final-in-rust/</guid><description>&lt;img src="https://edward40.com/p/tagless-final-in-rust/rust_programming_crab_sea.png" alt="Featured image of post Tagless Final in Rust" /&gt;&lt;p&gt;总所周知学习 Java 逃不开对各类设计模式的理解运用。今天千里冰封介绍了一个全新的设计模式——&amp;ldquo;Tagless Final&amp;rdquo; Style, 它可以用 &lt;code&gt;trait&lt;/code&gt; 在 Rust 中模拟子类型。&lt;/p&gt;
+&lt;h2 id="第一步实现目标"&gt;第一步实现目标
+&lt;/h2&gt;&lt;p&gt;实现一个 expr 范型方法，可以根据类型执行。如下方代码，可以已 &lt;code&gt;u32&lt;/code&gt; 或者 &lt;code&gt;String&lt;/code&gt; 的类型返回&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;expr&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;T: &lt;span style="color:#a6e22e"&gt;Expr&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;() -&amp;gt; &lt;span style="color:#a6e22e"&gt;T&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Expr::add(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Expr::div(Expr::lit(&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;), Expr::lit(&lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;)),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Expr::sub(Expr::lit(&lt;span style="color:#ae81ff"&gt;223&lt;/span&gt;), Expr::lit(&lt;span style="color:#ae81ff"&gt;23&lt;/span&gt;)),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;println!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;, expr::&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;println!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;, expr::&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;String&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/edward/.cargo/bin/cargo run --color&lt;span style="color:#f92672"&gt;=&lt;/span&gt;always --package tagless --bin tagless
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Compiling tagless v0.1.0 &lt;span style="color:#f92672"&gt;(&lt;/span&gt;/Users/edward/github/SASUKE40/tagless&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Finished dev &lt;span style="color:#f92672"&gt;[&lt;/span&gt;unoptimized + debuginfo&lt;span style="color:#f92672"&gt;]&lt;/span&gt; target&lt;span style="color:#f92672"&gt;(&lt;/span&gt;s&lt;span style="color:#f92672"&gt;)&lt;/span&gt; in 0.39s
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Running &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;target/debug/tagless&lt;span style="color:#e6db74"&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;210&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;((&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt; / 10&lt;span style="color:#f92672"&gt;)&lt;/span&gt; + &lt;span style="color:#f92672"&gt;(&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;223&lt;/span&gt; - 23&lt;span style="color:#f92672"&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="基础的-expr-trait-定义"&gt;基础的 Expr trait 定义
+&lt;/h2&gt;&lt;p&gt;这个最基础的 &lt;code&gt;trait&lt;/code&gt; 是外部引入，不能更改的。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;pub&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;crate&lt;/span&gt;) &lt;span style="color:#66d9ef"&gt;trait&lt;/span&gt; Expr {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lit&lt;/span&gt;(i: &lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sub&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;mul&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;div&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="实现-string-和-u32-的-impl"&gt;实现 String 和 u32 的 impl
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; Expr &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lit&lt;/span&gt;(i: &lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; i
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; lhs &lt;span style="color:#f92672"&gt;+&lt;/span&gt; rhs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sub&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; lhs &lt;span style="color:#f92672"&gt;-&lt;/span&gt; rhs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;mul&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; lhs &lt;span style="color:#f92672"&gt;*&lt;/span&gt; rhs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;div&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; lhs &lt;span style="color:#f92672"&gt;/&lt;/span&gt; rhs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; Expr &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; String {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lit&lt;/span&gt;(i: &lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; i.to_string()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;format!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; + &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;)&amp;#34;&lt;/span&gt;, lhs, rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sub&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;format!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; - &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;)&amp;#34;&lt;/span&gt;, lhs, rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;mul&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;format!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; * &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;)&amp;#34;&lt;/span&gt;, lhs, rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;div&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;format!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; / &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;)&amp;#34;&lt;/span&gt;, lhs, rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以上的内容都单独抽出放入到 &lt;code&gt;expr.rs&lt;/code&gt; 中。&lt;/p&gt;
+&lt;h2 id="给-expr-增加-exp-方法"&gt;给 expr 增加 exp 方法
+&lt;/h2&gt;&lt;p&gt;因为 Expr trait 不可被更改，所以新增一个 &lt;code&gt;trait&lt;/code&gt; 的 TypeParamBounds[^https://doc.rust-lang.org/reference/items/traits.html]: Rust traits&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;Syntax
 Trait :
 unsafe? trait IDENTIFIER Generics? ( : TypeParamBounds? )? WhereClause? {
 TraitItem*
 }
-&lt;/code>&lt;/pre>&lt;p>定义一个新的 &lt;code>ExprWithExp&lt;/code> trait，并实现 &lt;code>u32&lt;/code> 和 &lt;code>String&lt;/code> 类型的 &lt;code>exp&lt;/code> 方法：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">trait&lt;/span> ExprWithExp: &lt;span style="color:#a6e22e">Expr&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">exp&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">impl&lt;/span> ExprWithExp &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#66d9ef">u32&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">exp&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lhs.pow(rhs)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">impl&lt;/span> ExprWithExp &lt;span style="color:#66d9ef">for&lt;/span> String {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">exp&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format!(&lt;span style="color:#e6db74">&amp;#34;(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> ^ &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>, lhs, rhs)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这样就可以给 &lt;code>u32&lt;/code> 和 &lt;code>String&lt;/code> 拓展出 &lt;code>exp&lt;/code> 方法&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// snippet
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">expr2&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>T: &lt;span style="color:#a6e22e">ExprWithExp&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>() -&amp;gt; &lt;span style="color:#a6e22e">T&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ExprWithExp::exp(expr(), Expr::lit(&lt;span style="color:#ae81ff">2&lt;/span>))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr2::&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">u32&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>());
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr2::&lt;span style="color:#f92672">&amp;lt;&lt;/span>String&lt;span style="color:#f92672">&amp;gt;&lt;/span>());
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>output:&lt;/p>
-&lt;pre tabindex="0">&lt;code>/Users/edward/.cargo/bin/cargo run --color=always --package tagless --bin tagless
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;定义一个新的 &lt;code&gt;ExprWithExp&lt;/code&gt; trait，并实现 &lt;code&gt;u32&lt;/code&gt; 和 &lt;code&gt;String&lt;/code&gt; 类型的 &lt;code&gt;exp&lt;/code&gt; 方法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;trait&lt;/span&gt; ExprWithExp: &lt;span style="color:#a6e22e"&gt;Expr&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;exp&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; ExprWithExp &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;exp&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; lhs.pow(rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; ExprWithExp &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; String {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;exp&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;format!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; ^ &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;)&amp;#34;&lt;/span&gt;, lhs, rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样就可以给 &lt;code&gt;u32&lt;/code&gt; 和 &lt;code&gt;String&lt;/code&gt; 拓展出 &lt;code&gt;exp&lt;/code&gt; 方法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// snippet
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;expr2&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;T: &lt;span style="color:#a6e22e"&gt;ExprWithExp&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;() -&amp;gt; &lt;span style="color:#a6e22e"&gt;T&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ExprWithExp::exp(expr(), Expr::lit(&lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;println!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;, expr2::&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;println!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;, expr2::&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;String&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;output:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;/Users/edward/.cargo/bin/cargo run --color=always --package tagless --bin tagless
 Compiling tagless v0.1.0 (/Users/edward/github/SASUKE40/tagless)
 Finished dev [unoptimized + debuginfo] target(s) in 0.56s
 Running `target/debug/tagless`
@@ -107,4 +107,4 @@ Running `target/debug/tagless`
 ((100 / 10) + (223 - 23))
 44100
 (((100 / 10) + (223 - 23)) ^ 2)
-&lt;/code>&lt;/pre></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>

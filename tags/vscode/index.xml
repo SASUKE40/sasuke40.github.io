@@ -1,150 +1,150 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>VSCode on Shilin's Blog</title><link>https://edward40.com/tags/vscode/</link><description>Recent content in VSCode on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 17 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/vscode/index.xml" rel="self" type="application/rss+xml"/><item><title>尝试一下 VSCode Remote 开发 Node 应用</title><link>https://edward40.com/p/try-vscode-remote/</link><pubDate>Fri, 17 May 2019 00:00:00 +0000</pubDate><guid>https://edward40.com/p/try-vscode-remote/</guid><description>&lt;img src="https://edward40.com/p/try-vscode-remote/vscode.jpg" alt="Featured image of post 尝试一下 VSCode Remote 开发 Node 应用" />&lt;h2 id="第一步-安装-vscode-insiders">第一步 安装 VSCode Insiders
-&lt;/h2>&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743917-54d5a517-841b-43ea-a993-df3f3b38f763.png#align=left&amp;amp;display=inline&amp;amp;height=559&amp;amp;originHeight=559&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>VSCode on Shilin's Blog</title><link>https://edward40.com/tags/vscode/</link><description>Recent content in VSCode on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 17 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/vscode/index.xml" rel="self" type="application/rss+xml"/><item><title>尝试一下 VSCode Remote 开发 Node 应用</title><link>https://edward40.com/p/try-vscode-remote/</link><pubDate>Fri, 17 May 2019 00:00:00 +0000</pubDate><guid>https://edward40.com/p/try-vscode-remote/</guid><description>&lt;img src="https://edward40.com/p/try-vscode-remote/vscode.jpg" alt="Featured image of post 尝试一下 VSCode Remote 开发 Node 应用" /&gt;&lt;h2 id="第一步-安装-vscode-insiders"&gt;第一步 安装 VSCode Insiders
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743917-54d5a517-841b-43ea-a993-df3f3b38f763.png#align=left&amp;amp;display=inline&amp;amp;height=559&amp;amp;originHeight=559&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="VSCode Insiders 官网"
->&lt;/p>
-&lt;p>&lt;a class="link" href="https://code.visualstudio.com/insiders/code.visualstudio.com" target="_blank" rel="noopener"
->https://code.visualstudio.com/insiders/code.visualstudio.com&lt;/a>&lt;/p>
-&lt;p>目前只能在 VSCode Insiders 版本体验 Remote Development&lt;/p>
-&lt;h2 id="第二步-安装-remote-development-插件">第二步 安装 Remote Development 插件
-&lt;/h2>&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743932-53418a7d-b276-4d95-8633-661c4b392296.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://code.visualstudio.com/insiders/code.visualstudio.com" target="_blank" rel="noopener"
+&gt;https://code.visualstudio.com/insiders/code.visualstudio.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;目前只能在 VSCode Insiders 版本体验 Remote Development&lt;/p&gt;
+&lt;h2 id="第二步-安装-remote-development-插件"&gt;第二步 安装 Remote Development 插件
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743932-53418a7d-b276-4d95-8633-661c4b392296.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="Remote Development 插件"
->&lt;/p>
-&lt;p>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpackmarketplace.visualstudio.com" target="_blank" rel="noopener"
->https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpackmarketplace.visualstudio.com&lt;/a>&lt;/p>
-&lt;h2 id="第三步-配置-ssh-config">第三步 配置 SSH Config
-&lt;/h2>&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743885-aff00c17-7d47-4e5f-aa2c-0611357ee7b5.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpackmarketplace.visualstudio.com" target="_blank" rel="noopener"
+&gt;https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpackmarketplace.visualstudio.com&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="第三步-配置-ssh-config"&gt;第三步 配置 SSH Config
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743885-aff00c17-7d47-4e5f-aa2c-0611357ee7b5.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="SSH 配置文件"
->&lt;/p>
-&lt;p>SSH 配置文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>Host ubuntu
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HostName &amp;lt;your-remote-host&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>User ubuntu
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里需要准备一个远端的机器，这样可以直接访问到服务器的文件。&lt;/p>
-&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743887-f9d7a7df-f9f5-4599-952a-7a658117c13d.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;p&gt;SSH 配置文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Host ubuntu
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;HostName &amp;lt;your-remote-host&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;User ubuntu
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里需要准备一个远端的机器，这样可以直接访问到服务器的文件。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743887-f9d7a7df-f9f5-4599-952a-7a658117c13d.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="远端文件管理"
->&lt;/p>
-&lt;h2 id="第四步-编写-node-应用">第四步 编写 Node 应用
-&lt;/h2>&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743913-8e957743-919c-4cde-8d25-1c936268274a.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;h2 id="第四步-编写-node-应用"&gt;第四步 编写 Node 应用
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743913-8e957743-919c-4cde-8d25-1c936268274a.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="一个简单的 node 应用"
->&lt;/p>
-&lt;p>基本就 4 个文件，已经放到 github 上：
+&gt;&lt;/p&gt;
+&lt;p&gt;基本就 4 个文件，已经放到 github 上：
 &lt;a class="link" href="https://github.com/SASUKE40/docker_web_appgithub.com" target="_blank" rel="noopener"
->https://github.com/SASUKE40/docker_web_appgithub.com&lt;/a>&lt;/p>
-&lt;h2 id="第五步-构建推送-docker-镜像">第五步 构建推送 docker 镜像
-&lt;/h2>&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743894-a5a67fa5-9c6f-4714-9bff-11cc6a3f1228.png#align=left&amp;amp;display=inline&amp;amp;height=395&amp;amp;originHeight=395&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;https://github.com/SASUKE40/docker_web_appgithub.com&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="第五步-构建推送-docker-镜像"&gt;第五步 构建推送 docker 镜像
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743894-a5a67fa5-9c6f-4714-9bff-11cc6a3f1228.png#align=left&amp;amp;display=inline&amp;amp;height=395&amp;amp;originHeight=395&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="Docker Hub"
->&lt;/p>
-&lt;p>&lt;a class="link" href="https://hub.docker.com/hub.docker.com" target="_blank" rel="noopener"
->https://hub.docker.com/hub.docker.com&lt;/a>&lt;/p>
-&lt;p>在应用项目目录下执行镜像构建&lt;/p>
-&lt;p>docker build -t edward40/node-web-app .&lt;/p>
-&lt;p>查看构建的镜像&lt;/p>
-&lt;p>docker images&lt;/p>
-&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743906-f9d99e10-71b5-4d15-86a1-f57560ed8092.png#align=left&amp;amp;display=inline&amp;amp;height=486&amp;amp;originHeight=486&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://hub.docker.com/hub.docker.com" target="_blank" rel="noopener"
+&gt;https://hub.docker.com/hub.docker.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在应用项目目录下执行镜像构建&lt;/p&gt;
+&lt;p&gt;docker build -t edward40/node-web-app .&lt;/p&gt;
+&lt;p&gt;查看构建的镜像&lt;/p&gt;
+&lt;p&gt;docker images&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743906-f9d99e10-71b5-4d15-86a1-f57560ed8092.png#align=left&amp;amp;display=inline&amp;amp;height=486&amp;amp;originHeight=486&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="构建查看 Docker 镜像"
->&lt;/p>
-&lt;p>本地试跑镜像&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker run -p 3000:8080 -d edward40/node-web-app
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>访问 &lt;a class="link" href="http://localhost:3000/" target="_blank" rel="noopener"
->http://localhost:3000&lt;/a>&lt;/p>
-&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743937-838f6346-89c3-48fb-ac35-3373fd56c6b3.png#align=left&amp;amp;display=inline&amp;amp;height=456&amp;amp;originHeight=456&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;p&gt;本地试跑镜像&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker run -p 3000:8080 -d edward40/node-web-app
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;访问 &lt;a class="link" href="http://localhost:3000/" target="_blank" rel="noopener"
+&gt;http://localhost:3000&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743937-838f6346-89c3-48fb-ac35-3373fd56c6b3.png#align=left&amp;amp;display=inline&amp;amp;height=456&amp;amp;originHeight=456&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="本地查看效果"
->&lt;/p>
-&lt;p>推送 Docker 镜像可以在终端执行&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>docker push edward40/docker_web_app:tagname
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>不过这里我用官方的自动化构建&lt;/p>
-&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743885-3f850c63-2cb3-41d9-81ca-1211546b3026.png#align=left&amp;amp;display=inline&amp;amp;height=456&amp;amp;originHeight=456&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;p&gt;推送 Docker 镜像可以在终端执行&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker push edward40/docker_web_app:tagname
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不过这里我用官方的自动化构建&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743885-3f850c63-2cb3-41d9-81ca-1211546b3026.png#align=left&amp;amp;display=inline&amp;amp;height=456&amp;amp;originHeight=456&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="配置自动化构建镜像"
->&lt;/p>
-&lt;p>只要推送代码就会 build 出镜像&lt;/p>
-&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743912-cfe78e3f-c1be-4f98-83b0-e235daa56acf.png#align=left&amp;amp;display=inline&amp;amp;height=456&amp;amp;originHeight=456&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;p&gt;只要推送代码就会 build 出镜像&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743912-cfe78e3f-c1be-4f98-83b0-e235daa56acf.png#align=left&amp;amp;display=inline&amp;amp;height=456&amp;amp;originHeight=456&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="自动化构建流程"
->&lt;/p>
-&lt;h2 id="第六步-服务器上跑镜像">第六步 服务器上跑镜像
-&lt;/h2>&lt;p>在 SSH 终端中拉取 Node 应用镜像&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo docker pull edward40/docker_web_app
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405744425-4a2520a6-6740-42f6-8d93-a4f4c42fd3c9.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;h2 id="第六步-服务器上跑镜像"&gt;第六步 服务器上跑镜像
+&lt;/h2&gt;&lt;p&gt;在 SSH 终端中拉取 Node 应用镜像&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker pull edward40/docker_web_app
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405744425-4a2520a6-6740-42f6-8d93-a4f4c42fd3c9.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="服务端拉取镜像"
->&lt;/p>
-&lt;p>服务端启动 Container&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo docker run -p 80:8080 -d edward40/docker_web_app
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="第七步-本地开发-docker-container">第七步 本地开发 Docker Container
-&lt;/h2>&lt;p>安装 Docker 插件&lt;/p>
-&lt;p>&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-dockermarketplace.visualstudio.com" target="_blank" rel="noopener"
->https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-dockermarketplace.visualstudio.com&lt;/a>&lt;/p>
-&lt;p>项目目录创建配置文件&lt;/p>
-&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743908-75e153f8-5f30-44ff-b834-03f1c1af31c9.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;p&gt;服务端启动 Container&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker run -p 80:8080 -d edward40/docker_web_app
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="第七步-本地开发-docker-container"&gt;第七步 本地开发 Docker Container
+&lt;/h2&gt;&lt;p&gt;安装 Docker 插件&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-dockermarketplace.visualstudio.com" target="_blank" rel="noopener"
+&gt;https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-dockermarketplace.visualstudio.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;项目目录创建配置文件&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743908-75e153f8-5f30-44ff-b834-03f1c1af31c9.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="创建 Container 配置文件"
->&lt;/p>
-&lt;p>创建 Container 配置文件&lt;/p>
-&lt;p>不过因为使用 Alipine 导致无法打开&lt;/p>
-&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743920-7b386948-9bb9-4b72-962f-df34bd871658.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;p&gt;创建 Container 配置文件&lt;/p&gt;
+&lt;p&gt;不过因为使用 Alipine 导致无法打开&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743920-7b386948-9bb9-4b72-962f-df34bd871658.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="12"
->&lt;/p>
-&lt;p>需要切换别的 Linux 系统，并增加 .devcontainer.json 文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Node.js Sample&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;dockerFile&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Dockerfile&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;appPort&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">3000&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;extensions&amp;#34;&lt;/span>: []
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Dockerfile 的 alpine 换成 lts 版本&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> node:lts&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#75715e"># Create app directory&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">WORKDIR&lt;/span>&lt;span style="color:#e6db74"> /usr/src/app&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#75715e"># Install app dependencies&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#75715e"># A wildcard is used to ensure both package.json AND package-lock.json are copied&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#75715e"># where available (npm@5+)&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> package&lt;span style="color:#ae81ff">\*&lt;/span>.json ./&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">RUN&lt;/span> npm install&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#75715e"># If you are building your code for production&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#75715e"># RUN npm ci --only=production&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#75715e"># Bundle app source&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> . .&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">EXPOSE&lt;/span>&lt;span style="color:#e6db74"> 8080&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">CMD&lt;/span> [ &lt;span style="color:#e6db74">&amp;#34;npm&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;start&amp;#34;&lt;/span> ]&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743946-1675fb65-b892-49ae-aca4-7fab222b3909.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;p&gt;需要切换别的 Linux 系统，并增加 .devcontainer.json 文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;Node.js Sample&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;dockerFile&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;Dockerfile&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;appPort&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;3000&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;extensions&amp;#34;&lt;/span&gt;: []
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Dockerfile 的 alpine 换成 lts 版本&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;FROM&lt;/span&gt; &lt;span style="color:#e6db74"&gt;node:lts&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# Create app directory&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;WORKDIR&lt;/span&gt; &lt;span style="color:#e6db74"&gt;/usr/src/app&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# Install app dependencies&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# A wildcard is used to ensure both package.json AND package-lock.json are copied&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# where available (npm@5+)&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;COPY&lt;/span&gt; package&lt;span style="color:#ae81ff"&gt;\*&lt;/span&gt;.json ./&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;RUN&lt;/span&gt; npm install&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# If you are building your code for production&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# RUN npm ci --only=production&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# Bundle app source&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;COPY&lt;/span&gt; . .&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;EXPOSE&lt;/span&gt; &lt;span style="color:#e6db74"&gt;8080&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;CMD&lt;/span&gt; [ &lt;span style="color:#e6db74"&gt;&amp;#34;npm&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;start&amp;#34;&lt;/span&gt; ]&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743946-1675fb65-b892-49ae-aca4-7fab222b3909.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="点击右下在容器中打开"
->&lt;/p>
-&lt;p>点击右下在容器中打开&lt;/p>
-&lt;p>打开 Shell&lt;/p>
-&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743964-e306f894-05c6-4119-8c0f-e38f76faaf6d.png#align=left&amp;amp;display=inline&amp;amp;height=510&amp;amp;originHeight=510&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;p&gt;点击右下在容器中打开&lt;/p&gt;
+&lt;p&gt;打开 Shell&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743964-e306f894-05c6-4119-8c0f-e38f76faaf6d.png#align=left&amp;amp;display=inline&amp;amp;height=510&amp;amp;originHeight=510&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="最终可以在容器中方便用终端"
->&lt;/p>
-&lt;p>最终可以在容器中方便用终端&lt;/p>
-&lt;p>&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743934-6f5c8340-3a92-4f55-a40b-e503dbde9afd.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
+&gt;&lt;/p&gt;
+&lt;p&gt;最终可以在容器中方便用终端&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743934-6f5c8340-3a92-4f55-a40b-e503dbde9afd.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="使用容器终端"
->&lt;/p>
-&lt;p>使用容器终端&lt;/p>
-&lt;h2 id="使用总结">使用总结
-&lt;/h2>&lt;p>VSCode 的 Remote SSH 插件完美击中运维痛点，以后可以抛弃 Vim 直接在 VSCode 里面改东西，非常方便。
+&gt;&lt;/p&gt;
+&lt;p&gt;使用容器终端&lt;/p&gt;
+&lt;h2 id="使用总结"&gt;使用总结
+&lt;/h2&gt;&lt;p&gt;VSCode 的 Remote SSH 插件完美击中运维痛点，以后可以抛弃 Vim 直接在 VSCode 里面改东西，非常方便。
 而 Remote Containers 插件就有点鸡肋，连到 Docker 容器中好像也没什么大的意义。个人更倾向代码提交触发 Docker Hub 的自动构建能力，并服务器上更新 Docker 镜像容器这样的工作流。如果有小伙伴发现这个插件更好的用法务必留言。
-最后，VSCode Remote Development 快快 Release 吧！&lt;/p></description></item></channel></rss>
+最后，VSCode Remote Development 快快 Release 吧！&lt;/p&gt;</description></item></channel></rss>

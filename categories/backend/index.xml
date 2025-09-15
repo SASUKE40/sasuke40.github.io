@@ -1,85 +1,85 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Backend on Shilin's Blog</title><link>https://edward40.com/categories/backend/</link><description>Recent content in Backend on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 06 Feb 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/categories/backend/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu 安裝 php</title><link>https://edward40.com/p/php-installation/</link><pubDate>Sat, 06 Feb 2016 00:00:00 +0000</pubDate><guid>https://edward40.com/p/php-installation/</guid><description>&lt;img src="https://edward40.com/p/php-installation/php.png" alt="Featured image of post Ubuntu 安裝 php" />&lt;ol>
-&lt;li>安装 apt 源管理工具、添加 nginx 和 php 的安装源&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get install python-software-properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>add-apt-repository ppa:nginx/stable
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>add-apt-repository ppa:ondrej/php5
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>更新系统软件&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get update
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
-&lt;li>安装 mysql&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get install mysql-server mysql-client
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
-&lt;li>安装 php 及对 mysql 的支持&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get install php5-fpm php5-mysql
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="5">
-&lt;li>根据实际需要，选择性的安装 php 的各类功能模块&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get install php-pear php5-dev php5-curl
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt-get install php5-gd php5-intl php5-imagick
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt-get install php5-imap php5-mcrypt php5-memcache
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt-get install php5-ming php5-ps php5-pspell
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt-get install php5-recode php5-snmp php5-sqlite
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apt-get install php5-tidy php5-xmlrpc php5-xsl
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="6">
-&lt;li>安装 nginx&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get install nginx
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="7">
-&lt;li>修改 nginx 默认站点配置文件&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vim /etc/nginx/sites-available/default
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server &lt;span style="color:#f92672">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> listen &lt;span style="color:#ae81ff">80&lt;/span> default_server;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> listen &lt;span style="color:#f92672">[&lt;/span>::&lt;span style="color:#f92672">]&lt;/span>:80 default_server ipv6only&lt;span style="color:#f92672">=&lt;/span>on;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> root /usr/share/nginx/html;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> index index.php index.html index.htm;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> server_name server_domain_name_or_IP;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> location / &lt;span style="color:#f92672">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> try_files $uri $uri/ &lt;span style="color:#f92672">=&lt;/span>404;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> error_page &lt;span style="color:#ae81ff">404&lt;/span> /404.html;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> error_page &lt;span style="color:#ae81ff">500&lt;/span> &lt;span style="color:#ae81ff">502&lt;/span> &lt;span style="color:#ae81ff">503&lt;/span> &lt;span style="color:#ae81ff">504&lt;/span> /50x.html;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> location &lt;span style="color:#f92672">=&lt;/span> /50x.html &lt;span style="color:#f92672">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> root /usr/share/nginx/html;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> location ~ &lt;span style="color:#ae81ff">\.&lt;/span>php$ &lt;span style="color:#f92672">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> try_files $uri &lt;span style="color:#f92672">=&lt;/span>404;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fastcgi_split_path_info ^&lt;span style="color:#f92672">(&lt;/span>.+&lt;span style="color:#ae81ff">\.&lt;/span>php&lt;span style="color:#f92672">)(&lt;/span>/.+&lt;span style="color:#f92672">)&lt;/span>$;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fastcgi_pass unix:/var/run/php5-fpm.sock;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fastcgi_index index.php;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> include fastcgi_params;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Play Framework項目初始化</title><link>https://edward40.com/p/play-framework/</link><pubDate>Sat, 23 May 2015 00:00:00 +0000</pubDate><guid>https://edward40.com/p/play-framework/</guid><description>&lt;img src="https://edward40.com/p/play-framework/play.jpg" alt="Featured image of post Play Framework項目初始化" />&lt;h2 id="安裝-activator">安裝 Activator
-&lt;/h2>&lt;p>先下載&lt;a class="link" href="http://www.typesafe.com/community/core-tools/activator-and-sbt" target="_blank" rel="noopener"
->Activator&lt;/a>
-解壓到&lt;code>D:\Program Files\activator-1.3.2&lt;/code>
-將&lt;code>D:\Program Files\activator-1.3.2&lt;/code>加到環境變量 Path 中
-在你的項目目錄中執行以下命令，驗證是否安裝成功&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>activator -help
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="創建-play-項目">創建 Play 項目
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>activator new demo play-java
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd demo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>activator
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="安裝-eclipse-插件">安裝 Eclipse 插件
-&lt;/h2>&lt;p>&lt;a class="link" href="http://scala-ide.org/download/current.html" target="_blank" rel="noopener"
->Scala IDE&lt;/a>
-在 Eclipse 中 Install New Software 增加宰割 Update Site，記得安裝 Play Support&lt;/p>
-&lt;h2 id="創建-eclipse-項目">創建 Eclipse 項目
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>eclipse with-source&lt;span style="color:#f92672">=&lt;/span>true
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="跑起來看看">跑起來看看
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>run
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在瀏覽器中打開&lt;a class="link" href="http://localhost:9000" target="_blank" rel="noopener"
->http://localhost:9000&lt;/a>，項目就跑起來了 ╰(￣ ▽ ￣)╮&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Backend on Shilin's Blog</title><link>https://edward40.com/categories/backend/</link><description>Recent content in Backend on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 06 Feb 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/categories/backend/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu 安裝 php</title><link>https://edward40.com/p/php-installation/</link><pubDate>Sat, 06 Feb 2016 00:00:00 +0000</pubDate><guid>https://edward40.com/p/php-installation/</guid><description>&lt;img src="https://edward40.com/p/php-installation/php.png" alt="Featured image of post Ubuntu 安裝 php" /&gt;&lt;ol&gt;
+&lt;li&gt;安装 apt 源管理工具、添加 nginx 和 php 的安装源&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get install python-software-properties
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;add-apt-repository ppa:nginx/stable
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;add-apt-repository ppa:ondrej/php5
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="2"&gt;
+&lt;li&gt;更新系统软件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;li&gt;安装 mysql&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get install mysql-server mysql-client
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="4"&gt;
+&lt;li&gt;安装 php 及对 mysql 的支持&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get install php5-fpm php5-mysql
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="5"&gt;
+&lt;li&gt;根据实际需要，选择性的安装 php 的各类功能模块&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get install php-pear php5-dev php5-curl
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get install php5-gd php5-intl php5-imagick
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get install php5-imap php5-mcrypt php5-memcache
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get install php5-ming php5-ps php5-pspell
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get install php5-recode php5-snmp php5-sqlite
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get install php5-tidy php5-xmlrpc php5-xsl
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="6"&gt;
+&lt;li&gt;安装 nginx&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get install nginx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="7"&gt;
+&lt;li&gt;修改 nginx 默认站点配置文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vim /etc/nginx/sites-available/default
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;server &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; listen &lt;span style="color:#ae81ff"&gt;80&lt;/span&gt; default_server;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; listen &lt;span style="color:#f92672"&gt;[&lt;/span&gt;::&lt;span style="color:#f92672"&gt;]&lt;/span&gt;:80 default_server ipv6only&lt;span style="color:#f92672"&gt;=&lt;/span&gt;on;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; root /usr/share/nginx/html;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; index index.php index.html index.htm;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; server_name server_domain_name_or_IP;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; location / &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; try_files $uri $uri/ &lt;span style="color:#f92672"&gt;=&lt;/span&gt;404;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; error_page &lt;span style="color:#ae81ff"&gt;404&lt;/span&gt; /404.html;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; error_page &lt;span style="color:#ae81ff"&gt;500&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;502&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;503&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;504&lt;/span&gt; /50x.html;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; location &lt;span style="color:#f92672"&gt;=&lt;/span&gt; /50x.html &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; root /usr/share/nginx/html;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; location ~ &lt;span style="color:#ae81ff"&gt;\.&lt;/span&gt;php$ &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; try_files $uri &lt;span style="color:#f92672"&gt;=&lt;/span&gt;404;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; fastcgi_split_path_info ^&lt;span style="color:#f92672"&gt;(&lt;/span&gt;.+&lt;span style="color:#ae81ff"&gt;\.&lt;/span&gt;php&lt;span style="color:#f92672"&gt;)(&lt;/span&gt;/.+&lt;span style="color:#f92672"&gt;)&lt;/span&gt;$;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; fastcgi_pass unix:/var/run/php5-fpm.sock;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; fastcgi_index index.php;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; include fastcgi_params;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Play Framework項目初始化</title><link>https://edward40.com/p/play-framework/</link><pubDate>Sat, 23 May 2015 00:00:00 +0000</pubDate><guid>https://edward40.com/p/play-framework/</guid><description>&lt;img src="https://edward40.com/p/play-framework/play.jpg" alt="Featured image of post Play Framework項目初始化" /&gt;&lt;h2 id="安裝-activator"&gt;安裝 Activator
+&lt;/h2&gt;&lt;p&gt;先下載&lt;a class="link" href="http://www.typesafe.com/community/core-tools/activator-and-sbt" target="_blank" rel="noopener"
+&gt;Activator&lt;/a&gt;
+解壓到&lt;code&gt;D:\Program Files\activator-1.3.2&lt;/code&gt;
+將&lt;code&gt;D:\Program Files\activator-1.3.2&lt;/code&gt;加到環境變量 Path 中
+在你的項目目錄中執行以下命令，驗證是否安裝成功&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;activator -help
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="創建-play-項目"&gt;創建 Play 項目
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;activator new demo play-java
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd demo
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;activator
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="安裝-eclipse-插件"&gt;安裝 Eclipse 插件
+&lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="http://scala-ide.org/download/current.html" target="_blank" rel="noopener"
+&gt;Scala IDE&lt;/a&gt;
+在 Eclipse 中 Install New Software 增加宰割 Update Site，記得安裝 Play Support&lt;/p&gt;
+&lt;h2 id="創建-eclipse-項目"&gt;創建 Eclipse 項目
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;eclipse with-source&lt;span style="color:#f92672"&gt;=&lt;/span&gt;true
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="跑起來看看"&gt;跑起來看看
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;run
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在瀏覽器中打開&lt;a class="link" href="http://localhost:9000" target="_blank" rel="noopener"
+&gt;http://localhost:9000&lt;/a&gt;，項目就跑起來了 ╰(￣ ▽ ￣)╮&lt;/p&gt;</description></item></channel></rss>

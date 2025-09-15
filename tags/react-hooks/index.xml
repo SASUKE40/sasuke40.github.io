@@ -1,102 +1,102 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>React Hooks on Shilin's Blog</title><link>https://edward40.com/tags/react-hooks/</link><description>Recent content in React Hooks on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 10 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/react-hooks/index.xml" rel="self" type="application/rss+xml"/><item><title>对比 Vue Composition API 和 React Hooks</title><link>https://edward40.com/p/compare-vue-composition-api-with-react-hooks/</link><pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/p/compare-vue-composition-api-with-react-hooks/</guid><description>&lt;img src="https://edward40.com/p/compare-vue-composition-api-with-react-hooks/vue.jpg" alt="Featured image of post 对比 Vue Composition API 和 React Hooks" />&lt;h1 id="引言">引言
-&lt;/h1>&lt;p>最近 &lt;a class="link" href="https://github.com/vuejs/vue-next" target="_blank" rel="noopener"
->Vue 3.0&lt;/a> 发布了 Beta 版本，其中最引人注意的就是其 &lt;code>Composition API&lt;/code>。而这个设计近期经常被拿来和
-&lt;code>React Hooks&lt;/code> 进行比较，以下是两个代码片段：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-jsx" data-lang="jsx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// React
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">Component&lt;/span>(&lt;span style="color:#a6e22e">props&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> [&lt;span style="color:#a6e22e">a&lt;/span>, &lt;span style="color:#a6e22e">setA&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">useState&lt;/span>(&lt;span style="color:#ae81ff">0&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &amp;lt;&lt;span style="color:#f92672">a&lt;/span> &lt;span style="color:#a6e22e">onClick&lt;/span>&lt;span style="color:#f92672">=&lt;/span>{() =&amp;gt; &lt;span style="color:#a6e22e">setA&lt;/span>(&lt;span style="color:#a6e22e">x&lt;/span> =&amp;gt; &lt;span style="color:#a6e22e">x&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>)}&amp;gt;{&lt;span style="color:#a6e22e">a&lt;/span>}&amp;lt;/&lt;span style="color:#f92672">a&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-jsx" data-lang="jsx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Vue 3 composition API
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">Component&lt;/span>(&lt;span style="color:#a6e22e">props&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">ref&lt;/span>(&lt;span style="color:#ae81ff">0&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">setA&lt;/span> &lt;span style="color:#f92672">=&lt;/span> () =&amp;gt; &lt;span style="color:#a6e22e">a&lt;/span>.&lt;span style="color:#a6e22e">value&lt;/span>&lt;span style="color:#f92672">++&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &amp;lt;&lt;span style="color:#f92672">a&lt;/span> &lt;span style="color:#a6e22e">onClick&lt;/span>&lt;span style="color:#f92672">=&lt;/span>{&lt;span style="color:#a6e22e">setA&lt;/span>}&amp;gt;{&lt;span style="color:#a6e22e">a&lt;/span>}&amp;lt;/&lt;span style="color:#f92672">a&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>我们可以看到两者的心智模型非常不同，React 编程范式更接近于纯函数，Vue 则采取了 Reactivity 的模式。&lt;/p>
-&lt;h1 id="react-hooks-的心智负担">React Hooks 的心智负担
-&lt;/h1>&lt;p>React Hooks 是在 2018 年 10 月 React Conf 的时候正式向广大开发者进行宣传，在当时看到 Dan Abramov 演讲以及现场使用 React Hooks 重构 Class Component 的时候简直惊为天人，那一刻我深深被 Function Programming 所着迷。
-然而，直到如今一年半开发者各种实践，发现 React Hooks 并没有想象中的那么美好。你现在可以在知乎、掘金等各类平台上搜寻到大量的《React Hooks 最佳实践》，这不禁让人深思：React Hooks 怎么没那么美好了？&lt;/p>
-&lt;p>React Hooks 开发经常提及的一些问题我列举几个：&lt;/p>
-&lt;ol>
-&lt;li>我该使用单个 state 变量还是多个 state 变量？&lt;/li>
-&lt;li>deps 依赖过多，导致 Hooks 难以维护？&lt;/li>
-&lt;li>该不该使用 useMemo？&lt;/li>
-&lt;/ol>
-&lt;p>然后基于这些问题的最佳实践，人们又总结出：&lt;/p>
-&lt;ol>
-&lt;li>将完全不相关的 state 拆分为多组 state。&lt;/li>
-&lt;li>如果某些 state 是相互关联的，或者需要一起发生改变，就可以把它们合并为一组 state。&lt;/li>
-&lt;li>依赖数组依赖的值最好不要超过 3 个，否则会导致代码会难以维护。&lt;/li>
-&lt;li>如果发现依赖数组依赖的值过多，我们应该采取一些方法来减少它。
-&lt;ol>
-&lt;li>去掉不必要的依赖。&lt;/li>
-&lt;li>将 Hook 拆分为更小的单元，每个 Hook 依赖于各自的依赖数组。&lt;/li>
-&lt;li>通过合并相关的 state，将多个依赖值聚合为一个。&lt;/li>
-&lt;li>通过 setState 回调函数获取最新的 state，以减少外部依赖。&lt;/li>
-&lt;li>通过 ref 来读取可变变量的值，不过需要注意控制修改它的途径。&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>应该使用 useMemo 的场景：
-&lt;ol>
-&lt;li>保持引用相等&lt;/li>
-&lt;li>成本很高的计算&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>无需使用 useMemo 的场景：
-&lt;ol>
-&lt;li>如果返回的值是原始值： string, boolean, null, undefined, number, symbol（不包括动态声明的 Symbol），一般不需要使用 useMemo。&lt;/li>
-&lt;li>仅在组件内部用到的 object、array、函数等（没有作为 props 传递给子组件），且没有用到其他 Hook 的依赖数组中，一般不需要使用 useMemo。&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>Hooks、Render Props 和高阶组件都有各自的使用场景，具体使用哪一种要看实际情况。&lt;/li>
-&lt;li>若 Hook 类型相同，且依赖数组一致时，应该合并成一个 Hook。&lt;/li>
-&lt;li>自定义 Hooks 的返回值可以使用 Tuple 类型，更易于在外部重命名。如果返回的值过多，则不建议使用。&lt;/li>
-&lt;li>ref 不要直接暴露给外部使用，而是提供一个修改值的方法。&lt;/li>
-&lt;li>在使用 useMemo 或者 useCallback 时，可以借助 ref 或者 setState callback，确保返回的函数只创建一次。也就是说，函数不会根据依赖数组的变化而二次创建。&lt;/li>
-&lt;/ol>
-&lt;p>React Hooks 给人一种美丽的错觉，Function Component 可以非常简单，但长期开发下才逐渐暴露出函数式编程在 JavaScript 中的困境。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>React Hooks on Shilin's Blog</title><link>https://edward40.com/tags/react-hooks/</link><description>Recent content in React Hooks on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 10 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/react-hooks/index.xml" rel="self" type="application/rss+xml"/><item><title>对比 Vue Composition API 和 React Hooks</title><link>https://edward40.com/p/compare-vue-composition-api-with-react-hooks/</link><pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/p/compare-vue-composition-api-with-react-hooks/</guid><description>&lt;img src="https://edward40.com/p/compare-vue-composition-api-with-react-hooks/vue.jpg" alt="Featured image of post 对比 Vue Composition API 和 React Hooks" /&gt;&lt;h1 id="引言"&gt;引言
+&lt;/h1&gt;&lt;p&gt;最近 &lt;a class="link" href="https://github.com/vuejs/vue-next" target="_blank" rel="noopener"
+&gt;Vue 3.0&lt;/a&gt; 发布了 Beta 版本，其中最引人注意的就是其 &lt;code&gt;Composition API&lt;/code&gt;。而这个设计近期经常被拿来和
+&lt;code&gt;React Hooks&lt;/code&gt; 进行比较，以下是两个代码片段：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// React
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; [&lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;setA&lt;/span&gt;] &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;useState&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;a&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;onClick&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{() =&amp;gt; &lt;span style="color:#a6e22e"&gt;setA&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; =&amp;gt; &lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)}&amp;gt;{&lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;}&amp;lt;/&lt;span style="color:#f92672"&gt;a&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Vue 3 composition API
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;a&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ref&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;setA&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; () =&amp;gt; &lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;value&lt;/span&gt;&lt;span style="color:#f92672"&gt;++&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;a&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;onClick&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{&lt;span style="color:#a6e22e"&gt;setA&lt;/span&gt;}&amp;gt;{&lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;}&amp;lt;/&lt;span style="color:#f92672"&gt;a&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们可以看到两者的心智模型非常不同，React 编程范式更接近于纯函数，Vue 则采取了 Reactivity 的模式。&lt;/p&gt;
+&lt;h1 id="react-hooks-的心智负担"&gt;React Hooks 的心智负担
+&lt;/h1&gt;&lt;p&gt;React Hooks 是在 2018 年 10 月 React Conf 的时候正式向广大开发者进行宣传，在当时看到 Dan Abramov 演讲以及现场使用 React Hooks 重构 Class Component 的时候简直惊为天人，那一刻我深深被 Function Programming 所着迷。
+然而，直到如今一年半开发者各种实践，发现 React Hooks 并没有想象中的那么美好。你现在可以在知乎、掘金等各类平台上搜寻到大量的《React Hooks 最佳实践》，这不禁让人深思：React Hooks 怎么没那么美好了？&lt;/p&gt;
+&lt;p&gt;React Hooks 开发经常提及的一些问题我列举几个：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;我该使用单个 state 变量还是多个 state 变量？&lt;/li&gt;
+&lt;li&gt;deps 依赖过多，导致 Hooks 难以维护？&lt;/li&gt;
+&lt;li&gt;该不该使用 useMemo？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;然后基于这些问题的最佳实践，人们又总结出：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将完全不相关的 state 拆分为多组 state。&lt;/li&gt;
+&lt;li&gt;如果某些 state 是相互关联的，或者需要一起发生改变，就可以把它们合并为一组 state。&lt;/li&gt;
+&lt;li&gt;依赖数组依赖的值最好不要超过 3 个，否则会导致代码会难以维护。&lt;/li&gt;
+&lt;li&gt;如果发现依赖数组依赖的值过多，我们应该采取一些方法来减少它。
+&lt;ol&gt;
+&lt;li&gt;去掉不必要的依赖。&lt;/li&gt;
+&lt;li&gt;将 Hook 拆分为更小的单元，每个 Hook 依赖于各自的依赖数组。&lt;/li&gt;
+&lt;li&gt;通过合并相关的 state，将多个依赖值聚合为一个。&lt;/li&gt;
+&lt;li&gt;通过 setState 回调函数获取最新的 state，以减少外部依赖。&lt;/li&gt;
+&lt;li&gt;通过 ref 来读取可变变量的值，不过需要注意控制修改它的途径。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;应该使用 useMemo 的场景：
+&lt;ol&gt;
+&lt;li&gt;保持引用相等&lt;/li&gt;
+&lt;li&gt;成本很高的计算&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;无需使用 useMemo 的场景：
+&lt;ol&gt;
+&lt;li&gt;如果返回的值是原始值： string, boolean, null, undefined, number, symbol（不包括动态声明的 Symbol），一般不需要使用 useMemo。&lt;/li&gt;
+&lt;li&gt;仅在组件内部用到的 object、array、函数等（没有作为 props 传递给子组件），且没有用到其他 Hook 的依赖数组中，一般不需要使用 useMemo。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Hooks、Render Props 和高阶组件都有各自的使用场景，具体使用哪一种要看实际情况。&lt;/li&gt;
+&lt;li&gt;若 Hook 类型相同，且依赖数组一致时，应该合并成一个 Hook。&lt;/li&gt;
+&lt;li&gt;自定义 Hooks 的返回值可以使用 Tuple 类型，更易于在外部重命名。如果返回的值过多，则不建议使用。&lt;/li&gt;
+&lt;li&gt;ref 不要直接暴露给外部使用，而是提供一个修改值的方法。&lt;/li&gt;
+&lt;li&gt;在使用 useMemo 或者 useCallback 时，可以借助 ref 或者 setState callback，确保返回的函数只创建一次。也就是说，函数不会根据依赖数组的变化而二次创建。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;React Hooks 给人一种美丽的错觉，Function Component 可以非常简单，但长期开发下才逐渐暴露出函数式编程在 JavaScript 中的困境。
 对这个问题大家在思考，而 Vue 3.0 也在思考如何从 React Hooks 上取其精华去其糟粕。我们可以在 Vue RFC 中看到最初的 &lt;a class="link" href="https://github.com/vuejs/rfcs/pull/17" target="_blank" rel="noopener"
->Class API&lt;/a> 到 &lt;a class="link" href="https://github.com/vuejs/rfcs/pull/42" target="_blank" rel="noopener"
->Function-based Component API&lt;/a> 取其 FP 的精华，再到被修订为 &lt;a class="link" href="https://github.com/vuejs/rfcs/pull/78" target="_blank" rel="noopener"
->Composition API&lt;/a> 采用 Reactivity 的过程。&lt;/p>
-&lt;p>这种改变和 JavaScript 这门语言本身的编程范式离不开，主要还是围绕一等公民函数、动态类型这两点。&lt;/p>
-&lt;h1 id="vue-composition-api-是否美好">Vue Composition API 是否美好
-&lt;/h1>&lt;p>Vue 一直被人所称道的就是其开发简便，这也是隐式依赖跟踪带来的便利。然而成也萧何败也萧何，Vue 诟病的一点就是闭包对象的不可预测性，例如 this。&lt;/p>
-&lt;p>在 Vue Composition API 中，我发现官方对 Ref 和 Reactive 给出了最佳实践。可能这里就有所谓的幻灭存在，就像当年很多人不听 React 官方最佳实践，在 componentWillMount 里获取数据一样。&lt;/p>
-&lt;p>&lt;a class="link" href="https://composition-api.vuejs.org/#ref-vs-reactive" target="_blank" rel="noopener"
->Ref vs. Reactive&lt;/a> 章节中有如下的对比：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// style 1: separate variables
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">let&lt;/span> &lt;span style="color:#a6e22e">x&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">let&lt;/span> &lt;span style="color:#a6e22e">y&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">updatePosition&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">x&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">e&lt;/span>.&lt;span style="color:#a6e22e">pageX&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">y&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">e&lt;/span>.&lt;span style="color:#a6e22e">pageY&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// --- compared to ---
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// style 2: single object
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">pos&lt;/span> &lt;span style="color:#f92672">=&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">x&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">y&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">updatePosition&lt;/span>(&lt;span style="color:#a6e22e">e&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">pos&lt;/span>.&lt;span style="color:#a6e22e">x&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">e&lt;/span>.&lt;span style="color:#a6e22e">pageX&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">pos&lt;/span>.&lt;span style="color:#a6e22e">y&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">e&lt;/span>.&lt;span style="color:#a6e22e">pageY&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>那么依赖跟踪的迷惑就此开始，因为当你对已经 reactive 的对象进行解构赋值或者赋给新值的时候，依赖跟踪就失效了。官方对这个的态度比较模糊：&lt;/p>
-&lt;blockquote>
-&lt;p>在现阶段，我们认为在 ref vs reactive 上实施最佳做法为时尚早。我们建议您从上面的两个选项中选择与您的心智模型相符的方式。我们将收集实开发场景下的用户真反馈，并最终提供有关此主题的更明确的指导。&lt;/p>&lt;/blockquote>
-&lt;h1 id="对比两者">对比两者
-&lt;/h1>&lt;ul>
-&lt;li>Vue Composition API：闭包变量、响应式的依赖追踪&lt;/li>
-&lt;li>React Hooks: 纯函数、无副作用&lt;/li>
-&lt;/ul>
-&lt;p>其实没有好坏之分，在 JavaScript 这种编程范式模棱两可的语言中，你既可以写函数，但又不能不让改引用变量（像 cpp 的 const&amp;amp; 一般），你又可以面向对象编程（像 Java 一样疯狂反射，咻咻咻）。&lt;/p>
-&lt;p>其实语言、框架没有优劣，主要看使用的人对其理解到什么程度。使用 React Hooks 就要尽量采用 immutable 变量，降低函数调用过频影响性能（部分 React 调度策略兜底）；使用 Vue 就尽量不要依赖跟踪丢失或者滥用依赖跟踪导致行为不可预测。&lt;/p>
-&lt;h1 id="最后">最后
-&lt;/h1>&lt;p>React 和 Vue 没有不可调和之处，他们是 JavaScript 这门语言一体两面的提现。&lt;/p>
-&lt;p>未来哪个社区更加繁荣还是要看 TC39 把 JavaScript 带向何方，是更加 Functional Programming 呢？还是更加 Imperative Programming 呢？&lt;/p></description></item></channel></rss>
+&gt;Class API&lt;/a&gt; 到 &lt;a class="link" href="https://github.com/vuejs/rfcs/pull/42" target="_blank" rel="noopener"
+&gt;Function-based Component API&lt;/a&gt; 取其 FP 的精华，再到被修订为 &lt;a class="link" href="https://github.com/vuejs/rfcs/pull/78" target="_blank" rel="noopener"
+&gt;Composition API&lt;/a&gt; 采用 Reactivity 的过程。&lt;/p&gt;
+&lt;p&gt;这种改变和 JavaScript 这门语言本身的编程范式离不开，主要还是围绕一等公民函数、动态类型这两点。&lt;/p&gt;
+&lt;h1 id="vue-composition-api-是否美好"&gt;Vue Composition API 是否美好
+&lt;/h1&gt;&lt;p&gt;Vue 一直被人所称道的就是其开发简便，这也是隐式依赖跟踪带来的便利。然而成也萧何败也萧何，Vue 诟病的一点就是闭包对象的不可预测性，例如 this。&lt;/p&gt;
+&lt;p&gt;在 Vue Composition API 中，我发现官方对 Ref 和 Reactive 给出了最佳实践。可能这里就有所谓的幻灭存在，就像当年很多人不听 React 官方最佳实践，在 componentWillMount 里获取数据一样。&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://composition-api.vuejs.org/#ref-vs-reactive" target="_blank" rel="noopener"
+&gt;Ref vs. Reactive&lt;/a&gt; 章节中有如下的对比：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// style 1: separate variables
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;y&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;updatePosition&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;pageX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;y&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;pageY&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// --- compared to ---
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// style 2: single object
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;pos&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;x&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;y&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;updatePosition&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;pos&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;pageX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;pos&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;y&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;pageY&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;那么依赖跟踪的迷惑就此开始，因为当你对已经 reactive 的对象进行解构赋值或者赋给新值的时候，依赖跟踪就失效了。官方对这个的态度比较模糊：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在现阶段，我们认为在 ref vs reactive 上实施最佳做法为时尚早。我们建议您从上面的两个选项中选择与您的心智模型相符的方式。我们将收集实开发场景下的用户真反馈，并最终提供有关此主题的更明确的指导。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h1 id="对比两者"&gt;对比两者
+&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;Vue Composition API：闭包变量、响应式的依赖追踪&lt;/li&gt;
+&lt;li&gt;React Hooks: 纯函数、无副作用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其实没有好坏之分，在 JavaScript 这种编程范式模棱两可的语言中，你既可以写函数，但又不能不让改引用变量（像 cpp 的 const&amp;amp; 一般），你又可以面向对象编程（像 Java 一样疯狂反射，咻咻咻）。&lt;/p&gt;
+&lt;p&gt;其实语言、框架没有优劣，主要看使用的人对其理解到什么程度。使用 React Hooks 就要尽量采用 immutable 变量，降低函数调用过频影响性能（部分 React 调度策略兜底）；使用 Vue 就尽量不要依赖跟踪丢失或者滥用依赖跟踪导致行为不可预测。&lt;/p&gt;
+&lt;h1 id="最后"&gt;最后
+&lt;/h1&gt;&lt;p&gt;React 和 Vue 没有不可调和之处，他们是 JavaScript 这门语言一体两面的提现。&lt;/p&gt;
+&lt;p&gt;未来哪个社区更加繁荣还是要看 TC39 把 JavaScript 带向何方，是更加 Functional Programming 呢？还是更加 Imperative Programming 呢？&lt;/p&gt;</description></item></channel></rss>

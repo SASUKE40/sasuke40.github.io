@@ -1,114 +1,114 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rust on Shilin's Blog</title><link>https://edward40.com/tags/rust/</link><description>Recent content in Rust on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 18 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/rust/index.xml" rel="self" type="application/rss+xml"/><item><title>Tagless Final in Rust</title><link>https://edward40.com/p/tagless-final-in-rust/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/p/tagless-final-in-rust/</guid><description>&lt;img src="https://edward40.com/p/tagless-final-in-rust/rust_programming_crab_sea.png" alt="Featured image of post Tagless Final in Rust" />&lt;p>As everyone knows, learning Java inevitably involves understanding and applying various design patterns. Today, Tesla Zhang introduced a brand new design pattern—the &amp;ldquo;Tagless Final&amp;rdquo; Style, which can simulate subtyping in Rust using &lt;code>trait&lt;/code>s.&lt;/p>
-&lt;h2 id="step-one-implementation-goal">Step One: Implementation Goal
-&lt;/h2>&lt;p>Implement a generic &lt;code>expr&lt;/code> function that can execute based on the type. As shown in the code below, it can return results of type &lt;code>u32&lt;/code> or &lt;code>String&lt;/code>.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">expr&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>T: &lt;span style="color:#a6e22e">Expr&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>() -&amp;gt; &lt;span style="color:#a6e22e">T&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Expr::add(
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Expr::div(Expr::lit(&lt;span style="color:#ae81ff">100&lt;/span>), Expr::lit(&lt;span style="color:#ae81ff">10&lt;/span>)),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Expr::sub(Expr::lit(&lt;span style="color:#ae81ff">223&lt;/span>), Expr::lit(&lt;span style="color:#ae81ff">23&lt;/span>)),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr::&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">u32&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>());
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr::&lt;span style="color:#f92672">&amp;lt;&lt;/span>String&lt;span style="color:#f92672">&amp;gt;&lt;/span>());
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>output:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>/Users/edward/.cargo/bin/cargo run --color&lt;span style="color:#f92672">=&lt;/span>always --package tagless --bin tagless
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Compiling tagless v0.1.0 &lt;span style="color:#f92672">(&lt;/span>/Users/edward/github/SASUKE40/tagless&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Finished dev &lt;span style="color:#f92672">[&lt;/span>unoptimized + debuginfo&lt;span style="color:#f92672">]&lt;/span> target&lt;span style="color:#f92672">(&lt;/span>s&lt;span style="color:#f92672">)&lt;/span> in 0.39s
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Running &lt;span style="color:#e6db74">`&lt;/span>target/debug/tagless&lt;span style="color:#e6db74">`&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">210&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">((&lt;/span>&lt;span style="color:#ae81ff">100&lt;/span> / 10&lt;span style="color:#f92672">)&lt;/span> + &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#ae81ff">223&lt;/span> - 23&lt;span style="color:#f92672">))&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="basic-expr-trait-definition">Basic Expr trait definition
-&lt;/h2>&lt;p>This most basic &lt;code>trait&lt;/code> is imported from an external source and cannot be modified.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">pub&lt;/span>(&lt;span style="color:#66d9ef">crate&lt;/span>) &lt;span style="color:#66d9ef">trait&lt;/span> Expr {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">lit&lt;/span>(i: &lt;span style="color:#66d9ef">u32&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">add&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">sub&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">mul&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">div&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="implementations-for-string-and-u32">Implementations for String and u32
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">impl&lt;/span> Expr &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#66d9ef">u32&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">lit&lt;/span>(i: &lt;span style="color:#66d9ef">u32&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> i
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">add&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lhs &lt;span style="color:#f92672">+&lt;/span> rhs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">sub&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lhs &lt;span style="color:#f92672">-&lt;/span> rhs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">mul&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lhs &lt;span style="color:#f92672">*&lt;/span> rhs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">div&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lhs &lt;span style="color:#f92672">/&lt;/span> rhs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">impl&lt;/span> Expr &lt;span style="color:#66d9ef">for&lt;/span> String {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">lit&lt;/span>(i: &lt;span style="color:#66d9ef">u32&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> i.to_string()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">add&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format!(&lt;span style="color:#e6db74">&amp;#34;(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> + &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>, lhs, rhs)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">sub&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format!(&lt;span style="color:#e6db74">&amp;#34;(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> - &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>, lhs, rhs)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">mul&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format!(&lt;span style="color:#e6db74">&amp;#34;(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> * &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>, lhs, rhs)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">div&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format!(&lt;span style="color:#e6db74">&amp;#34;(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> / &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>, lhs, rhs)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>All the above content is extracted into &lt;code>expr.rs&lt;/code>.&lt;/p>
-&lt;h2 id="adding-an-exp-method-to-expr">Adding an &lt;code>exp&lt;/code> method to expr
-&lt;/h2>&lt;p>Since the &lt;code>Expr&lt;/code> trait cannot be changed, we add a new trait using TypeParamBounds[^https://doc.rust-lang.org/reference/items/traits.html]: Rust traits&lt;/p>
-&lt;pre tabindex="0">&lt;code>Syntax
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rust on Shilin's Blog</title><link>https://edward40.com/tags/rust/</link><description>Recent content in Rust on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 18 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://edward40.com/tags/rust/index.xml" rel="self" type="application/rss+xml"/><item><title>Tagless Final in Rust</title><link>https://edward40.com/p/tagless-final-in-rust/</link><pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/p/tagless-final-in-rust/</guid><description>&lt;img src="https://edward40.com/p/tagless-final-in-rust/rust_programming_crab_sea.png" alt="Featured image of post Tagless Final in Rust" /&gt;&lt;p&gt;As everyone knows, learning Java inevitably involves understanding and applying various design patterns. Today, Tesla Zhang introduced a brand new design pattern—the &amp;ldquo;Tagless Final&amp;rdquo; Style, which can simulate subtyping in Rust using &lt;code&gt;trait&lt;/code&gt;s.&lt;/p&gt;
+&lt;h2 id="step-one-implementation-goal"&gt;Step One: Implementation Goal
+&lt;/h2&gt;&lt;p&gt;Implement a generic &lt;code&gt;expr&lt;/code&gt; function that can execute based on the type. As shown in the code below, it can return results of type &lt;code&gt;u32&lt;/code&gt; or &lt;code&gt;String&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;expr&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;T: &lt;span style="color:#a6e22e"&gt;Expr&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;() -&amp;gt; &lt;span style="color:#a6e22e"&gt;T&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Expr::add(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Expr::div(Expr::lit(&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;), Expr::lit(&lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;)),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Expr::sub(Expr::lit(&lt;span style="color:#ae81ff"&gt;223&lt;/span&gt;), Expr::lit(&lt;span style="color:#ae81ff"&gt;23&lt;/span&gt;)),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;println!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;, expr::&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;println!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;, expr::&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;String&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/Users/edward/.cargo/bin/cargo run --color&lt;span style="color:#f92672"&gt;=&lt;/span&gt;always --package tagless --bin tagless
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Compiling tagless v0.1.0 &lt;span style="color:#f92672"&gt;(&lt;/span&gt;/Users/edward/github/SASUKE40/tagless&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Finished dev &lt;span style="color:#f92672"&gt;[&lt;/span&gt;unoptimized + debuginfo&lt;span style="color:#f92672"&gt;]&lt;/span&gt; target&lt;span style="color:#f92672"&gt;(&lt;/span&gt;s&lt;span style="color:#f92672"&gt;)&lt;/span&gt; in 0.39s
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Running &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;target/debug/tagless&lt;span style="color:#e6db74"&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;210&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;((&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt; / 10&lt;span style="color:#f92672"&gt;)&lt;/span&gt; + &lt;span style="color:#f92672"&gt;(&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;223&lt;/span&gt; - 23&lt;span style="color:#f92672"&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="basic-expr-trait-definition"&gt;Basic Expr trait definition
+&lt;/h2&gt;&lt;p&gt;This most basic &lt;code&gt;trait&lt;/code&gt; is imported from an external source and cannot be modified.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;pub&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;crate&lt;/span&gt;) &lt;span style="color:#66d9ef"&gt;trait&lt;/span&gt; Expr {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lit&lt;/span&gt;(i: &lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sub&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;mul&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;div&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="implementations-for-string-and-u32"&gt;Implementations for String and u32
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; Expr &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lit&lt;/span&gt;(i: &lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; i
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; lhs &lt;span style="color:#f92672"&gt;+&lt;/span&gt; rhs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sub&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; lhs &lt;span style="color:#f92672"&gt;-&lt;/span&gt; rhs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;mul&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; lhs &lt;span style="color:#f92672"&gt;*&lt;/span&gt; rhs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;div&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; lhs &lt;span style="color:#f92672"&gt;/&lt;/span&gt; rhs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; Expr &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; String {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lit&lt;/span&gt;(i: &lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; i.to_string()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;add&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;format!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; + &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;)&amp;#34;&lt;/span&gt;, lhs, rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sub&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;format!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; - &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;)&amp;#34;&lt;/span&gt;, lhs, rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;mul&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;format!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; * &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;)&amp;#34;&lt;/span&gt;, lhs, rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;div&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;format!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; / &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;)&amp;#34;&lt;/span&gt;, lhs, rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All the above content is extracted into &lt;code&gt;expr.rs&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="adding-an-exp-method-to-expr"&gt;Adding an &lt;code&gt;exp&lt;/code&gt; method to expr
+&lt;/h2&gt;&lt;p&gt;Since the &lt;code&gt;Expr&lt;/code&gt; trait cannot be changed, we add a new trait using TypeParamBounds[^https://doc.rust-lang.org/reference/items/traits.html]: Rust traits&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;Syntax
 Trait :
 unsafe? trait IDENTIFIER Generics? ( : TypeParamBounds? )? WhereClause? {
 TraitItem*
 }
-&lt;/code>&lt;/pre>&lt;p>Define a new &lt;code>ExprWithExp&lt;/code> trait and implement the &lt;code>exp&lt;/code> method for &lt;code>u32&lt;/code> and &lt;code>String&lt;/code> types:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">trait&lt;/span> ExprWithExp: &lt;span style="color:#a6e22e">Expr&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">exp&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">impl&lt;/span> ExprWithExp &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#66d9ef">u32&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">exp&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lhs.pow(rhs)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">impl&lt;/span> ExprWithExp &lt;span style="color:#66d9ef">for&lt;/span> String {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">exp&lt;/span>(lhs: &lt;span style="color:#a6e22e">Self&lt;/span>, rhs: &lt;span style="color:#a6e22e">Self&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format!(&lt;span style="color:#e6db74">&amp;#34;(&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74"> ^ &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>, lhs, rhs)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This allows extending &lt;code>u32&lt;/code> and &lt;code>String&lt;/code> with the &lt;code>exp&lt;/code> method.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// snippet
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">expr&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>T: &lt;span style="color:#a6e22e">Expr&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>() -&amp;gt; &lt;span style="color:#a6e22e">T&lt;/span> { &lt;span style="color:#75715e">// Define the original expr function again for context
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> Expr::add(
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Expr::div(Expr::lit(&lt;span style="color:#ae81ff">100&lt;/span>), Expr::lit(&lt;span style="color:#ae81ff">10&lt;/span>)),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Expr::sub(Expr::lit(&lt;span style="color:#ae81ff">223&lt;/span>), Expr::lit(&lt;span style="color:#ae81ff">23&lt;/span>)),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">expr2&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>T: &lt;span style="color:#a6e22e">ExprWithExp&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>() -&amp;gt; &lt;span style="color:#a6e22e">T&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ExprWithExp::exp(expr(), Expr::lit(&lt;span style="color:#ae81ff">2&lt;/span>)) &lt;span style="color:#75715e">// Call the original expr here
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr::&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">u32&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>()); &lt;span style="color:#75715e">// Original output
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr::&lt;span style="color:#f92672">&amp;lt;&lt;/span>String&lt;span style="color:#f92672">&amp;gt;&lt;/span>()); &lt;span style="color:#75715e">// Original output
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr2::&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">u32&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>()); &lt;span style="color:#75715e">// New output
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> println!(&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, expr2::&lt;span style="color:#f92672">&amp;lt;&lt;/span>String&lt;span style="color:#f92672">&amp;gt;&lt;/span>()); &lt;span style="color:#75715e">// New output
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>output:&lt;/p>
-&lt;pre tabindex="0">&lt;code>/Users/edward/.cargo/bin/cargo run --color=always --package tagless --bin tagless
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Define a new &lt;code&gt;ExprWithExp&lt;/code&gt; trait and implement the &lt;code&gt;exp&lt;/code&gt; method for &lt;code&gt;u32&lt;/code&gt; and &lt;code&gt;String&lt;/code&gt; types:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;trait&lt;/span&gt; ExprWithExp: &lt;span style="color:#a6e22e"&gt;Expr&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;exp&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; ExprWithExp &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;exp&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; lhs.pow(rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; ExprWithExp &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; String {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;exp&lt;/span&gt;(lhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;, rhs: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;format!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; ^ &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;)&amp;#34;&lt;/span&gt;, lhs, rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This allows extending &lt;code&gt;u32&lt;/code&gt; and &lt;code&gt;String&lt;/code&gt; with the &lt;code&gt;exp&lt;/code&gt; method.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// snippet
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;expr&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;T: &lt;span style="color:#a6e22e"&gt;Expr&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;() -&amp;gt; &lt;span style="color:#a6e22e"&gt;T&lt;/span&gt; { &lt;span style="color:#75715e"&gt;// Define the original expr function again for context
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; Expr::add(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Expr::div(Expr::lit(&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;), Expr::lit(&lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;)),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Expr::sub(Expr::lit(&lt;span style="color:#ae81ff"&gt;223&lt;/span&gt;), Expr::lit(&lt;span style="color:#ae81ff"&gt;23&lt;/span&gt;)),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;expr2&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;T: &lt;span style="color:#a6e22e"&gt;ExprWithExp&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;() -&amp;gt; &lt;span style="color:#a6e22e"&gt;T&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ExprWithExp::exp(expr(), Expr::lit(&lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;)) &lt;span style="color:#75715e"&gt;// Call the original expr here
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;println!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;, expr::&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;()); &lt;span style="color:#75715e"&gt;// Original output
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;println!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;, expr::&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;String&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;()); &lt;span style="color:#75715e"&gt;// Original output
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;println!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;, expr2::&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;u32&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;()); &lt;span style="color:#75715e"&gt;// New output
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;println!&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;, expr2::&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;String&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;()); &lt;span style="color:#75715e"&gt;// New output
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;output:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;/Users/edward/.cargo/bin/cargo run --color=always --package tagless --bin tagless
 Compiling tagless v0.1.0 (/Users/edward/github/SASUKE40/tagless)
 Finished dev [unoptimized + debuginfo] target(s) in 0.56s
 Running `target/debug/tagless`
@@ -116,149 +116,149 @@ Running `target/debug/tagless`
 ((100 / 10) + (223 - 23))
 44100
 (((100 / 10) + (223 - 23)) ^ 2)
-&lt;/code>&lt;/pre></description></item><item><title>尝试用 Rust + Yew 写高性能前端页面</title><link>https://edward40.com/p/try-writing-fe-with-rust-yew/</link><pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/p/try-writing-fe-with-rust-yew/</guid><description>&lt;img src="https://edward40.com/p/try-writing-fe-with-rust-yew/yew.jpg" alt="Featured image of post 尝试用 Rust + Yew 写高性能前端页面" />&lt;h1 id="前言">前言
-&lt;/h1>&lt;p>看到这篇文章，可能很多人会有个疑问：“已经有 React + TypeScript 这么好的组合，为什么还想着使用 Rust 来写前端页面，不折腾吗？”
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>尝试用 Rust + Yew 写高性能前端页面</title><link>https://edward40.com/p/try-writing-fe-with-rust-yew/</link><pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate><guid>https://edward40.com/p/try-writing-fe-with-rust-yew/</guid><description>&lt;img src="https://edward40.com/p/try-writing-fe-with-rust-yew/yew.jpg" alt="Featured image of post 尝试用 Rust + Yew 写高性能前端页面" /&gt;&lt;h1 id="前言"&gt;前言
+&lt;/h1&gt;&lt;p&gt;看到这篇文章，可能很多人会有个疑问：“已经有 React + TypeScript 这么好的组合，为什么还想着使用 Rust 来写前端页面，不折腾吗？”
 首先值得讨论的一点，接下来几年的前端方向有哪些？
 个人的愚见，在全栈领域必然是 serverless，我在业务开发中已经尝到甜头，高效、简便、心智负担很低了；而在 Web 领域，由于 2019 年 12 月 5 日— 万维网联盟（W3C）宣布 WebAssembly 核心规范成为正式标准，WASM 势必它的影响力会逐步提升。
 WASM 的框架 / 库的选择已经比较丰富了，如：C# + Blazor、Go + Vugu、Rust + Yew 等等。
 可能有人会问，为什么不能使用 TypeScript / JavaScript 来编译到 WASM，归根结底是因为 WASM 要求语言必须是静态强类型。当然可以魔改 TypeScript / JavaScript 做到这一点，例如 AssemblyScript / TurboScript 就是如此在 TypeScript / JavaScript 上做静态规范的。与其如此魔改，我个人觉得倒不如大大方方的使用静态强类型语言来编译到 WASM，反正魔改后也无法共享原有的生态。
-那么为什么选择 Rust 而不是其他的诸如 Go、C#、C / C++ 呢？这个确实没有很有说服力的理由，只是出于个人的技术偏好，或者说是受到 RY 使用 Rust 实现 Deno 的鼓舞吧。&lt;/p>
-&lt;h1 id="准备">准备
-&lt;/h1>&lt;h2 id="环境陈述">环境陈述
-&lt;/h2>&lt;p>我使用的是 macOS，很多人自然会想到使用 homebrew 来完成 Rust 环境 setup。一开始我也是这么做的，不过会遇到下面问题：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>error&lt;span style="color:#f92672">[&lt;/span>E0463&lt;span style="color:#f92672">]&lt;/span>: can&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>t find crate &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#e6db74">`&lt;/span>std&lt;span style="color:#e6db74">`&lt;/span> | &lt;span style="color:#f92672">=&lt;/span> note: the &lt;span style="color:#e6db74">`&lt;/span>wasm32-unknown-unknown&lt;span style="color:#e6db74">`&lt;/span> target may not be installed
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后还是走官方推荐的方式解决的。&lt;/p>
-&lt;h2 id="rust-installation">Rust Installation
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>curl --proto &lt;span style="color:#e6db74">&amp;#39;=https&amp;#39;&lt;/span> --tlsv1.2 -sSf https://sh.rustup.rs | sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="yew-installation">Yew Installation
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>cargo install wasm-pack
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cargo install cargo-web
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://user-images.githubusercontent.com/3114495/71768267-99f34400-2f4f-11ea-927f-9f919876c04f.png"
+那么为什么选择 Rust 而不是其他的诸如 Go、C#、C / C++ 呢？这个确实没有很有说服力的理由，只是出于个人的技术偏好，或者说是受到 RY 使用 Rust 实现 Deno 的鼓舞吧。&lt;/p&gt;
+&lt;h1 id="准备"&gt;准备
+&lt;/h1&gt;&lt;h2 id="环境陈述"&gt;环境陈述
+&lt;/h2&gt;&lt;p&gt;我使用的是 macOS，很多人自然会想到使用 homebrew 来完成 Rust 环境 setup。一开始我也是这么做的，不过会遇到下面问题：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;error&lt;span style="color:#f92672"&gt;[&lt;/span&gt;E0463&lt;span style="color:#f92672"&gt;]&lt;/span&gt;: can&lt;span style="color:#960050;background-color:#1e0010"&gt;&amp;#39;&lt;/span&gt;t find crate &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;std&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; | &lt;span style="color:#f92672"&gt;=&lt;/span&gt; note: the &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;wasm32-unknown-unknown&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; target may not be installed
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后还是走官方推荐的方式解决的。&lt;/p&gt;
+&lt;h2 id="rust-installation"&gt;Rust Installation
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl --proto &lt;span style="color:#e6db74"&gt;&amp;#39;=https&amp;#39;&lt;/span&gt; --tlsv1.2 -sSf https://sh.rustup.rs | sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="yew-installation"&gt;Yew Installation
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cargo install wasm-pack
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cargo install cargo-web
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/3114495/71768267-99f34400-2f4f-11ea-927f-9f919876c04f.png"
 loading="lazy"
->&lt;/p>
-&lt;p>&lt;img src="https://user-images.githubusercontent.com/3114495/71768269-9a8bda80-2f4f-11ea-8e2f-4fba76bfd7fd.png"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/3114495/71768269-9a8bda80-2f4f-11ea-8e2f-4fba76bfd7fd.png"
 loading="lazy"
->&lt;/p>
-&lt;h1 id="上手">上手
-&lt;/h1>&lt;h2 id="一些说明">一些说明
-&lt;/h2>&lt;p>Rust 本身就能实现编译到 WASM，使用 Yew 框架的原因就如其官网宣传：只是为了方便前端组件整合，以及对 JavaScript 互通性的考量。&lt;/p>
-&lt;h2 id="项目初始化">项目初始化
-&lt;/h2>&lt;p>这里不采用官网提供的参考，因为示例过于简单，有些脱离真正应用场景。下面的步骤是我个人认为比较接近真实开发的状态，相关源码我也放到 GitHub 供大家玩耍 ➡️https://github.com/SASUKE40/yew-starter&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git clone --depth&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> https://github.com/SASUKE40/yew-starter.git &amp;lt;project_name&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="目录结构">目录结构
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── Cargo.lock
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── Cargo.toml
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── LICENSE
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── README.md
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── index.html
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── index.js
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── package-lock.json
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── package.json
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── src
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ├── app.rs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> └── lib.rs
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里面最重要的就是 &lt;code>Cargo.toml&lt;/code> 了，其中最关键的依赖如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#a6e22e">lib&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">crate-type&lt;/span> = [&lt;span style="color:#e6db74">&amp;#34;cdylib&amp;#34;&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#a6e22e">dependencies&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">wasm-bindgen&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;0.2&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">yew&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;0.10.0&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>cdylib&lt;/code>  是用于配置构建 C interoperability(C FFI)，&lt;code>wasm-bindgen&lt;/code> 依赖是用于 WASM 模块和 JavaScript 之间的交互粘合。&lt;/p>
-&lt;h2 id="加载-wasm-以及-bind-的过程">加载 WASM 以及 bind 的过程
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">mod&lt;/span> app;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">use&lt;/span> wasm_bindgen::prelude::&lt;span style="color:#f92672">*&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#[wasm_bindgen]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">pub&lt;/span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">run_app&lt;/span>() -&amp;gt; Result&lt;span style="color:#f92672">&amp;lt;&lt;/span>(), JsValue&lt;span style="color:#f92672">&amp;gt;&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> yew::start_app::&lt;span style="color:#f92672">&amp;lt;&lt;/span>app::App&lt;span style="color:#f92672">&amp;gt;&lt;/span>();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Ok(())
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在需要导出 Rust 函数到 JavaScript 中，只需要在函数方法上注释 &lt;code>#[wasm_bindgen]&lt;/code> 即可，接着在 js 文件中导入使用&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">import&lt;/span> { &lt;span style="color:#a6e22e">run_app&lt;/span> } &lt;span style="color:#a6e22e">from&lt;/span> &lt;span style="color:#e6db74">&amp;#39;./lib&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">run_app&lt;/span>()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="构建套件">构建套件
-&lt;/h2>&lt;p>使用 Parcel 是最方便的，开箱即用。既可以直接 import rs，也可以 import wasm。
+&gt;&lt;/p&gt;
+&lt;h1 id="上手"&gt;上手
+&lt;/h1&gt;&lt;h2 id="一些说明"&gt;一些说明
+&lt;/h2&gt;&lt;p&gt;Rust 本身就能实现编译到 WASM，使用 Yew 框架的原因就如其官网宣传：只是为了方便前端组件整合，以及对 JavaScript 互通性的考量。&lt;/p&gt;
+&lt;h2 id="项目初始化"&gt;项目初始化
+&lt;/h2&gt;&lt;p&gt;这里不采用官网提供的参考，因为示例过于简单，有些脱离真正应用场景。下面的步骤是我个人认为比较接近真实开发的状态，相关源码我也放到 GitHub 供大家玩耍 ➡️https://github.com/SASUKE40/yew-starter&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone --depth&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; https://github.com/SASUKE40/yew-starter.git &amp;lt;project_name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="目录结构"&gt;目录结构
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── Cargo.lock
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── Cargo.toml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── LICENSE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── README.md
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── index.html
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── index.js
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── package-lock.json
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── package.json
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;└── src
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── app.rs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; └── lib.rs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里面最重要的就是 &lt;code&gt;Cargo.toml&lt;/code&gt; 了，其中最关键的依赖如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&lt;span style="color:#a6e22e"&gt;lib&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;crate-type&lt;/span&gt; = [&lt;span style="color:#e6db74"&gt;&amp;#34;cdylib&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&lt;span style="color:#a6e22e"&gt;dependencies&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;wasm-bindgen&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;0.2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;yew&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;0.10.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;cdylib&lt;/code&gt;  是用于配置构建 C interoperability(C FFI)，&lt;code&gt;wasm-bindgen&lt;/code&gt; 依赖是用于 WASM 模块和 JavaScript 之间的交互粘合。&lt;/p&gt;
+&lt;h2 id="加载-wasm-以及-bind-的过程"&gt;加载 WASM 以及 bind 的过程
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;mod&lt;/span&gt; app;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;use&lt;/span&gt; wasm_bindgen::prelude::&lt;span style="color:#f92672"&gt;*&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#[wasm_bindgen]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;pub&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt;() -&amp;gt; Result&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;(), JsValue&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; yew::start_app::&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;app::App&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Ok(())
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在需要导出 Rust 函数到 JavaScript 中，只需要在函数方法上注释 &lt;code&gt;#[wasm_bindgen]&lt;/code&gt; 即可，接着在 js 文件中导入使用&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt; } &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;./lib&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="构建套件"&gt;构建套件
+&lt;/h2&gt;&lt;p&gt;使用 Parcel 是最方便的，开箱即用。既可以直接 import rs，也可以 import wasm。
 &lt;img src="https://user-images.githubusercontent.com/3114495/71775834-453ce100-2fc2-11ea-8c66-27f19c0b8c98.png"
 loading="lazy"
 alt="image"
->
-我这里用了 &lt;code>parcel-plugin-wasm.rs&lt;/code> 插件完成 Cargo loader 的工作，和上述 import rs 的方式不同：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-js" data-lang="js">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">import&lt;/span> { &lt;span style="color:#a6e22e">run_app&lt;/span> } &lt;span style="color:#a6e22e">from&lt;/span> &lt;span style="color:#e6db74">&amp;#39;./Cargo.toml&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">run_app&lt;/span>()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="yew-组件编写体验">Yew 组件编写体验
-&lt;/h2>&lt;p>Yew 框架使用 &lt;code>html!&lt;/code> macro 来生成 HTML&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">impl&lt;/span> Component &lt;span style="color:#66d9ef">for&lt;/span> App {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Message&lt;/span> &lt;span style="color:#f92672">=&lt;/span> Msg;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Properties&lt;/span> &lt;span style="color:#f92672">=&lt;/span> ();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">create&lt;/span>(_: &lt;span style="color:#a6e22e">Self&lt;/span>::Properties, _: &lt;span style="color:#a6e22e">ComponentLink&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>Self&lt;span style="color:#f92672">&amp;gt;&lt;/span>) -&amp;gt; &lt;span style="color:#a6e22e">Self&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> App {}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">update&lt;/span>(&lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#66d9ef">mut&lt;/span> self, _msg: &lt;span style="color:#a6e22e">Self&lt;/span>::Message) -&amp;gt; &lt;span style="color:#a6e22e">ShouldRender&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fn&lt;/span> &lt;span style="color:#a6e22e">view&lt;/span>(&lt;span style="color:#f92672">&amp;amp;&lt;/span>self) -&amp;gt; &lt;span style="color:#a6e22e">Html&lt;/span>&lt;span style="color:#f92672">&amp;lt;&lt;/span>Self&lt;span style="color:#f92672">&amp;gt;&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> html! {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>p&lt;span style="color:#f92672">&amp;gt;&lt;/span>{ &lt;span style="color:#e6db74">&amp;#34;Hello world!&amp;#34;&lt;/span> }&lt;span style="color:#f92672">&amp;lt;/&lt;/span>p&lt;span style="color:#f92672">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>模板中可以使用 &lt;code>html! { &amp;quot;Hello, World&amp;quot; }&lt;/code> 这样的方式包裹文本或变量，这和 jsx 比较类似。
-事件绑定、条件、循环也都是类似的，大同小异：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 点击事件
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>html!{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>button onclick&lt;span style="color:#f92672">=|&lt;/span>_&lt;span style="color:#f92672">|&lt;/span> Msg::Click&lt;span style="color:#f92672">&amp;gt;&lt;/span>{ &lt;span style="color:#e6db74">&amp;#34;Click Me!&amp;#34;&lt;/span> }&lt;span style="color:#f92672">&amp;lt;/&lt;/span>button&lt;span style="color:#f92672">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 条件渲染
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>html! {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>div&lt;span style="color:#f92672">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> show_link {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> html! {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>a href&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;https://example.com&amp;#34;&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>{&lt;span style="color:#e6db74">&amp;#34;Link&amp;#34;&lt;/span>}&lt;span style="color:#f92672">&amp;lt;/&lt;/span>a&lt;span style="color:#f92672">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> html! {}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;/&lt;/span>div&lt;span style="color:#f92672">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 迭代渲染
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>html! {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&lt;/span>ul class&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;item-list&amp;#34;&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#66d9ef">for&lt;/span> self.props.items.iter().map(renderItem) }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;/&lt;/span>ul&lt;span style="color:#f92672">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="效果">效果
-&lt;/h1>&lt;p>Navigate to &lt;a class="link" href="https://yew-starter.netlify.com/" target="_blank" rel="noopener"
->https://yew-starter.netlify.com/&lt;/a>
+&gt;
+我这里用了 &lt;code&gt;parcel-plugin-wasm.rs&lt;/code&gt; 插件完成 Cargo loader 的工作，和上述 import rs 的方式不同：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt; } &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;./Cargo.toml&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="yew-组件编写体验"&gt;Yew 组件编写体验
+&lt;/h2&gt;&lt;p&gt;Yew 框架使用 &lt;code&gt;html!&lt;/code&gt; macro 来生成 HTML&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; Component &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; App {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Message&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Msg;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Properties&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;create&lt;/span&gt;(_: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;::Properties, _: &lt;span style="color:#a6e22e"&gt;ComponentLink&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Self&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; App {}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;update&lt;/span&gt;(&lt;span style="color:#f92672"&gt;&amp;amp;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;mut&lt;/span&gt; self, _msg: &lt;span style="color:#a6e22e"&gt;Self&lt;/span&gt;::Message) -&amp;gt; &lt;span style="color:#a6e22e"&gt;ShouldRender&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;fn&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;view&lt;/span&gt;(&lt;span style="color:#f92672"&gt;&amp;amp;&lt;/span&gt;self) -&amp;gt; &lt;span style="color:#a6e22e"&gt;Html&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Self&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;p&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;{ &lt;span style="color:#e6db74"&gt;&amp;#34;Hello world!&amp;#34;&lt;/span&gt; }&lt;span style="color:#f92672"&gt;&amp;lt;/&lt;/span&gt;p&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;模板中可以使用 &lt;code&gt;html! { &amp;quot;Hello, World&amp;quot; }&lt;/code&gt; 这样的方式包裹文本或变量，这和 jsx 比较类似。
+事件绑定、条件、循环也都是类似的，大同小异：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 点击事件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;button onclick&lt;span style="color:#f92672"&gt;=|&lt;/span&gt;_&lt;span style="color:#f92672"&gt;|&lt;/span&gt; Msg::Click&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;{ &lt;span style="color:#e6db74"&gt;&amp;#34;Click Me!&amp;#34;&lt;/span&gt; }&lt;span style="color:#f92672"&gt;&amp;lt;/&lt;/span&gt;button&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 条件渲染
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;div&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; show_link {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;a href&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;https://example.com&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;{&lt;span style="color:#e6db74"&gt;&amp;#34;Link&amp;#34;&lt;/span&gt;}&lt;span style="color:#f92672"&gt;&amp;lt;/&lt;/span&gt;a&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; } &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;/&lt;/span&gt;div&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 迭代渲染
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;ul class&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;item-list&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; { &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; self.props.items.iter().map(renderItem) }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;/&lt;/span&gt;ul&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="效果"&gt;效果
+&lt;/h1&gt;&lt;p&gt;Navigate to &lt;a class="link" href="https://yew-starter.netlify.com/" target="_blank" rel="noopener"
+&gt;https://yew-starter.netlify.com/&lt;/a&gt;
 &lt;img src="https://user-images.githubusercontent.com/3114495/71775897-ffcce380-2fc2-11ea-85f8-c3fbae3099e2.png"
 loading="lazy"
 alt="image"
->
-实际上 WASM 没有大家相信的那么“便携小巧”，WASM 吃掉的体积有 50kb。&lt;/p>
-&lt;h1 id="总结">总结
-&lt;/h1>&lt;p>其优势：&lt;/p>
-&lt;ul>
-&lt;li>WebAssembly 在桌面客户端移植到 Web 不可或缺&lt;/li>
-&lt;li>作为胶水包存在，如某面包姐姐最近就在尝试 Rust 2 WASM(CPP) 2 Node.js
-其疑点：&lt;/li>
-&lt;li>高性能，感觉没有很突出到必须得这么做&lt;/li>
-&lt;li>可移植性，要做 Web 的 JVM？&lt;/li>
-&lt;/ul>
-&lt;p>WASM 的生态日趋丰富完善，未来 WASM 在前端必然会大放异彩。不过也无需夸大其地位，可以参考 &lt;a class="link" href="https://www.zhihu.com/question/322007706/answer/741764049" target="_blank" rel="noopener"
->WebAssembly 的出现是否会取代 JavaScript？&lt;/a>这个知乎回答。摘抄官方对其定位的&lt;a class="link" href="https://webassembly.org/docs/faq/" target="_blank" rel="noopener"
->一个回答&lt;/a>：WebAssembly 旨在作为 JavaScript 的补充而不是替代。
+&gt;
+实际上 WASM 没有大家相信的那么“便携小巧”，WASM 吃掉的体积有 50kb。&lt;/p&gt;
+&lt;h1 id="总结"&gt;总结
+&lt;/h1&gt;&lt;p&gt;其优势：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WebAssembly 在桌面客户端移植到 Web 不可或缺&lt;/li&gt;
+&lt;li&gt;作为胶水包存在，如某面包姐姐最近就在尝试 Rust 2 WASM(CPP) 2 Node.js
+其疑点：&lt;/li&gt;
+&lt;li&gt;高性能，感觉没有很突出到必须得这么做&lt;/li&gt;
+&lt;li&gt;可移植性，要做 Web 的 JVM？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;WASM 的生态日趋丰富完善，未来 WASM 在前端必然会大放异彩。不过也无需夸大其地位，可以参考 &lt;a class="link" href="https://www.zhihu.com/question/322007706/answer/741764049" target="_blank" rel="noopener"
+&gt;WebAssembly 的出现是否会取代 JavaScript？&lt;/a&gt;这个知乎回答。摘抄官方对其定位的&lt;a class="link" href="https://webassembly.org/docs/faq/" target="_blank" rel="noopener"
+&gt;一个回答&lt;/a&gt;：WebAssembly 旨在作为 JavaScript 的补充而不是替代。
 &lt;img src="https://user-images.githubusercontent.com/3114495/71776039-49b6c900-2fc5-11ea-9bab-23f88030bfa8.png"
 loading="lazy"
 alt="image"
->&lt;/p>
-&lt;p>通宵写文，求 🌟🌟 求关注，不胜感激 ⬇️&lt;/p>
-&lt;p>&lt;a class="link" href="https://github.com/SASUKE40/yew-starter" target="_blank" rel="noopener"
->https://github.com/SASUKE40/yew-starter&lt;/a>&lt;/p></description></item></channel></rss>
+&gt;&lt;/p&gt;
+&lt;p&gt;通宵写文，求 🌟🌟 求关注，不胜感激 ⬇️&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://github.com/SASUKE40/yew-starter" target="_blank" rel="noopener"
+&gt;https://github.com/SASUKE40/yew-starter&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>
