@@ -4,25 +4,9 @@ languageName = "English"
 languagedirection = "ltr"
 title = "Shilin's Blog"
 weight = 1
-[en.menus]
-[[en.menus.main]]
-identifier = "cv"
-name = "CV"
-url = "/files/resume.pdf"
-[en.menus.main.params]
-icon = "file-cv"
-newtab = true
 
 [zh-cn]
 languageName = "中文"
 languagedirection = "ltr"
 title = "仕麟的博客"
 weight = 1
-[zh-cn.menus]
-[[zh-cn.menus.main]]
-identifier = "cv"
-name = "简历"
-url = "/files/resume.pdf"
-[zh-cn.menus.main.params]
-icon = "file-cv"
-newtab = true
