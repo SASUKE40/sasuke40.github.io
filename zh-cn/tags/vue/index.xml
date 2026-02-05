@@ -2,13 +2,13 @@
 &lt;/h1&gt;&lt;p&gt;最近 &lt;a class="link" href="https://github.com/vuejs/vue-next" target="_blank" rel="noopener"
 &gt;Vue 3.0&lt;/a&gt; 发布了 Beta 版本，其中最引人注意的就是其 &lt;code&gt;Composition API&lt;/code&gt;。而这个设计近期经常被拿来和
 &lt;code&gt;React Hooks&lt;/code&gt; 进行比较，以下是两个代码片段：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// React
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;) {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// React
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; [&lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;setA&lt;/span&gt;] &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;useState&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;a&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;onClick&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{() =&amp;gt; &lt;span style="color:#a6e22e"&gt;setA&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; =&amp;gt; &lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)}&amp;gt;{&lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;}&amp;lt;/&lt;span style="color:#f92672"&gt;a&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Vue 3 composition API
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Vue 3 composition API
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;a&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ref&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;setA&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; () =&amp;gt; &lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;value&lt;/span&gt;&lt;span style="color:#f92672"&gt;++&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;a&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;onClick&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{&lt;span style="color:#a6e22e"&gt;setA&lt;/span&gt;}&amp;gt;{&lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;}&amp;lt;/&lt;span style="color:#f92672"&gt;a&lt;/span&gt;&amp;gt;
@@ -66,8 +66,8 @@
 &lt;p&gt;在 Vue Composition API 中，我发现官方对 Ref 和 Reactive 给出了最佳实践。可能这里就有所谓的幻灭存在，就像当年很多人不听 React 官方最佳实践，在 componentWillMount 里获取数据一样。&lt;/p&gt;
 &lt;p&gt;&lt;a class="link" href="https://composition-api.vuejs.org/#ref-vs-reactive" target="_blank" rel="noopener"
 &gt;Ref vs. Reactive&lt;/a&gt; 章节中有如下的对比：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// style 1: separate variables
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// style 1: separate variables
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;y&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;updatePosition&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;) {
@@ -76,9 +76,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// --- compared to ---
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// style 2: single object
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;pos&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;pos&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;x&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;y&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
@@ -89,7 +89,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;那么依赖跟踪的迷惑就此开始，因为当你对已经 reactive 的对象进行解构赋值或者赋给新值的时候，依赖跟踪就失效了。官方对这个的态度比较模糊：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;在现阶段，我们认为在 ref vs reactive 上实施最佳做法为时尚早。我们建议您从上面的两个选项中选择与您的心智模型相符的方式。我们将收集实开发场景下的用户真反馈，并最终提供有关此主题的更明确的指导。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在现阶段，我们认为在 ref vs reactive 上实施最佳做法为时尚早。我们建议您从上面的两个选项中选择与您的心智模型相符的方式。我们将收集实开发场景下的用户真反馈，并最终提供有关此主题的更明确的指导。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h1 id="对比两者"&gt;对比两者
 &lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;Vue Composition API：闭包变量、响应式的依赖追踪&lt;/li&gt;

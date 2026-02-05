@@ -8,12 +8,12 @@ WASM 的框架 / 库的选择已经比较丰富了，如：C# + Blazor、Go + Vu
 &lt;h1 id="准备"&gt;准备
 &lt;/h1&gt;&lt;h2 id="环境陈述"&gt;环境陈述
 &lt;/h2&gt;&lt;p&gt;我使用的是 macOS，很多人自然会想到使用 homebrew 来完成 Rust 环境 setup。一开始我也是这么做的，不过会遇到下面问题：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;error&lt;span style="color:#f92672"&gt;[&lt;/span&gt;E0463&lt;span style="color:#f92672"&gt;]&lt;/span&gt;: can&lt;span style="color:#960050;background-color:#1e0010"&gt;&amp;#39;&lt;/span&gt;t find crate &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;std&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; | &lt;span style="color:#f92672"&gt;=&lt;/span&gt; note: the &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;wasm32-unknown-unknown&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; target may not be installed
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;error&lt;span style="color:#f92672"&gt;[&lt;/span&gt;E0463&lt;span style="color:#f92672"&gt;]&lt;/span&gt;: can&lt;span style="color:#960050;background-color:#1e0010"&gt;&amp;#39;&lt;/span&gt;t find crate &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;std&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; | &lt;span style="color:#f92672"&gt;=&lt;/span&gt; note: the &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;wasm32-unknown-unknown&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; target may not be installed
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后还是走官方推荐的方式解决的。&lt;/p&gt;
 &lt;h2 id="rust-installation"&gt;Rust Installation
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl --proto &lt;span style="color:#e6db74"&gt;&amp;#39;=https&amp;#39;&lt;/span&gt; --tlsv1.2 -sSf https://sh.rustup.rs | sh
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl --proto &lt;span style="color:#e6db74"&gt;&amp;#39;=https&amp;#39;&lt;/span&gt; --tlsv1.2 -sSf https://sh.rustup.rs | sh
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="yew-installation"&gt;Yew Installation
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cargo install wasm-pack
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cargo install wasm-pack
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cargo install cargo-web
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/3114495/71768267-99f34400-2f4f-11ea-927f-9f919876c04f.png"
 loading="lazy"
@@ -26,9 +26,9 @@ loading="lazy"
 &lt;/h2&gt;&lt;p&gt;Rust 本身就能实现编译到 WASM，使用 Yew 框架的原因就如其官网宣传：只是为了方便前端组件整合，以及对 JavaScript 互通性的考量。&lt;/p&gt;
 &lt;h2 id="项目初始化"&gt;项目初始化
 &lt;/h2&gt;&lt;p&gt;这里不采用官网提供的参考，因为示例过于简单，有些脱离真正应用场景。下面的步骤是我个人认为比较接近真实开发的状态，相关源码我也放到 GitHub 供大家玩耍 ➡️https://github.com/SASUKE40/yew-starter&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone --depth&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; https://github.com/SASUKE40/yew-starter.git &amp;lt;project_name&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone --depth&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; https://github.com/SASUKE40/yew-starter.git &amp;lt;project_name&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="目录结构"&gt;目录结构
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── Cargo.lock
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── Cargo.toml
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── LICENSE
@@ -41,7 +41,7 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── app.rs
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; └── lib.rs
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里面最重要的就是 &lt;code&gt;Cargo.toml&lt;/code&gt; 了，其中最关键的依赖如下：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&lt;span style="color:#a6e22e"&gt;lib&lt;/span&gt;]
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&lt;span style="color:#a6e22e"&gt;lib&lt;/span&gt;]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;crate-type&lt;/span&gt; = [&lt;span style="color:#e6db74"&gt;&amp;#34;cdylib&amp;#34;&lt;/span&gt;]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&lt;span style="color:#a6e22e"&gt;dependencies&lt;/span&gt;]
@@ -49,7 +49,7 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;yew&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;0.10.0&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;cdylib&lt;/code&gt;  是用于配置构建 C interoperability(C FFI)，&lt;code&gt;wasm-bindgen&lt;/code&gt; 依赖是用于 WASM 模块和 JavaScript 之间的交互粘合。&lt;/p&gt;
 &lt;h2 id="加载-wasm-以及-bind-的过程"&gt;加载 WASM 以及 bind 的过程
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;mod&lt;/span&gt; app;
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;mod&lt;/span&gt; app;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;use&lt;/span&gt; wasm_bindgen::prelude::&lt;span style="color:#f92672"&gt;*&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -59,7 +59,7 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Ok(())
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在需要导出 Rust 函数到 JavaScript 中，只需要在函数方法上注释 &lt;code&gt;#[wasm_bindgen]&lt;/code&gt; 即可，接着在 js 文件中导入使用&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt; } &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;./lib&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt; } &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;./lib&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt;()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="构建套件"&gt;构建套件
 &lt;/h2&gt;&lt;p&gt;使用 Parcel 是最方便的，开箱即用。既可以直接 import rs，也可以 import wasm。
@@ -68,11 +68,11 @@ loading="lazy"
 alt="image"
 &gt;
 我这里用了 &lt;code&gt;parcel-plugin-wasm.rs&lt;/code&gt; 插件完成 Cargo loader 的工作，和上述 import rs 的方式不同：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt; } &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;./Cargo.toml&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt; } &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;./Cargo.toml&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt;()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="yew-组件编写体验"&gt;Yew 组件编写体验
 &lt;/h2&gt;&lt;p&gt;Yew 框架使用 &lt;code&gt;html!&lt;/code&gt; macro 来生成 HTML&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; Component &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; App {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; Component &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; App {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Message&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Msg;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Properties&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ();
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -91,13 +91,13 @@ alt="image"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;模板中可以使用 &lt;code&gt;html! { &amp;quot;Hello, World&amp;quot; }&lt;/code&gt; 这样的方式包裹文本或变量，这和 jsx 比较类似。
 事件绑定、条件、循环也都是类似的，大同小异：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 点击事件
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt;{
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 点击事件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;button onclick&lt;span style="color:#f92672"&gt;=|&lt;/span&gt;_&lt;span style="color:#f92672"&gt;|&lt;/span&gt; Msg::Click&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;{ &lt;span style="color:#e6db74"&gt;&amp;#34;Click Me!&amp;#34;&lt;/span&gt; }&lt;span style="color:#f92672"&gt;&amp;lt;/&lt;/span&gt;button&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 条件渲染
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;div&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; show_link {
@@ -112,7 +112,7 @@ alt="image"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 迭代渲染
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;ul class&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;item-list&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; { &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; self.props.items.iter().map(renderItem) }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;/&lt;/span&gt;ul&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;

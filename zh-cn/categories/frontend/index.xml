@@ -50,7 +50,7 @@
 &lt;p&gt;&lt;img src="https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data.png"
 width="581"
 height="297"
-srcset="https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data_hu_269ae0c5846a3eff.png 480w, https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data_hu_abc944180012f5d.png 1024w"
+srcset="https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data_hu_42ec8f2d0f3c97b0.png 480w, https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data_hu_8ca60aac995c83e4.png 1024w"
 loading="lazy"
 class="gallery-image"
 data-flex-grow="195"
@@ -59,7 +59,7 @@ data-flex-basis="469px"
 &lt;p&gt;如果你是 Vue 的爱好者，你可能想到了计算属性。Derived Data 确实有 computed props 的味道，具体思路是选取多个 Atom 进行计算，然后返回一个新的 state。因此在 Recoil 中设计了 &lt;code&gt;select&lt;/code&gt; 这样的 API 来选取多个 Atom 进行计算。&lt;/p&gt;
 &lt;p&gt;![](Recoil at React Europe 2020 00-14-53 .png)&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;select&lt;/code&gt; 的设计和 Proxy 挺像的，属性上有 &lt;code&gt;get&lt;/code&gt; 进行读取，有 &lt;code&gt;set&lt;/code&gt; 进行设置，函数内部又有 &lt;code&gt;get&lt;/code&gt;， &lt;code&gt;set&lt;/code&gt; 操作 state&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;atom&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;selector&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;useRecoilState&lt;/span&gt; } &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;recoil&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;atom&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;selector&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;useRecoilState&lt;/span&gt; } &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;recoil&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;tempFahrenheit&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;atom&lt;/span&gt;({
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;key&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;tempFahrenheit&amp;#39;&lt;/span&gt;,
@@ -74,9 +74,9 @@ data-flex-basis="469px"
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="app-wide-observation"&gt;App-wide observation
 &lt;/h3&gt;&lt;p&gt;这个场景下需要把 url 分享给其他人，别人打开相同的链接也能看到一样的页面。&lt;/p&gt;
 &lt;p&gt;那么就需要 observe Atom 的变更，Recoil 使用 &lt;code&gt;useTransactionObservation&lt;/code&gt; 进行订阅&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;useTransactionObservation&lt;/span&gt;(({&lt;span style="color:#a6e22e"&gt;atomValues&lt;/span&gt;,&lt;span style="color:#a6e22e"&gt;modifiedAtoms&lt;/span&gt;,...} =&amp;gt; {}))
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;useTransactionObservation&lt;/span&gt;(({&lt;span style="color:#a6e22e"&gt;atomValues&lt;/span&gt;,&lt;span style="color:#a6e22e"&gt;modifiedAtoms&lt;/span&gt;,...} =&amp;gt; {}))
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;另一方面，打开链接的时候也需要对输入的数据进行校验&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;counter&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;atom&lt;/span&gt;({
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;counter&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;atom&lt;/span&gt;({
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;key&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;myCounter&amp;#39;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;default&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;validator&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;untrustedInput&lt;/span&gt;),
@@ -87,9 +87,9 @@ data-flex-basis="469px"
 &lt;h1 id="actor-model--recoil-联系"&gt;Actor Model &amp;amp; Recoil 联系
 &lt;/h1&gt;&lt;p&gt;通过前面提及 Recoil 的设计，可以发现两者的理念是相似的。&lt;/p&gt;
 &lt;p&gt;在实现的细节中 Recoil 维护了新的队列，并通过订阅、派发的机制完成消息的传递及组件的更新。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Fire or enqueue callbacks to rerender components that are subscribed to
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Fire or enqueue callbacks to rerender components that are subscribed to
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// nodes affected by the updatedNodes
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;fireNodeSubscriptions&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;fireNodeSubscriptions&lt;/span&gt;(
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;store&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Store&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;updatedNodes&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;$ReadOnlySet&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;NodeKey&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;when&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;enqueue&amp;#39;&lt;/span&gt; &lt;span style="color:#f92672"&gt;|&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;now&amp;#39;&lt;/span&gt;
@@ -120,12 +120,12 @@ data-flex-basis="469px"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// Wake all suspended components so the right one(s) can try to re-render.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// We need to wake up components not just when some asynchronous selector
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// resolved (when === &amp;#39;now&amp;#39;), but also when changing synchronous values because
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// they may cause a selector to change from asynchronous to synchronous, in
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// which case there would be no follow-up asynchronous resolution to wake us up.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// TODO OPTIMIZATION Only wake up related downstream components
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Tracing&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;trace&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// We need to wake up components not just when some asynchronous selector
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// resolved (when === &amp;#39;now&amp;#39;), but also when changing synchronous values because
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// they may cause a selector to change from asynchronous to synchronous, in
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// which case there would be no follow-up asynchronous resolution to wake us up.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// TODO OPTIMIZATION Only wake up related downstream components
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Tracing&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;trace&lt;/span&gt;(
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;value became available, waking components&amp;#39;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Array.&lt;span style="color:#a6e22e"&gt;from&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;updatedNodes&lt;/span&gt;).&lt;span style="color:#a6e22e"&gt;join&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;, &amp;#39;&lt;/span&gt;),
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; () =&amp;gt; {
@@ -145,13 +145,13 @@ data-flex-basis="469px"
 &lt;/h1&gt;&lt;p&gt;最近 &lt;a class="link" href="https://github.com/vuejs/vue-next" target="_blank" rel="noopener"
 &gt;Vue 3.0&lt;/a&gt; 发布了 Beta 版本，其中最引人注意的就是其 &lt;code&gt;Composition API&lt;/code&gt;。而这个设计近期经常被拿来和
 &lt;code&gt;React Hooks&lt;/code&gt; 进行比较，以下是两个代码片段：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// React
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;) {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// React
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; [&lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;setA&lt;/span&gt;] &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;useState&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;a&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;onClick&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{() =&amp;gt; &lt;span style="color:#a6e22e"&gt;setA&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; =&amp;gt; &lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)}&amp;gt;{&lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;}&amp;lt;/&lt;span style="color:#f92672"&gt;a&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Vue 3 composition API
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Vue 3 composition API
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;a&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ref&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;setA&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; () =&amp;gt; &lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;value&lt;/span&gt;&lt;span style="color:#f92672"&gt;++&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;a&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;onClick&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{&lt;span style="color:#a6e22e"&gt;setA&lt;/span&gt;}&amp;gt;{&lt;span style="color:#a6e22e"&gt;a&lt;/span&gt;}&amp;lt;/&lt;span style="color:#f92672"&gt;a&lt;/span&gt;&amp;gt;
@@ -209,8 +209,8 @@ data-flex-basis="469px"
 &lt;p&gt;在 Vue Composition API 中，我发现官方对 Ref 和 Reactive 给出了最佳实践。可能这里就有所谓的幻灭存在，就像当年很多人不听 React 官方最佳实践，在 componentWillMount 里获取数据一样。&lt;/p&gt;
 &lt;p&gt;&lt;a class="link" href="https://composition-api.vuejs.org/#ref-vs-reactive" target="_blank" rel="noopener"
 &gt;Ref vs. Reactive&lt;/a&gt; 章节中有如下的对比：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// style 1: separate variables
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// style 1: separate variables
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;x&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;y&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;updatePosition&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;e&lt;/span&gt;) {
@@ -219,9 +219,9 @@ data-flex-basis="469px"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// --- compared to ---
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// style 2: single object
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;pos&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;pos&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;x&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;y&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
@@ -232,7 +232,8 @@ data-flex-basis="469px"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;那么依赖跟踪的迷惑就此开始，因为当你对已经 reactive 的对象进行解构赋值或者赋给新值的时候，依赖跟踪就失效了。官方对这个的态度比较模糊：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;在现阶段，我们认为在 ref vs reactive 上实施最佳做法为时尚早。我们建议您从上面的两个选项中选择与您的心智模型相符的方式。我们将收集实开发场景下的用户真反馈，并最终提供有关此主题的更明确的指导。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在现阶段，我们认为在 ref vs reactive 上实施最佳做法为时尚早。我们建议您从上面的两个选项中选择与您的心智模型相符的方式。我们将收集实开发场景下的用户真反馈，并最终提供有关此主题的更明确的指导。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h1 id="对比两者"&gt;对比两者
 &lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;Vue Composition API：闭包变量、响应式的依赖追踪&lt;/li&gt;
@@ -252,11 +253,11 @@ data-flex-basis="469px"
 &lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;安装 Gatsby CLI&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install -g gatsby-cli
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install -g gatsby-cli
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="2"&gt;
 &lt;li&gt;创建项目&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gatsby new
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gatsby new
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;目录结构如下：&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;.
 ├── LICENSE
@@ -273,11 +274,11 @@ data-flex-basis="469px"
 &lt;/code&gt;&lt;/pre&gt;&lt;ol start="3"&gt;
 &lt;li&gt;本地开发&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gatsby develop
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gatsby develop
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="4"&gt;
 &lt;li&gt;常用的插件&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;gatsby-plugin-feed&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;^2.3.25&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;,&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;gatsby-plugin-feed&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;^2.3.25&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;gatsby-plugin-google-analytics&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;^2.1.31&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;gatsby-plugin-manifest&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;^2.2.34&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;gatsby-plugin-offline&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;^3.0.30&amp;#34;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;,&lt;/span&gt;
@@ -301,7 +302,7 @@ data-flex-basis="469px"
 &lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics.png"
 width="1704"
 height="1464"
-srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_42506dbab9fa3456.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_de2234577a7871f8.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_40d72cd12acd4a5c.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_5beb45eec0713e9b.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -314,7 +315,7 @@ data-flex-basis="279px"
 &lt;p&gt;&lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode.png"
 width="1346"
 height="1692"
-srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_588fd42caec8b945.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_942143c91bc59aef.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_e5c7e229aa45aa83.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_eddb4bbe5d714ded.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -325,7 +326,7 @@ data-flex-basis="190px"
 &lt;li&gt;注入全局函数
 在 src 目录下新建 &lt;code&gt;html.js&lt;/code&gt;，开发一个用于控制主题的全局函数&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;script&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;script&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;dangerouslySetInnerHTML&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;__html&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; (function() {
@@ -367,7 +368,7 @@ data-flex-basis="190px"
 &lt;ol start="3"&gt;
 &lt;li&gt;修改 layout&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-jsx" data-lang="jsx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;theme&lt;/span&gt; &lt;span style="color:#f92672"&gt;!=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;null&lt;/span&gt; &lt;span style="color:#f92672"&gt;?&lt;/span&gt; (
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;Toggle&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;icons&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{{
@@ -403,7 +404,7 @@ data-flex-basis="190px"
 &lt;li&gt;编写全局样式
 编写 &lt;code&gt;global.css&lt;/code&gt; 并在 &lt;code&gt;typography.js&lt;/code&gt; 导入它，主要工作是给 body 配置 css 变量&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;body&lt;/span&gt; {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-css" data-lang="css"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;body&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --pink: rgb(&lt;span style="color:#ae81ff"&gt;255&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;167&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;196&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;background-color&lt;/span&gt;: &lt;span style="color:#a6e22e"&gt;var&lt;/span&gt;(&lt;span style="color:#f92672"&gt;--&lt;/span&gt;bg);
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
@@ -439,7 +440,7 @@ data-flex-basis="190px"
 &lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result.png"
 width="1418"
 height="1576"
-srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_addfaaa7fb03e672.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_465b00a87fa1cc4e.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_acded0e59b50a2d1.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_bedd0b713dd0faec.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -450,11 +451,11 @@ data-flex-basis="215px"
 &lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;安装 gh-pages&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install gh-pages --save-dev
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm install gh-pages --save-dev
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="2"&gt;
 &lt;li&gt;配置部署脚本&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;scripts&amp;#34;&lt;/span&gt;: {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;deploy&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;gatsby build &amp;amp;&amp;amp; gh-pages -d public -b master&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
@@ -467,7 +468,7 @@ data-flex-basis="215px"
 &lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting.png"
 width="1534"
 height="512"
-srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_9d8877c167ac5edb.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_132e3db4c678ce18.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_c5c6b0e08518b7b4.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_18158ec6b0ee0ce5.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -477,7 +478,7 @@ data-flex-basis="719px"
 &lt;ol start="4"&gt;
 &lt;li&gt;推送构建后的生产代码&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm run deploy
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;npm run deploy
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;推送后应该稍微等一下，就可以访问个人网站了。&lt;/p&gt;
 &lt;h1 id="总结"&gt;总结
 &lt;/h1&gt;&lt;p&gt;Gastby 优势&lt;/p&gt;
@@ -502,12 +503,12 @@ WASM 的框架 / 库的选择已经比较丰富了，如：C# + Blazor、Go + Vu
 &lt;h1 id="准备"&gt;准备
 &lt;/h1&gt;&lt;h2 id="环境陈述"&gt;环境陈述
 &lt;/h2&gt;&lt;p&gt;我使用的是 macOS，很多人自然会想到使用 homebrew 来完成 Rust 环境 setup。一开始我也是这么做的，不过会遇到下面问题：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;error&lt;span style="color:#f92672"&gt;[&lt;/span&gt;E0463&lt;span style="color:#f92672"&gt;]&lt;/span&gt;: can&lt;span style="color:#960050;background-color:#1e0010"&gt;&amp;#39;&lt;/span&gt;t find crate &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;std&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; | &lt;span style="color:#f92672"&gt;=&lt;/span&gt; note: the &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;wasm32-unknown-unknown&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; target may not be installed
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;error&lt;span style="color:#f92672"&gt;[&lt;/span&gt;E0463&lt;span style="color:#f92672"&gt;]&lt;/span&gt;: can&lt;span style="color:#960050;background-color:#1e0010"&gt;&amp;#39;&lt;/span&gt;t find crate &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;std&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; | &lt;span style="color:#f92672"&gt;=&lt;/span&gt; note: the &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;wasm32-unknown-unknown&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; target may not be installed
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后还是走官方推荐的方式解决的。&lt;/p&gt;
 &lt;h2 id="rust-installation"&gt;Rust Installation
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl --proto &lt;span style="color:#e6db74"&gt;&amp;#39;=https&amp;#39;&lt;/span&gt; --tlsv1.2 -sSf https://sh.rustup.rs | sh
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl --proto &lt;span style="color:#e6db74"&gt;&amp;#39;=https&amp;#39;&lt;/span&gt; --tlsv1.2 -sSf https://sh.rustup.rs | sh
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="yew-installation"&gt;Yew Installation
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cargo install wasm-pack
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cargo install wasm-pack
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cargo install cargo-web
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/3114495/71768267-99f34400-2f4f-11ea-927f-9f919876c04f.png"
 loading="lazy"
@@ -520,9 +521,9 @@ loading="lazy"
 &lt;/h2&gt;&lt;p&gt;Rust 本身就能实现编译到 WASM，使用 Yew 框架的原因就如其官网宣传：只是为了方便前端组件整合，以及对 JavaScript 互通性的考量。&lt;/p&gt;
 &lt;h2 id="项目初始化"&gt;项目初始化
 &lt;/h2&gt;&lt;p&gt;这里不采用官网提供的参考，因为示例过于简单，有些脱离真正应用场景。下面的步骤是我个人认为比较接近真实开发的状态，相关源码我也放到 GitHub 供大家玩耍 ➡️https://github.com/SASUKE40/yew-starter&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone --depth&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; https://github.com/SASUKE40/yew-starter.git &amp;lt;project_name&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone --depth&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; https://github.com/SASUKE40/yew-starter.git &amp;lt;project_name&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="目录结构"&gt;目录结构
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── Cargo.lock
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── Cargo.toml
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── LICENSE
@@ -535,7 +536,7 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── app.rs
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; └── lib.rs
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里面最重要的就是 &lt;code&gt;Cargo.toml&lt;/code&gt; 了，其中最关键的依赖如下：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&lt;span style="color:#a6e22e"&gt;lib&lt;/span&gt;]
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&lt;span style="color:#a6e22e"&gt;lib&lt;/span&gt;]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;crate-type&lt;/span&gt; = [&lt;span style="color:#e6db74"&gt;&amp;#34;cdylib&amp;#34;&lt;/span&gt;]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&lt;span style="color:#a6e22e"&gt;dependencies&lt;/span&gt;]
@@ -543,7 +544,7 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;yew&lt;/span&gt; = &lt;span style="color:#e6db74"&gt;&amp;#34;0.10.0&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;cdylib&lt;/code&gt;  是用于配置构建 C interoperability(C FFI)，&lt;code&gt;wasm-bindgen&lt;/code&gt; 依赖是用于 WASM 模块和 JavaScript 之间的交互粘合。&lt;/p&gt;
 &lt;h2 id="加载-wasm-以及-bind-的过程"&gt;加载 WASM 以及 bind 的过程
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;mod&lt;/span&gt; app;
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;mod&lt;/span&gt; app;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;use&lt;/span&gt; wasm_bindgen::prelude::&lt;span style="color:#f92672"&gt;*&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -553,7 +554,7 @@ loading="lazy"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Ok(())
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在需要导出 Rust 函数到 JavaScript 中，只需要在函数方法上注释 &lt;code&gt;#[wasm_bindgen]&lt;/code&gt; 即可，接着在 js 文件中导入使用&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt; } &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;./lib&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt; } &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;./lib&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt;()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="构建套件"&gt;构建套件
 &lt;/h2&gt;&lt;p&gt;使用 Parcel 是最方便的，开箱即用。既可以直接 import rs，也可以 import wasm。
@@ -562,11 +563,11 @@ loading="lazy"
 alt="image"
 &gt;
 我这里用了 &lt;code&gt;parcel-plugin-wasm.rs&lt;/code&gt; 插件完成 Cargo loader 的工作，和上述 import rs 的方式不同：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt; } &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;./Cargo.toml&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt; } &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;./Cargo.toml&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;run_app&lt;/span&gt;()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="yew-组件编写体验"&gt;Yew 组件编写体验
 &lt;/h2&gt;&lt;p&gt;Yew 框架使用 &lt;code&gt;html!&lt;/code&gt; macro 来生成 HTML&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; Component &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; App {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;impl&lt;/span&gt; Component &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; App {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Message&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Msg;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Properties&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; ();
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -585,13 +586,13 @@ alt="image"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;模板中可以使用 &lt;code&gt;html! { &amp;quot;Hello, World&amp;quot; }&lt;/code&gt; 这样的方式包裹文本或变量，这和 jsx 比较类似。
 事件绑定、条件、循环也都是类似的，大同小异：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 点击事件
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt;{
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 点击事件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;button onclick&lt;span style="color:#f92672"&gt;=|&lt;/span&gt;_&lt;span style="color:#f92672"&gt;|&lt;/span&gt; Msg::Click&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;{ &lt;span style="color:#e6db74"&gt;&amp;#34;Click Me!&amp;#34;&lt;/span&gt; }&lt;span style="color:#f92672"&gt;&amp;lt;/&lt;/span&gt;button&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 条件渲染
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;div&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; show_link {
@@ -606,7 +607,7 @@ alt="image"
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 迭代渲染
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;html!&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;ul class&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;item-list&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; { &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; self.props.items.iter().map(renderItem) }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;/&lt;/span&gt;ul&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
@@ -658,7 +659,7 @@ loading="lazy"
 alt="SSH 配置文件"
 &gt;&lt;/p&gt;
 &lt;p&gt;SSH 配置文件&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Host ubuntu
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Host ubuntu
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;HostName &amp;lt;your-remote-host&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;User ubuntu
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里需要准备一个远端的机器，这样可以直接访问到服务器的文件。&lt;/p&gt;
@@ -690,7 +691,7 @@ loading="lazy"
 alt="构建查看 Docker 镜像"
 &gt;&lt;/p&gt;
 &lt;p&gt;本地试跑镜像&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker run -p 3000:8080 -d edward40/node-web-app
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker run -p 3000:8080 -d edward40/node-web-app
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;访问 &lt;a class="link" href="http://localhost:3000/" target="_blank" rel="noopener"
 &gt;http://localhost:3000&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743937-838f6346-89c3-48fb-ac35-3373fd56c6b3.png#align=left&amp;amp;display=inline&amp;amp;height=456&amp;amp;originHeight=456&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
@@ -698,7 +699,7 @@ loading="lazy"
 alt="本地查看效果"
 &gt;&lt;/p&gt;
 &lt;p&gt;推送 Docker 镜像可以在终端执行&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker push edward40/docker_web_app:tagname
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker push edward40/docker_web_app:tagname
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不过这里我用官方的自动化构建&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743885-3f850c63-2cb3-41d9-81ca-1211546b3026.png#align=left&amp;amp;display=inline&amp;amp;height=456&amp;amp;originHeight=456&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
@@ -711,13 +712,13 @@ alt="自动化构建流程"
 &gt;&lt;/p&gt;
 &lt;h2 id="第六步-服务器上跑镜像"&gt;第六步 服务器上跑镜像
 &lt;/h2&gt;&lt;p&gt;在 SSH 终端中拉取 Node 应用镜像&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker pull edward40/docker_web_app
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker pull edward40/docker_web_app
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405744425-4a2520a6-6740-42f6-8d93-a4f4c42fd3c9.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="服务端拉取镜像"
 &gt;&lt;/p&gt;
 &lt;p&gt;服务端启动 Container&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker run -p 80:8080 -d edward40/docker_web_app
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker run -p 80:8080 -d edward40/docker_web_app
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="第七步-本地开发-docker-container"&gt;第七步 本地开发 Docker Container
 &lt;/h2&gt;&lt;p&gt;安装 Docker 插件&lt;/p&gt;
 &lt;p&gt;&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-dockermarketplace.visualstudio.com" target="_blank" rel="noopener"
@@ -734,39 +735,39 @@ loading="lazy"
 alt="12"
 &gt;&lt;/p&gt;
 &lt;p&gt;需要切换别的 Linux 系统，并增加 .devcontainer.json 文件&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;Node.js Sample&amp;#34;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;dockerFile&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;Dockerfile&amp;#34;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;appPort&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;3000&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;extensions&amp;#34;&lt;/span&gt;: []
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Dockerfile 的 alpine 换成 lts 版本&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;FROM&lt;/span&gt; &lt;span style="color:#e6db74"&gt;node:lts&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;FROM&lt;/span&gt; &lt;span style="color:#e6db74"&gt;node:lts&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# Create app directory&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Create app directory&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;WORKDIR&lt;/span&gt; &lt;span style="color:#e6db74"&gt;/usr/src/app&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;WORKDIR&lt;/span&gt; &lt;span style="color:#e6db74"&gt;/usr/src/app&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# Install app dependencies&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Install app dependencies&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# A wildcard is used to ensure both package.json AND package-lock.json are copied&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# A wildcard is used to ensure both package.json AND package-lock.json are copied&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# where available (npm@5+)&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# where available (npm@5+)&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;COPY&lt;/span&gt; package&lt;span style="color:#ae81ff"&gt;\*&lt;/span&gt;.json ./&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;COPY&lt;/span&gt; package&lt;span style="color:#ae81ff"&gt;\*&lt;/span&gt;.json ./&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;RUN&lt;/span&gt; npm install&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;RUN&lt;/span&gt; npm install&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# If you are building your code for production&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# If you are building your code for production&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# RUN npm ci --only=production&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# RUN npm ci --only=production&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# Bundle app source&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Bundle app source&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;COPY&lt;/span&gt; . .&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;COPY&lt;/span&gt; . .&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;EXPOSE&lt;/span&gt; &lt;span style="color:#e6db74"&gt;8080&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;CMD&lt;/span&gt; [ &lt;span style="color:#e6db74"&gt;&amp;#34;npm&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;start&amp;#34;&lt;/span&gt; ]&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;EXPOSE&lt;/span&gt; &lt;span style="color:#e6db74"&gt;8080&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;CMD&lt;/span&gt; [ &lt;span style="color:#e6db74"&gt;&amp;#34;npm&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;start&amp;#34;&lt;/span&gt; ]&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743946-1675fb65-b892-49ae-aca4-7fab222b3909.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="点击右下在容器中打开"
@@ -804,22 +805,22 @@ alt="使用容器终端"
 &lt;h1 id="试玩"&gt;试玩
 &lt;/h1&gt;&lt;h2 id="克隆-depot-tools"&gt;克隆 &lt;a class="link" href="http://commondatastorage.googleapis.com/chrome-infra-docs/flat/depot_tools/docs/html/depot_tools_tutorial.html#_setting_up" target="_blank" rel="noopener"
 &gt;Depot Tools&lt;/a&gt;
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="配置环境变量"&gt;配置环境变量
 &lt;/h2&gt;&lt;p&gt;这里我是把配置到 &lt;code&gt;.zshrc&lt;/code&gt; 文件中&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export PATH&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$PATH:/path/to/depot_tools
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;export PATH&lt;span style="color:#f92672"&gt;=&lt;/span&gt;$PATH:/path/to/depot_tools
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="克隆仓库"&gt;克隆仓库
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone git@github.com:ry/deno.git
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone git@github.com:ry/deno.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="进入到-src-文件夹"&gt;进入到 src 文件夹
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd deno/src
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd deno/src
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="获取包和-v8"&gt;获取包和 v8
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gclient sync --no-history
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gclient sync --no-history
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后你就会在 &lt;code&gt;src&lt;/code&gt; 下看到一堆三方包和 &lt;code&gt;v8&lt;/code&gt; 被下载下来&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529995554027-c933cf86-d4df-4399-a4e2-eb1a7a5a9e31.png"
 loading="lazy"
 &gt;&lt;/p&gt;
 &lt;h2 id="安装-js-依赖"&gt;安装 js 依赖
-&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd js
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd js
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yarn install
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gn gen out/Debug --args&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;cc_wrapper=&amp;#34;ccache&amp;#34; is_debug=true &amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="使用-ninja-编译"&gt;使用 ninja 编译
@@ -827,9 +828,9 @@ loading="lazy"
 &lt;p&gt;&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529995488649-004e99f7-50ff-4456-b394-15c20a1ec5ff.png"
 loading="lazy"
 &gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install ccache
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install ccache
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在 &lt;code&gt;src&lt;/code&gt; 下进行编译&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ninja -C out/Debug/ deno
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ninja -C out/Debug/ deno
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://cdn.yuque.com/yuque/0/2018/png/99653/1529995461197-704e52ca-67a1-4682-a8fd-7060b393d590.png"
 loading="lazy"
 &gt;&lt;/p&gt;
@@ -896,7 +897,7 @@ Note 
 &lt;h2 id="反模式无条件地将-prop-复制给-state"&gt;反模式：无条件地将 prop 复制给 state
 &lt;/h2&gt;&lt;p&gt;一个常见关于  &lt;code&gt;getDerivedStateFromProps&lt;/code&gt;  和  &lt;code&gt;componentWillReceiveProps&lt;/code&gt;  的错误理解就是他们只会在 props “变化”时调用。无论是组件重新渲染还是 props 和之前“不同”，这些生命周期方法都会被调用。基于此，这两个生命周期方法总是被用于不安全地无条件地覆盖 state。&lt;strong&gt;这样做将导致 state 的更新发生丢失。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;让我们思考一个例子来说明这个问题。这里有一个  &lt;code&gt;EmailInput&lt;/code&gt;  组件“映射”了一个 email 属性在 state 中：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;email&lt;/span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;render&lt;/span&gt;() {
@@ -909,8 +910,8 @@ Note 
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;componentWillReceiveProps&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;nextProps&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// This will erase any local state updates!
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// Do not do this.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;setState&lt;/span&gt;({ &lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;nextProps&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;email&lt;/span&gt; })
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// Do not do this.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;setState&lt;/span&gt;({ &lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;nextProps&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;email&lt;/span&gt; })
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;首先，这个组件看上去没什么问题。State 被 props 传递进来的值所初始化，并在我们键入  &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt;  的时候被更新。但是如果我们的父组件重新渲染的时候，我们输入到  &lt;code&gt;input&lt;/code&gt;  的内容就会丢失(&lt;a class="link" href="https://link.zhihu.com/?target=https%3A//codesandbox.io/s/m3w9zn1z8x" target="_blank" rel="noopener"
@@ -920,14 +921,14 @@ Note 
 &lt;p&gt;至此，为何&lt;strong&gt;无条件地将 props 复制给 state 是一个坏想法&lt;/strong&gt;显而易见。在 review 可能的解决方案，让我们来看看一个有关的问题模式：在 email 属性改变时，如果我们只更新 state ？&lt;/p&gt;
 &lt;h2 id="反模式当-props-改变时清除-state"&gt;反模式：当 props 改变时清除 state
 &lt;/h2&gt;&lt;p&gt;继续上述的例子，当  &lt;code&gt;props.email&lt;/code&gt;  改变时，我们可以通过只更新来避免意外地清除 state：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;componentWillReceiveProps&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;nextProps&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// Any time props.email changes, update state.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;nextProps&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;email&lt;/span&gt; &lt;span style="color:#f92672"&gt;!==&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;nextProps&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;email&lt;/span&gt; &lt;span style="color:#f92672"&gt;!==&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;setState&lt;/span&gt;({
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;nextProps&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; })
@@ -935,7 +936,7 @@ Note 
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// ...
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note
 不仅在以上例子中  &amp;gt; &lt;code&gt;componentWillReceiveProps&lt;/code&gt; ,一个的反模式也被用于  &amp;gt; &lt;code&gt;getDerivedStateFromProps&lt;/code&gt;  中。
 我们做了很大的改进。现在我们的组件在 props 实质变化时才会清楚我们输入的内容。&lt;/p&gt;
@@ -947,14 +948,14 @@ Note 
 &lt;h1 id="优选方案"&gt;优选方案
 &lt;/h1&gt;&lt;h2 id="推荐完全受控组件"&gt;推荐：完全受控组件
 &lt;/h2&gt;&lt;p&gt;一个避免上述涉及问题的途径就是完全地移除我们组件中的 state。如果 email 地址只存在于 prop，那我们没必要担心 state 的冲突。我们甚至可以把  &lt;code&gt;EmailInput&lt;/code&gt;  缓存一个更加轻量的函数式的组件：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;) {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;input&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;onChange&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;onChange&lt;/span&gt;} &lt;span style="color:#a6e22e"&gt;value&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;} &lt;span style="color:#f92672"&gt;/&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个途径简化了我们组件的实现，但是我们如果想存储草稿的时候，父组件还是需要手工完成这件事。(&lt;a class="link" href="https://link.zhihu.com/?target=https%3A//codesandbox.io/s/7154w1l551" target="_blank" rel="noopener"
 &gt;点这看这种模式的例子&lt;/a&gt;)&lt;/p&gt;
 &lt;h2 id="推荐带有-key-的完全不受控组件"&gt;推荐：带有 key 的完全不受控组件
 &lt;/h2&gt;&lt;p&gt;另一个替代方案就是我们的组件完全的控制自己的 email state “草稿”。在此例子中，我们的组件依然可以接收一个来自于&lt;em&gt;初始值&lt;/em&gt;，但它将会忽略后面 prop 的改动：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;defaultEmail&lt;/span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;handleChange&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;event&lt;/span&gt; =&amp;gt; {
@@ -967,7 +968,7 @@ Note 
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;为了能在不同的情境下重置值(如密码管理方案)，我们使用特殊的 React 属性  &lt;code&gt;key&lt;/code&gt; 。当  &lt;code&gt;key&lt;/code&gt;  改变时，React &lt;a class="link" href="https://link.zhihu.com/?target=https%3A//reactjs.org/docs/reconciliation.html%23keys" target="_blank" rel="noopener"
 &gt;将创建一个新的组件实例而不是更新现有的这个&lt;/a&gt;。Keys 经常被用于动态 list，但在这里依然管用。在我们的案例中，我们能根据 user ID 在新用户被选中时重新创建 email 输入组件：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;defaultEmail&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{&lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;user&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;} &lt;span style="color:#a6e22e"&gt;key&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{&lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;user&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;id&lt;/span&gt;} &lt;span style="color:#f92672"&gt;/&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;defaultEmail&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{&lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;user&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;} &lt;span style="color:#a6e22e"&gt;key&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;{&lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;user&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;id&lt;/span&gt;} &lt;span style="color:#f92672"&gt;/&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;每当 ID 改变时， &lt;code&gt;EmailInput&lt;/code&gt;  将会被重新创建，它的 state 将会用最新的  &lt;code&gt;defaultEmail&lt;/code&gt;  值重置。(&lt;a class="link" href="https://link.zhihu.com/?target=https%3A//codesandbox.io/s/6v1znlxyxn" target="_blank" rel="noopener"
 &gt;点这里看这种模式的例子&lt;/a&gt;)使用这种途径，你不需要为每一个输入组件加  &lt;code&gt;key&lt;/code&gt; 。也许在 from 中加一个  &lt;code&gt;key&lt;/code&gt;  会来得更好。每当 key 改变时，所有在 from 里的组件都会用一个新的 initialized state 来重新创建。&lt;/p&gt;
 &lt;p&gt;更多的案例中，这是一个处理需要被重置的 state 的最佳方式。
@@ -975,7 +976,7 @@ Note
 虽然这貌似会很慢，在性能差异无关紧要的时候。当组件有很重的更新逻辑时候，使用一个 key ，忽略子树 diffing 甚至会更快。&lt;/p&gt;
 &lt;h2 id="替代方案-1使用-id-prop-重置不受控组件"&gt;替代方案 1：使用 ID prop 重置不受控组件
 &lt;/h2&gt;&lt;p&gt;如果  &lt;code&gt;key&lt;/code&gt;  由于某些原因不能被使用(也许组件有昂贵的初始化代价)，一个可行但笨重的方案就是在  &lt;code&gt;getDerivedStateFromProps&lt;/code&gt;  中监听 “userID” 的改变：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;defaultEmail&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;prevPropsUserID&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;userID&lt;/span&gt;
@@ -983,9 +984,9 @@ Note
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;static&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;getDerivedStateFromProps&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// Any time the current user changes,
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// Reset any parts of state that are tied to that user.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// In this simple example, that&amp;#39;s just the email.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;userID&lt;/span&gt; &lt;span style="color:#f92672"&gt;!==&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;prevPropsUserID&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// Reset any parts of state that are tied to that user.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// In this simple example, that&amp;#39;s just the email.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;userID&lt;/span&gt; &lt;span style="color:#f92672"&gt;!==&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;prevPropsUserID&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;prevPropsUserID&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;userID&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;defaultEmail&lt;/span&gt;
@@ -995,14 +996,14 @@ Note
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// ...
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这也提供了灵活性——重置部分被我们选中的组件内部 state。(&lt;a class="link" href="https://link.zhihu.com/?target=https%3A//codesandbox.io/s/rjyvp7l3rq" target="_blank" rel="noopener"
 &gt;点这里看此模式的 demo&lt;/a&gt;)
 Note
 及时以上例子展示了  &amp;gt; &lt;code&gt;getDerivedStateFromProps&lt;/code&gt; ，同样的技术手段也可以被用在  &amp;gt; &lt;code&gt;componentWillReceiveProps&lt;/code&gt; 。&lt;/p&gt;
 &lt;h2 id="替代方式-2在一个实例方法中重置不受控组件"&gt;替代方式 2：在一个实例方法中重置不受控组件
 &lt;/h2&gt;&lt;p&gt;更罕见地，你可能需要重置 state 即使没有适当的 ID 可用为  &lt;code&gt;key&lt;/code&gt; 。一个解决方案就是每次你想重置时用一个随机数或者自增数字重置 key。另一个可行的方案是暴露一个实例方法命令式的重置内部 state：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;EmailInput&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;email&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;defaultEmail&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
@@ -1012,7 +1013,7 @@ Note
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// ...
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;父组件能&lt;a class="link" href="https://link.zhihu.com/?target=https%3A//reactjs.org/docs/glossary.html%23refs" target="_blank" rel="noopener"
 &gt;用 ref 来调用这个方法&lt;/a&gt;。(&lt;a class="link" href="https://link.zhihu.com/?target=https%3A//codesandbox.io/s/l70krvpykl" target="_blank" rel="noopener"
 &gt;点击这看这个模式例子&lt;/a&gt;)&lt;/p&gt;
@@ -1039,20 +1040,20 @@ Note
 &gt;memoization&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;使用 derived state 来完成 memoization 并不一定是坏事，但这经常不是最佳方案。管理 derived state 具有内在复杂度，这个复杂度随着属性的增加而提升。例如，如果我们想要加入第二个 derived feild 到我们的组件 state，那么我们的实现将需要分别跟踪两者的变化。&lt;/p&gt;
 &lt;p&gt;让我们来看一个例子——组件携带一个属性(一个 item list)，并渲染匹配用户输入的搜索查询的 item。我们使用 derived state 存储过滤的 list：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Example&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Example&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;filterText&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// *******************************************************
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// NOTE: this example is NOT the recommended approach.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// See the examples below for our recommendations instead.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// *******************************************************
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// NOTE: this example is NOT the recommended approach.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// See the examples below for our recommendations instead.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// *******************************************************
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;static&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;getDerivedStateFromProps&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// Re-run the filter whenever the list array or filter text change.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// Note we need to store prevPropsList and prevFilterText to detect changes.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// Note we need to store prevPropsList and prevFilterText to detect changes.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;list&lt;/span&gt; &lt;span style="color:#f92672"&gt;!==&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;prevPropsList&lt;/span&gt; &lt;span style="color:#f92672"&gt;||&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;prevFilterText&lt;/span&gt; &lt;span style="color:#f92672"&gt;!==&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;filterText&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ) {
@@ -1085,11 +1086,11 @@ Note
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个实现避免了不必要  &lt;code&gt;filteredList&lt;/code&gt;  的重新计算。但这比原来的更复杂，因为他必须分开跟踪和检测 props 和 state 的变化，才能正确更新过滤后的列表。在这个例子中，我们能使用  &lt;code&gt;PureComponent&lt;/code&gt;  简化工作，移动更新操作到 render 方法中：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// PureComponents only rerender if at least one state or prop value changes.
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// PureComponents only rerender if at least one state or prop value changes.
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Change is determined by doing a shallow comparison of state and prop keys.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Example&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PureComponent&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Example&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;PureComponent&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// State only needs to hold the current filter text value:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;filterText&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -1099,8 +1100,8 @@ Note
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;render&lt;/span&gt;() {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// The render method on this PureComponent is called only if
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// props.list or state.filterText has changed.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;filteredList&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;list&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;filter&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;item&lt;/span&gt; =&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// props.list or state.filterText has changed.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;filteredList&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;list&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;filter&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;item&lt;/span&gt; =&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;item&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;text&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;includes&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;state&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;filterText&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -1117,14 +1118,14 @@ Note
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这种途径比用 derived state 更加清晰且简单。偶尔地，这不够好——在大列表中过滤会变得慢，如果其他 prop 变化时  &lt;code&gt;PureComponent&lt;/code&gt;  不会阻止重渲染。为了解决这些问题，我们可以加入一个 memoization helper 来避免对 list 的不必要过滤：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;memoize&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;memoize-one&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;import&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;memoize&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;from&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;memoize-one&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Example&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;extends&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Component&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// State only needs to hold the current filter text value:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;filterText&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;&amp;#39;&lt;/span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;state&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;filterText&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;&amp;#39;&lt;/span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// Re-run the filter whenever the list array or filter text changes:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;filter&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;memoize&lt;/span&gt;((&lt;span style="color:#a6e22e"&gt;list&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;filterText&lt;/span&gt;) =&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;filter&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;memoize&lt;/span&gt;((&lt;span style="color:#a6e22e"&gt;list&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;filterText&lt;/span&gt;) =&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;list&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;filter&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;item&lt;/span&gt; =&amp;gt; &lt;span style="color:#a6e22e"&gt;item&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;text&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;includes&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;filterText&lt;/span&gt;))
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -1134,8 +1135,8 @@ Note
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;render&lt;/span&gt;() {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// Calculate the latest filtered list. If these arguments haven&amp;#39;t changed
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// since the last render, `memoize-one` will reuse the last return value.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;filteredList&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;filter&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;list&lt;/span&gt;, &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;state&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;filterText&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// since the last render, `memoize-one` will reuse the last return value.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;filteredList&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;filter&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;props&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;list&lt;/span&gt;, &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;state&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;filterText&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; (
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;Fragment&lt;/span&gt;&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;
@@ -1180,7 +1181,7 @@ Note
 &lt;h1 id="怎麼開始用上-react"&gt;怎麼開始用上 React
 &lt;/h1&gt;&lt;p&gt;這裡我們先不用 Webpack、gulp 這些這麼“高級”的工具，方便小白入門。
 我們直接引入對應的腳本更加方便，大概是這樣子的：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;html&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lang&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;head&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;meta&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;charset&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;UTF-8&amp;#34;&lt;/span&gt; /&amp;gt;
@@ -1221,10 +1222,11 @@ Note
 &lt;li&gt;用 ReactDOM 如渲染並掛載到某個具體的 DOM 節點上&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;額外的 Tip：在這裡的 &lt;code&gt;&amp;lt;div&amp;gt;Hello {this.props.name}&amp;lt;/div&amp;gt;&lt;/code&gt; 這一部分並不是 HTML，而是貨真價實的 JavaScript，並且創建出來對象是 React 實例，並不是 HTML 的 DOM 節點。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;額外的 Tip：在這裡的 &lt;code&gt;&amp;lt;div&amp;gt;Hello {this.props.name}&amp;lt;/div&amp;gt;&lt;/code&gt; 這一部分並不是 HTML，而是貨真價實的 JavaScript，並且創建出來對象是 React 實例，並不是 HTML 的 DOM 節點。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h1 id="使用-react-在這個示例的好處"&gt;使用 React 在這個示例的好處
 &lt;/h1&gt;&lt;p&gt;可以自定義標籤屬性，在渲染的時候可以插入到內容中&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;html&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lang&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;head&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;meta&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;charset&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;UTF-8&amp;#34;&lt;/span&gt; /&amp;gt;
@@ -1268,7 +1270,7 @@ Note
 &lt;li&gt;&lt;code&gt;componentWillUnmount&lt;/code&gt; 也顧名思義，將要卸載的時候做點事情，良好的編碼習慣，這裡清除定時&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1 id="示例-3"&gt;示例 3
-&lt;/h1&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;/h1&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;html&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lang&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;head&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;meta&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;charset&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;UTF-8&amp;#34;&lt;/span&gt; /&amp;gt;
@@ -1330,7 +1332,7 @@ Note
 &lt;li&gt;列表組件定義的一種推薦寫法：&lt;code&gt;this.props.items.map&lt;/code&gt; 傳入單個組件&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1 id="示例-4"&gt;示例 4
-&lt;/h1&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;/h1&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;html&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lang&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;head&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;meta&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;charset&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;UTF-8&amp;#34;&lt;/span&gt; /&amp;gt;
@@ -1385,6 +1387,7 @@ Note
 &lt;li&gt;使用 &lt;code&gt;refs&lt;/code&gt; 拿到 DOM？思考一下是不是吧~&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;額外的 Tip：React 還沒有 1.0.0，很多都經常變化，&lt;code&gt;refs&lt;/code&gt; 在以前不是這麼拿到，哭死我們這些前端小白了~&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;額外的 Tip：React 還沒有 1.0.0，很多都經常變化，&lt;code&gt;refs&lt;/code&gt; 在以前不是這麼拿到，哭死我們這些前端小白了~&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h1 id="結語"&gt;結語
 &lt;/h1&gt;&lt;p&gt;前端之路還很長，React 大法好啊~&lt;/p&gt;</description></item></channel></rss>

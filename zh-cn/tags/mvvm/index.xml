@@ -9,7 +9,7 @@
 &lt;h1 id="怎麼開始用上-react"&gt;怎麼開始用上 React
 &lt;/h1&gt;&lt;p&gt;這裡我們先不用 Webpack、gulp 這些這麼“高級”的工具，方便小白入門。
 我們直接引入對應的腳本更加方便，大概是這樣子的：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;html&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lang&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;head&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;meta&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;charset&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;UTF-8&amp;#34;&lt;/span&gt; /&amp;gt;
@@ -50,10 +50,11 @@
 &lt;li&gt;用 ReactDOM 如渲染並掛載到某個具體的 DOM 節點上&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;額外的 Tip：在這裡的 &lt;code&gt;&amp;lt;div&amp;gt;Hello {this.props.name}&amp;lt;/div&amp;gt;&lt;/code&gt; 這一部分並不是 HTML，而是貨真價實的 JavaScript，並且創建出來對象是 React 實例，並不是 HTML 的 DOM 節點。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;額外的 Tip：在這裡的 &lt;code&gt;&amp;lt;div&amp;gt;Hello {this.props.name}&amp;lt;/div&amp;gt;&lt;/code&gt; 這一部分並不是 HTML，而是貨真價實的 JavaScript，並且創建出來對象是 React 實例，並不是 HTML 的 DOM 節點。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h1 id="使用-react-在這個示例的好處"&gt;使用 React 在這個示例的好處
 &lt;/h1&gt;&lt;p&gt;可以自定義標籤屬性，在渲染的時候可以插入到內容中&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;html&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lang&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;head&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;meta&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;charset&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;UTF-8&amp;#34;&lt;/span&gt; /&amp;gt;
@@ -97,7 +98,7 @@
 &lt;li&gt;&lt;code&gt;componentWillUnmount&lt;/code&gt; 也顧名思義，將要卸載的時候做點事情，良好的編碼習慣，這裡清除定時&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1 id="示例-3"&gt;示例 3
-&lt;/h1&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;/h1&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;html&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lang&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;head&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;meta&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;charset&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;UTF-8&amp;#34;&lt;/span&gt; /&amp;gt;
@@ -159,7 +160,7 @@
 &lt;li&gt;列表組件定義的一種推薦寫法：&lt;code&gt;this.props.items.map&lt;/code&gt; 傳入單個組件&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1 id="示例-4"&gt;示例 4
-&lt;/h1&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;/h1&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#f92672"&gt;html&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lang&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;head&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#f92672"&gt;meta&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;charset&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;UTF-8&amp;#34;&lt;/span&gt; /&amp;gt;
@@ -214,6 +215,7 @@
 &lt;li&gt;使用 &lt;code&gt;refs&lt;/code&gt; 拿到 DOM？思考一下是不是吧~&lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;額外的 Tip：React 還沒有 1.0.0，很多都經常變化，&lt;code&gt;refs&lt;/code&gt; 在以前不是這麼拿到，哭死我們這些前端小白了~&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;額外的 Tip：React 還沒有 1.0.0，很多都經常變化，&lt;code&gt;refs&lt;/code&gt; 在以前不是這麼拿到，哭死我們這些前端小白了~&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h1 id="結語"&gt;結語
 &lt;/h1&gt;&lt;p&gt;前端之路還很長，React 大法好啊~&lt;/p&gt;</description></item></channel></rss>

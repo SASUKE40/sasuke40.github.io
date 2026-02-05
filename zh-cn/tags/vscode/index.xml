@@ -19,7 +19,7 @@ loading="lazy"
 alt="SSH 配置文件"
 &gt;&lt;/p&gt;
 &lt;p&gt;SSH 配置文件&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Host ubuntu
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Host ubuntu
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;HostName &amp;lt;your-remote-host&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;User ubuntu
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里需要准备一个远端的机器，这样可以直接访问到服务器的文件。&lt;/p&gt;
@@ -51,7 +51,7 @@ loading="lazy"
 alt="构建查看 Docker 镜像"
 &gt;&lt;/p&gt;
 &lt;p&gt;本地试跑镜像&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker run -p 3000:8080 -d edward40/node-web-app
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker run -p 3000:8080 -d edward40/node-web-app
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;访问 &lt;a class="link" href="http://localhost:3000/" target="_blank" rel="noopener"
 &gt;http://localhost:3000&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743937-838f6346-89c3-48fb-ac35-3373fd56c6b3.png#align=left&amp;amp;display=inline&amp;amp;height=456&amp;amp;originHeight=456&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
@@ -59,7 +59,7 @@ loading="lazy"
 alt="本地查看效果"
 &gt;&lt;/p&gt;
 &lt;p&gt;推送 Docker 镜像可以在终端执行&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker push edward40/docker_web_app:tagname
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker push edward40/docker_web_app:tagname
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不过这里我用官方的自动化构建&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743885-3f850c63-2cb3-41d9-81ca-1211546b3026.png#align=left&amp;amp;display=inline&amp;amp;height=456&amp;amp;originHeight=456&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
@@ -72,13 +72,13 @@ alt="自动化构建流程"
 &gt;&lt;/p&gt;
 &lt;h2 id="第六步-服务器上跑镜像"&gt;第六步 服务器上跑镜像
 &lt;/h2&gt;&lt;p&gt;在 SSH 终端中拉取 Node 应用镜像&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker pull edward40/docker_web_app
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker pull edward40/docker_web_app
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405744425-4a2520a6-6740-42f6-8d93-a4f4c42fd3c9.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="服务端拉取镜像"
 &gt;&lt;/p&gt;
 &lt;p&gt;服务端启动 Container&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker run -p 80:8080 -d edward40/docker_web_app
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo docker run -p 80:8080 -d edward40/docker_web_app
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="第七步-本地开发-docker-container"&gt;第七步 本地开发 Docker Container
 &lt;/h2&gt;&lt;p&gt;安装 Docker 插件&lt;/p&gt;
 &lt;p&gt;&lt;a class="link" href="https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-dockermarketplace.visualstudio.com" target="_blank" rel="noopener"
@@ -95,39 +95,39 @@ loading="lazy"
 alt="12"
 &gt;&lt;/p&gt;
 &lt;p&gt;需要切换别的 Linux 系统，并增加 .devcontainer.json 文件&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;Node.js Sample&amp;#34;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;dockerFile&amp;#34;&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;Dockerfile&amp;#34;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;appPort&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;3000&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;extensions&amp;#34;&lt;/span&gt;: []
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Dockerfile 的 alpine 换成 lts 版本&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;FROM&lt;/span&gt; &lt;span style="color:#e6db74"&gt;node:lts&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;FROM&lt;/span&gt; &lt;span style="color:#e6db74"&gt;node:lts&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# Create app directory&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Create app directory&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;WORKDIR&lt;/span&gt; &lt;span style="color:#e6db74"&gt;/usr/src/app&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;WORKDIR&lt;/span&gt; &lt;span style="color:#e6db74"&gt;/usr/src/app&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# Install app dependencies&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Install app dependencies&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# A wildcard is used to ensure both package.json AND package-lock.json are copied&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# A wildcard is used to ensure both package.json AND package-lock.json are copied&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# where available (npm@5+)&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# where available (npm@5+)&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;COPY&lt;/span&gt; package&lt;span style="color:#ae81ff"&gt;\*&lt;/span&gt;.json ./&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;COPY&lt;/span&gt; package&lt;span style="color:#ae81ff"&gt;\*&lt;/span&gt;.json ./&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;RUN&lt;/span&gt; npm install&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;RUN&lt;/span&gt; npm install&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# If you are building your code for production&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# If you are building your code for production&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# RUN npm ci --only=production&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# RUN npm ci --only=production&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;# Bundle app source&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# Bundle app source&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;COPY&lt;/span&gt; . .&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;COPY&lt;/span&gt; . .&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;EXPOSE&lt;/span&gt; &lt;span style="color:#e6db74"&gt;8080&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;CMD&lt;/span&gt; [ &lt;span style="color:#e6db74"&gt;&amp;#34;npm&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;start&amp;#34;&lt;/span&gt; ]&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;EXPOSE&lt;/span&gt; &lt;span style="color:#e6db74"&gt;8080&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;CMD&lt;/span&gt; [ &lt;span style="color:#e6db74"&gt;&amp;#34;npm&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;start&amp;#34;&lt;/span&gt; ]&lt;span style="color:#960050;background-color:#1e0010"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://cdn.nlark.com/yuque/0/2020/png/99653/1578405743946-1675fb65-b892-49ae-aca4-7fab222b3909.png#align=left&amp;amp;display=inline&amp;amp;height=558&amp;amp;originHeight=558&amp;amp;originWidth=720&amp;amp;size=0&amp;amp;status=done&amp;amp;style=none&amp;amp;width=720"
 loading="lazy"
 alt="点击右下在容器中打开"
