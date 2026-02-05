@@ -62,6 +62,11 @@ links:
     website: https://desvl.xyz
     image: https://avatars.githubusercontent.com/u/40477748?v=4
 
+  - title: Kevin Deng
+    description: ""
+    website: https://sxzz.dev
+    image: https://sxzz.dev/avatar.jpg
+
 menu:
   main:
     weight: -50
