@@ -63,7 +63,7 @@ links:
     image: https://avatars.githubusercontent.com/u/40477748?v=4
 
   - title: Kevin Deng
-    description: ""
+    description: "Creator of tsdown, Vue Macros, and Elk. Core team member of Vue, Vite, VueUse, unjs, unplugin, and Oxc."
     website: https://sxzz.dev
     image: https://sxzz.dev/avatar.jpg
 
