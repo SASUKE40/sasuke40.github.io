@@ -1,0 +1,29 @@
+<footer class="article-footer">
+    <section class="article-share">
+        {{ $shareText := .Title }}
+        {{ $shareURL := .Permalink }}
+        {{ $intentURL := printf "https://x.com/intent/tweet?text=%s&url=%s" ($shareText | urlquery) ($shareURL | urlquery) }}
+        <a href="{{ $intentURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ if eq .Language.Lang "zh-cn" }}分享到 X{{ else }}Share on X{{ end }}">
+            <span class="article-share-icon" aria-hidden="true">{{ partial "helper/icon" "brand-x" }}</span>
+            <span>{{ if eq .Language.Lang "zh-cn" }}分享到 X{{ else }}Share on X{{ end }}</span>
+        </a>
+    </section>
+
+    {{ partial "article/components/tags" . }}
+
+    {{ if and (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}
+    <section class="article-copyright">
+        {{ partial "helper/icon" "copyright" }}
+        <span>{{ default .Site.Params.article.license.default .Params.license | markdownify }}</span>
+    </section>
+    {{ end }}
+
+    {{- if ne .Lastmod .Date -}}
+    <section class="article-lastmod">
+        {{ partial "helper/icon" "clock" }}
+        <span>
+            {{ T "article.lastUpdatedOn" }} {{ .Lastmod | time.Format ( or .Site.Params.dateFormat.lastUpdated "Jan 02, 2006 15:04 MST" ) }}
+        </span>
+    </section>
+    {{- end -}}
+</footer>
