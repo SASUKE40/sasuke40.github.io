@@ -2,7 +2,7 @@
 title: "工作不是一种祝福，而是诅咒"
 description: "工作被包装成生活的必要条件，但在更多时候，它只是人为了生存而被迫交出的时间。"
 slug: work-is-not-a-blessing-but-a-curse
-date: 2026-06-07T00:00:00-07:00
+date: 2026-06-06T00:00:00-07:00
 author: Edward Elric
 image: cover.png
 tags:

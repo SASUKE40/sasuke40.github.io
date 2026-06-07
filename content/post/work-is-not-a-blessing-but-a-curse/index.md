@@ -2,7 +2,7 @@
 title: "Work Is Not a Blessing, but a Curse"
 description: "Work is packaged as a necessary condition of life, but more often it is the time people are forced to surrender in order to survive."
 slug: work-is-not-a-blessing-but-a-curse
-date: 2026-06-07T00:00:00-07:00
+date: 2026-06-06T00:00:00-07:00
 author: Edward Elric
 image: cover.png
 tags:
