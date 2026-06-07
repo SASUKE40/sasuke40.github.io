@@ -1,7 +1,7 @@
 <footer class="article-footer">
     <section class="article-share">
         {{ $shareText := .Title }}
-        {{ $shareURL := printf "%s?x_card=1" .Permalink }}
+        {{ $shareURL := .Permalink }}
         {{ $intentURL := printf "https://x.com/intent/tweet?text=%s&url=%s" ($shareText | urlquery) ($shareURL | urlquery) }}
         <a href="{{ $intentURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ if eq .Language.Lang "zh-cn" }}分享到 X{{ else }}Share on X{{ end }}">
             <span class="article-share-icon" aria-hidden="true">{{ partial "helper/icon" "brand-x" }}</span>
