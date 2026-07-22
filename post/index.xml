@@ -1,4 +1,422 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Shilin's Blog</title><link>https://edward40.com/post/</link><description>Recent content in Posts on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 06 Jun 2026 00:00:00 -0700</lastBuildDate><atom:link href="https://edward40.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Work Is Not a Blessing, but a Curse</title><link>https://edward40.com/p/work-is-not-a-blessing-but-a-curse/</link><pubDate>Sat, 06 Jun 2026 00:00:00 -0700</pubDate><guid>https://edward40.com/p/work-is-not-a-blessing-but-a-curse/</guid><description>&lt;img src="https://edward40.com/p/work-is-not-a-blessing-but-a-curse/cover.png" alt="Featured image of post Work Is Not a Blessing, but a Curse" /&gt;&lt;h2 id="starting-from-a-wechat-voice-call"&gt;Starting From a WeChat Voice Call
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Shilin's Blog</title><link>https://edward40.com/post/</link><description>Recent content in Posts on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 21 Jul 2026 00:00:00 -0700</lastBuildDate><atom:link href="https://edward40.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Inside Pi Agent</title><link>https://edward40.com/p/pi-agent-internal/</link><pubDate>Tue, 21 Jul 2026 00:00:00 -0700</pubDate><guid>https://edward40.com/p/pi-agent-internal/</guid><description>&lt;p&gt;Pi is a minimalist coding agent, but “minimalist” does not mean simplistic. Behind its small default toolset is a useful blueprint for understanding how a production terminal agent works.&lt;/p&gt;
+&lt;p&gt;In this article, I will walk through Pi from the inside out: the core loop, the context sent to the model, session persistence, tool execution, extensions, prompt assembly, the terminal interface, compaction, and skills. The goal is not only to understand Pi, but also to extract patterns that can be reused when building other agents.&lt;/p&gt;
+&lt;h2 id="the-two-main-layers-of-pi"&gt;The Two Main Layers of Pi
+&lt;/h2&gt;&lt;p&gt;The easiest way to understand Pi is to divide it into two conceptual layers.&lt;/p&gt;
+&lt;p&gt;The first is the &lt;strong&gt;agent core&lt;/strong&gt;. It owns the model-facing runtime: conversation state, model streaming, tool calls, tool results, cancellation, and the loop that continues until the model has finished.&lt;/p&gt;
+&lt;p&gt;The second is &lt;strong&gt;Pi Interactive&lt;/strong&gt;, the user-facing coding environment built around that core. It adds the terminal UI, durable sessions, context compaction, project instructions, extensions, skills, commands, and multiple execution modes.&lt;/p&gt;
+&lt;p&gt;Underneath this two-layer mental model, the TypeScript monorepo separates responsibilities into four packages:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Package&lt;/th&gt;
+&lt;th&gt;Responsibility&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;pi-ai&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;A common streaming interface over many LLM providers&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;pi-agent-core&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The stateful agent and tool-calling loop&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;pi-tui&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Terminal components and differential rendering&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;pi-coding-agent&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Sessions, prompts, skills, extensions, tools, and user-facing modes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This separation is important because the TUI is not the agent. The same core can be embedded in another program, exposed through RPC, or used with a completely different interface. Provider-specific behavior also stays below the loop, so changing models does not require rewriting session or UI logic.&lt;/p&gt;
+&lt;h2 id="the-core-agent-loop"&gt;The Core Agent Loop
+&lt;/h2&gt;&lt;p&gt;At the center of Pi is the same feedback loop found in most tool-using agents:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Prepare the current context.&lt;/li&gt;
+&lt;li&gt;stream that context to the model.&lt;/li&gt;
+&lt;li&gt;Collect the assistant response.&lt;/li&gt;
+&lt;li&gt;Execute any requested tools.&lt;/li&gt;
+&lt;li&gt;Append the tool results to the conversation.&lt;/li&gt;
+&lt;li&gt;Call the model again.&lt;/li&gt;
+&lt;li&gt;Stop when the model returns a final answer or the run is terminated.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In simplified pseudocode:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;while&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;assistantMessage&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;await&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;streamModel&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;context&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;toolCalls&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;findToolCalls&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;assistantMessage&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;toolCalls&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;length&lt;/span&gt; &lt;span style="color:#f92672"&gt;===&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;) &lt;span style="color:#66d9ef"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;results&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;await&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;executeTools&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;toolCalls&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;context&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;messages&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;push&lt;/span&gt;(...&lt;span style="color:#a6e22e"&gt;results&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The production implementation is observable through typed events. The event stream describes the agent, turn, message, and tool lifecycles:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;agent_start
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; turn_start
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; message_start -&amp;gt; message_update* -&amp;gt; message_end
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; tool_execution_start -&amp;gt; tool_execution_update* -&amp;gt; tool_execution_end
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; turn_end
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;agent_end
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The loop emits facts without deciding how they should appear. A terminal can render them, a JSON client can serialize them, a session manager can persist them, and a test can assert their order.&lt;/p&gt;
+&lt;p&gt;There are several details hidden behind the simple loop:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Preflight checks:&lt;/strong&gt; Pi resolves a tool, validates its arguments, and runs relevant hooks before execution.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Parallel execution:&lt;/strong&gt; Independent calls can run concurrently, reducing latency when the model requests several reads or searches.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ordered results:&lt;/strong&gt; Even if calls finish out of order, results are restored to the model&amp;rsquo;s original call order before entering the conversation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cancellation:&lt;/strong&gt; One abort signal coordinates the model stream, tools, and higher-level operation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Explicit termination:&lt;/strong&gt; A tool can indicate that another model call is unnecessary.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pi also distinguishes &lt;strong&gt;steering&lt;/strong&gt; from &lt;strong&gt;follow-up&lt;/strong&gt; input. Steering redirects the active run at the next safe boundary. A follow-up waits for the run to settle and then begins another turn. Keeping separate queues makes interactive input predictable.&lt;/p&gt;
+&lt;h2 id="context-initialization"&gt;Context Initialization
+&lt;/h2&gt;&lt;p&gt;The model does not see the repository or session directly. Before every request, Pi has to construct a context that represents the relevant state.&lt;/p&gt;
+&lt;p&gt;That context can include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the base system prompt;&lt;/li&gt;
+&lt;li&gt;global and project-specific instructions;&lt;/li&gt;
+&lt;li&gt;tool names, descriptions, and parameter schemas;&lt;/li&gt;
+&lt;li&gt;the active path through the session history;&lt;/li&gt;
+&lt;li&gt;the current user message and attachments;&lt;/li&gt;
+&lt;li&gt;relevant skill instructions;&lt;/li&gt;
+&lt;li&gt;context supplied or transformed by extensions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pi deliberately keeps its baseline small. Specialized behavior is layered in by the environment rather than permanently baked into one enormous prompt. This makes it easier to identify where a rule came from and to adapt the same agent to different repositories.&lt;/p&gt;
+&lt;p&gt;Internally, Pi can preserve application-specific message types such as UI notifications, summaries, and extension data. Immediately before a provider request, the &lt;code&gt;convertToLlm&lt;/code&gt; pipeline projects those rich messages into the narrower user, assistant, and tool-result schema accepted by the model.&lt;/p&gt;
+&lt;p&gt;This boundary avoids turning an external API format into the schema for the entire application:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Application messages
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -&amp;gt; context transforms
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -&amp;gt; convertToLlm
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -&amp;gt; provider-compatible context
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="memory-sessions-and-conversation-state"&gt;Memory: Sessions and Conversation State
+&lt;/h2&gt;&lt;p&gt;Sessions give the agent continuity. A coding task rarely ends after one response: the agent reads files, forms a hypothesis, edits code, runs a command, inspects the failure, and iterates. Each step depends on what happened before it.&lt;/p&gt;
+&lt;p&gt;Pi stores sessions as JSON Lines. The format is append-friendly and inspectable, while parent references turn the conversation into a tree rather than a flat transcript.&lt;/p&gt;
+&lt;p&gt;The tree supports workflows that match real engineering work:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;return to an earlier decision without deleting later messages;&lt;/li&gt;
+&lt;li&gt;fork a different implementation from the same point;&lt;/li&gt;
+&lt;li&gt;summarize the branch that is no longer active;&lt;/li&gt;
+&lt;li&gt;rebuild the current conversation by following parent links.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="navigating-memory-with-tree"&gt;Navigating memory with &lt;code&gt;/tree&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;The &lt;code&gt;/tree&lt;/code&gt; command opens the current session&amp;rsquo;s tree navigator. From there, we can select any earlier entry and continue from that point. Pi does not erase the messages that came after it. The next message simply creates another child from the selected entry, so the old and new continuations become sibling branches in the same session.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://edward40.com/p/pi-agent-internal/pi-tree-command.png"
+width="1914"
+height="398"
+srcset="https://edward40.com/p/pi-agent-internal/pi-tree-command_hu_821810e354d14abf.png 480w, https://edward40.com/p/pi-agent-internal/pi-tree-command_hu_ea496196bc0b35ab.png 1024w"
+loading="lazy"
+alt="Entering Pi’s tree command to navigate and switch session branches"
+class="gallery-image"
+data-flex-grow="480"
+data-flex-basis="1154px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Typing &lt;code&gt;/tree&lt;/code&gt; opens the session-tree navigator; pressing Escape twice provides a shortcut to the same view.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Every stored entry has an &lt;code&gt;id&lt;/code&gt; and a &lt;code&gt;parentId&lt;/code&gt;. The active conversation is the path from the root to the currently selected leaf. When we move to an older entry and continue, the new record points back to that entry rather than to the previous leaf:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;session root
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;└── user: implement feature
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; └── assistant: approach A
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ├── user: continue with A &amp;lt;- original branch
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; └── user: try approach B &amp;lt;- branch created after /tree
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Because both paths remain in the same file, &lt;code&gt;/tree&lt;/code&gt; is useful for exploring alternatives without losing earlier work. When switching away from a branch, Pi can also summarize the path being left and attach that context to the destination. Use &lt;code&gt;/tree&lt;/code&gt; when alternatives belong to one session; &lt;code&gt;/fork&lt;/code&gt; or &lt;code&gt;/clone&lt;/code&gt; is more appropriate when the new path should live in a separate session file.&lt;/p&gt;
+&lt;h3 id="where-the-jsonl-memory-is-stored"&gt;Where the JSONL memory is stored
+&lt;/h3&gt;&lt;p&gt;Pi automatically stores sessions below:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;~/.pi/agent/sessions/--&amp;lt;working-directory&amp;gt;--/&amp;lt;timestamp&amp;gt;_&amp;lt;uuid&amp;gt;.jsonl
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The working-directory portion is encoded as a directory name. For example, a session started in &lt;code&gt;/Users/edward&lt;/code&gt; appears under &lt;code&gt;~/.pi/agent/sessions/--Users-edward--/&lt;/code&gt;, as shown below.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://edward40.com/p/pi-agent-internal/pi-jsonl-session.png"
+width="2316"
+height="1774"
+srcset="https://edward40.com/p/pi-agent-internal/pi-jsonl-session_hu_29df6f6ac513f52d.png 480w, https://edward40.com/p/pi-agent-internal/pi-jsonl-session_hu_1b0b7951745fccc8.png 1024w"
+loading="lazy"
+alt="A Pi JSONL session file and its location under the per-working-directory sessions folder"
+class="gallery-image"
+data-flex-grow="130"
+data-flex-basis="313px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The JSONL file is append-friendly: each line is one session entry, including model changes, thinking-level changes, user messages, assistant messages, and usage metadata.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The screenshot also reveals how the tree is encoded. Each line carries its own &lt;code&gt;id&lt;/code&gt;; most lines carry the &lt;code&gt;parentId&lt;/code&gt; of the preceding node on that branch. Following those parent links reconstructs the active history, while entries with the same ancestor represent alternative branches. This is why Pi can navigate a conversation tree while preserving all history in a single JSONL file.&lt;/p&gt;
+&lt;p&gt;The durable session and the model context are intentionally different objects. The session answers, “What happened?” The context answers, “What does the model need for the next decision?” Keeping them separate lets Pi retain a complete record while showing the model only the active branch and any summaries needed to understand it.&lt;/p&gt;
+&lt;h2 id="tools-how-the-agent-acts-on-the-world"&gt;Tools: How the Agent Acts on the World
+&lt;/h2&gt;&lt;p&gt;The model can produce text and structured requests, but it cannot directly read a file, search a repository, or run a test. Tools are the bridge between the model and the environment.&lt;/p&gt;
+&lt;p&gt;Pi starts with a deliberately small coding toolset: read, write, edit, and bash. Other capabilities can be added through extensions. Each tool exposes a name, a description, a parameter schema, and an execution function. The schema becomes part of the model&amp;rsquo;s context so that the model knows both what actions are available and how to request them.&lt;/p&gt;
+&lt;h3 id="the-basic-tools-in-source-code"&gt;The basic tools in source code
+&lt;/h3&gt;&lt;p&gt;Pi assembles its default set in &lt;a class="link" href="https://github.com/earendil-works/pi/blob/main/packages/coding-agent/src/core/tools/index.ts" target="_blank" rel="noopener"
+&gt;&lt;code&gt;tools/index.ts&lt;/code&gt;&lt;/a&gt;. Stripped down to the important part, the factory is simply:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;export&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;createCodingTools&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;cwd&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;AgentTool&lt;/span&gt;[] {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; [
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;createReadTool&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;cwd&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;createBashTool&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;cwd&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;createEditTool&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;cwd&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;createWriteTool&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;cwd&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Each factory returns the same &lt;code&gt;AgentTool&lt;/code&gt; contract, so the core loop does not need special logic for files versus shell commands. The &lt;a class="link" href="https://github.com/earendil-works/pi/blob/main/packages/coding-agent/src/core/tools/read.ts" target="_blank" rel="noopener"
+&gt;&lt;code&gt;read&lt;/code&gt; tool&lt;/a&gt; is a useful example. This adapted excerpt removes image handling, truncation, and TUI rendering to expose its essential shape:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;readSchema&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Type&lt;/span&gt;.Object({
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;path&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;Type.String&lt;/span&gt;({ &lt;span style="color:#a6e22e"&gt;description&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;File path, relative or absolute&amp;#34;&lt;/span&gt; }),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;offset&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;Type.Optional&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;Type&lt;/span&gt;.Number({ &lt;span style="color:#a6e22e"&gt;description&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;First line, starting at 1&amp;#34;&lt;/span&gt; })),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;limit&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;Type.Optional&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;Type&lt;/span&gt;.Number({ &lt;span style="color:#a6e22e"&gt;description&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;Maximum lines to return&amp;#34;&lt;/span&gt; })),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;createReadToolDefinition&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;cwd&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ToolDefinition&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;name&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;read&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;label&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;read&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;description&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;Read text files or images, with bounded output.&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;parameters&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;readSchema&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;async&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;execute&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;_id&lt;/span&gt;, { &lt;span style="color:#a6e22e"&gt;path&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;offset&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;limit&lt;/span&gt; }, &lt;span style="color:#a6e22e"&gt;signal&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;signal&lt;/span&gt;&lt;span style="color:#f92672"&gt;?&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;aborted&lt;/span&gt;) &lt;span style="color:#66d9ef"&gt;throw&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; Error(&lt;span style="color:#e6db74"&gt;&amp;#34;Operation aborted&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;absolutePath&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;await&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;resolveReadPathAsync&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;path&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;cwd&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;text&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;await&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;fs&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;readFile&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;absolutePath&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;utf8&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lines&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;text&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;split&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;\n&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;start&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Math.&lt;span style="color:#a6e22e"&gt;max&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;, (&lt;span style="color:#a6e22e"&gt;offset&lt;/span&gt; &lt;span style="color:#f92672"&gt;??&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;) &lt;span style="color:#f92672"&gt;-&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;selected&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;lines&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;slice&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;start&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;limit&lt;/span&gt; &lt;span style="color:#f92672"&gt;?&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;start&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;limit&lt;/span&gt; : &lt;span style="color:#66d9ef"&gt;undefined&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;content&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; [{ &lt;span style="color:#66d9ef"&gt;type&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;text&amp;#34;&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;text&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;selected.join&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;\n&amp;#34;&lt;/span&gt;) }],
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;details&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;totalLines&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;lines.length&lt;/span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;export&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;createReadTool&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;cwd&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;string&lt;/span&gt;)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;AgentTool&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;wrapToolDefinition&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;createReadToolDefinition&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;cwd&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;There are two layers in this example. &lt;code&gt;ToolDefinition&lt;/code&gt; contains the model-facing schema plus coding-agent metadata such as prompt guidance and renderers. &lt;code&gt;wrapToolDefinition&lt;/code&gt; projects it into the smaller &lt;code&gt;AgentTool&lt;/code&gt; interface required by the core runtime: &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;description&lt;/code&gt;, &lt;code&gt;parameters&lt;/code&gt;, and &lt;code&gt;execute&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The production implementation adds the details a real tool needs: readable-path checks, abort listeners during I/O, image detection and resizing, line and byte truncation, pluggable filesystem operations, and custom terminal rendering. But those details do not change the core contract: validated input goes in, typed text or image content comes out.&lt;/p&gt;
+&lt;p&gt;A tool&amp;rsquo;s lifecycle is richer than calling a JavaScript function:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The model streams a tool call and its arguments.&lt;/li&gt;
+&lt;li&gt;Pi validates and prepares the call.&lt;/li&gt;
+&lt;li&gt;Extensions may inspect, block, or modify it.&lt;/li&gt;
+&lt;li&gt;The tool runs with an abort signal and can stream progress.&lt;/li&gt;
+&lt;li&gt;Pi normalizes the output into a tool-result message.&lt;/li&gt;
+&lt;li&gt;The result is appended to the context for the next model call.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This boundary is also where safety policy belongs. A permission extension can inspect a shell command before it runs. A path-protection extension can reject edits to secrets or generated files. The agent loop stays general while the environment decides what is allowed.&lt;/p&gt;
+&lt;h2 id="extensions"&gt;Extensions
+&lt;/h2&gt;&lt;p&gt;Extensions add behavior without expanding the core into a fixed, all-purpose framework. They can register:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;custom tools and commands;&lt;/li&gt;
+&lt;li&gt;keyboard shortcuts;&lt;/li&gt;
+&lt;li&gt;model providers;&lt;/li&gt;
+&lt;li&gt;message renderers and UI components;&lt;/li&gt;
+&lt;li&gt;event handlers and workflow policy;&lt;/li&gt;
+&lt;li&gt;custom compaction or session behavior.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;They can also observe lifecycle events around input, context, model requests, sessions, and tools. The &lt;code&gt;before_agent_start&lt;/code&gt; hook, for example, can inject messages or alter the assembled prompt immediately before the loop begins. Tool hooks can implement approvals, sandboxing, auditing, or result transformations.&lt;/p&gt;
+&lt;p&gt;A minimal tool extension looks conceptually like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;export&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;default&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;pi&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;ExtensionAPI&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;pi&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;registerTool&lt;/span&gt;({
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;name&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;deploy_preview&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;description&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;Deploy the current branch to a preview environment&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;parameters&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;schema&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;async&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;execute&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;toolCallId&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;params&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;signal&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;onUpdate&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// Perform work and optionally publish progress through onUpdate.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; { &lt;span style="color:#a6e22e"&gt;content&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; [{ &lt;span style="color:#66d9ef"&gt;type&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;text&amp;#34;&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;text&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;Preview ready&amp;#34;&lt;/span&gt; }] }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; })
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is why Pi can be described as an &lt;strong&gt;anti-framework&lt;/strong&gt;. It still has structure, but the structure ends at stable primitives and lifecycle boundaries. Pi does not insist that plan mode, sub-agents, permissions, or a particular project workflow must be implemented in one prescribed way.&lt;/p&gt;
+&lt;p&gt;That flexibility transfers responsibility to the user. Extensions run inside an agent that can execute commands and edit files, so third-party code must be reviewed, pinned, and updated deliberately.&lt;/p&gt;
+&lt;h2 id="system-prompts-and-project-instructions"&gt;System Prompts and Project Instructions
+&lt;/h2&gt;&lt;p&gt;The system prompt establishes the agent&amp;rsquo;s baseline behavior: how it communicates, which tools it has, and how it should approach coding work. Pi then layers more specific instructions on top.&lt;/p&gt;
+&lt;p&gt;A useful mental model is:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Base agent behavior&lt;/li&gt;
+&lt;li&gt;Global user and environment instructions&lt;/li&gt;
+&lt;li&gt;Repository instructions such as &lt;code&gt;AGENTS.md&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Skill- or extension-provided instructions&lt;/li&gt;
+&lt;li&gt;The current request&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;One repository might require &lt;code&gt;uv&lt;/code&gt; for Python dependencies, another might use &lt;code&gt;pnpm&lt;/code&gt;, and a third might impose a release or testing checklist. Project instructions allow the same agent runtime to behave correctly in each environment without hardcoding those conventions globally.&lt;/p&gt;
+&lt;p&gt;The assembly process also makes customization traceable. Instead of wondering why an opaque product behaved a certain way, a developer can inspect the base prompt, project files, loaded skills, and extension hooks that contributed to the final context.&lt;/p&gt;
+&lt;h2 id="pi-interactive-the-terminal-ui-layer"&gt;Pi Interactive: The Terminal UI Layer
+&lt;/h2&gt;&lt;p&gt;Pi Interactive is the layer users see. It handles chat input, streaming output, tool progress, session selection, commands, model switching, and interruption.&lt;/p&gt;
+&lt;p&gt;Streaming terminal interfaces are deceptively difficult. Text arrives token by token while tools update progress and the user may still be typing. Repainting the entire screen after every event would be slow and visibly unstable.&lt;/p&gt;
+&lt;p&gt;Pi&amp;rsquo;s TUI uses differential rendering. It builds the next frame, compares it with the previous one, and selects an update strategy. It may append new lines, replace only the changed tail, or perform a larger redraw when necessary. This minimizes terminal writes without sacrificing correctness.&lt;/p&gt;
+&lt;p&gt;The interface is only one adapter around the harness. Pi can expose the same runtime through four modes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;interactive terminal mode for direct use;&lt;/li&gt;
+&lt;li&gt;print mode for one-shot commands and shell scripts;&lt;/li&gt;
+&lt;li&gt;JSON mode for consuming the event stream;&lt;/li&gt;
+&lt;li&gt;RPC mode for embedding Pi behind another application.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Because all four modes share the same harness, automation does not require a separate reduced agent implementation.&lt;/p&gt;
+&lt;h2 id="compaction"&gt;Compaction
+&lt;/h2&gt;&lt;p&gt;Long-running sessions eventually approach the model&amp;rsquo;s context limit. Coding agents reach it especially quickly because file contents, command output, tool schemas, system instructions, images, and generated tokens all consume space.&lt;/p&gt;
+&lt;p&gt;By default, Pi reserves &lt;strong&gt;16,384 tokens&lt;/strong&gt; for the next model response. The &lt;a class="link" href="https://github.com/earendil-works/pi/blob/main/packages/agent/src/harness/compaction/compaction.ts#L251" target="_blank" rel="noopener"
+&gt;&lt;code&gt;shouldCompact&lt;/code&gt;&lt;/a&gt; check triggers automatic compaction when the estimated context crosses the remaining budget:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;DEFAULT_COMPACTION_SETTINGS&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;enabled&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;reserveTokens&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;16384&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;shouldCompact&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;contextTokens&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;number&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;contextWindow&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;number&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;contextTokens&lt;/span&gt; &lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;contextWindow&lt;/span&gt; &lt;span style="color:#f92672"&gt;-&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;DEFAULT_COMPACTION_SETTINGS&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;reserveTokens&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In formula form:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;trigger compaction when:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;contextTokens &amp;gt; contextWindow - reserveTokens
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For a model with a 128,000-token context window, the default threshold is therefore &lt;strong&gt;111,616 context tokens&lt;/strong&gt;. Pi compacts after the estimate rises above that point, leaving the final 16,384 tokens available for model output rather than filling the entire window with input. &lt;code&gt;reserveTokens&lt;/code&gt; is configurable in &lt;code&gt;~/.pi/agent/settings.json&lt;/code&gt; or the project&amp;rsquo;s &lt;code&gt;.pi/settings.json&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;compaction&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;#34;reserveTokens&amp;#34;&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;16384&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="how-pi-estimates-tokens"&gt;How Pi estimates tokens
+&lt;/h3&gt;&lt;p&gt;Pi does not run a provider-specific tokenizer over every message before each check. Its &lt;a class="link" href="https://github.com/earendil-works/pi/blob/main/packages/agent/src/harness/compaction/compaction.ts#L275" target="_blank" rel="noopener"
+&gt;&lt;code&gt;estimateTokens&lt;/code&gt;&lt;/a&gt; helper uses a conservative character heuristic:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;estimateTokens&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;message&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;AgentMessage&lt;/span&gt;)&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;number&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;chars&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;countMessageCharacters&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;message&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; Math.&lt;span style="color:#a6e22e"&gt;ceil&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;chars&lt;/span&gt; &lt;span style="color:#f92672"&gt;/&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;4&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In other words, Pi estimates approximately &lt;strong&gt;one token for every four characters&lt;/strong&gt;. The character count depends on the message type:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;user and tool-result messages count their text content;&lt;/li&gt;
+&lt;li&gt;assistant messages count text, thinking, tool names, and serialized tool arguments;&lt;/li&gt;
+&lt;li&gt;bash records count the command and its output;&lt;/li&gt;
+&lt;li&gt;branch and compaction entries count their summary text;&lt;/li&gt;
+&lt;li&gt;each image is represented by a fixed 4,800-character estimate, or roughly 1,200 tokens.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The full &lt;a class="link" href="https://github.com/earendil-works/pi/blob/main/packages/agent/src/harness/compaction/compaction.ts#L220" target="_blank" rel="noopener"
+&gt;&lt;code&gt;estimateContextTokens&lt;/code&gt;&lt;/a&gt; calculation prefers the provider&amp;rsquo;s reported usage from the most recent assistant message when one exists. It then applies the &lt;code&gt;characters / 4&lt;/code&gt; heuristic only to messages added after that usage snapshot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;estimated context = last provider-reported usage
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; + ceil(trailing message characters / 4)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If there is no reported usage yet, every message is estimated with &lt;code&gt;ceil(characters / 4)&lt;/code&gt;. This hybrid approach is cheap enough to run frequently while anchoring the estimate to real provider accounting whenever possible. The result is the &lt;code&gt;contextTokens&lt;/code&gt; value compared against &lt;code&gt;contextWindow - 16384&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Pi estimates the context size and compacts before the next request would overflow the window. Older activity is summarized into a smaller representation that retains the information needed to continue:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the user&amp;rsquo;s objective;&lt;/li&gt;
+&lt;li&gt;decisions and constraints;&lt;/li&gt;
+&lt;li&gt;relevant files and changes;&lt;/li&gt;
+&lt;li&gt;completed work;&lt;/li&gt;
+&lt;li&gt;unresolved errors and blockers;&lt;/li&gt;
+&lt;li&gt;the next intended steps.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The summarization contract is defined in &lt;a class="link" href="https://github.com/earendil-works/pi/blob/main/packages/agent/src/harness/compaction/compaction.ts#L434" target="_blank" rel="noopener"
+&gt;&lt;code&gt;compaction.ts&lt;/code&gt;&lt;/a&gt;. Pi uses two prompts with separate responsibilities. The following abridged version preserves the structure while making the division easier to see:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;export&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;SUMMARIZATION_SYSTEM_PROMPT&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;Act only as a conversation summarizer.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;Return a structured checkpoint; never continue or answer the conversation.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;SUMMARIZATION_PROMPT&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;Summarize the preceding conversation so another model can resume the work.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;## Goal
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;## Constraints &amp;amp; Preferences
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;## Progress
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;### Done
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;### In Progress
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;### Blocked
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;## Key Decisions
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;## Next Steps
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;## Critical Context
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;Keep the checkpoint concise and retain precise technical identifiers.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;SUMMARIZATION_SYSTEM_PROMPT&lt;/code&gt; constrains the summarizer&amp;rsquo;s role. This is important because the input contains a real conversation with questions and instructions that the summarization model must describe, not execute. &lt;code&gt;SUMMARIZATION_PROMPT&lt;/code&gt; defines the handoff schema: goals, constraints, completed and active work, blockers, decisions, next steps, and details needed to resume safely. The &lt;a class="link" href="https://github.com/earendil-works/pi/blob/main/packages/agent/src/harness/compaction/compaction.ts#L434" target="_blank" rel="noopener"
+&gt;full source prompt&lt;/a&gt; also explicitly protects exact file paths, function names, and error messages from being blurred by summarization.&lt;/p&gt;
+&lt;p&gt;Inside &lt;code&gt;generateSummaryWithUsage&lt;/code&gt;, the conversation and prompt are assembled roughly like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;messages&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;convertToLlm&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;currentMessages&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;history&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;serializeConversation&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;messages&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;userPrompt&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;`&amp;lt;conversation&amp;gt;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;\&lt;/span&gt;&lt;span style="color:#e6db74"&gt;n&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;history&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;\&lt;/span&gt;&lt;span style="color:#e6db74"&gt;n&amp;lt;/conversation&amp;gt;&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;\&lt;/span&gt;&lt;span style="color:#e6db74"&gt;n&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;\&lt;/span&gt;&lt;span style="color:#e6db74"&gt;n&lt;/span&gt;&lt;span style="color:#e6db74"&gt;${&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;SUMMARIZATION_PROMPT&lt;/span&gt;&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;summary&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;await&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;completeSimpleWithRetries&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;models&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;model&lt;/span&gt;, {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;systemPrompt&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;SUMMARIZATION_SYSTEM_PROMPT&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;messages&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; [{ &lt;span style="color:#a6e22e"&gt;role&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;user&amp;#34;&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;content&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; [{ &lt;span style="color:#66d9ef"&gt;type&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;text&amp;#34;&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;text&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;userPrompt&lt;/span&gt; }] }],
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If a previous checkpoint exists, Pi chooses an update prompt instead, includes the old checkpoint in &lt;code&gt;&amp;lt;previous-summary&amp;gt;&lt;/code&gt; tags, and asks the model to merge new progress into it. Custom compaction instructions can also be appended as an additional focus. The complete flow is therefore:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;session branch
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -&amp;gt; choose old messages and a recent tail
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -&amp;gt; convert and serialize the old messages
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -&amp;gt; generate or update a structured checkpoint
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -&amp;gt; store checkpoint + retained tail
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -&amp;gt; build future contexts from checkpoint + recent messages
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Compaction does not need to destroy the original history. Pi can append a summary entry and use it in place of an older span only when assembling future model context:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Stored session: complete, append-only history
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Model context: active branch + compacted summary + recent detail
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This distinction makes compaction safer and easier to reason about. It changes what the model sees, not what actually happened.&lt;/p&gt;
+&lt;h2 id="skills"&gt;Skills
+&lt;/h2&gt;&lt;p&gt;Skills are reusable operating instructions centered on a &lt;code&gt;SKILL.md&lt;/code&gt; file. They encode more than background knowledge: they can specify which files to inspect, which commands to run, how to validate the result, and where approval is required.&lt;/p&gt;
+&lt;p&gt;Instead of asking the model to rediscover a complicated procedure in every session, a skill turns that procedure into a repeatable capability. Examples include preparing a release, diagnosing CI, generating a document, or following a team&amp;rsquo;s review checklist.&lt;/p&gt;
+&lt;p&gt;Skills also help control prompt size. The agent can begin with a compact catalog and load the full instructions only when a skill is relevant. This keeps the default context small without hiding specialized workflows from the agent.&lt;/p&gt;
+&lt;p&gt;The implementation is visible in &lt;a class="link" href="https://github.com/earendil-works/pi/blob/main/packages/agent/src/harness/system-prompt.ts" target="_blank" rel="noopener"
+&gt;&lt;code&gt;system-prompt.ts&lt;/code&gt;&lt;/a&gt;. The following is a simplified version of &lt;code&gt;formatSkillsForSystemPrompt&lt;/code&gt; that highlights the insertion path:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ts" data-lang="ts"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;export&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;formatSkillsForSystemPrompt&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;skills&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;Skill&lt;/span&gt;[])&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;string&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;visible&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;skills&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;filter&lt;/span&gt;((&lt;span style="color:#a6e22e"&gt;skill&lt;/span&gt;) &lt;span style="color:#f92672"&gt;=&amp;gt;&lt;/span&gt; &lt;span style="color:#f92672"&gt;!&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;skill&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;disableModelInvocation&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (&lt;span style="color:#a6e22e"&gt;visible&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;length&lt;/span&gt; &lt;span style="color:#f92672"&gt;===&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;) &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;renderXml&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;available_skills&amp;#34;&lt;/span&gt;, &lt;span style="color:#a6e22e"&gt;visible&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;map&lt;/span&gt;((&lt;span style="color:#a6e22e"&gt;skill&lt;/span&gt;) &lt;span style="color:#f92672"&gt;=&amp;gt;&lt;/span&gt; ({
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;name&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;skill.name&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;description&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;skill.description&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;location&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;skill.filePath&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; })))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The actual function emits instructions followed by an XML catalog with this shape:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-xml" data-lang="xml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;available_skills&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;skill&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;name&amp;gt;&lt;/span&gt;release&lt;span style="color:#f92672"&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;description&amp;gt;&lt;/span&gt;Prepare and validate a project release&lt;span style="color:#f92672"&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;location&amp;gt;&lt;/span&gt;/path/to/release/SKILL.md&lt;span style="color:#f92672"&gt;&amp;lt;/location&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;&amp;lt;/skill&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&amp;lt;/available_skills&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Notice that Pi does &lt;strong&gt;not&lt;/strong&gt; insert every &lt;code&gt;SKILL.md&lt;/code&gt; body into the system prompt. It inserts only the name, description, and file location of skills that allow model invocation. The surrounding prompt tells the model to read the full file when the current task matches its description. Skill loading therefore happens in two stages:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Startup: discover skills -&amp;gt; insert compact metadata catalog
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Runtime: match the request -&amp;gt; read the relevant SKILL.md -&amp;gt; follow its instructions
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This progressive-loading design saves context tokens. A large skill library adds a small routing index to the system prompt, while the detailed procedure is paid for only when the agent needs it. Skills marked with &lt;code&gt;disableModelInvocation&lt;/code&gt; are omitted from that index, so they can remain available for explicit invocation without being selected automatically by the model.&lt;/p&gt;
+&lt;p&gt;The distinction between extensions and skills is useful:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Mechanism&lt;/th&gt;
+&lt;th&gt;Best suited for&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Extension&lt;/td&gt;
+&lt;td&gt;New executable capabilities, hooks, integrations, or UI behavior&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Skill&lt;/td&gt;
+&lt;td&gt;Repeatable instructions that teach the agent how to use available capabilities&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;An extension changes what the runtime can do. A skill teaches the model how and when to do it.&lt;/p&gt;
+&lt;h2 id="why-this-architecture-works"&gt;Why This Architecture Works
+&lt;/h2&gt;&lt;p&gt;Pi&amp;rsquo;s architecture works because each responsibility has a visible boundary:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the provider layer normalizes model streams;&lt;/li&gt;
+&lt;li&gt;the agent loop coordinates reasoning and actions;&lt;/li&gt;
+&lt;li&gt;the context builder decides what the model should see;&lt;/li&gt;
+&lt;li&gt;tools connect model requests to the environment;&lt;/li&gt;
+&lt;li&gt;sessions preserve the complete conversation tree;&lt;/li&gt;
+&lt;li&gt;extensions add optional runtime behavior;&lt;/li&gt;
+&lt;li&gt;the TUI presents events without owning the agent;&lt;/li&gt;
+&lt;li&gt;compaction keeps long sessions usable;&lt;/li&gt;
+&lt;li&gt;skills package repeatable workflows.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;None of these ideas is unique on its own. The value comes from combining them without hiding the seams.&lt;/p&gt;
+&lt;p&gt;If I were building a coding agent from scratch, I would follow the same order: start with a typed model stream, implement the smallest correct tool loop, make every lifecycle transition observable, persist sessions independently from context, and only then add prompts, extensions, compaction, skills, and user interfaces.&lt;/p&gt;
+&lt;p&gt;The central lesson is that a production agent is not merely a system prompt wrapped around an LLM. It is a concurrent runtime, a tool scheduler, a context projection system, a persistence layer, and an interface. Pi remains understandable because it lets each of those pieces stay small.&lt;/p&gt;
+&lt;h2 id="references"&gt;References
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="link" href="https://www.youtube.com/watch?v=llN-fnfwM9A" target="_blank" rel="noopener"
+&gt;Video: PI Agent Internals—Architecture, Loops, and the Anti-Framework&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/badlogic/pi-mono" target="_blank" rel="noopener"
+&gt;Pi source code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent/docs" target="_blank" rel="noopener"
+&gt;Pi coding-agent documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent/examples/extensions" target="_blank" rel="noopener"
+&gt;Pi extension examples&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="link" href="https://alejandro-ao.com/pi-architecture/" target="_blank" rel="noopener"
+&gt;Reference article: How Pi Works&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Work Is Not a Blessing, but a Curse</title><link>https://edward40.com/p/work-is-not-a-blessing-but-a-curse/</link><pubDate>Sat, 06 Jun 2026 00:00:00 -0700</pubDate><guid>https://edward40.com/p/work-is-not-a-blessing-but-a-curse/</guid><description>&lt;img src="https://edward40.com/p/work-is-not-a-blessing-but-a-curse/cover.png" alt="Featured image of post Work Is Not a Blessing, but a Curse" /&gt;&lt;h2 id="starting-from-a-wechat-voice-call"&gt;Starting From a WeChat Voice Call
 &lt;/h2&gt;&lt;p&gt;Today I had a WeChat voice call with my mother, and we talked about finding a job.&lt;/p&gt;
 &lt;p&gt;This kind of conversation is ordinary. I am studying in the United States now, and what my mother worries about most is not some abstract career plan, but living expenses. Rent, food, insurance, and all the costs outside tuition can quickly become very concrete pressure. As the conversation goes on, it naturally lands on the same point: I still need to find a job. There is no grand theory here, just a plain anxiety about life.&lt;/p&gt;
 &lt;p&gt;Later, I thought about how light the phrase &amp;ldquo;finding a job&amp;rdquo; sounds. It sounds like sending resumes, doing interviews, getting hired, and putting life back on track. But what it really points to is something else: giving away my time again, entering the rhythm of an organization again, accepting an external system of evaluation again, and trading the clearest hours of each day for a limited sense of security.&lt;/p&gt;
