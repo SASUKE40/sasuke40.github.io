@@ -15,7 +15,7 @@ menu:
       icon: user
 ---
 
-Hi, I'm Edward Zhu, a software engineer and M.S. in Computer Science student at Northeastern University in Seattle.
+Hi, I'm Shilin (Edward) Zhu, a software engineer and M.S. in Computer Science student at Northeastern University in Seattle.
 
 My work sits at the intersection of AI systems and software engineering. I build LLM training and evaluation pipelines, agentic and multimodal workflows, and the infrastructure that makes them reliable. Recent projects include a compact language model for Rust code generation, an open-source Typst symbol classifier, and an agentic platform for AI video creation.
 
