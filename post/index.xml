@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Shilin's Blog</title><link>https://edward40.com/post/</link><description>Recent content in Posts on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 21 Jul 2026 00:00:00 -0700</lastBuildDate><atom:link href="https://edward40.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Inside Pi Agent</title><link>https://edward40.com/p/pi-agent-internal/</link><pubDate>Tue, 21 Jul 2026 00:00:00 -0700</pubDate><guid>https://edward40.com/p/pi-agent-internal/</guid><description>&lt;p&gt;Pi is a minimalist coding agent, but “minimalist” does not mean simplistic. Behind its small default toolset is a useful blueprint for understanding how a production terminal agent works.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Shilin's Blog</title><link>https://edward40.com/post/</link><description>Recent content in Posts on Shilin's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 14 Nov 2026 00:00:00 -0800</lastBuildDate><atom:link href="https://edward40.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>We Are Waiting for the Major Appliance for the Next AI Pivot</title><link>https://edward40.com/p/ai-major-appliance-pivot/</link><pubDate>Sat, 14 Nov 2026 00:00:00 -0800</pubDate><guid>https://edward40.com/p/ai-major-appliance-pivot/</guid><description>&lt;p&gt;&lt;em&gt;The models will keep getting stronger. Whether that changes anyone&amp;rsquo;s life comes down to two things: control and delivery.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve been thinking about where the AI industry is going, and I keep landing on the same answer. The two things that matter most are control and delivery.&lt;/p&gt;
+&lt;h2 id="control"&gt;Control
+&lt;/h2&gt;&lt;p&gt;Control means two things to me.&lt;/p&gt;
+&lt;p&gt;The first is making agents better. There are two levers for that: the model itself, which keeps improving along the scaling laws, and the harness around it, meaning the tools, context, and environment the model works inside. Both matter, and the harness is often where the practical gains show up first.&lt;/p&gt;
+&lt;p&gt;The second is security. An agent that can do real work is an agent that holds real access. It has to keep credentials from leaking. It also has to keep its integrity: it should not be altered or redirected by unauthorized people who borrow someone else&amp;rsquo;s identity to gain trust. As agents take on more of our work, the question stops being &amp;ldquo;can it do the task?&amp;rdquo; and becomes &amp;ldquo;can I trust that it is still working for me?&amp;rdquo;&lt;/p&gt;
+&lt;h2 id="delivery"&gt;Delivery
+&lt;/h2&gt;&lt;p&gt;Andrej Karpathy recently did some napkin math: somewhere around 6 billion people, about 75% of the world, have barely come in contact with LLMs at all. To me that is the delivery problem in one number. Most people have not yet had the chance to use these tools to improve their own lives.&lt;/p&gt;
+&lt;p&gt;He lays it out as a funnel:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://edward40.com/p/ai-major-appliance-pivot/llm-contact-funnel.png"
+width="1600"
+height="1000"
+srcset="https://edward40.com/p/ai-major-appliance-pivot/llm-contact-funnel_hu_f23abda4c11a26be.png 480w, https://edward40.com/p/ai-major-appliance-pivot/llm-contact-funnel_hu_29d976f9bb6cbb02.png 1024w"
+loading="lazy"
+alt="The LLM contact funnel: ~6B people (~75%) have barely come in contact with LLMs, ~1-2B (~20%) are casual free-tier users, ~20M (0.2%) use frontier LLMs professionally in math and code, and ~5,000 (~0.00006%) have internal access to frontier systems."
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="384px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Figure 1. The LLM contact funnel. Figures are Karpathy&amp;rsquo;s own napkin math from his &lt;a class="link" href="https://x.com/karpathy/status/2109361546505966046" target="_blank" rel="noopener"
+&gt;post on X&lt;/a&gt; (Oct 11, 2026). Band widths are not to scale.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Something that surprised me: people I never expected to touch AI, including elderly people, have come to me asking how to find an image they saw online. It turned out the image was AI-generated. They didn&amp;rsquo;t go looking for AI. AI found them.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not saying everyone has to love AI. But I do believe AI can and will replace digital work broadly, and that will heavily affect everyone living in a society that runs on digital systems. Whether people opt in or not, they will feel it. So the job is to make sure they also get the benefit.&lt;/p&gt;
+&lt;h2 id="three-pivots-so-far"&gt;Three pivots so far
+&lt;/h2&gt;&lt;p&gt;Looking back, I see three turning points.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. The GPT-3 moment.&lt;/strong&gt; Prompt engineering became a skill, and the industry focused on chat.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Manus.&lt;/strong&gt; People realized agents were the thing that mattered. Last year, a lot of agent application companies thrived.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. Opus 4.6.&lt;/strong&gt; This year it changed the rules. The first time I used it, I was amazed by how flexible it was. Many agent companies died. Value moved down the stack, to the infrastructure that supports agents. AI infra, like inference and RL training, is thriving. So is agent infra, like sandboxes and cloud agent platforms.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://edward40.com/p/ai-major-appliance-pivot/ai-pivots-timeline.png"
+width="1600"
+height="580"
+srcset="https://edward40.com/p/ai-major-appliance-pivot/ai-pivots-timeline_hu_dbd81b9bb8ff0b80.png 480w, https://edward40.com/p/ai-major-appliance-pivot/ai-pivots-timeline_hu_8604a2c17730ff1d.png 1024w"
+loading="lazy"
+alt="Timeline of three AI pivots: the GPT-3 moment (prompt engineering, chat), Manus (agents matter, agent application companies thrive), Opus 4.6 (many agent companies die, value moves to AI infra and agent infra), and a guessed fourth pivot: major appliances."
+class="gallery-image"
+data-flex-grow="275"
+data-flex-basis="662px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Figure 2. Three pivots so far, plus my guess at the fourth.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="what-comes-next-ai-as-electricity"&gt;What comes next: AI as electricity
+&lt;/h2&gt;&lt;p&gt;The best analogy I have is electricity.&lt;/p&gt;
+&lt;p&gt;Model companies are the power plants. Scaling laws still work, so they keep building bigger plants: higher voltage, higher volume.&lt;/p&gt;
+&lt;p&gt;But power on its own doesn&amp;rsquo;t light a single home. You need a grid to deliver it safely. That is the role of infra companies: getting this power to everyone, reliably, without anyone getting hurt. Control and delivery, again.&lt;/p&gt;
+&lt;p&gt;Then there is the part that actually changes daily life. Nobody&amp;rsquo;s life changed because a power plant existed. It changed because of the major appliances that plugged into the grid: the TV, the fridge, the air conditioner.&lt;/p&gt;
+&lt;p&gt;My guess is that the next pivot is a hyperscaler of appliances. Products that draw power from the grid and change everyone&amp;rsquo;s life, not just the lives of developers and early adopters.&lt;/p&gt;
+&lt;p&gt;Put together, the whole chain looks like this:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://edward40.com/p/ai-major-appliance-pivot/ai-electricity-flow.png"
+width="1600"
+height="900"
+srcset="https://edward40.com/p/ai-major-appliance-pivot/ai-electricity-flow_hu_a0aeefe65557557d.png 480w, https://edward40.com/p/ai-major-appliance-pivot/ai-electricity-flow_hu_996b9ee8196816dc.png 1024w"
+loading="lazy"
+alt="Flow diagram: power plant (model companies, scaling laws) to grid (AI infra and agent infra, delivered safely with control and security) to major appliances (the next pivot, a super app built on super efficient context sharing) to ~6B people."
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Figure 3. AI as electricity. Model companies generate the power, infra delivers it safely, and appliances bring it into everyone&amp;rsquo;s daily life.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="the-super-app-im-waiting-for"&gt;The super app I&amp;rsquo;m waiting for
+&lt;/h2&gt;&lt;p&gt;I believe one of those appliances will be a super app that changes the media system.&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t think it exists yet. It isn&amp;rsquo;t Muse, it isn&amp;rsquo;t the Grok bot, and it isn&amp;rsquo;t any app I&amp;rsquo;ve used so far. I don&amp;rsquo;t know its name. But I&amp;rsquo;m fairly sure about its core feature: super efficient context sharing. Moving what one person, or one agent, knows to another person or agent with almost no friction.&lt;/p&gt;
+&lt;p&gt;Today, so much effort goes into re-explaining. Copying, pasting, summarizing, catching people up. Whoever makes context flow as easily as electricity flows through a wire will build the appliance everyone ends up using, including those 6 billion people who haven&amp;rsquo;t really started yet.&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s my bet. The power plants will keep getting bigger. The interesting work is in the grid and the appliances, and in making sure all of it stays under control.&lt;/p&gt;</description></item><item><title>Inside Pi Agent</title><link>https://edward40.com/p/pi-agent-internal/</link><pubDate>Tue, 21 Jul 2026 00:00:00 -0700</pubDate><guid>https://edward40.com/p/pi-agent-internal/</guid><description>&lt;p&gt;Pi is a minimalist coding agent, but “minimalist” does not mean simplistic. Behind its small default toolset is a useful blueprint for understanding how a production terminal agent works.&lt;/p&gt;
 &lt;p&gt;In this article, I will walk through Pi from the inside out: the core loop, the context sent to the model, session persistence, tool execution, extensions, prompt assembly, the terminal interface, compaction, and skills. The goal is not only to understand Pi, but also to extract patterns that can be reused when building other agents.&lt;/p&gt;
 &lt;h2 id="the-two-main-layers-of-pi"&gt;The Two Main Layers of Pi
 &lt;/h2&gt;&lt;p&gt;The easiest way to understand Pi is to divide it into two conceptual layers.&lt;/p&gt;
@@ -104,7 +165,7 @@
 &lt;p&gt;&lt;img src="https://edward40.com/p/pi-agent-internal/pi-tree-command.png"
 width="1914"
 height="398"
-srcset="https://edward40.com/p/pi-agent-internal/pi-tree-command_hu_821810e354d14abf.png 480w, https://edward40.com/p/pi-agent-internal/pi-tree-command_hu_ea496196bc0b35ab.png 1024w"
+srcset="https://edward40.com/p/pi-agent-internal/pi-tree-command_hu_8d162a459f8ce548.png 480w, https://edward40.com/p/pi-agent-internal/pi-tree-command_hu_f344178f6f5183a.png 1024w"
 loading="lazy"
 alt="Entering Pi’s tree command to navigate and switch session branches"
 class="gallery-image"
@@ -126,7 +187,7 @@ data-flex-basis="1154px"
 &lt;p&gt;&lt;img src="https://edward40.com/p/pi-agent-internal/pi-jsonl-session.png"
 width="2316"
 height="1774"
-srcset="https://edward40.com/p/pi-agent-internal/pi-jsonl-session_hu_29df6f6ac513f52d.png 480w, https://edward40.com/p/pi-agent-internal/pi-jsonl-session_hu_1b0b7951745fccc8.png 1024w"
+srcset="https://edward40.com/p/pi-agent-internal/pi-jsonl-session_hu_1e31da6d7fabc329.png 480w, https://edward40.com/p/pi-agent-internal/pi-jsonl-session_hu_362a9a44e1ed15d5.png 1024w"
 loading="lazy"
 alt="A Pi JSONL session file and its location under the per-working-directory sessions folder"
 class="gallery-image"
@@ -611,7 +672,7 @@ Your browser doesn't support HTML5 video. Here is a
 &lt;p&gt;&lt;img src="https://edward40.com/p/a-review-of-2025/ielts-1.png"
 width="1802"
 height="228"
-srcset="https://edward40.com/p/a-review-of-2025/ielts-1_hu_c71fdd958719ab8f.png 480w, https://edward40.com/p/a-review-of-2025/ielts-1_hu_9f5928f1872e329f.png 1024w"
+srcset="https://edward40.com/p/a-review-of-2025/ielts-1_hu_a4fb1cacfc6fca7.png 480w, https://edward40.com/p/a-review-of-2025/ielts-1_hu_3df56510d1a0c560.png 1024w"
 loading="lazy"
 alt="October 29, 2023, second IELTS"
 class="gallery-image"
@@ -623,7 +684,7 @@ data-flex-basis="1896px"
 &lt;p&gt;&lt;img src="https://edward40.com/p/a-review-of-2025/ielts-2.png"
 width="1802"
 height="232"
-srcset="https://edward40.com/p/a-review-of-2025/ielts-2_hu_f5bdd7c56a4e3990.png 480w, https://edward40.com/p/a-review-of-2025/ielts-2_hu_cf2e24310a5b03c1.png 1024w"
+srcset="https://edward40.com/p/a-review-of-2025/ielts-2_hu_2f2435c86c15a5d4.png 480w, https://edward40.com/p/a-review-of-2025/ielts-2_hu_d228d880479046be.png 1024w"
 loading="lazy"
 alt="September 20, 2024, third IELTS"
 class="gallery-image"
@@ -634,7 +695,7 @@ data-flex-basis="1864px"
 &lt;p&gt;&lt;img src="https://edward40.com/p/a-review-of-2025/ielts-3.png"
 width="1798"
 height="240"
-srcset="https://edward40.com/p/a-review-of-2025/ielts-3_hu_cc59ffbc7c022c18.png 480w, https://edward40.com/p/a-review-of-2025/ielts-3_hu_d10a03942bb3d6c1.png 1024w"
+srcset="https://edward40.com/p/a-review-of-2025/ielts-3_hu_eed73c933d31e17e.png 480w, https://edward40.com/p/a-review-of-2025/ielts-3_hu_298c9a2ffd91d68e.png 1024w"
 loading="lazy"
 alt="December 26, 2024, fourth IELTS"
 class="gallery-image"
@@ -645,7 +706,7 @@ data-flex-basis="1798px"
 &lt;p&gt;&lt;img src="https://edward40.com/p/a-review-of-2025/ielts-4.png"
 width="1662"
 height="212"
-srcset="https://edward40.com/p/a-review-of-2025/ielts-4_hu_7ff551aeda1eb012.png 480w, https://edward40.com/p/a-review-of-2025/ielts-4_hu_7cd75dd0b7880519.png 1024w"
+srcset="https://edward40.com/p/a-review-of-2025/ielts-4_hu_66742defd697e378.png 480w, https://edward40.com/p/a-review-of-2025/ielts-4_hu_2e9750f6e9447895.png 1024w"
 loading="lazy"
 alt="February 28, 2025, fifth IELTS"
 class="gallery-image"
@@ -862,7 +923,7 @@ Running `target/debug/tagless`
 &lt;p&gt;&lt;img src="https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data.png"
 width="581"
 height="297"
-srcset="https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data_hu_42ec8f2d0f3c97b0.png 480w, https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data_hu_8ca60aac995c83e4.png 1024w"
+srcset="https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data_hu_a0ac03c27a5899e.png 480w, https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data_hu_cb8dbe20f99dbe7f.png 1024w"
 loading="lazy"
 class="gallery-image"
 data-flex-grow="195"
@@ -1243,7 +1304,7 @@ data-flex-basis="180px"
 &lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics.png"
 width="1704"
 height="1464"
-srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_40d72cd12acd4a5c.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_5beb45eec0713e9b.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_a6a2fc51072807c9.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_1c1fa2de0fc38f7a.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -1256,7 +1317,7 @@ data-flex-basis="279px"
 &lt;p&gt;&lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode.png"
 width="1346"
 height="1692"
-srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_e5c7e229aa45aa83.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_eddb4bbe5d714ded.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_514b7bb272ef96d4.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_e08e028b8e790dd0.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -1381,7 +1442,7 @@ data-flex-basis="190px"
 &lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result.png"
 width="1418"
 height="1576"
-srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_acded0e59b50a2d1.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_bedd0b713dd0faec.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_855489fa0c5b79c2.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_30c9183349e94d0c.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -1409,7 +1470,7 @@ data-flex-basis="215px"
 &lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting.png"
 width="1534"
 height="512"
-srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_c5c6b0e08518b7b4.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_18158ec6b0ee0ce5.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_38f145756a605710.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_8079660cb0bbcba.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"

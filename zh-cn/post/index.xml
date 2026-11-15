@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 仕麟的博客</title><link>https://edward40.com/zh-cn/post/</link><description>Recent content in Posts on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 21 Jul 2026 00:00:00 -0700</lastBuildDate><atom:link href="https://edward40.com/zh-cn/post/index.xml" rel="self" type="application/rss+xml"/><item><title>深入 Pi Agent</title><link>https://edward40.com/zh-cn/p/pi-agent-internal/</link><pubDate>Tue, 21 Jul 2026 00:00:00 -0700</pubDate><guid>https://edward40.com/zh-cn/p/pi-agent-internal/</guid><description>&lt;p&gt;Pi 是一个极简的编程 Agent，但“极简”并不意味着简单。它默认只提供少量工具，背后却包含了一套很值得研究的架构，可以帮助我们理解一个生产级终端 Agent 是如何工作的。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 仕麟的博客</title><link>https://edward40.com/zh-cn/post/</link><description>Recent content in Posts on 仕麟的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 14 Nov 2026 00:00:00 -0800</lastBuildDate><atom:link href="https://edward40.com/zh-cn/post/index.xml" rel="self" type="application/rss+xml"/><item><title>我们在等待下一次 AI 转折点的“大家电”</title><link>https://edward40.com/zh-cn/p/ai-major-appliance-pivot/</link><pubDate>Sat, 14 Nov 2026 00:00:00 -0800</pubDate><guid>https://edward40.com/zh-cn/p/ai-major-appliance-pivot/</guid><description>&lt;p&gt;&lt;em&gt;模型会越来越强，但它能否改变普通人的生活，取决于两件事：控制与交付。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;最近我一直在思考 AI 行业的走向，每次得出的答案都一样：最重要的两件事是控制（Control）与交付（Delivery）。&lt;/p&gt;
+&lt;h2 id="控制"&gt;控制
+&lt;/h2&gt;&lt;p&gt;对我来说，控制包含两层含义。&lt;/p&gt;
+&lt;p&gt;第一层是让 Agent 变得更好。这里有两个杠杆：一是模型本身，它沿着 Scaling Law 持续进步；二是模型外面的 Harness，也就是模型所依赖的工具、上下文和运行环境。两者都很重要，而实际收益往往最先出现在 Harness 上。&lt;/p&gt;
+&lt;p&gt;第二层是安全。一个能做真正工作的 Agent，必然握有真正的权限。它必须防止凭证泄露，也必须保持自身的完整性：不能被那些冒用他人身份骗取信任的未授权者篡改或劫持。随着 Agent 承担越来越多的工作，问题将不再是“它能不能完成任务？”，而是“我能否相信它仍在为我工作？”&lt;/p&gt;
+&lt;h2 id="交付"&gt;交付
+&lt;/h2&gt;&lt;p&gt;Andrej Karpathy 最近做了一个粗略估算：全球大约有 60 亿人，约占 75%，几乎从未接触过 LLM。在我看来，这一个数字就概括了交付问题：大多数人还没有机会用这些工具改善自己的生活。&lt;/p&gt;
+&lt;p&gt;他把这件事画成了一个漏斗：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://edward40.com/p/ai-major-appliance-pivot/llm-contact-funnel.png"
+width="1600"
+height="1000"
+srcset="https://edward40.com/p/ai-major-appliance-pivot/llm-contact-funnel_hu_f23abda4c11a26be.png 480w, https://edward40.com/p/ai-major-appliance-pivot/llm-contact-funnel_hu_29d976f9bb6cbb02.png 1024w"
+loading="lazy"
+alt="LLM 接触漏斗：约 60 亿人（约 75%）几乎没有接触过 LLM；约 10-20 亿人（约 20%）是免费版的轻度用户；约 2000 万人（0.2%）在数学和代码领域专业地使用前沿 LLM；约 5000 人（约 0.00006%）能在内部接触前沿系统。"
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="384px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;图 1. LLM 接触漏斗。数据来自 Karpathy 在 &lt;a class="link" href="https://x.com/karpathy/status/2109361546505966046" target="_blank" rel="noopener"
+&gt;X 上的帖子&lt;/a&gt;（2026 年 10 月 11 日）中的粗略估算，各层宽度并非按比例绘制。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;有件事让我很意外：一些我从没想过会接触 AI 的人，包括老年人，来问我怎么找到他们在网上看到的一张图片。结果那张图片是 AI 生成的。他们并没有主动去找 AI，而是 AI 找到了他们。&lt;/p&gt;
+&lt;p&gt;我并不是说每个人都必须喜欢 AI。但我确实相信，AI 能够而且将会广泛取代数字化工作，这会深刻影响每一个生活在数字化社会中的人。无论人们是否选择参与，都会感受到它的影响。所以我们要做的，是确保他们也能从中受益。&lt;/p&gt;
+&lt;h2 id="迄今为止的三次转折"&gt;迄今为止的三次转折
+&lt;/h2&gt;&lt;p&gt;回头看，我认为有三个转折点。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. GPT-3 时刻。&lt;/strong&gt; Prompt Engineering 成为一项技能，整个行业聚焦于聊天。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Manus。&lt;/strong&gt; 人们意识到 Agent 才是真正重要的东西。去年，大量 Agent 应用公司蓬勃发展。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. Opus 4.6。&lt;/strong&gt; 今年它改变了规则。第一次使用时，我就被它的灵活性震撼了。许多 Agent 公司倒下，价值沿着技术栈下沉到支撑 Agent 的基础设施：推理、RL 训练等 AI Infra 正在繁荣，沙箱、云端 Agent 平台等 Agent Infra 也是如此。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://edward40.com/p/ai-major-appliance-pivot/ai-pivots-timeline.png"
+width="1600"
+height="580"
+srcset="https://edward40.com/p/ai-major-appliance-pivot/ai-pivots-timeline_hu_dbd81b9bb8ff0b80.png 480w, https://edward40.com/p/ai-major-appliance-pivot/ai-pivots-timeline_hu_8604a2c17730ff1d.png 1024w"
+loading="lazy"
+alt="三次 AI 转折的时间线：GPT-3 时刻（Prompt Engineering、聊天）、Manus（Agent 才是关键，Agent 应用公司繁荣）、Opus 4.6（许多 Agent 公司倒下，价值转向 AI Infra 和 Agent Infra），以及我猜测的第四次转折：大家电。"
+class="gallery-image"
+data-flex-grow="275"
+data-flex-basis="662px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;图 2. 迄今为止的三次转折，以及我对第四次的猜测。&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="下一步ai-如电力"&gt;下一步：AI 如电力
+&lt;/h2&gt;&lt;p&gt;我能想到的最好类比是电力。&lt;/p&gt;
+&lt;p&gt;模型公司就是发电厂。Scaling Law 依然有效，所以它们不断建造更大的电厂：更高的电压，更大的发电量。&lt;/p&gt;
+&lt;p&gt;但电力本身点不亮任何一个家庭。你需要电网把它安全地输送出去。这正是 Infra 公司的角色：可靠地把电力送到每个人手中，同时不伤害任何人。又是控制与交付。&lt;/p&gt;
+&lt;p&gt;然后才是真正改变日常生活的部分。没有人的生活因为一座发电厂的存在而改变，改变生活的是接入电网的大家电：电视、冰箱、空调。&lt;/p&gt;
+&lt;p&gt;我的猜测是，下一次转折将是大家电级别的超大规模产品：从电网取电，改变每个人的生活，而不仅仅是开发者和早期用户的生活。&lt;/p&gt;
+&lt;p&gt;把这些串起来，整条链路是这样的：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://edward40.com/p/ai-major-appliance-pivot/ai-electricity-flow.png"
+width="1600"
+height="900"
+srcset="https://edward40.com/p/ai-major-appliance-pivot/ai-electricity-flow_hu_a0aeefe65557557d.png 480w, https://edward40.com/p/ai-major-appliance-pivot/ai-electricity-flow_hu_996b9ee8196816dc.png 1024w"
+loading="lazy"
+alt="流程图：发电厂（模型公司、Scaling Law）到电网（AI Infra 和 Agent Infra，以控制与安全的方式交付）到大家电（下一次转折，一个建立在超高效上下文共享之上的超级应用），最终到达约 60 亿人。"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;图 3. AI 如电力。模型公司发电，Infra 安全输电，大家电把电力带进每个人的日常生活。&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="我在等待的超级应用"&gt;我在等待的超级应用
+&lt;/h2&gt;&lt;p&gt;我相信，其中一件大家电会是一个改变媒体体系的超级应用。&lt;/p&gt;
+&lt;p&gt;我认为它还不存在。它不是 Muse，不是 Grok bot，也不是我用过的任何应用。我不知道它叫什么名字，但我相当确定它的核心功能：超高效的上下文共享，几乎无摩擦地把一个人或一个 Agent 所知道的东西传递给另一个人或 Agent。&lt;/p&gt;
+&lt;p&gt;今天，大量精力被花在反复解释上：复制、粘贴、总结、给别人补背景。谁能让上下文像电流在导线中一样顺畅流动，谁就能造出人人都会用的那件大家电，包括那 60 亿还没真正开始使用 AI 的人。&lt;/p&gt;
+&lt;p&gt;这就是我的押注。发电厂会越建越大，而真正有意思的工作在电网和大家电上，以及确保这一切始终处于控制之中。&lt;/p&gt;</description></item><item><title>深入 Pi Agent</title><link>https://edward40.com/zh-cn/p/pi-agent-internal/</link><pubDate>Tue, 21 Jul 2026 00:00:00 -0700</pubDate><guid>https://edward40.com/zh-cn/p/pi-agent-internal/</guid><description>&lt;p&gt;Pi 是一个极简的编程 Agent，但“极简”并不意味着简单。它默认只提供少量工具，背后却包含了一套很值得研究的架构，可以帮助我们理解一个生产级终端 Agent 是如何工作的。&lt;/p&gt;
 &lt;p&gt;本文将从内到外拆解 Pi：核心循环、发送给模型的上下文、会话持久化、工具执行、扩展、提示词组装、终端界面、上下文压缩以及 Skills。目的不仅是理解 Pi，也是提炼出能够复用到其他 Agent 中的设计模式。&lt;/p&gt;
 &lt;h2 id="pi-的两个主要层次"&gt;Pi 的两个主要层次
 &lt;/h2&gt;&lt;p&gt;理解 Pi 最简单的方法，是先把它划分为两个概念层。&lt;/p&gt;
@@ -104,7 +165,7 @@
 &lt;p&gt;&lt;img src="https://edward40.com/p/pi-agent-internal/pi-tree-command.png"
 width="1914"
 height="398"
-srcset="https://edward40.com/p/pi-agent-internal/pi-tree-command_hu_821810e354d14abf.png 480w, https://edward40.com/p/pi-agent-internal/pi-tree-command_hu_ea496196bc0b35ab.png 1024w"
+srcset="https://edward40.com/p/pi-agent-internal/pi-tree-command_hu_8d162a459f8ce548.png 480w, https://edward40.com/p/pi-agent-internal/pi-tree-command_hu_f344178f6f5183a.png 1024w"
 loading="lazy"
 alt="输入 Pi 的 tree 命令以浏览和切换会话分支"
 class="gallery-image"
@@ -126,7 +187,7 @@ data-flex-basis="1154px"
 &lt;p&gt;&lt;img src="https://edward40.com/p/pi-agent-internal/pi-jsonl-session.png"
 width="2316"
 height="1774"
-srcset="https://edward40.com/p/pi-agent-internal/pi-jsonl-session_hu_29df6f6ac513f52d.png 480w, https://edward40.com/p/pi-agent-internal/pi-jsonl-session_hu_1b0b7951745fccc8.png 1024w"
+srcset="https://edward40.com/p/pi-agent-internal/pi-jsonl-session_hu_1e31da6d7fabc329.png 480w, https://edward40.com/p/pi-agent-internal/pi-jsonl-session_hu_362a9a44e1ed15d5.png 1024w"
 loading="lazy"
 alt="Pi 的 JSONL 会话文件以及它在按工作目录划分的 sessions 目录中的位置"
 class="gallery-image"
@@ -611,7 +672,7 @@ Your browser doesn't support HTML5 video. Here is a
 &lt;p&gt;&lt;img src="https://edward40.com/p/a-review-of-2025/ielts-1.png"
 width="1802"
 height="228"
-srcset="https://edward40.com/p/a-review-of-2025/ielts-1_hu_c71fdd958719ab8f.png 480w, https://edward40.com/p/a-review-of-2025/ielts-1_hu_9f5928f1872e329f.png 1024w"
+srcset="https://edward40.com/p/a-review-of-2025/ielts-1_hu_a4fb1cacfc6fca7.png 480w, https://edward40.com/p/a-review-of-2025/ielts-1_hu_3df56510d1a0c560.png 1024w"
 loading="lazy"
 alt="2023年10月29日第二次雅思"
 class="gallery-image"
@@ -623,7 +684,7 @@ data-flex-basis="1896px"
 &lt;p&gt;&lt;img src="https://edward40.com/p/a-review-of-2025/ielts-2.png"
 width="1802"
 height="232"
-srcset="https://edward40.com/p/a-review-of-2025/ielts-2_hu_f5bdd7c56a4e3990.png 480w, https://edward40.com/p/a-review-of-2025/ielts-2_hu_cf2e24310a5b03c1.png 1024w"
+srcset="https://edward40.com/p/a-review-of-2025/ielts-2_hu_2f2435c86c15a5d4.png 480w, https://edward40.com/p/a-review-of-2025/ielts-2_hu_d228d880479046be.png 1024w"
 loading="lazy"
 alt="2024年9月20日第三次雅思"
 class="gallery-image"
@@ -634,7 +695,7 @@ data-flex-basis="1864px"
 &lt;p&gt;&lt;img src="https://edward40.com/p/a-review-of-2025/ielts-3.png"
 width="1798"
 height="240"
-srcset="https://edward40.com/p/a-review-of-2025/ielts-3_hu_cc59ffbc7c022c18.png 480w, https://edward40.com/p/a-review-of-2025/ielts-3_hu_d10a03942bb3d6c1.png 1024w"
+srcset="https://edward40.com/p/a-review-of-2025/ielts-3_hu_eed73c933d31e17e.png 480w, https://edward40.com/p/a-review-of-2025/ielts-3_hu_298c9a2ffd91d68e.png 1024w"
 loading="lazy"
 alt="2024年12月26日第四次雅思"
 class="gallery-image"
@@ -645,7 +706,7 @@ data-flex-basis="1798px"
 &lt;p&gt;&lt;img src="https://edward40.com/p/a-review-of-2025/ielts-4.png"
 width="1662"
 height="212"
-srcset="https://edward40.com/p/a-review-of-2025/ielts-4_hu_7ff551aeda1eb012.png 480w, https://edward40.com/p/a-review-of-2025/ielts-4_hu_7cd75dd0b7880519.png 1024w"
+srcset="https://edward40.com/p/a-review-of-2025/ielts-4_hu_66742defd697e378.png 480w, https://edward40.com/p/a-review-of-2025/ielts-4_hu_2e9750f6e9447895.png 1024w"
 loading="lazy"
 alt="2025年2月28日第五次雅思"
 class="gallery-image"
@@ -859,7 +920,7 @@ Running `target/debug/tagless`
 &lt;p&gt;&lt;img src="https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data.png"
 width="581"
 height="297"
-srcset="https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data_hu_42ec8f2d0f3c97b0.png 480w, https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data_hu_8ca60aac995c83e4.png 1024w"
+srcset="https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data_hu_a0ac03c27a5899e.png 480w, https://edward40.com/p/recoil-a-state-management-system-for-react/derived_data_hu_cb8dbe20f99dbe7f.png 1024w"
 loading="lazy"
 class="gallery-image"
 data-flex-grow="195"
@@ -1240,7 +1301,7 @@ data-flex-basis="180px"
 &lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics.png"
 width="1704"
 height="1464"
-srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_40d72cd12acd4a5c.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_5beb45eec0713e9b.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_a6a2fc51072807c9.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/google_analytics_hu_1c1fa2de0fc38f7a.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -1253,7 +1314,7 @@ data-flex-basis="279px"
 &lt;p&gt;&lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode.png"
 width="1346"
 height="1692"
-srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_e5c7e229aa45aa83.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_eddb4bbe5d714ded.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_514b7bb272ef96d4.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/add_dark_mode_hu_e08e028b8e790dd0.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -1378,7 +1439,7 @@ data-flex-basis="190px"
 &lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result.png"
 width="1418"
 height="1576"
-srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_acded0e59b50a2d1.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_bedd0b713dd0faec.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_855489fa0c5b79c2.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/result_hu_30c9183349e94d0c.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
@@ -1406,7 +1467,7 @@ data-flex-basis="215px"
 &lt;img src="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting.png"
 width="1534"
 height="512"
-srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_c5c6b0e08518b7b4.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_18158ec6b0ee0ce5.png 1024w"
+srcset="https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_38f145756a605710.png 480w, https://edward40.com/p/a-guide-to-building-a-personal-website-with-gatsby/github_pages_setting_hu_8079660cb0bbcba.png 1024w"
 loading="lazy"
 alt="image"
 class="gallery-image"
