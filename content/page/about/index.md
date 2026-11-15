@@ -22,5 +22,3 @@ My work sits at the intersection of AI systems and software engineering. I build
 Previously, I built large-scale developer and content platforms at ByteDance, Tencent, and Alibaba. My experience spans Python, Rust, TypeScript, Go, and production systems used by millions of people and tens of thousands of employees.
 
 Outside of code, I'm a shark 🦈 lover, amateur pianist 🎹, and classical music enthusiast 🎵.
-
-[View my résumé](/files/resume.pdf)
