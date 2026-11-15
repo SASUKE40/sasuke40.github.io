@@ -2,6 +2,7 @@
 title: "我们在等待下一次 AI 转折点的“大家电”"
 description: "模型会越来越强，但它能否改变普通人的生活，取决于两件事：控制与交付。"
 slug: ai-major-appliance-pivot
+image: cover.png
 date: 2026-11-14T00:00:00-08:00
 author: Edward Elric
 tags:

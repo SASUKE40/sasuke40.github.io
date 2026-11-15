@@ -2,6 +2,7 @@
 title: "We Are Waiting for the Major Appliance for the Next AI Pivot"
 description: "The models will keep getting stronger. Whether that changes anyone's life comes down to two things: control and delivery."
 slug: ai-major-appliance-pivot
+image: cover.png
 date: 2026-11-14T00:00:00-08:00
 author: Edward Elric
 tags:
